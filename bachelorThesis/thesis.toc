@@ -1,0 +1,40 @@
+\select@language {english}
+\select@language {ngerman}
+\select@language {english}
+\select@language {ngerman}
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Problem/Motivation}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Content}{2}{subsection.1.2}
+\contentsline {section}{\numberline {2}Preliminaries}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Definitions and Notations}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}The algorithms for comparison}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}The Tabucol algorithm}{6}{subsection.2.3}
+\contentsline {section}{\numberline {3}Solving GCP by Tabucol}{8}{section.3}
+\contentsline {subsection}{\numberline {3.1}Data structures}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Improvement through randomly generated solution}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Improvement through changing solution matrix traverse direction}{11}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Improvement through statistic matrix}{11}{subsection.3.4}
+\contentsline {section}{\numberline {4}Our Parallel Algorithm}{12}{section.4}
+\contentsline {subsection}{\numberline {4.1}1st Approach: The pure portfolio approach}{12}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}2nd Approach: Forced color reducing}{12}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}3rd Approach: Tabu sharing}{12}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}4th Approach: Statistic sharing}{13}{subsection.4.4}
+\contentsline {section}{\numberline {5}Evaluation}{14}{section.5}
+\contentsline {subsection}{\numberline {5.1}DIMACS standard format}{14}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Benchmarks}{14}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Used plots and tables}{16}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Automatic parameter optimization}{16}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Experiments}{18}{subsection.5.5}
+\contentsline {subsubsection}{\numberline {5.5.1}Experiment 1: Random initialization vs Node-index initialization}{19}{subsubsection.5.5.1}
+\contentsline {subsubsection}{\numberline {5.5.2}Experiment 2: Original solver vs Solution replacement}{20}{subsubsection.5.5.2}
+\contentsline {subsubsection}{\numberline {5.5.3}Experiment 3: RowTraverse vs ColumnTraverse}{21}{subsubsection.5.5.3}
+\contentsline {subsubsection}{\numberline {5.5.4}Experiment 4: Original solver vs Statistic solver}{22}{subsubsection.5.5.4}
+\contentsline {subsubsection}{\numberline {5.5.5}Experiment 5: Original solver vs Parallel solver with various parameter combinations}{25}{subsubsection.5.5.5}
+\contentsline {subsubsection}{\numberline {5.5.6}Experiment 6: GCP-solver with FRC}{27}{subsubsection.5.5.6}
+\contentsline {subsubsection}{\numberline {5.5.7}Experiment 7: GCP-solver with tabu share}{29}{subsubsection.5.5.7}
+\contentsline {subsubsection}{\numberline {5.5.8}Experiment 8: GCP-solver with statistic Matrix sharing}{32}{subsubsection.5.5.8}
+\contentsline {subsubsection}{\numberline {5.5.9}Experiment 9: Comparison of our GCP-solver with other algorithms}{32}{subsubsection.5.5.9}
+\contentsline {section}{\numberline {6}Conclusion}{35}{section.6}
+\contentsline {subsection}{\numberline {6.1}Further work}{35}{subsection.6.1}
+\contentsline {section}{\numberline {7}Bibliography}{37}{section.7}

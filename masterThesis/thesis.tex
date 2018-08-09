@@ -1,0 +1,319 @@
+% Template for bachelor's/master's thesis for students at Karlsruhe Institute of Technology.
+% Best for students majored in Computer Science or Mathematics.
+
+% English version by Wei Zhou (ftfish@gmail.com)
+% Based on the German version of Timo Bingmann
+
+
+% This is just a template. Since there's no strict rule on how a bachelor's thesis must look like, every part of this template can be adapted.
+
+\documentclass[12pt,a4paper,twoside]{scrartcl}
+
+% Loading babel to enable automatic hypentation and multiple languages in the document.
+% The last language in the option list will be used as default.
+\usepackage[ngerman,english]{babel}
+% Using T1 font encoding and the Latin Modern font
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{lscape}
+\usepackage{afterpage}
+
+% Using utf8 as file encoding.
+\usepackage[utf8]{inputenc}
+\usepackage[capbesideposition=outside,capbesidesep=quad]{floatrow}
+
+
+% Page size. Using almost the whole A4 paper.
+\usepackage[tmargin=22mm,bmargin=22mm,lmargin=20mm,rmargin=20mm]{geometry}
+
+
+% Some standard packages for writing papers
+\usepackage{latexsym,amsmath,amssymb,mathtools,textcomp}
+
+% Paragraphs are not indented but there will be some space between paragraphs
+\usepackage{parskip}
+% For defining theorem-style environments like Lemma/Proof/Definition
+\usepackage{amsthm}
+% Fixing spacing problems before theorems due to \usepackage{parskip}
+\begingroup
+    \makeatletter
+    \@for\theoremstyle:=definition,remark,plain\do{%
+        \expandafter\g@addto@macro\csname th@\theoremstyle\endcsname{%
+            \addtolength\thm@preskip\parskip
+            }%
+        }
+\endgroup
+
+% Some theorem-style environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+
+% Setting equation numbers to <chapter>.<section>.<index>
+\numberwithin{equation}{section}
+
+% For inserting graphics into the document
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+% For tables
+\usepackage{array,multirow}
+
+% Control layout of itemize, enumerate, description
+\usepackage{enumitem}
+
+\setlist[enumerate]{topsep=0pt}
+\setlist[itemize]{topsep=0pt}
+\setlist[description]{font=\normalfont,topsep=0pt}
+
+\setlist[enumerate,1]{label=(\roman*)}
+
+% TikZ for graphics in LaTeX
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% Have the current section and subsection in the header.
+\usepackage{fancyhdr}
+\usepackage{ltxtable} 
+\fancypagestyle{plain}{
+  \setlength\footskip{32pt}
+  \fancyhead{}
+  \fancyfoot{}
+  \fancyfoot[LE,RO]{\normalsize\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{normal}{
+  \setlength{\headheight}{20pt}
+  \setlength\footskip{32pt}
+  \fancyhead{}
+  \fancyhead[LE]{\normalsize\textsc{\nouppercase{\leftmark}}}
+  \fancyhead[RO]{\normalsize\textsc{\nouppercase{\rightmark}}}
+  \fancyfoot{}
+  \fancyfoot[LE,RO]{\normalsize\thepage}
+  \renewcommand{\headrulewidth}{0.4pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Hyperref for hyperlinks und cross refs
+\usepackage{color}
+\usepackage{lscape}
+\usepackage[pagebackref]{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{pbox}
+\DeclareOldFontCommand{\bf}{\normalfont\bfseries}{\mathbf}
+\hypersetup{
+  pdftitle={SAT Solving with distributed local search},
+  pdfauthor={Guangping Li}, 
+  pdfsubject={Tabucol, \emph{\textbf{graph coloring problem}},parallel cooperative tabu search}, 
+  colorlinks=true,
+  pdfborder={0 0 0},
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  bookmarksnumbered=true,
+  linkcolor=black,
+  %linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  filecolor=black,
+  pdfpagemode=UseNone,
+  unicode=true,
+}
+
+% Add the word "page" for pagebackref's in the bibliography.
+\renewcommand*{\backreflastsep}{, }
+\renewcommand*{\backreftwosep}{, }
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{%
+  \ifcase #1 %
+No citations.% use \relax if you do not want the "No citations" message 
+  \or
+(Page #2).%
+  \else
+(Pages #2).%
+  \fi%
+}
+
+
+% For importing graphics from subdirectories.
+\usepackage{import}
+
+% Referencing figures, etc.
+\newcommand{\reflst}[1]{\hyperref[#1]{Listing~\ref*{#1}}}
+\newcommand{\refthm}[1]{\hyperref[#1]{Theorem~\ref*{#1}}}
+\newcommand{\refdef}[1]{\hyperref[#1]{Definition~\ref*{#1}}}
+
+
+
+
+% Package for inserting pseudo codes in the document.
+\usepackage[ruled,vlined,linesnumbered,norelsize]{algorithm2e}
+\DontPrintSemicolon
+\def\NlSty#1{\textnormal{\fontsize{8}{10}\selectfont{}#1}}
+\SetKwSty{texttt}
+\SetCommentSty{emph}
+\def\listalgorithmcfname{List of Algorithms}
+\def\algorithmautorefname{Algorithm}
+\let\chapter=\section % resolve a problem with algorithm2e
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{empty} % no page number
+\pagenumbering{alph}
+
+% title page
+\begin{titlepage}
+
+  \begin{center}\large
+
+    {\flushleft\includegraphics[height=17mm]{kit_logo_en.pdf} \hfill}
+%    \includegraphics[height=20mm]{grouplogo-algo-blue.pdf}\quad\null
+
+    \vfill
+
+    \vspace*{2cm}
+
+    {\bf\huge SAT Solving  \\ with distributed local search \par} 
+    % Be sure to fill in the field pdftitle={} above
+    % mit \par am Ende stimmt der Zeilenabstand
+  
+
+    \vfill
+Master Thesis of \\
+
+    \vspace*{15mm}
+    {\bf Guangping Li} 
+
+    \vspace*{15mm}
+
+    At the Department of Informatics\\
+Institute of Theoretical informatics, Algorithmics II 
+
+    \vspace*{45mm}
+
+    \begin{tabular}{rl}
+      Advisors: & Dr. Tom{\' a}{\v s} Balyo \\
+      & Prof. Dr. Peter Sanders  \\
+    \end{tabular}
+    
+    \vspace*{10mm}
+
+	% Deutsch
+%    Institut für Theoretische Informatik, Algorithmik \\
+%    Fakultät für Informatik \\
+%    Karlsruher Institut für Technologie
+
+    % English:
+%     Institute of Theoretical Informatics, Algorithmics \\
+
+    \vspace*{12mm}
+  \end{center}
+\afterpage{\null\newpage}
+\end{titlepage}
+\afterpage{\null\newpage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace*{0pt}\vfill
+
+\selectlanguage{ngerman}
+\hrule\medskip
+
+Hiermit versichere ich, dass ich diese Arbeit selbständig verfasst und keine anderen, als die angegebenen Quellen und Hilfsmittel benutzt, die wörtlich oder inhaltlich übernommenen Stellen als solche kenntlich gemacht und die Satzung des Karlsruher Instituts für Technologie zur Sicherung guter wissenschaftlicher Praxis in der jeweils gültigen Fassung beachtet habe.
+
+\bigskip
+
+\noindent
+Karlsruhe, 1th September 2018 
+
+% Hand-written signature!! %TODO
+
+\vspace*{5cm}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vspace*{0pt}\vfill
+\selectlanguage{english}
+\begin{abstract}
+\centerline{\bf Abstract}
+{\noindent }
+%Abstct %TODO 
+
+\end{abstract}
+\vfill
+\afterpage{\null\newpage}
+\selectlanguage{ngerman}
+\begin{abstract}
+\centerline{\bf Zusammenfassung}
+{\noindent }
+%german abstract %TODO 
+\end{abstract}
+
+
+\vfill\vfill\vfill
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\selectlanguage{english}
+\pagestyle{plain}
+\pagenumbering{roman}
+  
+% markiere sections im Seitenkopf links und subsections rechts
+\renewcommand\sectionmark[1]{\markboth{\thesection\quad\MakeUppercase{#1}}{\thesection\quad\MakeUppercase{#1}}}
+\renewcommand\subsectionmark[1]{\markright{\thesubsection\quad\MakeUppercase{#1}}}
+
+
+\tableofcontents
+\afterpage{\null\newpage}
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{normal}
+\pagenumbering{arabic}
+
+\section{Introduction} %TODO
+\subsection{Problem/Motivation} %TODO
+
+\subsection{Content} %TODO
+\subsection{Definitions and Notations} %TODO
+\subsection{The algorithms for comparison} %TODO
+\section{Our local Solver}
+\label{sec:Solving GCP by Tabucol}
+\subsection{Probsat}
+\subsection{Improvement through randomly generated solution}
+\label{subsec:Improvement through Bias initialization}
+\label{double choose (greedy and sls)}
+\label{subsec:Improvement through Tabu}
+\subsection{Improvement through random generator}
+\subsection{Improvement through statistic}
+\subsection{try star version}
+
+\section{Our Parallel Algorithm}
+\label{sec:Our parallel Algorithm}
+\subsection{1st Approach: The pure portfolio approach (no partition)}
+\subsection{2nd Approach: Star}
+\subsection{3nd Approach: Hope}
+\subsection{4th Approach: future}
+\section{Evaluation} 
+ %TODO some server information
+\subsection{format}
+\subsection{Benchmarks}
+\label{benchmark}
+\subsection{Used plots and tables}
+Different plots and tables are used to illustrate the results of the following experiments.\\
+\emph{\textbf{Comparison Table}}\\
+\emph{\textbf{Scatter Plot}}\\
+\emph{\textbf{Cactus Plot}}\\
+\emph{\textbf{Advantage Plot}}\\
+ \subsection{Automatic parameter optimization}
+\subsection{Experiments}
+\section{Conclusion}
+\subsection{Further work}
+\section{Bibliography}
+\bibliographystyle{ieeetr}
+\bibliography{references}
+\end{document}
