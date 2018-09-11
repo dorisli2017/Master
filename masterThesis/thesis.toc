@@ -7,24 +7,24 @@
 \contentsline {subsection}{\numberline {1.1}Problem/Motivation}{1}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Content}{1}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Definitions and Notations}{1}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}The algorithms for comparison}{1}{subsection.1.4}
-\contentsline {section}{\numberline {2}Our local Solver}{1}{section.2}
-\contentsline {subsection}{\numberline {2.1}Probsat}{1}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Improvement through randomly generated solution}{1}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Improvement through random generator}{1}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Improvement through statistic}{1}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}try star version}{1}{subsection.2.5}
-\contentsline {section}{\numberline {3}Our Parallel Algorithm}{1}{section.3}
-\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach (no partition)}{1}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}2nd Approach: Star}{1}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}3nd Approach: Hope}{1}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}4th Approach: future}{1}{subsection.3.4}
-\contentsline {section}{\numberline {4}Evaluation}{1}{section.4}
-\contentsline {subsection}{\numberline {4.1}format}{1}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Benchmarks}{1}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Used plots and tables}{1}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Automatic parameter optimization}{2}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Experiments}{2}{subsection.4.5}
-\contentsline {section}{\numberline {5}Conclusion}{2}{section.5}
-\contentsline {subsection}{\numberline {5.1}Further work}{2}{subsection.5.1}
-\contentsline {section}{\numberline {6}Bibliography}{2}{section.6}
+\contentsline {subsection}{\numberline {1.4}The algorithms for comparison}{4}{subsection.1.4}
+\contentsline {section}{\numberline {2}Our local Solver}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Probsat}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Improvement through randomly generated solution}{4}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Improvement through random generator}{4}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Improvement through statistic}{4}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}try star version}{4}{subsection.2.5}
+\contentsline {section}{\numberline {3}Our Parallel Algorithm}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach (no partition)}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}2nd Approach: Star}{4}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}3nd Approach: Hope}{4}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}4th Approach: future}{4}{subsection.3.4}
+\contentsline {section}{\numberline {4}Evaluation}{4}{section.4}
+\contentsline {subsection}{\numberline {4.1}format}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Benchmarks}{4}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Used plots and tables}{4}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Automatic parameter optimization}{5}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Experiments}{5}{subsection.4.5}
+\contentsline {section}{\numberline {5}Conclusion}{5}{section.5}
+\contentsline {subsection}{\numberline {5.1}Further work}{5}{subsection.5.1}
+\contentsline {section}{\numberline {6}Bibliography}{5}{section.6}

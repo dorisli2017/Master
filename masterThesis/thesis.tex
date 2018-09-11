@@ -240,7 +240,9 @@ Karlsruhe, 1th September 2018
 \centerline{\bf Abstract}
 {\noindent }
 %Abstct %TODO
-Stochastic local search (SLS) is an elementary technique for solving computationally difficult combinational problems. Probsat is one of the simplest SLS solvers for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. In the first section of this paper, we introduce an efficient Probsat based heuristic. We experimentally evaluate and analyze the performance of our solver in a combination of different techniques, including simulated annealing and tabu search.  With the approach of formula partition, a parallel version of our solver is introduced in the second section. The parallelism improves the Efficiency of the solver. Using different random generator and other parameter settings in solving the sub-formula can bring further improvement in performance to our parallel solver.   
+Stochastic local search (SLS) is an elementary technique for solving combinational problems. Probsat is an algorithm paradigm of the simplest SLS solvers for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. In the first section of this paper, we introduce an efficient Probsat heuristic. We experimentally evaluate and analyze the performance
+of our solver in a combination of different techniques, including simulated annealing and tabu search. With the approach of formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the Efficiency of the solver. Using different random generator and other parameter settings in solving
+the sub-formula can bring further improvement in performance to our parallel solver. 
 
 \end{abstract}
 \vfill
@@ -250,7 +252,7 @@ Stochastic local search (SLS) is an elementary technique for solving computation
 \centerline{\bf Zusammenfassung}
 {\noindent }
 %german abstract %TODO 
-Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Probsat ist einer der einfachsten SLS-Löser für das Erfüllbarkeitsproblem der Aussagenlogik (SAT), bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Im ersten Teil dieser Arbeit stellen wir eine effiziente Probsat-basierte Heuristik vor.  Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und Tabu Search wurde auch experimentell bewertet und analysiert. Mit dem Ansatz der Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Lösers verbessert. Die flexible Parametereinstellungen bei der Lösung der Teil-formeln kann eine weitere Verbesserung unseres Algorithmus bringen. 
+Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Probsat ist einer der einfachsten SLS-Solver für das Erfüllbarkeitsproblem der Aussagenlogik (SAT), bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Im ersten Teil dieser Arbeit stellen wir eine effiziente Probsat-basierte Heuristik vor.  Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und Tabu Search wurde auch experimentell bewertet und analysiert. Mit dem Ansatz der Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Lösers verbessert. Die flexible Parametereinstellungen bei der Lösung der Teil-formeln kann eine weitere Verbesserung unseres Algorithmus bringen. 
 \end{abstract}
 
 
@@ -277,11 +279,64 @@ Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von 
 \pagestyle{normal}
 \pagenumbering{arabic}
 
-\section{Introduction} %TODO
-\subsection{Problem/Motivation} %TODO
+\section{Introduction} 
+\subsection{Problem/Motivation} 
+The propositional satisfiability problem (SAT) is the first proven NP-complete problem. The problem is to determine whether an assignment of Boolean values to variables in a  Boolean formula (CNF) such that the expression evaluates to true. 
+As one of the most studied problems in computer science, the SAT problem has many applications. Hard combinational problems can be resolved with appropriate Encoding as a sat problem.
+The SAT problem has many applications in computer science like hard model checking, software verification or in automated planning and scheduling in artificial intelligence. 
+Formula partition is one of the promising approaches in DPLL-like solvers. By giving the order to the variables according to a good formula partition, the search gets a relatively balanced decision tree. But formula partition is rarely used in a local search for the SAT problem. How to combine the formula partition with local search, will the local search benefit from the partitioning, if the formula partitioning can guide a parallel local search, are still open questions. 
 
-\subsection{Content} %TODO
-\subsection{Definitions and Notations} %TODO
+\subsection{Content} 
+The SAT problem, as a well-known NP-complete problem, has received a great deal of attention and different local search heuristics have been developed. This paper is a survey on the stochastic local search on SAT problem with a guide of formula partition. The following section summarizes the formal concept and introduces techniques used in this paper. 
+ One class of the most straightforward but efficient stochastic local search algorithms Probsat is the algorithm basic in our paper. Probsat was proposed in 2012 by Adrian Balint and Uwe Schoening. Section 2 describes our Probsat algorithm and discusses our attempts to improve the original algorithm. By experimentally evaluation and comparison, some techniques turned out to be more efficient than the simple Probsat search.
+With the partition of variables and its corresponding formulas, the problem can be separated into two subproblems of similar size.  In section 3, we search the potential benefit of formula partition in a parallel search. 
+Section 4 describes the details in experiments and several empiric results mentioned in section 2 and section 3.  Section 5 concludes the paper with further works. 
+
+\subsection{Definitions and Notations} 
+The SAT Problem
+The propositional satisfiability problem (SAT)  
+A variable with two possible logical values TRUE or False is a Boolean variable. 
+A literal is an atomic formula in propositional logic. Literals can either be a positive literal (a variable) or a negative literal (negation of a variable)
+A clause is a disjunction(OR)of literal.
+A formula is in conjunctive normal form (CNF) if it is a conjunction (AND) of clauses.  
+An assignment assigns the truth value to each Boolean variable x in the formula. We say the assignment is satisfying a formula if the truth value of the formula with this assignment turns out to be true. Specifically, an assignment satisfies a clause, if one literal in the clause with value True in this assignment. A CNF formula is satisfying if the assignment satisfies all its clauses. We say an assignment a satisfying assignment if it satisfies the formula. Otherwise, we say there are conflicts in some clauses with this assignment, or some clauses are unsatisfying clauses with this assignment. 
+The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a satisfiable formula. 
+A set is a container of unique elements. A set of 3 objects a, b, c is written as {a, b, c}. The
+size of a set is the number of elements in the set.
+Local search
+For instance I of hard combinational Problem, there is a set of solutions.  According to the constraints of the problem, an object function (score) is used to evaluate the candidate solutions. The Goal of the local search is to find the solution of minimum cost (the solution with the maximal score).
+A local search starts with an initial complete solution. According to some heuristic, the local search makes local changes to its current solution iteratively, hence the name local search. Starts from an initial solution, the search will evaluate the solutions which can be reached by applying a local change to the current solution and choose one of the neighbor solutions with local optimization. The search applies local moves until the optimal solution is reached, or in some cases, a generally good solution is reached.  Local search is widely used in hard combinational problems such as the traveling salesman problem [13] and the graph coloring problem [14]. 
+In the Boolean satisfiability problem, a local search operates primarily as follows: The search start from a randomly generated assignment as the initial solution. If this current assignment satisfied the formula, the search stops with success. Otherwise, a variable is chosen depends on some criterion, which we further call pickVal. By change the assignment of the selected variable, a neighbor assignment of our current solution is reached in next step, which is also called variable flipping. A local search will move in the space of the assignments by making the variable flipping until a satisfying assignment is reached by the search.  
+The heuristic used for the pickVal selection is based on some scores of the variables in the current assignment.Consider the assignment reached by taking a flip of the variable in the current assignment. The number of clauses satisfied in B,but not in A is called the breakcout of the local move from to. Accordingly, the number of clauses, which become satisfying because of the flipping, is the makecount. The number of newly satisfying clauses (make) minus the number of newly unsatisfying clauses (break), which is denoted as diffscore, represents the local improvement of the corresponding flipping. Apart from this, other aspects like the repetition number of one flip or the number of occurrences of the variables can be considered in a selection heuristic.
+An example is the unit propagation embedded local solver EagleUp, which prefers flipping of variable with the highest number of occurrences in a formula to creates new unit clauses sooner. To get local improvement effectively, man can only consider variables in unsat clauses for the flipping selection. This process is called a focused local search and commonly used. 
+The initial hope of the local search is that through iterative greedy local improvement the optimal global solution can be found.  The typical problem of the local search is that the greedy local improvement searches be trapped in local unattractive local optimal solution.  To avoid this, a worse solution then the current solution will be chosen for the next step (uphill moves). There are some techniques following used in local search with occasional uphill moves.
+
+Stochastic local search
+The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen p(T(s)) corresponds to the scores of the solution. In this way, the advantage a move is, the probability of choosing it as the next step is higher.   This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. 
+
+Tabu local search 
+ Tabu search is created by Fred W. Glover in 1986 [15] and formalized in 1989.  For recognize the loop in a suboptimal region, the search trace is recorded in the process by mark the recently reached neighboring assignments as tabu. The tabu moves will not be touched in the further search to discourage getting stuck in a region. By 
+
+Simulated Annealing
+Simulated Annealing is an approach of SLS solver to difficult combinational optimization problems proposed by Kirkpatrick, Gelatt, and Vecchi. This approach is inspired by the metallic process annealing of shaping the material by heating and then slowly cooling the material. This approach works as a local optimization algorithm guided by a controlling parameter temperature. By high temperature, an uphill move is allowed with high probability while only small steps are allowed in low temperature. The temperature is varying according to the score of the current situation.  For a current solution with a nearly optimal score, the temperature is near zero. For an unattractive local extreme with a poor score, the active search is tending to make uphill moves in high temperature.
+
+
+The Probsat
+Probsat is a class of SLS sat solver, which was introduced in 2012 by Adrian Balint and Uwe Schoening. In a probsat solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. In the initial solution, the truth value of The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfying clauses exists, which means the satisfying assignment is found. The flip probability p of the variables in the chosen clause is calculated in a function p(x,s) based on make and break score of the variable in the current assignment. The idea behind the probability function is to give the advantageous flipping relative high probability, but the other flipping has small chance to be chosen.  There are two kinds of functions are considered in the paper of Adrian Baliant: exponential function and a polynomial function. 
+ An exponential function f is an exponential 2-parameter (cb and cm) function:
+Or a function with polynomial decay, which is called a polynomial function in the original paper: 
+
+As mentioned in the probsat paper, it turns out in experiments that the influence or make is rather weak, so the one parameter function like the following can lead to an efficient algorithm.
+The pseudo code of a typical Probsat is shown below:
+Algorithm 1: ProbSAT
+Input: Formula F, maxTries, maxFlips
+Output: satisfying assignment a or UNKNOWN
+For I =1 to  maxTries do:
+ a<- randomly generated assignment
+ For I =1 to maxFlips do:
+If(a satisfies  F) then 
+Return a
+C 
 \subsection{The algorithms for comparison} %TODO
 \section{Our local Solver}
 \label{sec:Solving GCP by Tabucol}
