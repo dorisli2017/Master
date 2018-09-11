@@ -1,3 +1,27 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{cook1971complexity}
+S.~A. Cook, ``The complexity of theorem-proving procedures,'' in {\em
+  Proceedings of the third annual ACM symposium on Theory of computing},
+  pp.~151--158, ACM, 1971.
+
+\bibitem{clarke2001bounded}
+E.~Clarke, A.~Biere, R.~Raimi, and Y.~Zhu, ``Bounded model checking using
+  satisfiability solving,'' {\em Formal methods in system design}, vol.~19,
+  no.~1, pp.~7--34, 2001.
+
+\bibitem{ivanvcic2008efficient}
+F.~Ivan{\v{c}}i{\'c}, Z.~Yang, M.~K. Ganai, A.~Gupta, and P.~Ashar, ``Efficient
+  sat-based bounded model checking for software verification,'' {\em
+  Theoretical Computer Science}, vol.~404, no.~3, pp.~256--274, 2008.
+
+\bibitem{kautz1999unifying}
+H.~Kautz and B.~Selman, ``Unifying sat-based and graph-based planning,'' in
+  {\em IJCAI}, vol.~99, pp.~318--325, 1999.
+
+\bibitem{mann2017guiding}
+Z.~{\'A}. Mann and P.~A. Papp, ``Guiding sat solving by formula partitioning,''
+  {\em International Journal on Artificial Intelligence Tools}, vol.~26,
+  no.~04, p.~1750011, 2017.
 
 \end{thebibliography}
