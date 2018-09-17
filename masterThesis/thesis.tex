@@ -363,9 +363,14 @@ C
 \section{Evaluation} 
 \label{sec:eva}
  %TODO some server information
-\subsection{format}
+\subsection{DIMACS standard format}  
+All the benchmark CNF formula used in experiments are encoded in the DIMACS standard format \cite{johnson1996cliques}. This format is used to test and compare SAT solver in SAT competition. A DIMACS file contains the description of an instance using three types of lines\footnote {Only clause unweighted simple instances are tested in our experiments. For other descriptors and details of the DIMACS format, see \cite{dimacs}.}:\\ \\ 1. Comment line: Comment lines give information about the graph for human readers, like the author of the file or the seed used in generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause Descriptor: An clause $\{v_1, v_2,.., v_n\}$ in the graph is described in an edge Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\; .. \;v_n$}\\  
+\begin{figure}[h!] \begin{center}  \includegraphics[scale = 0.5]{1/Dimacs.pdf}      \caption{A DIMACS file example of the problem in Figure \ref{Figure 6}}      \end{center} \end{figure}  
 \subsection{Benchmarks}
 \label{benchmark}
+The benchmark instances used in experiments are the 180 uniform instances (unif) in random benchmark categories in SAT competition 2017  \cite{balyo2017proceedings}. In an unif problem file, all the clause have the same length.
+The suffix 'k'  denotes the length of clauses. The r indicates the clause-to-variable ratio. The c and v are for the number of clauses and variables, while s is for the seed used in the generation process.
+ Without flitering, there are at least 60 ( $33\%$ ) problems form our 180 benchmark collections are unsatisfiable.
 \subsection{Used plots and tables}
 Different plots and tables are used to illustrate the results of the following experiments.\\
 \emph{\textbf{Comparison Table}}\\

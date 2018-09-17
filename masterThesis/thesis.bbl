@@ -24,4 +24,13 @@ Z.~{\'A}. Mann and P.~A. Papp, ``Guiding sat solving by formula partitioning,''
   {\em International Journal on Artificial Intelligence Tools}, vol.~26,
   no.~04, p.~1750011, 2017.
 
+\bibitem{balint2016engineering}
+A.~Balint and U.~Sch{\"o}ning, ``Engineering a lightweight and efficient local
+  search sat solver,'' in {\em Algorithm Engineering}, pp.~1--18, Springer,
+  2016.
+
+\bibitem{balyo2017proceedings}
+T.~Balyo, M.~J. Heule, and M.~Järvisalo, ``Proceedings of sat competition
+  2017: Solver and benchmark descriptions,'' 2017.
+
 \end{thebibliography}
