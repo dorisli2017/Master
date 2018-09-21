@@ -1,0 +1,144 @@
+\begin{thebibliography}{10}
+
+\bibitem{kubale2004graph}
+M.~Kubale, {\em Graph colorings}, vol.~352.
+\newblock American Mathematical Soc., 2004.
+
+\bibitem{gary1979computers}
+M.~R. Gary and D.~S. Johnson, ``Computers and intractability: A guide to the
+  theory of np-completeness,'' 1979.
+
+\bibitem{chaitin1981register}
+G.~J. Chaitin, M.~A. Auslander, A.~K. Chandra, J.~Cocke, M.~E. Hopkins, and
+  P.~W. Markstein, ``Register allocation via coloring,'' {\em Computer
+  languages}, vol.~6, no.~1, pp.~47--57, 1981.
+
+\bibitem{chow1990priority}
+F.~C. Chow and J.~L. Hennessy, ``The priority-based coloring approach to
+  register allocation,'' {\em ACM Transactions on Programming Languages and
+  Systems (TOPLAS)}, vol.~12, no.~4, pp.~501--536, 1990.
+
+\bibitem{garey1976application}
+M.~Garey, D.~Johnson, and H.~So, ``An application of graph coloring to printed
+  circuit testing,'' {\em IEEE Transactions on circuits and systems}, vol.~23,
+  no.~10, pp.~591--599, 1976.
+
+\bibitem{leighton1979graph}
+F.~T. Leighton, ``A graph coloring algorithm for large scheduling problems,''
+  {\em Journal of research of the national bureau of standards}, vol.~84,
+  no.~6, pp.~489--506, 1979.
+
+\bibitem{de1985introduction}
+D.~de~Werra, ``An introduction to timetabling,'' {\em European journal of
+  operational research}, vol.~19, no.~2, pp.~151--162, 1985.
+
+\bibitem{gamst1986some}
+A.~Gamst, ``Some lower bounds for a class of frequency assignment problems,''
+  {\em IEEE transactions on vehicular technology}, vol.~35, no.~1, pp.~8--14,
+  1986.
+
+\bibitem{minton1992minimizing}
+S.~Minton, M.~D. Johnston, A.~B. Philips, and P.~Laird, ``Minimizing conflicts:
+  a heuristic repair method for constraint satisfaction and scheduling
+  problems,'' {\em Artificial Intelligence}, vol.~58, no.~1-3, pp.~161--205,
+  1992.
+
+\bibitem{johnson1991optimization}
+D.~S. Johnson, C.~R. Aragon, L.~A. McGeoch, and C.~Schevon, ``Optimization by
+  simulated annealing: an experimental evaluation; part ii, graph coloring and
+  number partitioning,'' {\em Operations research}, vol.~39, no.~3,
+  pp.~378--406, 1991.
+
+\bibitem{hertz1987using}
+A.~Hertz and D.~de~Werra, ``Using tabu search techniques for graph coloring,''
+  {\em Computing}, vol.~39, no.~4, pp.~345--351, 1987.
+
+\bibitem{trudeau1993introduction}
+R.~J. Trudeau, ``Introduction to graph theory (corrected, enlarged
+  republication. ed.),'' 1993.
+
+\bibitem{stutzle1997max}
+T.~Stutzle and H.~Hoos, ``Max-min ant system and local search for the traveling
+  salesman problem,'' in {\em Evolutionary Computation, 1997., IEEE
+  International Conference on}, pp.~309--314, IEEE, 1997.
+
+\bibitem{zhang2004configuration}
+W.~Zhang, ``Configuration landscape analysis and backbone guided local search.:
+  Part i: Satisfiability and maximum satisfiability,'' {\em Artificial
+  Intelligence}, vol.~158, no.~1, pp.~1--26, 2004.
+
+\bibitem{glover1986future}
+F.~Glover, ``Future paths for integer programming and links to artificial
+  intelligence,'' {\em Computers \& operations research}, vol.~13, no.~5,
+  pp.~533--549, 1986.
+
+\bibitem{glover1989tabu1}
+F.~Glover, ``Tabu search—part i,'' {\em ORSA Journal on computing}, vol.~1,
+  no.~3, pp.~190--206, 1989.
+
+\bibitem{glover1990tabu2}
+F.~Glover, ``Tabu search—part ii,'' {\em ORSA Journal on computing}, vol.~2,
+  no.~1, pp.~4--32, 1990.
+
+\bibitem{cormen2009introduction}
+T.~H. Cormen, {\em Introduction to algorithms}.
+\newblock MIT press, 2009.
+
+\bibitem{brelaz1979new}
+D.~Br{\'e}laz, ``New methods to color the vertices of a graph,'' {\em
+  Communications of the ACM}, vol.~22, no.~4, pp.~251--256, 1979.
+
+\bibitem{Trickalgorithm}
+``Trick's graph coloring algorithm.''
+  \url{http://mat.gsia.cmu.edu/COLOR/color.html}.
+\newblock Accessed: 2017-03-8.
+
+\bibitem{san2012new}
+P.~San~Segundo, ``A new dsatur-based algorithm for exact vertex coloring,''
+  {\em Computers \& Operations Research}, vol.~39, no.~7, pp.~1724--1733, 2012.
+
+\bibitem{galinier2006survey}
+P.~Galinier and A.~Hertz, ``A survey of local search methods for graph
+  coloring,'' {\em Computers \& Operations Research}, vol.~33, no.~9,
+  pp.~2547--2562, 2006.
+
+\bibitem{galinier1999hybrid}
+P.~Galinier and J.-K. Hao, ``Hybrid evolutionary algorithms for graph
+  coloring,'' {\em Journal of combinatorial optimization}, vol.~3, no.~4,
+  pp.~379--397, 1999.
+
+\bibitem{ic2}
+``Ic2 - hardware and architecture.''
+  \url{https://wiki.scc.kit.edu/hpc/index.php/IC2_-_Hardware_and_Architecture\#Architecture_of_IC2}.
+\newblock Accessed: 2017-02-09.
+
+\bibitem{johnson1996cliques}
+D.~S. Johnson and M.~A. Trick, {\em Cliques, coloring, and satisfiability:
+  second DIMACS implementation challenge, October 11-13, 1993}, vol.~26.
+\newblock American Mathematical Soc., 1996.
+
+\bibitem{dimacs}
+``Clique and coloring problems graph format.''
+  \url{http://www.or.uni-bonn.de/lectures/ss12/praktikum/ccformat.pdfl}, 1993.
+
+\bibitem{graph1}
+``Graph coloring instances.''
+  \url{http://mat.gsia.cmu.edu/COLOR/instances.html}.
+\newblock Accessed: 2017-01-14.
+
+\bibitem{graph2}
+``Dimacs graphs: Benchmark instances and best upper bounds.''
+  \url{http://www.info.univ-angers.fr/pub/porumbel/graphs/}.
+\newblock Accessed: 2017-01-14.
+
+\bibitem{SMAC}
+``Smac: Sequential model-based algorithm configuration.''
+  \url{http://www.cs.ubc.ca/labs/beta/Projects/SMAC/}.
+\newblock Accessed: 2017-03-10.
+
+\bibitem{Dalgorithm}
+``Source code of dsatur and pass.''
+  \url{http://www.lamsade.dauphine.fr/coloring/doku.php}.
+\newblock Accessed: 2017-03-8.
+
+\end{thebibliography}
