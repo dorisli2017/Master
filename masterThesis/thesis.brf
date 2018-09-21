@@ -4,6 +4,9 @@
 \backcite {kautz1999unifying}{{1}{1.1}{subsection.1.1}}
 \backcite {mann2017guiding}{{1}{1.1}{subsection.1.1}}
 \backcite {balint2016engineering}{{1}{1.2}{subsection.1.2}}
-\backcite {johnson1996cliques}{{4}{4.1}{subsection.4.1}}
-\backcite {dimacs}{{4}{1}{Hfootnote.1}}
-\backcite {balyo2017proceedings}{{5}{4.2}{subsection.4.2}}
+\backcite {kirkpatrick1983optimization}{{3}{5}{algocf.1}}
+\backcite {hoos2002adaptive}{{3}{5}{algocf.1}}
+\backcite {balint2016engineering}{{4}{4}{algocf.2}}
+\backcite {biere2014yet}{{4}{1.4}{subsection.1.4}}
+\backcite {johnson1996cliques}{{8}{4.1}{subsection.4.1}}
+\backcite {balyo2017proceedings}{{8}{4.2}{subsection.4.2}}

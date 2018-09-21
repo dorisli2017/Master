@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{cook1971complexity}
 S.~A. Cook, ``The complexity of theorem-proving procedures,'' in {\em
@@ -29,8 +29,21 @@ A.~Balint and U.~Sch{\"o}ning, ``Engineering a lightweight and efficient local
   search sat solver,'' in {\em Algorithm Engineering}, pp.~1--18, Springer,
   2016.
 
+\bibitem{kirkpatrick1983optimization}
+S.~Kirkpatrick, C.~D. Gelatt, and M.~P. Vecchi, ``Optimization by simulated
+  annealing,'' {\em science}, vol.~220, no.~4598, pp.~671--680, 1983.
+
+\bibitem{hoos2002adaptive}
+H.~H. Hoos {\em et~al.}, ``An adaptive noise mechanism for walksat,'' in {\em
+  AAAI/IAAI}, pp.~655--660, 2002.
+
+\bibitem{biere2014yet}
+A.~Biere, ``Yet another local search solver and lingeling and friends entering
+  the sat competition 2014,'' {\em SAT Competition}, vol.~2014, no.~2, p.~65,
+  2014.
+
 \bibitem{balyo2017proceedings}
-T.~Balyo, M.~J. Heule, and M.~Järvisalo, ``Proceedings of sat competition
+T.~Balyo, M.~J. Heule, and M.~Jaervisalo, ``Proceedings of sat competition
   2017: Solver and benchmark descriptions,'' 2017.
 
 \end{thebibliography}

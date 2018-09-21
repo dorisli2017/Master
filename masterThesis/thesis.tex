@@ -1,12 +1,3 @@
-% Template for bachelor's/master's thesis for students at Karlsruhe Institute of Technology.
-% Best for students majored in Computer Science or Mathematics.
-
-% English version by Wei Zhou (ftfish@gmail.com)
-% Based on the German version of Timo Bingmann
-
-
-% This is just a template. Since there's no strict rule on how a bachelor's thesis must look like, every part of this template can be adapted.
-
 \documentclass[12pt,a4paper,twoside]{scrartcl}
 
 % Loading babel to enable automatic hypentation and multiple languages in the document.
@@ -48,7 +39,6 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{lemma}[theorem]{Lemma}
-
 % Setting equation numbers to <chapter>.<section>.<index>
 \numberwithin{equation}{section}
 
@@ -106,7 +96,7 @@
 \hypersetup{
   pdftitle={SAT Solving with distributed local search},
   pdfauthor={Guangping Li}, 
-  pdfsubject={Tabucol, \emph{\textbf{graph coloring problem}},parallel cooperative tabu search}, 
+  pdfsubject={SAT solver, \emph{\textbf{SAT}},distributed local search}, 
   colorlinks=true,
   pdfborder={0 0 0},
   bookmarksopen=true,
@@ -224,7 +214,7 @@ Hiermit versichere ich, dass ich diese Arbeit selbständig verfasst und keine an
 \bigskip
 
 \noindent
-Karlsruhe, 1th September 2018 
+Karlsruhe, 20th September 2018 
 
 % Hand-written signature!! %TODO
 
@@ -238,21 +228,17 @@ Karlsruhe, 1th September 2018
 \selectlanguage{english}
 \begin{abstract}
 \centerline{\bf Abstract}
-{\noindent }
-%Abstct %TODO
-Stochastic local search (SLS) is an elementary technique for solving combinational problems. Probsat is an algorithm paradigm of the simplest SLS solvers for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. In the first section of this paper, we introduce an efficient Probsat heuristic. We experimentally evaluate and analyze the performance
-of our solver in a combination of different techniques, including simulated annealing and tabu search. With the approach of formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the Efficiency of the solver. Using different random generator and other parameter settings in solving
-the sub-formula can bring further improvement in performance to our parallel solver. 
-
+{\noindent Stochastic local search (SLS) is an elementary technique for solving combinational problems. Probsat is an algorithm paradigm of the simplest SLS solvers for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. In the first section of this paper, we introduce an efficient Probsat heuristic. We experimentally evaluate and analyze the performance
+of our solver in a combination of different techniques, including simulated annealing and WalkSAT. With the approach of formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the Efficiency of the solver. Using different random generator and other parameter settings in solving
+the sub-formula can bring further improvement in performance to our parallel solver.}
 \end{abstract}
 \vfill
 \afterpage{\null\newpage}
 \selectlanguage{ngerman}
 \begin{abstract}
 \centerline{\bf Zusammenfassung}
-{\noindent }
-%german abstract %TODO 
-Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Probsat ist einer der einfachsten SLS-Solver für das Erfüllbarkeitsproblem der Aussagenlogik (SAT), bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Im ersten Teil dieser Arbeit stellen wir eine effiziente Probsat-basierte Heuristik vor.  Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und Tabu Search wurde auch experimentell bewertet und analysiert. Mit dem Ansatz der Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Lösers verbessert. Die flexible Parametereinstellungen bei der Lösung der Teil-formeln kann eine weitere Verbesserung unseres Algorithmus bringen. 
+{\noindent Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Probsat ist einer der einfachsten SLS-Solver für das Erfüllbarkeitsproblem der Aussagenlogik (SAT), bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Im ersten Teil dieser Arbeit stellen wir eine effiziente Probsat-basierte Heuristik vor. Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und WalkSAT wurde auch experimentell bewertet und analysiert. Mit dem Ansatz der Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Lösers verbessert. Die flexible Parametereinstellungen bei der Lösung der Teil-formeln kann eine weitere Verbesserung unseres Algorithmus bringen.
+ }
 \end{abstract}
 
 
@@ -282,8 +268,7 @@ Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von 
 \section{Introduction} 
 \label{sec:Intro}
 \subsection{Problem/Motivation} 
-The \emph{\textbf{propositional satisfiability problem}} (\emph{\textbf{SAT}}) is the first proven NP-complete problem \cite{cook1971complexity}. The problem is to determine whether an assignment of Boolean values to variables in a  Boolean formula such that the expression evaluates to true. 
-As one of the most studied problems in computer science, the SAT problem has many applications. Hard combinational problems can be resolved with appropriate Encoding as a sat problem.
+The \emph{\textbf{propositional satisfiability problem}} (\emph{\textbf{SAT}}) is the first proven NP-complete problem \cite{cook1971complexity}. The problem is to determine whether an assignment of Boolean values to variables in a  Boolean formula such that the expression evaluates to true. Hard combinational problems can be resolved with appropriate Encoding as a sat problem.
 The SAT problem has many applications in computer science like chip model checking  \cite{clarke2001bounded}, software verification \cite{ivanvcic2008efficient} or in automated planning and scheduling in artificial intelligence  \cite{kautz1999unifying}. 
 Formula partition is one of the promising approaches in DPLL-like solvers  \cite{mann2017guiding}. By giving the order to the variables according to a good formula partition, the search gets a relatively balanced decision tree. But formula partition is rarely used in a local search for the SAT problem. How to combine the formula partition with local search, will the local search benefit from the partitioning, if the formula partitioning can guide a parallel local search, are still open questions. 
 
@@ -294,11 +279,11 @@ One class of the most straightforward but efficient stochastic local search algo
 
 \subsection{Definitions and Notations} 
 \emph{\textbf{Propositional Satisfiability Problem}}\\
-A variable with two possible logical values  \textit{TRUE} or  \textit{False} is a\emph{\textbf{propositional variable}}, which will be referred to as \emph{\textbf{variable}} in this paper.
+A variable with two possible logical values  \textit{TRUE} or  \textit{False} is a \emph{\textbf{propositional variable}}, which will be referred to as \emph{\textbf{variable}} in this paper.
 A \emph{\textbf{literal}} is an atomic formula in propositional logic. A literal can either be a \emph{\textbf{positive literal}} $v$ as the variable $v$ or a \emph{\textbf{negative literal}} $\bar{v}$ as negation of $v$.
 A \emph{\textbf{clause}} is a disjunction of literals. A formula in conjunctive normal form (CNF) is a conjunction of clauses. We refer it as  \emph{\textbf{CNF-formula}} or simply as \emph{\textbf{formula}} in this paper.
-An \emph{\textbf{assignment}} a: assigns the truth value to each variable $v$ in the formula. We say the assignment satisfies a formula if the truth value of the formula with this assignment turns out to be true. Specifically, an assignment satisfies a clause, if one literal in the clause with value  \textit{True} in this assignment. A formula is a satisfying formula if one assignment exists satisfies all its clauses. We say an assignment a satisfying assignment if it satisfies the formula. Otherwise, we say there are conflicts in some clauses with this assignment, or some clauses are unsatisfying clauses with this assignment. 
-The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a satisfiable formula. 
+An \emph{\textbf{assignment}} a as a function  $a$: $V\rightarrow \{True {, }\; False\}$ assigns the truth value to each variable $v$ in the formula. We say the assignment satisfies a formula if the truth value of the formula with this assignment turns out to be true. Specifically, an assignment satisfies a clause, if one literal in the clause with value  \textit{True} in this assignment. A formula is a satisfying formula if one assignment exists satisfies all its clauses. We say an assignment a satisfying assignment if it satisfies the formula. Otherwise, we say there are conflicts in some clauses with this assignment, or some clauses are unsatisfying clauses with this assignment. 
+The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a \emph{\textbf{satisfiable formula}}. 
 
 
 \emph{\textbf{Set}}\\
@@ -307,52 +292,180 @@ size of a set is the number of elements in the set.
 
 
 \emph{\textbf{Local Search}}\\
-For instance I of hard combinational Problem, there is a set of solutions.  According to the constraints of the problem, an object function (score) is used to evaluate the candidate solutions. The Goal of the local search is to find the solution of minimum cost (the solution with the maximal score).
-A local search starts with an initial complete solution. According to some heuristic, the local search makes local changes to its current solution iteratively, hence the name local search. Starts from an initial solution, the search will evaluate the solutions which can be reached by applying a local change to the current solution and choose one of the neighbor solutions with local optimization. The search applies local moves until the optimal solution is reached, or in some cases, a generally good solution is reached.  Local search is widely used in hard combinational problems such as the traveling salesman problem [13] and the graph coloring problem [14]. 
-In the Boolean satisfiability problem, a local search operates primarily as follows: The search start from a randomly generated assignment as the initial solution. If this current assignment satisfied the formula, the search stops with success. Otherwise, a variable is chosen depends on some criterion, which we further call pickVal. By change the assignment of the selected variable, a neighbor assignment of our current solution is reached in next step, which is also called variable flipping. A local search will move in the space of the assignments by making the variable flipping until a satisfying assignment is reached by the search.  
-The heuristic used for the pickVal selection is based on some scores of the variables in the current assignment.Consider the assignment reached by taking a flip of the variable in the current assignment. The number of clauses satisfied in B,but not in A is called the breakcout of the local move from to. Accordingly, the number of clauses, which become satisfying because of the flipping, is the makecount. The number of newly satisfying clauses (make) minus the number of newly unsatisfying clauses (break), which is denoted as diffscore, represents the local improvement of the corresponding flipping. Apart from this, other aspects like the repetition number of one flip or the number of occurrences of the variables can be considered in a selection heuristic.
-An example is the unit propagation embedded local solver EagleUp, which prefers flipping of variable with the highest number of occurrences in a formula to creates new unit clauses sooner. To get local improvement effectively, man can only consider variables in unsat clauses for the flipping selection. This process is called a focused local search and commonly used. 
-The initial hope of the local search is that through iterative greedy local improvement the optimal global solution can be found.  The typical problem of the local search is that the greedy local improvement searches be trapped in local unattractive local optimal solution.  To avoid this, a worse solution then the current solution will be chosen for the next step (uphill moves). There are some techniques following used in local search with occasional uphill moves.
+For instance $I$ of a hard combinational Problem $P$, there is a set of solutions $S$.  According to the constraints of the problem, an object function (score or cost) $\Gamma$ is used to evaluate the candidate solutions. The Goal of the local search is to find the solution of minimum cost ( or the solution with the maximal score).\\
+A local search starts with an initial complete solution. According to some heuristic, the local search makes local changes to its current solution iteratively, hence the name \emph{\textbf{local search}}. Starts from an initial solution, the search will evaluate the solutions which can be reached by applying a local change to the current solution and choose one of the neighbor solutions with local optimization. The search applies local moves until the optimal solution is reached, or in some cases, a generally good solution is reached.  Local search is widely used in hard combinational problems such as the traveling salesman problem [13] and the graph coloring problem [14]. \\
+\\
+\emph{\textbf{Local Search in SAT Problem}}\\
+In the Boolean satisfiability problem, a local search operates primarily as follows: The search start from a randomly generated assignment as the initial solution. If this current assignment satisfied the formula, the search stops with success. Otherwise, a variable is chosen depends on some criterion. This selection is called \emph{\textbf{pickVar}}. By change the assignment of the selected variable $v$, a neighbor assignment of our current solution $A$ is reached in next step, which is also called  \emph{\textbf{flipp$(A,v)$}}. A local search will move in the space of the assignments by making the variable flipping until a satisfying assignment is reached by the search. \\
+The heuristic used for the flipping variable selection $pickVar$  is based on some scores of the variables in the current assignment. Consider the assignment $\hat{A}$  reached by taking a flip of the variable in the current assignment $A$. The number of clauses satisfied in $A$,but not in $\hat{A}$ is called the \emph{\textbf{breakcout}} of the local move from $A$ to $\hat{A}$. Accordingly, the number of clauses, which become satisfying because of the flipping, is the  \emph{\textbf{makecount}}. The number of newly satisfying clauses ($makecount$) minus the number of newly unsatisfying clauses ($breakcount$), which is denoted as \emph{\textbf{diffscore}}, represents the local improvement of the corresponding flipping. Apart from this, other aspects like the repetition number of one flip or the number of occurrences of the variables can be considered in a selection heuristic. An example is the unit propagation embedded local solver $EagleUp$, which prefers flipping of variables with the highest number of occurrences in a formula to creates new unit clauses sooner. To get local improvement effectively, man can only consider variables in unsat clauses for the flipping selection. This process is called a \emph{\textbf{focused local search}} and commonly used. \\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula F}
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $A \leftarrow$ random generated assignment  $A$;\;
+ \While {$( \exists$ unsatisfied clause $ \land$ Timeout does not occur$)$}{
+  $c \leftarrow$ random selected  unsatisfied clause ;\;
+  $x \leftarrow pickVar(A,c)$\;
+  $A \leftarrow flip(A,x)$;\;
+ }
+ \caption{Focused Local Search}
+\end{algorithm}  
 
+By choosing the variable with best score in $pickVal$, the seach will get greedy local improvemnet. 
+The initial hope of the local search is that through iterative greedy local improvement the optimal global solution can be found. The typical problem of the local search is that the greedy local searches be trapped in local unattractive local optimal solution.  To avoid this , some random flips are picked or even a worse solution  will be chosen for the next step (\emph{\textbf{uphill moves}}). There are some techniques following used in local search to avoid getting stuck in local optimum.
 
-\emph{\textbf{Stochastic Local Search}}\\
-The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen p(T(s)) corresponds to the scores of the solution. In this way, the advantage a move is, the probability of choosing it as the next step is higher.   This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. 
-
-
+\emph{\textbf{Stochastic Local Search (SLS)}}\\
+The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen $p(\Gamma(s))$ corresponds to the score $\Gamma(s)$ of the solution $s$. In this way, the advantage a move is, the probability of choosing it as the next step is higher. This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. \\
+\\
 \emph{\textbf{Tabu Local Search }}\\
  Tabu search is created by Fred W. Glover in 1986 [15] and formalized in 1989.  For recognize the loop in a suboptimal region, the search trace is recorded in the process by mark the recently reached neighboring assignments as tabu. The tabu moves will not be touched in the further search to discourage getting stuck in a region. \\
 \\
 \emph{\textbf{Simulated Annealing}}\\
-Simulated Annealing is an approach of SLS solver to difficult combinational optimization problems proposed by Kirkpatrick, Gelatt, and Vecchi. This approach is inspired by the metallic process annealing of shaping the material by heating and then slowly cooling the material. This approach works as a local optimization algorithm guided by a controlling parameter temperature. By high temperature, an uphill move is allowed with high probability while only small steps are allowed in low temperature. The temperature is varying according to the score of the current situation.  For a current solution with a nearly optimal score, the temperature is near zero. For an unattractive local extreme with a poor score, the active search is tending to make uphill moves in high temperature.\\
+Simulated Annealing is an approach of local search solver to difficult combinational optimization problems proposed by Kirkpatrick, Gelatt, and Vecchi \cite{kirkpatrick1983optimization}. This approach is inspired by the metallic process annealing of shaping the material by heating and then slowly cooling the material. This approach works as a local optimization algorithm guided by a controlling parameter \emph{\textbf{temperature}}. By high temperature, an uphill move is allowed with high probability while only small steps are allowed in low temperature. The temperature is varying according to the score of the current situation.  For a current solution with a nearly optimal score, the temperature is near zero. For an unattractive local extreme with a poor score, the active search is tending to make uphill moves in high temperature.\\
 \\
+\emph{\textbf{WalkSAT}}\\
+WalkSAT is a focused random local search strategy to solve SAT problem, which is originally introduces in 1994 \cite{hoos2002adaptive}\\. WALKsat may ignore the greedy flipping and flip a random variable in chosen unsatisfied clause wit probability $p$ . By introducing these "uphill noises", the WalkSAT combines greedy local search and random walk to get an effective and robust random solver. \\
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ for flipping}
+\For{$v$ in $c$}{
+  Evaluate $v$ with function $\Gamma(A,v)$;\;
+ }
+  with probability $p$: $x \leftarrow$   $v$ with maximum $\Gamma(A,v)$; \;
+  with probability $1-p$:  $x \leftarrow$  randomly selected $v$ in $c$. 
+ \caption{pickVar in WalkSAT}
+\end{algorithm}  
+
 \emph{\textbf{The Probsat}}\\
-Probsat is a class of SLS sat solver, which was introduced in 2012 by Adrian Balint and Uwe Schoening. In a probsat solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. In the initial solution, the truth value of The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfying clauses exists, which means the satisfying assignment is found. The flip probability p of the variables in the chosen clause is calculated in a function p(x,s) based on make and break score of the variable in the current assignment. The idea behind the probability function is to give the advantageous flipping relative high probability, but the other flipping has small chance to be chosen.  There are two kinds of functions are considered in the paper of Adrian Baliant: exponential function and a polynomial function. 
- An exponential function f is an exponential 2-parameter (cb and cm) function:
-Or a function with polynomial decay, which is called a polynomial function in the original paper: 
-As mentioned in the probsat paper, it turns out in experiments that the influence or make is rather weak, so the one parameter function like the following can lead to an efficient algorithm.
-The pseudo code of a typical Probsat is shown below:
-Algorithm 1: ProbSAT
-Input: Formula F, maxTries, maxFlips
-Output: satisfying assignment a or UNKNOWN
-For I =1 to  maxTries do:
- a<- randomly generated assignment
- For I =1 to maxFlips do:
-If(a satisfies  F) then 
-Return a
-C 
-\subsection{The algorithms for comparison} %TODO
+Probsat is a class of SLS sat solver, which was introduced in 2012 by Adrian Balint and Uwe Schoening \cite{balint2016engineering}. In a probsat solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $/Gamma(v,A)$ based on break score of $v$ in the current assignment $A$ \footnote{As mentioned in the probsat paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
+\\
+$\Gamma(v,A) = (c_b)^{break(v,A)}$ (break-only-exp-function) \\
+$\Gamma(v,A)=(\epsilon +break(v,A)^{-c_b})$  (break-only-poly-function)\\ 
+\\
+The pseudo code of a typical Probsat is shown below:\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Output{a variable $x$ in $c$ for flipping}
+\For{$v$ in $c$}{
+  Evaluate $v$ with function $\Gamma(A,v)$;\;
+ }
+  $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; 
+ \caption{pickVar in probSAT}
+\end{algorithm} 
+
+\subsection{The Competitors}
+\label{comparision}
+Our heuristic is based on the probSAT paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original ProbSAT. Another random SAT solver used for a comparison with our algorithm is yalSAT, which is the champion in random track category in SAT competition 2017 \cite{biere2014yet}.\\
+\\
+\emph{\textbf{probSAT}} \footnote{https://github.com/adrianopolus/probSAT}
+\\
+The authors of the original Paper implement the ProbSAT. We compare our Solver with this original code \footnote{Using same parameter settings our implementation gets similar performance to the original code}.  \\
+In this original code, there are two implementation variants available. In the incremental approach, the breakScores of variables are calculated in the initialization phase and only updated in the further search. The other straightforward approach is to compute breakScores of the variables in consideration of flipping. This method is called non-incremental approach in original paper. As suggested in Experiments, we take the non-incremental approach for the 3SAT problems and incremental method for 5SAT and 7SAT to get optimal results of the probSAT solver.\\
+The parameters of ProbSAT in our Experiments have been set as suggested in the original paper:\\
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{| l | l| l | l| l |p{3cm}|}
+\hline 
+    $k$SAT\footnote{k is the maximum length of the clause} & score $\Gamma$ & $c_b$ & $\epsilon$ &variants \\ \hline
+    $3$SAT & break-only-poly& 2.06 & 0.9 &non-incrementel \\ \hline
+    $5$SAT & break-only-exp & 3.7 & - & incremental \\ \hline
+    $7$SAT &  break-only-exp & 5.4 & - & incremental \\ \hline
+\end{tabular}
+\caption[probSAT]{Parameter setting for competitor probSAT}
+\end{center}
+%\end{minipage}
+\end{table} 
+
+\emph{\textbf{yalSAT}} \footnote{https://baldur.iti.kit.edu/sat-competition-2017/solvers/random/}\\
+We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver in our experiments. Armin Biere implements it as a reimplementation with extensions of probSAT.  With the implementation of different variants of probSAT, the yalSAT uses a different variant of probSAT randomly in the restart of a round of search. In our comparison, we use the default settings of the yalSAT with specific seeds.
+\clearpage
 \section{Our local Solver}
 \label{sec:local}
-\label{sec:Solving GCP by Tabucol}
-\subsection{Probsat}
-\subsection{Improvement through randomly generated solution}
+%TODO
+%: steps
+\subsection{Initialization}
 \label{subsec:Improvement through Bias initialization}
-\label{double choose (greedy and sls)}
-\label{subsec:Improvement through Tabu}
-\subsection{Improvement through random generator}
-\subsection{Improvement through statistic}
-\subsection{try star version}
+%TODO
+%: step 1
 
+\subsection{pickVar}
+%TODO
+%: step pickVar
+Inspired by probSAT and walkSAT, Our algorithm is a typical focused SLS algorithm, which solves the SAT problem as follows:\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ for flipping}
+ greedyVs $\leftarrow$ $\emptyset$;\;
+\For{all $v$ in $c$}{
+   \If{$($break(A,v)= 0 $\land$ $Permit(v))$}{
+	greedyVs = greedVs +  $\{v\}$    
+   }
+ }
+  with probability $p$: $x \leftarrow$ randomly selected variable $v \in$ greedyVs;  \;
+  with probability $1-p$:   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  
+\caption{pickVar in COMBINE}
+\end{algorithm}  
+
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ for flipping}
+ greedyVs $\leftarrow$ $\emptyset$;\;
+\For{all $v$ in $c$}{
+   \If{$($break(A,v)= 0 $\land$ $Permit(v))$}{
+	greedyVs = greedVs +  $\{v\}$    
+   }
+ }
+  $greedyV \leftarrow$   randomly selected variable $v \in$ greedyVs  ; \;
+  $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  \;
+  with probability $p = \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
+    with probability 1-p: $x\leftarrow$ greedyV;\;
+\caption{pickVar in WALK}
+\end{algorithm} 
+
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ for flipping}
+  greedyVs $\leftarrow$ $\emptyset$;\;
+\For{all $v$ in $c$}{
+   \If{$($break(A,v)= 0 $\land$ $Permit(v))$}{
+	greedyVs = greedVs + $\{v\}$   
+   }
+ }
+  \If{$($greedyVs is not empty$)$}{
+  		 x $\leftarrow$ selected variable $v$ in $greedyVs$ at random 
+ 	}
+ \Else{
+  x $\leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; }
+  \;
+\caption{pickVar in TieBreak}
+\end{algorithm} 
+\subsection{Simulated Annealing}
+\label{sec:Simulated Annealing}
+%TODO
 \section{Our Parallel Algorithm}
 \label{sec:parallel}
 \label{sec:Our parallel Algorithm}
@@ -364,7 +477,7 @@ C
 \label{sec:eva}
  %TODO some server information
 \subsection{DIMACS standard format}  
-All the benchmark CNF formula used in experiments are encoded in the DIMACS standard format \cite{johnson1996cliques}. This format is used to test and compare SAT solver in SAT competition. A DIMACS file contains the description of an instance using three types of lines\footnote {Only clause unweighted simple instances are tested in our experiments. For other descriptors and details of the DIMACS format, see \cite{dimacs}.}:\\ \\ 1. Comment line: Comment lines give information about the graph for human readers, like the author of the file or the seed used in generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause Descriptor: An clause $\{v_1, v_2,.., v_n\}$ in the graph is described in an edge Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\; .. \;v_n$}\\  
+All the benchmark CNF formula used in experiments are encoded in the DIMACS standard format \cite{johnson1996cliques}. This format is used to test and compare SAT solver in SAT competition. A DIMACS file contains the description of an instance using three types of lines\footnote {Only clause unweighted simple instances are tested in our experiments. For other descriptors and details of the DIMACS format}:\\ \\ 1. Comment line: Comment lines give information about the graph for human readers, like the author of the file or the seed used in generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause Descriptor: An clause $\{v_1, v_2,, v_n\}$ in the graph is described in an edge Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\;  \;v_n$}\\  
 \begin{figure}[h!] \begin{center}  \includegraphics[scale = 0.5]{1/Dimacs.pdf}      \caption{A DIMACS file example of the problem in Figure \ref{Figure 6}}      \end{center} \end{figure}  
 \subsection{Benchmarks}
 \label{benchmark}
@@ -374,10 +487,30 @@ The suffix 'k'  denotes the length of clauses. The r indicates the clause-to-var
 \subsection{Used plots and tables}
 Different plots and tables are used to illustrate the results of the following experiments.\\
 \emph{\textbf{Comparison Table}}\\
-\emph{\textbf{Scatter Plot}}\\
 \emph{\textbf{Cactus Plot}}\\
-\emph{\textbf{Advantage Plot}}\\
- \subsection{Automatic parameter optimization}
+\subsection{Random seeds used in Experiments}
+To make our experiments results reproducible and robust, we repeat our tests with three specific seeds. We produce the seeds in experiments as follows: First, we use the sum of characters of the name of the solver to seed the pseudo-random generator in c++.  Then we use this reinitialized generator to produce three random values, which are the seeds used later in our experiments. 
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{1cm}|}
+\hline 
+    solver&name&1.seed&2.seed&3.seed \\ \hline
+	probSAT&probsat&1988822874&338954226 &858910419 \\ \hline
+	yalSAT &yalsat&1851831967&280788293&1956345180 \\ \hline
+	our local solver & local&1962042455&1112841915&566263966 \\ \hline
+	our parallel solver & parallel &1749729997& 68910537& 473644167 \\ \hline
+	
+\end{tabular}
+\caption[probSAT]{Parameter setting for competitor probSAT}
+\end{center}
+%\end{minipage}
+\end{table} 
+
+
+
+
+\subsection{Automatic parameter optimization}
 \subsection{Experiments}
 \section{Conclusion}
 \label{sec:conc}
