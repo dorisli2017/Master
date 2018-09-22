@@ -393,17 +393,39 @@ We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver
 \clearpage
 \section{Our local Solver}
 \label{sec:local}
-%TODO
-%: steps
-\subsection{Initialization}
-\label{subsec:Improvement through Bias initialization}
-%TODO
-%: step 1
-
-\subsection{pickVar}
-%TODO
-%: step pickVar
-Inspired by probSAT and walkSAT, Our algorithm is a typical focused SLS algorithm, which solves the SAT problem as follows:\\
+ Our algorithm is a typical focused SLS algorithm, which solves the SAT problem with the basic shema:\\
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula F}
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $A \leftarrow initAssign(F)$ \;
+ \While {$( \exists$ unsatisfied clause $ \land$ Timeout does not occur$)$}{
+  $c \leftarrow pickCla(A)$ ;\;
+  $x \leftarrow pickVar(A,c)$\;
+  $A \leftarrow flip(A,x)$;\;
+ }
+ \caption{Our Local Search}
+\end{algorithm}
+ In the following, we will describe the methods used in our local search.\\
+\\
+\subsection{initAssign(F)}
+In our algorithm, we have three variants to make assignment initialization.
+One is the $RandomInit$ which is the random initiation like in the original probsat suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias-RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 we compare these three alternatives based on the probsat algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
+\\
+\subsection{pickCla(A)}
+$numT(c)$ , the number of $True$ values in each clause $c$, are counted in Initilization phase and maintained in further search. The unsatisfying clauses will be cached in a set $UNSAT$. During the local flipping, these numbers will be updated when the flipping variable is in the clauses.  Comparing to the $numT$, the $UNSAT$ is updated lazily. After Flipping, if the $numT$ of one clause is decreased to zero, it will be added in the $UNSAT$.  To select an unsat clause in $pickCla(A)$, man needs to select a clause from the $UNSAT$ and Ocheck if it is still unsat with its $numT$ is zero. Otherwise, if the chosen clause $c$ with $numT(c)$ as zero, it will be removed from the $UNSAT$ set. This step pickCla(A) will be repeated until one unsatisfied clause is found or the $UNSAT$ set is empty, which means the current Assignment $A$ is a satisfying assignment.\\ 
+\\
+\subsection{pickVar(A,c)}
+Inspired by probSAT and walkSAT, Our pickVar combines the random walk and stochastic selection. We analyze experimentally the following variants for  $pickVar$.\\
+\\ 
+ \emph{\textbf{1.Varinat:COMBINE}}\\
+\\
+In observation of the experiments of the probSAT, this stochastic search bases its selection on a random heuristic.  Even the search is very close to a satisfying assignment, and the probability of the critical flipping is exceptionally high, it is possible that the stochastic search make uphill moves and leave then the region of the global minimum. To prevent this besides the stochastic way,  we pick greedy flip with zero $breakScore$ with a certain probability $p$. With probability $1-p$, we choose the variable for flipping using the probSAT heristic.\\
+\\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -419,9 +441,12 @@ Inspired by probSAT and walkSAT, Our algorithm is a typical focused SLS algorith
  }
   with probability $p$: $x \leftarrow$ randomly selected variable $v \in$ greedyVs;  \;
   with probability $1-p$:   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  
-\caption{pickVar in COMBINE}
+\caption{COMBINE}
 \end{algorithm}  
-
+ \emph{\textbf{2.Varinat: WALK}}\\
+\\
+Instead of using a constant probability $p$ to choose between a greedy Literal without clause break and the random Literal using probSAT flipping directly, we see a list, called statistic list $S$ to record how many times each variable is chosen for flipping.  To avoid cycling, we see the variable $v_i$ with a high value of S[i] to be disadvantages for flipping. After selecting a variable using the ProbSAT stochastic distribution, we make the choice randomly according to the statistic values of these two variables.\\
+ \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -438,10 +463,11 @@ Inspired by probSAT and walkSAT, Our algorithm is a typical focused SLS algorith
   $greedyV \leftarrow$   randomly selected variable $v \in$ greedyVs  ; \;
   $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  \;
   with probability $p = \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
-    with probability 1-p: $x\leftarrow$ greedyV;\;
-\caption{pickVar in WALK}
+    with probability $1-p$: $x\leftarrow$ greedyV;\;
+\caption{WALK}
 \end{algorithm} 
-
+ \emph{\textbf{3.Varinat: GreedyBreak}}\\
+ Compared to find the greedy Literals with zero breakScores, the calculation of the decay function \Gamma values and get a random literal according to its distribution takes the most part in the whole search. In this variant $greedybreaking$, we search greedy Literal with small statistic value.  Hier, we define a literal is a permitted greedy Literal if its break value is zero and its statistic value is under some Limit. If permitted greedy variables exist, we choose one randomly for flipping. Otherweise, we pick random Literal using probSAT heuristic. To set the limit based on the search history, we compare two functions in our experiment. In the first approach "Average", the limit is set statistic to $\apha *\frac{numFs}/{numVs}$. In another approach "Random-Flip,"we select randomly a value $r $ in $[0, numFs]$. For each greedy Literal, we check if its statistic value is smaller than $\alpha * r$. 
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -461,11 +487,45 @@ Inspired by probSAT and walkSAT, Our algorithm is a typical focused SLS algorith
  \Else{
   x $\leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; }
   \;
-\caption{pickVar in TieBreak}
+\caption{TieBreak}
 \end{algorithm} 
 \subsection{Simulated Annealing}
 \label{sec:Simulated Annealing}
-%TODO
+\subsection{Data structures}
+\label{subsec:Data structures}
+\emph{\textbf{ Occurrences}}
+\\
+In the process of initialization, the numbers of occurrences of one variable will be compared. In our implementation, we use a list to count and record these occurrences numbers. This list with size of $2*numClauses $ is denoted as Occurrences List OL. For the variable with index $i$, the $OL[2i]$ is the number of literal vs occurrences; The $OL[2i+1]$ is for its negative occurrences. \\
+\\
+\emph{\textbf{ Literals}}
+\\
+Local search is a search where only small changes are made in each step. In our Situation, only the clauses include the flipping variables are involved in the flipping step. The most time in our solver is spent to update the $numTs$ of these involving clauses. To find the involving clauses of one Variable,  two $2D$ Array $posL$ and $negL$is made to record the clauses of positive nad negative literals. For variable $v_i $, the posL[i] record the indexes of clauses containing the positive literal $v_i$. Tthe ones with negative literal $-v_i$ are in by $egL[i]$. To implement the flipping of the variable $v_i$, we update the $numTs$ of clauses with indexes in $posL[i]$ and $negL[i]$.\\
+\\
+\emph{\textbf{LookUp}}
+\\
+The most time used in the search is the repeated  calculation  of  tthe polynomial or exponential decay function $\Gamma$. With this observation in our experiments, we calculate the $\Gamma(x)$ with $x$ from $0$ to $0.5* numCs$ and keep the valuse in a list $LookUp$. In our implementation, we use this Table lookup to get the values instead of the reputation of time-consuming exponential operation.  \\
+\\
+\emph{\textbf{Solution}}
+\\
+A Solution in our implementation includes the boolean Assignment and three other structures to record information about the current assignment. The Solution is computed after assignment initialization and is updated during each flipping :\\
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{1cm}|}
+\hline 
+ 	Name &Structure & Size & Meaning\\ \hline
+    $Assignment$&list & numVs & boolean assignment to variables\\ \hline
+	$NumTs$&list & numCs& number of $True$ values in each clause \\ \hline
+	$NumUnsat$& natural number & -&the number of unsatisfied clauses  \\ \hline
+	$UNSAT$& set & - & indexes of unsatisfied clauses \footnote{This UNSAT is updated in flipping phase lazily by only adding new unsatisfied clauses and remove the clause chosen in $pickCla$.}\\ \hline
+
+	
+\end{tabular}
+\caption[probSAT]{Parameter setting for competitor probSAT}
+\end{center}
+%\end{minipage}
+\end{table} 
+
 \section{Our Parallel Algorithm}
 \label{sec:parallel}
 \label{sec:Our parallel Algorithm}
@@ -485,9 +545,16 @@ The benchmark instances used in experiments are the 180 uniform instances (unif)
 The suffix 'k'  denotes the length of clauses. The r indicates the clause-to-variable ratio. The c and v are for the number of clauses and variables, while s is for the seed used in the generation process.
  Without flitering, there are at least 60 ( $33\%$ ) problems form our 180 benchmark collections are unsatisfiable.
 \subsection{Used plots and tables}
-Different plots and tables are used to illustrate the results of the following experiments.\\
+the results of the following experiments are all shown in comparision table and  illusatrated in cactus plot.  \\
+\\
 \emph{\textbf{Comparison Table}}\\
+See Table \ref{Experiment 1 Comparison Table} for example.\\
+A comparison table compares the performance of different algorithms. The first column contains the 2-factor penalized runtime \footnote{Not like the PAR-2 scheme in SAT competition, we only  assign a 2-factor time limit penalization  for each unsolved benchmark which has been solved by another solver in the comparision.} of solving a set of benchmark problems. The fields of a comparison table in the following columns corresponds to the coloring sizes found with an algorithm.\\
+\\
 \emph{\textbf{Cactus Plot}}\\
+See Figure \ref{Experiment 1 cactus plot} for an example.\\
+A cactus plot shows the performance of different algorithms. The y-axis shows the time in second used to solve the benchmark graphs.  The y-axis is for the number of solved problems by a certain time. Each algorithm corresponds to a curve in different colors. The point $(u, v)$ on a curve means by $v$ seconds the corresponding algorithm have solved  $u$ problems.  \\
+
 \subsection{Random seeds used in Experiments}
 To make our experiments results reproducible and robust, we repeat our tests with three specific seeds. We produce the seeds in experiments as follows: First, we use the sum of characters of the name of the solver to seed the pseudo-random generator in c++.  Then we use this reinitialized generator to produce three random values, which are the seeds used later in our experiments. 
 \begin{table}[h!]
@@ -512,6 +579,21 @@ To make our experiments results reproducible and robust, we repeat our tests wit
 
 \subsection{Automatic parameter optimization}
 \subsection{Experiments}
+\subsubsection{Experiment 1: initAssign(F)}
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{1cm}|}
+\hline 
+    k &$RandomInit$&$BiasInit$&$Bias$-$RandomInit$ \\ \hline
+	3&\textbf{11187.15} (\textbf{112})&11754.82 (109)&11858.93 (110) \\ \hline
+	5&11006.72 (167)&\textbf{6023.1}(\textbf{175})&6692.79 (\textbf{175})\\ \hline
+	7& 5941.4(\textbf{119})&\textbf{4097.48} (118)&6387.73 (117)\\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table} 
 \section{Conclusion}
 \label{sec:conc}
 \subsection{Further work}
