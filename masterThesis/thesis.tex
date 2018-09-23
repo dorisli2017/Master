@@ -467,7 +467,8 @@ Instead of using a constant probability $p$ to choose between a greedy Literal w
 \caption{WALK}
 \end{algorithm} 
  \emph{\textbf{3.Varinat: GreedyBreak}}\\
- Compared to find the greedy Literals with zero breakScores, the calculation of the decay function \Gamma values and get a random literal according to its distribution takes the most part in the whole search. In this variant $greedybreaking$, we search greedy Literal with small statistic value.  Hier, we define a literal is a permitted greedy Literal if its break value is zero and its statistic value is under some Limit. If permitted greedy variables exist, we choose one randomly for flipping. Otherweise, we pick random Literal using probSAT heuristic. To set the limit based on the search history, we compare two functions in our experiment. In the first approach "Average", the limit is set statistic to $\apha *\frac{numFs}/{numVs}$. In another approach "Random-Flip,"we select randomly a value $r $ in $[0, numFs]$. For each greedy Literal, we check if its statistic value is smaller than $\alpha * r$. 
+\\  Compared to find the greedy Literals with zero breakScores, the calculation of the decay function $\Gamma$ values and get a random literal according to its distribution takes the most part in the whole search. In this variant $greedybreaking$, we search greedy Literal with small statistic value.  Hier, we define a literal is a permitted greedy Literal if its break value is zero and its statistic value is under some Limit. If permitted greedy variables exist, we choose one randomly for flipping. Otherweise, we pick random Literal using probSAT heuristic. To set the limit based on the search history, we compare two functions in our experiment. In the first approach "Average", the limit is set statistic to $\alpha*\frac{numFs}{numVs}$.\\
+ In another approach "Random-Flip,"we select randomly a value $r $ in $[0, numFs]$. For each greedy Literal, we check if its statistic value is smaller than $\alpha * r$. \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -490,6 +491,7 @@ Instead of using a constant probability $p$ to choose between a greedy Literal w
 \caption{TieBreak}
 \end{algorithm} 
 \subsection{Simulated Annealing}
+
 \label{sec:Simulated Annealing}
 \subsection{Data structures}
 \label{subsec:Data structures}
@@ -573,27 +575,253 @@ To make our experiments results reproducible and robust, we repeat our tests wit
 \end{center}
 %\end{minipage}
 \end{table} 
+\subsubsection{Soft- and Hardware}
+The single-threaded experiments were run on computers that had Two Intel Xeon E5-2683 v4 processors  (2.1 GHz 2x16-core + 2x16-HTcore) and 512GB RAM. The machine ran the 64-bit version
+of  Ubuntu 14.04.5 LTS. 
+\subsection{Parameter Settings in Experiment}
+The $TimeOut$ is set to 5Minutes in the experiments of local searches.  For the probSAT heuristic, our local search uses the values for $c_b$ and $/epsilon$ suggested in the probSAT paper.  The $tolerence$ $ \tau$ used in the experiments is generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the UNIF category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) using different   $ \tau \in [0, 10]$\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}  and randomly generated seeds. With the help of SMAC.
 
 
-
-
-\subsection{Automatic parameter optimization}
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
-\begin{table}[h!]
+Experiment 1 compares two three strategies of initialization in our solver. The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns True to variables whose positive literal occurs more than its negative literal. Another alternative $randomInit$ is to build a coloring randomly. In a combination of these two variants $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. the probability to assign True to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. \\
+\begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{1cm}|}
 \hline 
     k &$RandomInit$&$BiasInit$&$Bias$-$RandomInit$ \\ \hline
-	3&\textbf{11187.15} (\textbf{112})&11754.82 (109)&11858.93 (110) \\ \hline
-	5&11006.72 (167)&\textbf{6023.1}(\textbf{175})&6692.79 (\textbf{175})\\ \hline
-	7& 5941.4(\textbf{119})&\textbf{4097.48} (118)&6387.73 (117)\\ \hline
+	3&9221.9 (\textbf{55})&9157.76 (54)&\textbf{ 9078.27}(\textbf{55}) \\ \hline
+	5&7143.9 (82)&\textbf{4351.09}(\textbf{87})&4582.54 (\textbf{87})\\ \hline
+
+	7& 	6238.51(60)&\textbf{5421.9} (60)& 6310.7(60)\\ \hline
 	
 \end{tabular}
 \end{center}
 %\end{minipage}
 \end{table} 
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e1.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 1 k3 cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e1.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 1 k5 cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e1.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 1 k7 cactus plot}
+  \end{figure}
+  \clearpage
+\subsubsection{Experiment 2: pickVar(F)}  
+With the comparison of three Variant of $pickVal$ with the one in probSAT, our suggestions are faster and solve more instances in K3 and K5.  For K7,  there are no noticeable differences in results.
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{3cm}|}
+\hline 
+    k &$probSAT$&$WALK$&$Average$&$Random-Flip$ \\ \hline
+	3&9221.9 (55)&7430.12 (57)&\textbf{6161.11}(\textbf{61})&8362.42 (55) \\ \hline
+	5&7143.9 (82)&4433.05 (87)&\textbf{3308.16}(\textbf{89})&4052.47(87)\\ \hline
+
+	7& 	6238.51(\textbf{60})& 6358.76(\textbf{60})&6525.597(59)&\textbf{5800.46}(\textbf{60})\\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table} 
+
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e2.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 2 k3 cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e2.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 2 k5 cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e2.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 2 k7 cactus plot}
+  \end{figure}
+
+\subsubsection{Experiment 3: WALK with Simulated Annealing} 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e3w.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 3 k3-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e3w.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 3 k5-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e3w.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 3 k7-w cactus plot}
+  \end{figure}
+\subsubsection{Experiment 4: Average with Simulated Annealing} 
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e3a.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 4 k3-a cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e3a.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 4 k5-a cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e3a.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 4 k7-a cactus plot}
+  \end{figure}
+\subsubsection{Experiment 5: Random-Flip with Simulated Annealing} 
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e3r.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 5 k3-r cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e3r.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 5 k5-r cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e3r.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 5 k7-r cactus plot}
+  \end{figure}
+
+\subsubsection{Experiment 6: probSAT vs WALK.}  
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e4w.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 6 k3-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e4w.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 6 k5-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e4w.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 7 k7-w cactus plot}
+  \end{figure}
+
+\subsubsection{Experiment 7: probSAT vs Average.}   
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e4a.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 6 k3-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e4a.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 6 k5-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e4a.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 7 k7-w cactus plot}
+  \end{figure}
+\subsubsection{Experiment 8:probSAT vs Random-Flip.}  
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e4r.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 6 k3-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e4r.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 6 k5-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e4r.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 7 k7-w cactus plot}
+  \end{figure} 
+\subsubsection{Experiment 9: probSAT vs yalSAT vs swpSolver } 
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K3/e5.pdf}
+  \end{center}
+  \caption{Three suggestions have very similar performance.}
+  \label{Experiment 9 k3-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K5/e5.pdf}
+  \end{center}
+  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \label{Experiment 9 k5-w cactus plot}
+  \end{figure}
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/K7/e5.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 7 k7-w cactus plot}
+  \end{figure} 
+
+
+  
 \section{Conclusion}
 \label{sec:conc}
 \subsection{Further work}
