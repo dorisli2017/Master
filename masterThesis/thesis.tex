@@ -283,7 +283,33 @@ A variable with two possible logical values  \textit{TRUE} or  \textit{False} is
 A \emph{\textbf{literal}} is an atomic formula in propositional logic. A literal can either be a \emph{\textbf{positive literal}} $v$ as the variable $v$ or a \emph{\textbf{negative literal}} $\bar{v}$ as negation of $v$.
 A \emph{\textbf{clause}} is a disjunction of literals. A formula in conjunctive normal form (CNF) is a conjunction of clauses. We refer it as  \emph{\textbf{CNF-formula}} or simply as \emph{\textbf{formula}} in this paper.
 An \emph{\textbf{assignment}} a as a function  $a$: $V\rightarrow \{True {, }\; False\}$ assigns the truth value to each variable $v$ in the formula. We say the assignment satisfies a formula if the truth value of the formula with this assignment turns out to be true. Specifically, an assignment satisfies a clause, if one literal in the clause with value  \textit{True} in this assignment. A formula is a satisfying formula if one assignment exists satisfies all its clauses. We say an assignment a satisfying assignment if it satisfies the formula. Otherwise, we say there are conflicts in some clauses with this assignment, or some clauses are unsatisfying clauses with this assignment. 
-The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a \emph{\textbf{satisfiable formula}}. 
+The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a \emph{\textbf{satisfiable formula}}. \\
+\\
+Here is an example of SAT problem:
+\begin{center}
+\begin{table}
+\begin{tabular}{l}
+$F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_1 \lor \bar{v_1})$\\	
+$Vars(F) = \{v_1, v_2, v_3\}$\\
+$numVs(F) = |Vars(F)| = 3$\\
+$Lits(F) = \{v_1, \bar{v_1}, v_2, v_3, \bar{v_3}\}$\\
+$Cls(F) = \{C_1, C_2\}$\\
+$numCs(F) = |Cls| = 2$\\ 
+$C_1 = \{v_1, \bar{v_3}\}$\\
+$C_2 = \{v_2, v_3, \bar{v_1}\}$\\
+\\
+$A(v_1)$ = $True$, $A(v_2)$ = $False$, $A(v_3)$ = $True$, \\
+$A$  is an assignment satisfies $F$.\\
+\\
+$\hat{A}(v_1)$ = $True$, $\hat{A}(v_2)$ = $False$, $\hat{A}(v_3)$ = $False$, \\
+$\hat{A}$  is an assignment with conflict in $C_2$.\\
+\\
+\end{tabular}
+\label{table:kysymys}
+\end{table}
+\end{center}
+
+
 
 
 \emph{\textbf{Set}}\\
@@ -320,7 +346,7 @@ The initial hope of the local search is that through iterative greedy local impr
 \emph{\textbf{Stochastic Local Search (SLS)}}\\
 The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen $p(\Gamma(s))$ corresponds to the score $\Gamma(s)$ of the solution $s$. In this way, the advantage a move is, the probability of choosing it as the next step is higher. This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. \\
 \\
-\emph{\textbf{Tabu Local Search }}\\
+\emph{\textbf{Statistical Local Search }}\\
  Tabu search is created by Fred W. Glover in 1986 [15] and formalized in 1989.  For recognize the loop in a suboptimal region, the search trace is recorded in the process by mark the recently reached neighboring assignments as tabu. The tabu moves will not be touched in the further search to discourage getting stuck in a region. \\
 \\
 \emph{\textbf{Simulated Annealing}}\\
@@ -347,7 +373,7 @@ WalkSAT is a focused random local search strategy to solve SAT problem, which is
 \emph{\textbf{The Probsat}}\\
 Probsat is a class of SLS sat solver, which was introduced in 2012 by Adrian Balint and Uwe Schoening \cite{balint2016engineering}. In a probsat solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $/Gamma(v,A)$ based on break score of $v$ in the current assignment $A$ \footnote{As mentioned in the probsat paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
 \\
-$\Gamma(v,A) = (c_b)^{break(v,A)}$ (break-only-exp-function) \\
+$\Gamma(v,A) = (c_b)^{-break(v,A)}$ (break-only-exp-function) \\
 $\Gamma(v,A)=(\epsilon +break(v,A)^{-c_b})$  (break-only-poly-function)\\ 
 \\
 The pseudo code of a typical Probsat is shown below:\\
@@ -414,7 +440,7 @@ We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver
 \\
 \subsection{initAssign(F)}
 In our algorithm, we have three variants to make assignment initialization.
-One is the $RandomInit$ which is the random initiation like in the original probsat suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias-RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 we compare these three alternatives based on the probsat algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
+One is the $RandomInit$ which is the random initiation like in the original probsat suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias-RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 in Section 4 (see ~\ref{sec:Experiment 1}) we compare these three alternatives based on the probsat algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
 \\
 \subsection{pickCla(A)}
 $numT(c)$ , the number of $True$ values in each clause $c$, are counted in Initilization phase and maintained in further search. The unsatisfying clauses will be cached in a set $UNSAT$. During the local flipping, these numbers will be updated when the flipping variable is in the clauses.  Comparing to the $numT$, the $UNSAT$ is updated lazily. After Flipping, if the $numT$ of one clause is decreased to zero, it will be added in the $UNSAT$.  To select an unsat clause in $pickCla(A)$, man needs to select a clause from the $UNSAT$ and Ocheck if it is still unsat with its $numT$ is zero. Otherwise, if the chosen clause $c$ with $numT(c)$ as zero, it will be removed from the $UNSAT$ set. This step pickCla(A) will be repeated until one unsatisfied clause is found or the $UNSAT$ set is empty, which means the current Assignment $A$ is a satisfying assignment.\\ 
@@ -462,7 +488,7 @@ Instead of using a constant probability $p$ to choose between a greedy Literal w
  }
   $greedyV \leftarrow$   randomly selected variable $v \in$ greedyVs  ; \;
   $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  \;
-  with probability $p = \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
+  with probability $p = \alpha \times \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
     with probability $1-p$: $x\leftarrow$ greedyV;\;
 \caption{WALK}
 \end{algorithm} 
@@ -490,7 +516,21 @@ Instead of using a constant probability $p$ to choose between a greedy Literal w
   \;
 \caption{TieBreak}
 \end{algorithm} 
-\subsection{Simulated Annealing}
+\subsection{pickVar(A,c) with Simulated Annealing}
+Simulated Annealing is a technique, whose combination with WalkSAT is extensively studied. Besides the dynamic noises introduced above, we use simulated annealing to improve our three suggestions of $pickVal$.That is, we define the $\alpha$ as a function depending on the quality of current assignment $q$ instead of using a static parameter in the whole process.
+To define the $temperature$, we have two variants: Global and Local.\\
+\\
+\textbf{Global}:\\
+In the process of search, the number of unsatisfied clauses is shown in $unsatN$. In this traditional variant $Global$, we use this number to define the quality of the current solution.\\
+\textbf{Local}:\\
+As the name suggested, in the $Local$ variant, we measure the quality of the current assignment focused on the chosen clause/ The quality  $q(A,c)$ is equal to the number of greedy Literals in current clause.\\
+\\
+\begin{center}
+ $q_{Global}(A) =unsatN(A)$.\\
+ $q_{local}(A) =|{v| v in  c \land breaks(v) == 0}|$.\\
+ $\alpha = (c_b)^{-q)}$\\
+\end{center}
+
 
 \label{sec:Simulated Annealing}
 \subsection{Data structures}
@@ -535,12 +575,24 @@ A Solution in our implementation includes the boolean Assignment and three other
 \subsection{2nd Approach: Star}
 \subsection{3nd Approach: Hope}
 \subsection{4th Approach: future}
+
+\clearpage
 \section{Evaluation} 
 \label{sec:eva}
  %TODO some server information
 \subsection{DIMACS standard format}  
 All the benchmark CNF formula used in experiments are encoded in the DIMACS standard format \cite{johnson1996cliques}. This format is used to test and compare SAT solver in SAT competition. A DIMACS file contains the description of an instance using three types of lines\footnote {Only clause unweighted simple instances are tested in our experiments. For other descriptors and details of the DIMACS format}:\\ \\ 1. Comment line: Comment lines give information about the graph for human readers, like the author of the file or the seed used in generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause Descriptor: An clause $\{v_1, v_2,, v_n\}$ in the graph is described in an edge Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\;  \;v_n$}\\  
-\begin{figure}[h!] \begin{center}  \includegraphics[scale = 0.5]{1/Dimacs.pdf}      \caption{A DIMACS file example of the problem in Figure \ref{Figure 6}}      \end{center} \end{figure}  
+\\
+Here is the DIMACS format of the formula $F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_1 \lor \bar{v_1})$:
+\begin{center}
+\begin{tabular}{l}
+c simple$\_v_3\_c_2$.cnf\\
+p cnf 3 2\\
+1 -3 0\\
+2 3 -1 0 \\
+\end{tabular}
+\end{center}
+
 \subsection{Benchmarks}
 \label{benchmark}
 The benchmark instances used in experiments are the 180 uniform instances (unif) in random benchmark categories in SAT competition 2017  \cite{balyo2017proceedings}. In an unif problem file, all the clause have the same length.
@@ -580,11 +632,31 @@ The single-threaded experiments were run on computers that had Two Intel Xeon E5
 of  Ubuntu 14.04.5 LTS. 
 \subsection{Parameter Settings in Experiment}
 The $TimeOut$ is set to 5Minutes in the experiments of local searches.  For the probSAT heuristic, our local search uses the values for $c_b$ and $/epsilon$ suggested in the probSAT paper.  The $tolerence$ $ \tau$ used in the experiments is generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the UNIF category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) using different   $ \tau \in [0, 10]$\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}  and randomly generated seeds. With the help of SMAC.
+   \begin{table}[H]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l||l|l|l|l|p{1cm}|}
+\hline 
 
+    k &$WALK$&$WALK_Local$&$WALK_Global$&$Average$&$Average_Local$&$Average_Global$ \\ \hline
+    3 & 1& 1 & 10 &  1 & 2& 0.5       \\ \hline  
+    5 & 0.5& 1 & 1&  1 & 2& 2 \\ \hline  
+    7 & 1& 0.5 & 2&  1 & 2& 0.5  \\ \hline  
+ \hline  
+    k &$RF$&$RF_Local$&$RF_Global$&$swpSAT$&$\alpha$&$SA$ \\ \hline  
+    3 & 1& 0.5 & 0.5&$Average$ & 1 & $-$\\ \hline 
+    5 & 0.5& 2& 9.5&$Average$& 2 & $Local$\\ \hline 
+    7 & 0.5& 1& 0.5 &$Average$&2 & $Local$\\ \hline 
 
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
-Experiment 1 compares two three strategies of initialization in our solver. The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns True to variables whose positive literal occurs more than its negative literal. Another alternative $randomInit$ is to build a coloring randomly. In a combination of these two variants $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. the probability to assign True to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. \\
+\label{sec:Experiment 1}
+Experiment 1 compares three strategies of initialization in our solver. The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns True to variables whose positive literal occurs more than its negative literal. Another alternative $randomInit$ is to build a coloring randomly. In a combination of these two variants $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. the probability to assign True to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. \\
 \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -605,14 +677,14 @@ Experiment 1 compares two three strategies of initialization in our solver. The 
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e1.pdf}
   \end{center}
-  \caption{Three suggestions have very similar performance.}
+  \caption{Three suggestions have very similar performance. In our solver, we use $RanomInit$ for $3SAT$ as initiliazation method because of its simplify.}
   \label{Experiment 1 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e1.pdf}
   \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \caption{Two bias suggestions show advantages especially for huge 5SAT instances.}
   \label{Experiment 1 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
@@ -622,8 +694,8 @@ Experiment 1 compares two three strategies of initialization in our solver. The 
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
   \label{Experiment 1 k7 cactus plot}
   \end{figure}
-  \clearpage
-\subsubsection{Experiment 2: pickVar(F)}  
+\subsubsection{Experiment 2: pickVar(F)} 
+\label{sec:Experiment 2} 
 With the comparison of three Variant of $pickVal$ with the one in probSAT, our suggestions are faster and solve more instances in K3 and K5.  For K7,  there are no noticeable differences in results.
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
@@ -645,25 +717,26 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e2.pdf}
   \end{center}
-  \caption{Three suggestions have very similar performance.}
+  \caption{For k3, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems.}
   \label{Experiment 2 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e2.pdf}
   \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \caption{The improvement through our suggestions are big and stable. They solve more problems efficiently. The $Average$ (with $\alpha = 1$) can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema). }
   \label{Experiment 2 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e2.pdf}
   \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \caption{For $7SAT$ problems, the $WALK$ and $Average$ have generally worse inperformance.The $Random-Flip$ can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds.}
   \label{Experiment 2 k7 cactus plot}
   \end{figure}
 
 \subsubsection{Experiment 3: WALK with Simulated Annealing} 
+\label{sec:Experiment 3}
 \begin{table}[H]
 %begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -683,7 +756,7 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e3w.pdf}
   \end{center}
-  \caption{Three suggestions have very similar performance.}
+  \caption{The combination with simulated Annealing show worse efficiency than the original $WALK$. They solve one less problems. }
   \label{Experiment 3 k3-w cactus plot}
   \end{figure}
   \begin{figure}[H]
@@ -701,13 +774,14 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 3 k7-w cactus plot}
   \end{figure}
 \subsubsection{Experiment 4: Average with Simulated Annealing} 
+\label{sec:Experiment 4}
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{3cm}|}
 \hline 
 
-    k &$Average$&$Average-Local$&$WALK-Global$ \\ \hline      
+    k &$Average$&$Average-Local$&$Average-Global$ \\ \hline      
     3 & \textbf{6161.11}(\textbf{61})	&9254.18(53)&	9870.25(53) \\ \hline
     5& 3308.16(89)	&\textbf{2793.32}(89)&	2939.74(89)\\ \hline
     7& 6525.59(59)&\textbf{	3829.95}(\textbf{65})	&5738.2(61)\\ \hline	
@@ -720,24 +794,25 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e3a.pdf}
   \end{center}
-  \caption{Three suggestions have very similar performance.}
+  \caption{The performances of these three algorithms are guiet semiliar for small problems within $50$ Seconds. The original Average can solve $15\%$ problems.}
   \label{Experiment 4 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e3a.pdf}
   \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \caption{There are not big differences in  $Average$ with different combination of simulated annealing. They have shown small Advantages in  solving huge problems.}
   \label{Experiment 4 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e3a.pdf}
   \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \caption{For $7SAT$ problems, the $Local$ version can solve 6  problems more than the original $Average$. It has also shown its efficiency in solving huge $7SAT$ problems.  The $Local$ (with $\alpha = 2$) can solve $10\%$ more problems than the probSAT within less than $60\%$ time (in PAR-2 schema). }
   \label{Experiment 4 k7 cactus plot}
   \end{figure}
 \subsubsection{Experiment 5: Random-Flip with Simulated Annealing} 
+\label{sec:Experiment 5}
   \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -774,7 +849,8 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
   \label{Experiment 5 k7 cactus plot}
   \end{figure}
-\subsubsection{Experiment 6: probSAT vs WALK.}  
+\subsubsection{Experiment 6: probSAT vs WALK.} 
+\label{sec:Experiment 6} 
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e4w.pdf}
@@ -797,7 +873,8 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 7 k7 cactus plot}
   \end{figure}
 
-\subsubsection{Experiment 7: probSAT vs Average.}   
+\subsubsection{Experiment 7: probSAT vs Average.}  
+\label{sec:Experiment 7} 
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e4a.pdf}
@@ -820,6 +897,7 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 7 k7 cactus plot}
   \end{figure}
 \subsubsection{Experiment 8:probSAT vs Random-Flip.}  
+\label{sec:Experiment 8}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e4r.pdf}
@@ -842,6 +920,7 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 8 k7 cactus plot}
   \end{figure} 
 \subsubsection{Experiment 9: 2017-UNIF Comparision} 
+\label{sec:Experiment 9}
    \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -886,6 +965,7 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 9 all cactus plot}
   \end{figure} 
 \subsubsection{Experiment 10: 2009-UNIF Comparision} 
+\label{sec:Experiment 10}
 
 TODO: get the results of new version on 132 (still occupied by some guy)
 

@@ -7,36 +7,36 @@
 \contentsline {subsection}{\numberline {1.1}Problem/Motivation}{1}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Content}{1}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Definitions and Notations}{1}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}The Competitors}{4}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.4}The Competitors}{5}{subsection.1.4}
 \contentsline {section}{\numberline {2}Our local Solver}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}initAssign(F)}{6}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}pickCla(A)}{6}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}pickVar(A,c)}{7}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Simulated Annealing}{8}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Data structures}{8}{subsection.2.5}
-\contentsline {section}{\numberline {3}Our Parallel Algorithm}{9}{section.3}
-\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach (no partition)}{9}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}2nd Approach: Star}{9}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}3nd Approach: Hope}{9}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}4th Approach: future}{9}{subsection.3.4}
-\contentsline {section}{\numberline {4}Evaluation}{9}{section.4}
-\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{9}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Benchmarks}{10}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Used plots and tables}{10}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Random seeds used in Experiments}{11}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}Soft- and Hardware}{11}{subsubsection.4.4.1}
-\contentsline {subsection}{\numberline {4.5}Parameter Settings in Experiment}{11}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Experiments}{12}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}Experiment 1: initAssign(F)}{12}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}Experiment 2: pickVar(F)}{14}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}Experiment 3: WALK with Simulated Annealing}{15}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}Experiment 4: Average with Simulated Annealing}{16}{subsubsection.4.6.4}
-\contentsline {subsubsection}{\numberline {4.6.5}Experiment 5: Random-Flip with Simulated Annealing}{18}{subsubsection.4.6.5}
-\contentsline {subsubsection}{\numberline {4.6.6}Experiment 6: probSAT vs WALK.}{20}{subsubsection.4.6.6}
-\contentsline {subsubsection}{\numberline {4.6.7}Experiment 7: probSAT vs Average.}{21}{subsubsection.4.6.7}
-\contentsline {subsubsection}{\numberline {4.6.8}Experiment 8:probSAT vs Random-Flip.}{23}{subsubsection.4.6.8}
-\contentsline {subsubsection}{\numberline {4.6.9}Experiment 9: 2017-UNIF Comparision}{24}{subsubsection.4.6.9}
-\contentsline {subsubsection}{\numberline {4.6.10}Experiment 10: 2009-UNIF Comparision}{26}{subsubsection.4.6.10}
-\contentsline {section}{\numberline {5}Conclusion}{26}{section.5}
-\contentsline {subsection}{\numberline {5.1}Further work}{26}{subsection.5.1}
-\contentsline {section}{\numberline {6}Bibliography}{26}{section.6}
+\contentsline {subsection}{\numberline {2.4}pickVar(A,c) with Simulated Annealing}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Data structures}{9}{subsection.2.5}
+\contentsline {section}{\numberline {3}Our Parallel Algorithm}{10}{section.3}
+\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach (no partition)}{10}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}2nd Approach: Star}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}3nd Approach: Hope}{10}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}4th Approach: future}{10}{subsection.3.4}
+\contentsline {section}{\numberline {4}Evaluation}{11}{section.4}
+\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{11}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Benchmarks}{11}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Used plots and tables}{11}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Random seeds used in Experiments}{12}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Soft- and Hardware}{12}{subsubsection.4.4.1}
+\contentsline {subsection}{\numberline {4.5}Parameter Settings in Experiment}{12}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Experiments}{13}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Experiment 1: initAssign(F)}{13}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}Experiment 2: pickVar(F)}{15}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}Experiment 3: WALK with Simulated Annealing}{16}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}Experiment 4: Average with Simulated Annealing}{18}{subsubsection.4.6.4}
+\contentsline {subsubsection}{\numberline {4.6.5}Experiment 5: Random-Flip with Simulated Annealing}{19}{subsubsection.4.6.5}
+\contentsline {subsubsection}{\numberline {4.6.6}Experiment 6: probSAT vs WALK.}{21}{subsubsection.4.6.6}
+\contentsline {subsubsection}{\numberline {4.6.7}Experiment 7: probSAT vs Average.}{23}{subsubsection.4.6.7}
+\contentsline {subsubsection}{\numberline {4.6.8}Experiment 8:probSAT vs Random-Flip.}{24}{subsubsection.4.6.8}
+\contentsline {subsubsection}{\numberline {4.6.9}Experiment 9: 2017-UNIF Comparision}{25}{subsubsection.4.6.9}
+\contentsline {subsubsection}{\numberline {4.6.10}Experiment 10: 2009-UNIF Comparision}{27}{subsubsection.4.6.10}
+\contentsline {section}{\numberline {5}Conclusion}{27}{section.5}
+\contentsline {subsection}{\numberline {5.1}Further work}{27}{subsection.5.1}
+\contentsline {section}{\numberline {6}Bibliography}{27}{section.6}
