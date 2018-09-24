@@ -664,29 +664,16 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \end{figure}
 
 \subsubsection{Experiment 3: WALK with Simulated Annealing} 
-\begin{table}[h!]
-%\begin{minipage}{\textwidth}                                                                                         
+\begin{table}[H]
+%begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{3cm}|}
 \hline 
 
     k &$WALK$&$WALK-Local$&$WALK-Global$ \\ \hline      
-    3 &  \\ \hline
-    5& \\ \hline
-    7& \\ \hline
-
-
-
-
-
-
-
-
-
-
-
-
-	
+    3 &\textbf{7430.12}(\textbf{57})&	8346.76(56)	&9023.96(56)  \\ \hline
+    5&4433.05(87)	&3330.61(89)	&\textbf{3117.45}(\textbf{89}) \\ \hline
+    7&6358.76(60)	&\textbf{5409.67}(\textbf{61})&	6566.06(59) \\ \hline	
 \end{tabular}
 \end{center}
 %\end{minipage}
@@ -714,71 +701,100 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \label{Experiment 3 k7-w cactus plot}
   \end{figure}
 \subsubsection{Experiment 4: Average with Simulated Annealing} 
+\begin{table}[h!]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{3cm}|}
+\hline 
+
+    k &$Average$&$Average-Local$&$WALK-Global$ \\ \hline      
+    3 & \textbf{6161.11}(\textbf{61})	&9254.18(53)&	9870.25(53) \\ \hline
+    5& 3308.16(89)	&\textbf{2793.32}(89)&	2939.74(89)\\ \hline
+    7& 6525.59(59)&\textbf{	3829.95}(\textbf{65})	&5738.2(61)\\ \hline	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table} 
+
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e3a.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 4 k3-a cactus plot}
+  \label{Experiment 4 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e3a.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 4 k5-a cactus plot}
+  \label{Experiment 4 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e3a.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 4 k7-a cactus plot}
+  \label{Experiment 4 k7 cactus plot}
   \end{figure}
 \subsubsection{Experiment 5: Random-Flip with Simulated Annealing} 
+  \begin{table}[H]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{3cm}|}
+\hline 
+
+    k &$Random-Flip$&$Random-Flip-Local$&$Random-Flip-Global$ \\ \hline      
+    3 &  8362.42(55)&8409.8(55)	&\textbf{7308.01}(\textbf{58})\\ \hline
+    5&4052.47(87)&	4132.07(87)&\textbf{4003.06}(\textbf{88}) \\ \hline
+    7& 5800.46(60) &6792.23(59) &	\textbf{4903.61}(\textbf{60})\\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e3r.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 5 k3-r cactus plot}
+  \label{Experiment 5 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e3r.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 5 k5-r cactus plot}
+  \label{Experiment 5 k5 cactus plot} 
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e3r.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 5 k7-r cactus plot}
+  \label{Experiment 5 k7 cactus plot}
   \end{figure}
-
 \subsubsection{Experiment 6: probSAT vs WALK.}  
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e4w.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 6 k3-w cactus plot}
+  \label{Experiment 6 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e4w.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 6 k5-w cactus plot}
+  \label{Experiment 6 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e4w.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7-w cactus plot}
+  \label{Experiment 7 k7 cactus plot}
   \end{figure}
 
 \subsubsection{Experiment 7: probSAT vs Average.}   
@@ -787,21 +803,21 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \includegraphics[scale = 1]{DATA/K3/e4a.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 6 k3-w cactus plot}
+  \label{Experiment 7 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e4a.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 6 k5-w cactus plot}
+  \label{Experiment 7 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e4a.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7-w cactus plot}
+  \label{Experiment 7 k7 cactus plot}
   \end{figure}
 \subsubsection{Experiment 8:probSAT vs Random-Flip.}  
   \begin{figure}[H]
@@ -809,45 +825,69 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \includegraphics[scale = 1]{DATA/K3/e4r.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 6 k3-w cactus plot}
+  \label{Experiment 8 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e4r.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 6 k5-w cactus plot}
+  \label{Experiment 8 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e4r.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7-w cactus plot}
+  \label{Experiment 8 k7 cactus plot}
   \end{figure} 
-\subsubsection{Experiment 9: probSAT vs yalSAT vs swpSolver } 
+\subsubsection{Experiment 9: 2017-UNIF Comparision} 
+   \begin{table}[H]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{3cm}|}
+\hline 
+
+    k &$probSAT$&$yalSAT$&$WALK$&$Average$/$swpSAT$&$Random-Flip$ \\ \hline      
+    3 &9221.9(55)&17062.35(41)&7430.12(57)&\textbf{6161.11}(\textbf{61})&7308.01(58)\\ \hline
+    5& 7143.9(82)&5676.63(85)&3330.61(89)&\textbf{2939.74}(\textbf{89})&4003.06(88)\\ \hline
+    7& 6238.51(60)&10063.4(54)&5409.67(61)&\textbf{3829.95}(\textbf{65})&4903.61(60)\\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e5.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
-  \label{Experiment 9 k3-w cactus plot}
+  \label{Experiment 9 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K5/e5.pdf}
   \end{center}
   \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 9 k5-w cactus plot}
+  \label{Experiment 9 k5 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K7/e5.pdf}
   \end{center}
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7-w cactus plot}
+  \label{Experiment 9 k7 cactus plot}
   \end{figure} 
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 1]{DATA/UNIF/e5.pdf}
+  \end{center}
+  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \label{Experiment 9 all cactus plot}
+  \end{figure} 
+\subsubsection{Experiment 10: 2009-UNIF Comparision} 
 
+TODO: get the results of new version on 132 (still occupied by some guy)
 
   
 \section{Conclusion}
