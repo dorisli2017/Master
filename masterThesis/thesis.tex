@@ -389,6 +389,13 @@ The pseudo code of a typical Probsat is shown below:\\
   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; 
  \caption{pickVar in probSAT}
 \end{algorithm} 
+\emph{\textbf{Formula partition}}\\
+Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, and another one is to separate the clauses. For the algorithms with the technique of decision tree like DPLL, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. 
+To introduce our parallel SAT solver with formula partitioning, we use a  hypergraph representation of SAT problem. \\
+  For a SAT Formula $F$, its hypergraph representation $G(F)$ consists of $numVs$ vertices and $numCs$ hyperedges. 
+  Each vertex corresponds to a variable in $F$, and a hyperedge refers to a clause, which connects the variables in this clause. \\
+$F =\underbrace{(v_1 \lor v_2 \lor \bar{v_3})}_\text{$C_1$} \land \underbrace{(v_1 \lor v_3\lor \bar{v_4})}_\text{$C_2$}\land \underbrace{(v_5 \lor v_6\lor \bar{v_8})}_\text{$C_3$}\land \underbrace{(v_6 \lor v_7\lor \bar{v_8})}_\text{$C_4$}\land \underbrace{(v_3v\lor \bar{v_6})}_\text{$C_5$}\land \underbrace{(v_4 \lor v_5)}_\text{$C_6$}$\\
+
 
 \subsection{The Competitors}
 \label{comparision}
@@ -602,8 +609,10 @@ The suffix 'k'  denotes the length of clauses. The r indicates the clause-to-var
 the results of the following experiments are all shown in comparision table and  illusatrated in cactus plot.  \\
 \\
 \emph{\textbf{Comparison Table}}\\
-See Table \ref{Experiment 1 Comparison Table} for example.\\
-A comparison table compares the performance of different algorithms. The first column contains the 2-factor penalized runtime \footnote{Not like the PAR-2 scheme in SAT competition, we only  assign a 2-factor time limit penalization  for each unsolved benchmark which has been solved by another solver in the comparision.} of solving a set of benchmark problems. The fields of a comparison table in the following columns corresponds to the coloring sizes found with an algorithm.\\
+See Table \ref{tab:com} for example.\\
+A comparison table shows the different results of algorithms. The first column contains the
+clause length $k$. The UNIF benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains k variables.  The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the UNIF benchmark graphs without filtering contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiment. There are 61 $3$SAT instances, 89 $5$SAT instances and 66 $7$SAT instances found satisfied in our experiments. Besides the runtime score, the number of solved problems are in parentheses. The best results in comparison are in bold.
+\\
 \\
 \emph{\textbf{Cactus Plot}}\\
 See Figure \ref{Experiment 1 cactus plot} for an example.\\
@@ -658,6 +667,7 @@ The $TimeOut$ is set to 5Minutes in the experiments of local searches.  For the 
 \label{sec:Experiment 1}
 Experiment 1 compares three strategies of initialization in our solver. The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns True to variables whose positive literal occurs more than its negative literal. Another alternative $randomInit$ is to build a coloring randomly. In a combination of these two variants $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. the probability to assign True to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. \\
 \begin{table}[H]
+\label{tab:com}
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{1cm}|}
@@ -849,11 +859,27 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
   \label{Experiment 5 k7 cactus plot}
   \end{figure}
+  
+\begin{table}[H]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|l|p{2cm}|}
+\hline 
+
+    k &$Average$&$Average\-Local$&$Average\-Global$ &$RF$& $RF\-Local$& $RF\-Global$ \\ \hline      
+    3 &$5.43\%$&$2.43\%$&$5.43\%$&$9.98\%$&$10.01\%$&$3.13\%$\\ \hline
+    5& $4.07\%$&$0.35\%$&$0.00\%$&$9.18\%$&$9.17\%$&$0.33\%$\\ \hline
+    7&$2.28\%$&$0.03\%$&$0.00\%$&$4.30\%$&$4.14\%$&$0.05\%$\\ \hline
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
+  
 \subsubsection{Experiment 6: probSAT vs WALK.} 
 \label{sec:Experiment 6} 
   \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 1]{DATA/K3/e4w.pdf}
+  \includegraphics[scale = 1]{DATA/K7/e4w.pdf}
   \end{center}
   \caption{Three suggestions have very similar performance.}
   \label{Experiment 6 k3 cactus plot}
@@ -936,6 +962,22 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
 \end{center}
 %\end{minipage}
 \end{table}
+
+   \begin{table}[H]
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{3cm}|}
+\hline 
+
+    k &$probSAT$&$WALK$&$Average$/$swpSAT$&$Random-Flip$ \\ \hline      
+    3& 954426 &946662 &\textbf{1012761}&988477 \\ \hline
+    5& 389453&\textbf{443172}&414765&423364\\ \hline
+    7& 248025 &237387 &\textbf{248028}&221107 \\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
   \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/K3/e5.pdf}
@@ -964,12 +1006,6 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
   \label{Experiment 9 all cactus plot}
   \end{figure} 
-\subsubsection{Experiment 10: 2009-UNIF Comparision} 
-\label{sec:Experiment 10}
-
-TODO: get the results of new version on 132 (still occupied by some guy)
-
-  
 \section{Conclusion}
 \label{sec:conc}
 \subsection{Further work}
