@@ -390,13 +390,23 @@ The pseudo code of a typical Probsat is shown below:\\
  \caption{pickVar in probSAT}
 \end{algorithm} 
 \emph{\textbf{Formula partition}}\\
-Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, and another one is to separate the clauses. For the algorithms with the technique of decision tree like DPLL, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. 
 To introduce our parallel SAT solver with formula partitioning, we use a  hypergraph representation of SAT problem. \\
-  For a SAT Formula $F$, its hypergraph representation $G(F)$ consists of $numVs$ vertices and $numCs$ hyperedges. 
+A hypergraph $G = (V,H)$ is a generalized graph, in which an hyperedge $h \in H$ is a non-empty subset of the vertices set $V$. For a SAT Formula $F$, its hypergraph representation $G(F)$ = ($Vars(F),Cls(F)$) consists of $numVs$ vertices and $numCs$ hyperedges. 
   Each vertex corresponds to a variable in $F$, and a hyperedge refers to a clause, which connects the variables in this clause. \\
+\\
+Here is an example:\\
 $F =\underbrace{(v_1 \lor v_2 \lor \bar{v_3})}_\text{$C_1$} \land \underbrace{(v_1 \lor v_3\lor \bar{v_4})}_\text{$C_2$}\land \underbrace{(v_5 \lor v_6\lor \bar{v_8})}_\text{$C_3$}\land \underbrace{(v_6 \lor v_7\lor \bar{v_8})}_\text{$C_4$}\land \underbrace{(v_3v\lor \bar{v_6})}_\text{$C_5$}\land \underbrace{(v_4 \lor v_5)}_\text{$C_6$}$\\
+$G(F)$:
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.4]{1/hypergraph.png}
+  \end{center}
+  \caption{In a hypergraph, a hyperedge is a set of vertices. In our example, the vertices  $v_3$  and $v_4$ are both in hyperedge $\{v_1, v_3, v_4\}$ and $\{v_1, v_2, v_3\}$, so they are connected twice. In our hypergraph representation of SAT problem, a hyperedge contains the vertices of the corresponding clauses. Another variant is a hypergraph representation, in which each literal refers to one vertex, and a hyperedge contains all the literals of the corresponding clause.}
+  \label{hypergraph representation}
+  \end{figure}
 
-
+Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, which is used in this paper, and another one is to separate the clauses. For the algorithms with the technique of decision tree like DPLL, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. Based on this hypergraph represenation, we describe in this paper the formula partition with the notations in graph partition. For a hypergraph $G = (V,H)$,  a ($2$-way) partitioning is to seperate the verices set in two disjoint subsets. A good partition is to seperate $V$ in $P_1$ and $P_2$, which are of relative same size and only few hyperedges containing both verticse in $P_1$ and vertices in $P_2$.  Based on a vertices partitioning, the hyperedges are seperated in three disjoint subsets $H_1$, $H_2$ and $I$. $H1$ contains the edeges connecting verticse in $P_1$, $H_2$ are edges in $P_2$. The \textbf{intersection} $I$ are the edges containing vertices in $P_1$ and vertices in $P_2$.In our example formula above, a minimum cost balanced partition is $P_1$ = $\{v_1,v_2, v_3, v_4\}$ and $P_2$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_1$ = $\{C_1,C_2\}$ , $H_2$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
+\clearpage
 \subsection{The Competitors}
 \label{comparision}
 Our heuristic is based on the probSAT paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original ProbSAT. Another random SAT solver used for a comparison with our algorithm is yalSAT, which is the champion in random track category in SAT competition 2017 \cite{biere2014yet}.\\
@@ -662,6 +672,112 @@ The $TimeOut$ is set to 5Minutes in the experiments of local searches.  For the 
 \end{center}
 %\end{minipage}
 \end{table}
+\subsection{Benchmark Generation}
+To combine the hypergraph partitioning and SAT local solver, we try to get a relatively balanced graph partition with small intersection for the benchmark SAT problems.  On UNIF benchmark, we try to get graph partitioning using some partitioning algorithms (KaHypar and hmetis). Since the uniform random generation of this benchmark, these problems are without a real-world-like structure. Even with a high imbalance like 0.3 and high tolerance of intersection size ($50\%$ of edge sizes), the partitioning algorithms take more time than our SAT solver for more than $50\%$ of our UNIF benchmarks.  To investigate the local search on graphs with proper partitioning, we generate our benchmark COMBINE  using the UNIF benchmark instances.  As the name COMBINE suggested, we combine two UNIF benchmark instances in one SAT problem and make for the new generated problem with two disjoint subproblems an intersection.  To create a satisfiable formula, we build the intersection based on a pair of random chosen satisfying assignments of the two UNIF problems in combination. To get satisfying assignments of UNIF benchmarks, we run different solvers in SAT competitions including CSCCSat, DCCASat, score2SAT, probSAT, and yalSAT. We do not use our local search to collect satisfying assignments. Otherwise, it is possible that after solve the two partitioning sets individually using our local solver, the current assignment is the same or a similar one used for the intersection generation.\\
+We combine the UNIF problems in consideration of real-world uses. 
+We combine 4  pairs of instances in  $3$SAT, $5$SAT problems $7$SAT problems. Besides that, we consider five combinations between  3SAT and 5 SAT instances and three combination of $5$SAT and $7$SAT instances. 
+We combine problem in similar vertices size, which corresponds to balanced partitioning in the structure. We also combine one massive problem with a small instance of an imbalanced partitioning. For the intersection generation part, we generate clauses with three vertices in different partitioning sets. \\
+We first choose vertices of two partition sets for intersection generation randomly. Here we consider also the balanced intersection and imbalanced intersection. In a balanced intersection, same proportion of vertices in both partitioning sets are chosen to generate the intersection. In an imbalanced intersection, the portions are not the same.  To control the size of the intersection, we also count the number of the clauses in an intersection, if the proposition of the intersection clauses in the clauses number in whole combined problems is upper a specified limit, the generation of intersection is stopped.
+\begin{table}[H]
+\label{tab:combine big} 
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|p{1cm}|}
+\hline 
+Problem &Intersection \\ \hline
+k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.1-0.1.cnfP&	1.04\%\\  \hline
+k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.1-0.2.cnfP&	1.00\%\\  \hline
+k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.1-0.4.cnfP&	1.03\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.2-0.2.cnfP&	15.53\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.4-0.1.cnfP&	6.84\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.2-0.2.cnfP&	12.04\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.4-0.1.cnfP&	7.53\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.1-0.4.cnfP&	6.38\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.2-0.1.cnfP&	7.35\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.4-0.2.cnfP&	6.11\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.2.cnfP&	16.67\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.4.cnfP&	25.21\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.2-0.2.cnfP&	14.77\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.4-0.1.cnfP&	6.46\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.1-0.2.cnfP&	13.92\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.2-0.4.cnfP&	11.40\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.4-0.2.cnfP&	7.08\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.1-0.4.cnfP&	5.88\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.2-0.4.cnfP&	6.86\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.4-0.4.cnfP&	5.81\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.1.cnfP&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.2.cnfP&	16.67\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.4.cnfP&	25.07\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.1.cnfP&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.4.cnfP&	14.68\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.4-0.4.cnfP&	6.36\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.1.cnfP&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.2.cnfP&	13.96\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.2-0.2.cnfP&	11.58\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.4-0.2.cnfP&	6.97\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.1-0.4.cnfP&	5.98\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.4-0.4.cnfP&	5.60\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.1-0.4.cnfP&	1.30\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.2-0.2.cnfP&	2.52\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.4-0.2.cnfP&	4.88\%\\  \hline
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table} 
+
+\begin{table}[H]
+\label{tab:combine small} 
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|p{1cm}|}
+\hline 
+Problem &Intersection \\ \hline
+k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
+ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.4-0.1.cnfP&	0.13\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.2-0.1.cnfP&	0.36\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.4-0.4.cnfP&	0.11\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.1-0.2.cnfP&	0.37\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.2-0.1.cnfP&	0.27\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.2-0.4.cnfP&	0.11\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.4-0.4.cnfP&	0.09\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.2-0.2.cnfP&	0.37\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.4-0.1.cnfP&	0.11\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.1-0.2.cnfP&	0.35\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.2-0.2.cnfP&	0.27\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.4-0.2.cnfP&	0.13\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.4-0.1-0.2.cnfP&	0.10\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.8-0.8-0.05.cnfP&	0.06\%	\\   \hline
+ k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.2-0.1.cnfP&	0.38\%	\\   \hline
+ k3-r4.267-v11000.cnf-k5-r16.2.cnf-0.8-0.8-0.05.cnfP&	0.52\%	\\   \hline
+ k3-r4.267-v11200.cnf-k5-r16.8.cnf-0.8-0.8-0.05.cnfP&	0.49\%	\\   \hline
+ k3-r4.267-v11600.cnf-k5-r17.0.cnf-0.8-0.8-0.05.cnfP&	0.52\%	\\   \hline
+ k3-r4.267-v7400.cnf-k5-r17.2.cnf-0.8-0.8-0.05.cnfP&	0.34\%	\\   \hline
+ k3-r4.267-v9600.cnf-k5-r17.4.cnf-0.8-0.8-0.05.cnfP&	0.42\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.1-0.1-0.2.cnfP&	0.04\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.2-0.1-0.2.cnfP&	0.09\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.4-0.1-0.4.cnfP&	0.17\%	\\   \hline
+ k5-r21.117-v220.cnf-k5-r17.6.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.1-0.1-0.4.cnfP&	0.06\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.2-0.1-0.1.cnfP&	0.12\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.4-0.1-0.1.cnfP&	0.23\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.1-0.1-0.2.cnfP&	0.06\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.2-0.1-0.4.cnfP&	0.12\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.4-0.1-0.1.cnfP&	0.24\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.1-0.4.cnfP&	0.21\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.2-0.4.cnfP&	0.41\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.4-0.2.cnfP&	0.80\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.1-0.4.cnfP&	0.04\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.2-0.4.cnfP&	0.09\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.4-0.2.cnfP&	0.18\%	\\   \hline
+ k7-r87.79-v102.cnf-k5-r17.8.cnf-0.8-0.8-0.05.cnfP&	0.00\%	\\   \hline
+ k7-r87.79-v106.cnf-k5-r18.0.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
+ k7-r87.79-v110.cnf-k5-r18.2.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
+
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table} 
+
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
 \label{sec:Experiment 1}
@@ -1006,9 +1122,11 @@ With the comparison of three Variant of $pickVal$ with the one in probSAT, our s
   \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
   \label{Experiment 9 all cactus plot}
   \end{figure} 
+\clearpage
 \section{Conclusion}
 \label{sec:conc}
 \subsection{Further work}
+\clearpage
 \section{Bibliography}
 \bibliographystyle{ieeetr}
 \bibliography{references}
