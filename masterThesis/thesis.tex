@@ -622,14 +622,21 @@ With the information of the formula partitioning, the first idea is to speed up 
 \begin{center}
   \includegraphics[scale = 0.3]{1/a2.png}
   \end{center}
-  \caption{}
-  \label{Experiment 1 k3 cactus plot}
+  \label{a2}
   \end{figure}
-
-
-\subsection{3nd Approach: Priority level to variables}
-\subsection{4nd Approach: Soft Assignment}
-\subsection{5th Approach: Initialization with a guide of formula partitioning}
+We did an experiment to test the performance of this approach (see Experiment in section ). It shows, however a worse performance compared to the original swpSAT especially in the aspect of the number of solved problems.  According to our observation in the implementation, we think the possible reason is the following: Its sequential version is precisely our swpSAT solver with priorities of unsatisfied clauses. Instead of choosing an unsatisfied clause in whole formula, this approach solves first $P1$ and then $P2$ (or inverse) and at last the Intersection $I$. So there is no reason f an improved performance in this parallel search. Worsely, because the priority of the clauses in search, the flip works are done in slave threads are destroyed in solving the intersection part, even we take the breaks score in partitioning sets in the count. There are more local minimums are visited in the search path. These "traps," which can be avoided by an independent chosen clause with variables in another partitioning set, search much slower.
+\subsection{3nd Approach: Assignment combination}
+In consideration of the failure in Approach 2, in this approach we make the slave threads solve intersection part besides a partition set. First, each slave thread finds a satisfying sub-assignment for the corresponding partitioning set and also the intersection part. Not like the approach 2, here two slave threads may have some different assignments to variables in the boundary of the partitioning. Then the master threads may deal with these differences. That is, we combine these two sub-assignment such that we can get a satisfying assignment or an assignment with only a few conflicts. Then the slave threads will adjust this assignment by make flips in the part of their charge (including the intersection part). 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.3]{1/a3.png}
+  \end{center}
+  \label{a2}
+  \end{figure}
+For the combination of two sub-assignments, there are several cases:\\ 
+1. The assignments of one variable are different in both sub-solutions. This variable is not the critical one for a sub-assignment, so we can assign it as the value in the other sub-assignment.\\
+2. If the variable in consideration is critical in both sub-assignment, there are some different policies. The simple one is to assign the variable randomly. We call this policy further randomCombine. Another one is to assign the variable as the value suggested by its charging thread. In another word, we combine the assignment according to the partitioning. This policy will not break any clauses in partition set. The slave thread will deal with conflicts in intersection individually in the next round. This policy refers as partition-based Combine. In experiment, we compare these two policies. Both policies can bring a good performance compared with our swpSAT solver. The possible reason is  
+\subsection{4th Approach: Initialization with a guide of formula partitioning}
 Initialization with a guide of formula partitioning
 After the analysis of the failures in the 2 Approaches above, we came up with this approach, in which the formula partition information is only used to get an initial solution, and the further search in the whole problem is like our he pure portfolio approach. This approach intends to use the partitioning information to get a good initial solution.  A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared between the agents encourage the further search the flipping of non critical variables in clauses. \\
 \\
@@ -875,6 +882,15 @@ Experiment 1 compares three strategies of initialization in our solver. The $bia
 \end{center}
 %\end{minipage}
 \end{table} 
+
+\begin{figure}[H]
+  \includegraphics[scale = 1]{DATA/K3/e1.pdf}
+  \includegraphics[scale = 1]{DATA/K5/e1.pdf}
+  \includegraphics[scale = 1]{DATA/K7/e1.pdf}
+  \label{Experiment 1 k357 cactus plot}
+  \caption{3SAT 5SAT and 7SAT instances.}
+\end{figure}
+
 
 \begin{figure}[H]
 \begin{center}
@@ -1245,7 +1261,15 @@ Our parallel implementation uses OpenMP to support shared memory multiprocessing
 
 \clearpage
 \section{Conclusion}
+
 \label{sec:conc}
+Local search is a universally applicable approach to solve random SAT problems. Our paper presents a stochastic local search algorithm with the cooperation of WALKSAT and probSAT.\\
+\\
+In section 3, we discussed the basic scheme of our sequential algorithm. In, we compare the original probSAT with a randomly generated initial solution and our version based on the occurrence of os literals in formel. Based on our experiment, our initialization is advantages n the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and use the robustness of the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the probSAT algorithm. \\
+Based on the performance of these searches in kSAT problems, we get our swpSAT solver, which combines the advantages of the local searches. \\
+\\
+In section 4, we make our swpSAT solver parallel with different approaches. Most problems get similar results with the different seed of one random generator. However, the formulas get different results with different random generation. With this fact, we make the parallel version of our local search, in which the agents run the search with different random generators and then take advantages of the suitable one.\\
+In the following part of this section, we discussed the combination of formula partitioning and our parallel solver. After trying several approaches with failure, we found the way of using formula partitioning to make a fine initial solution save search time and furthermore solve more problems. Our experiments evaluate the hyperthesis that the formula partitioning information can guide the local search and improve the efficiency in the parallel search.
 \subsection{Further work}
 \clearpage
 \section{Bibliography}

@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2017/Debian)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: thesis.aux
+The style file: ieeetr.bst
+Database file #1: references.bib
+Warning--I didn't find a database entry for "johnson1996cliques"
+Warning--empty journal in lisolving
+Warning--empty year in lisolving
+Warning--empty journal in balyo2017proceedings
+You've used 11 entries,
+            1876 wiz_defined-function locations,
+            550 strings with 5223 characters,
+and the built_in function-call counts, 3143 in all, are:
+= -- 317
+> -- 97
+< -- 0
++ -- 37
+- -- 26
+* -- 211
+:= -- 427
+add.period$ -- 10
+call.type$ -- 11
+change.case$ -- 11
+chr.to.int$ -- 0
+cite$ -- 14
+duplicate$ -- 179
+empty$ -- 310
+format.name$ -- 26
+if$ -- 777
+int.to.chr$ -- 0
+int.to.str$ -- 11
+missing$ -- 11
+newline$ -- 36
+num.names$ -- 11
+pop$ -- 44
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 126
+stack$ -- 0
+substring$ -- 216
+swap$ -- 75
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 3
+while$ -- 34
+width$ -- 13
+write$ -- 109
+(There were 4 warnings)

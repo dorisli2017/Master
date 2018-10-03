@@ -17,9 +17,8 @@
 \contentsline {section}{\numberline {3}Our Parallel Algorithm}{11}{section.3}
 \contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}3nd Approach: Priority level to variables}{12}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}4nd Approach: Soft Assignment}{12}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}5th Approach: Initialization with a guide of formula partitioning}{12}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}
 \contentsline {section}{\numberline {4}Evaluation}{14}{section.4}
 \contentsline {subsection}{\numberline {4.1}DIMACS standard format}{14}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Benchmarks}{14}{subsection.4.2}
@@ -30,16 +29,16 @@
 \contentsline {subsection}{\numberline {4.6}Benchmark Generation}{16}{subsection.4.6}
 \contentsline {subsection}{\numberline {4.7}Experiments}{19}{subsection.4.7}
 \contentsline {subsubsection}{\numberline {4.7.1}Experiment 1: initAssign(F)}{19}{subsubsection.4.7.1}
-\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{20}{subsubsection.4.7.2}
-\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: WALK with Simulated Annealing}{22}{subsubsection.4.7.3}
-\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: Average with Simulated Annealing}{23}{subsubsection.4.7.4}
-\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: Random-Flip with Simulated Annealing}{25}{subsubsection.4.7.5}
-\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: probSAT vs WALK.}{27}{subsubsection.4.7.6}
-\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7: probSAT vs Average.}{28}{subsubsection.4.7.7}
-\contentsline {subsubsection}{\numberline {4.7.8}Experiment 8:probSAT vs Random-Flip.}{30}{subsubsection.4.7.8}
-\contentsline {subsubsection}{\numberline {4.7.9}Experiment 9: 2017-UNIF Comparision}{31}{subsubsection.4.7.9}
-\contentsline {subsubsection}{\numberline {4.7.10}Experiment 10: The pure portfolio approach}{33}{subsubsection.4.7.10}
-\contentsline {subsubsection}{\numberline {4.7.11}Experiment 11: Initialization with a guide of formula partitioning}{33}{subsubsection.4.7.11}
-\contentsline {section}{\numberline {5}Conclusion}{36}{section.5}
-\contentsline {subsection}{\numberline {5.1}Further work}{36}{subsection.5.1}
-\contentsline {section}{\numberline {6}Bibliography}{37}{section.6}
+\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.7.2}
+\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: WALK with Simulated Annealing}{23}{subsubsection.4.7.3}
+\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: Average with Simulated Annealing}{25}{subsubsection.4.7.4}
+\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: Random-Flip with Simulated Annealing}{26}{subsubsection.4.7.5}
+\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: probSAT vs WALK.}{28}{subsubsection.4.7.6}
+\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7: probSAT vs Average.}{30}{subsubsection.4.7.7}
+\contentsline {subsubsection}{\numberline {4.7.8}Experiment 8:probSAT vs Random-Flip.}{31}{subsubsection.4.7.8}
+\contentsline {subsubsection}{\numberline {4.7.9}Experiment 9: 2017-UNIF Comparision}{32}{subsubsection.4.7.9}
+\contentsline {subsubsection}{\numberline {4.7.10}Experiment 10: The pure portfolio approach}{34}{subsubsection.4.7.10}
+\contentsline {subsubsection}{\numberline {4.7.11}Experiment 11: Initialization with a guide of formula partitioning}{35}{subsubsection.4.7.11}
+\contentsline {section}{\numberline {5}Conclusion}{37}{section.5}
+\contentsline {subsection}{\numberline {5.1}Further work}{37}{subsection.5.1}
+\contentsline {section}{\numberline {6}Bibliography}{38}{section.6}

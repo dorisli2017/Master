@@ -78,11 +78,10 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Focused Local Search}}{11}{algocf.8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces }}{12}{figure.2}}
-\newlabel{Experiment 1 k3 cactus plot}{{2}{12}{}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}3nd Approach: Priority level to variables}{12}{subsection.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}4nd Approach: Soft Assignment}{12}{subsection.3.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}5th Approach: Initialization with a guide of formula partitioning}{12}{subsection.3.5}}
+\newlabel{a2}{{2}{12}{2nd Approach: Solve Order of clauses}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}}
+\newlabel{a2}{{2}{12}{3nd Approach: Assignment combination}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Focused Local Search}}{13}{algocf.9}}
 \citation{johnson1996cliques}
 \citation{balyo2017proceedings}
@@ -105,89 +104,91 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.1}Experiment 1: initAssign(F)}{19}{subsubsection.4.7.1}}
 \newlabel{sec:Experiment 1}{{4.7.1}{19}{Experiment 1: initAssign(F)}{subsubsection.4.7.1}{}}
 \newlabel{tab:com}{{4}{19}{Experiment 1: initAssign(F)}{table.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Three suggestions have very similar performance. In our solver, we use $RanomInit$ for $3SAT$ as initiliazation method because of its simplify.}}{19}{figure.3}}
-\newlabel{Experiment 1 k3 cactus plot}{{3}{19}{Three suggestions have very similar performance. In our solver, we use $RanomInit$ for $3SAT$ as initiliazation method because of its simplify}{figure.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Two bias suggestions show advantages especially for huge 5SAT instances.}}{20}{figure.4}}
-\newlabel{Experiment 1 k5 cactus plot}{{4}{20}{Two bias suggestions show advantages especially for huge 5SAT instances}{figure.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{20}{figure.5}}
-\newlabel{Experiment 1 k7 cactus plot}{{5}{20}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.5}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{20}{subsubsection.4.7.2}}
-\newlabel{sec:Experiment 2}{{4.7.2}{20}{Experiment 2: pickVar(F)}{subsubsection.4.7.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces For k3, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems.}}{21}{figure.6}}
-\newlabel{Experiment 2 k3 cactus plot}{{6}{21}{For k3, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems}{figure.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The improvement through our suggestions are big and stable. They solve more problems efficiently. The $Average$ (with $\alpha = 1$) can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema). }}{21}{figure.7}}
-\newlabel{Experiment 2 k5 cactus plot}{{7}{21}{The improvement through our suggestions are big and stable. They solve more problems efficiently. The $Average$ (with $\alpha = 1$) can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema)}{figure.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces For $7SAT$ problems, the $WALK$ and $Average$ have generally worse inperformance.The $Random-Flip$ can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds.}}{22}{figure.8}}
-\newlabel{Experiment 2 k7 cactus plot}{{8}{22}{For $7SAT$ problems, the $WALK$ and $Average$ have generally worse inperformance.The $Random-Flip$ can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}{figure.8}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: WALK with Simulated Annealing}{22}{subsubsection.4.7.3}}
-\newlabel{sec:Experiment 3}{{4.7.3}{22}{Experiment 3: WALK with Simulated Annealing}{subsubsection.4.7.3}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The combination with simulated Annealing show worse efficiency than the original $WALK$. They solve one less problems. }}{22}{figure.9}}
-\newlabel{Experiment 3 k3-w cactus plot}{{9}{22}{The combination with simulated Annealing show worse efficiency than the original $WALK$. They solve one less problems}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{23}{figure.10}}
-\newlabel{Experiment 3 k5-w cactus plot}{{10}{23}{Two bias suggestions show advantages especially for huge instances}{figure.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{23}{figure.11}}
-\newlabel{Experiment 3 k7-w cactus plot}{{11}{23}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.11}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: Average with Simulated Annealing}{23}{subsubsection.4.7.4}}
-\newlabel{sec:Experiment 4}{{4.7.4}{23}{Experiment 4: Average with Simulated Annealing}{subsubsection.4.7.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces The performances of these three algorithms are guiet semiliar for small problems within $50$ Seconds. The original Average can solve $15\%$ problems.}}{24}{figure.12}}
-\newlabel{Experiment 4 k3 cactus plot}{{12}{24}{The performances of these three algorithms are guiet semiliar for small problems within $50$ Seconds. The original Average can solve $15\%$ problems}{figure.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces There are not big differences in $Average$ with different combination of simulated annealing. They have shown small Advantages in solving huge problems.}}{24}{figure.13}}
-\newlabel{Experiment 4 k5 cactus plot}{{13}{24}{There are not big differences in $Average$ with different combination of simulated annealing. They have shown small Advantages in solving huge problems}{figure.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces For $7SAT$ problems, the $Local$ version can solve 6 problems more than the original $Average$. It has also shown its efficiency in solving huge $7SAT$ problems. The $Local$ (with $\alpha = 2$) can solve $10\%$ more problems than the probSAT within less than $60\%$ time (in PAR-2 schema). }}{25}{figure.14}}
-\newlabel{Experiment 4 k7 cactus plot}{{14}{25}{For $7SAT$ problems, the $Local$ version can solve 6 problems more than the original $Average$. It has also shown its efficiency in solving huge $7SAT$ problems. The $Local$ (with $\alpha = 2$) can solve $10\%$ more problems than the probSAT within less than $60\%$ time (in PAR-2 schema)}{figure.14}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: Random-Flip with Simulated Annealing}{25}{subsubsection.4.7.5}}
-\newlabel{sec:Experiment 5}{{4.7.5}{25}{Experiment 5: Random-Flip with Simulated Annealing}{subsubsection.4.7.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Three suggestions have very similar performance.}}{25}{figure.15}}
-\newlabel{Experiment 5 k3 cactus plot}{{15}{25}{Three suggestions have very similar performance}{figure.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{26}{figure.16}}
-\newlabel{Experiment 5 k5 cactus plot}{{16}{26}{Two bias suggestions show advantages especially for huge instances}{figure.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{26}{figure.17}}
-\newlabel{Experiment 5 k7 cactus plot}{{17}{26}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.17}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: probSAT vs WALK.}{27}{subsubsection.4.7.6}}
-\newlabel{sec:Experiment 6}{{4.7.6}{27}{Experiment 6: probSAT vs WALK}{subsubsection.4.7.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Three suggestions have very similar performance.}}{27}{figure.18}}
-\newlabel{Experiment 6 k3 cactus plot}{{18}{27}{Three suggestions have very similar performance}{figure.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{27}{figure.19}}
-\newlabel{Experiment 6 k5 cactus plot}{{19}{27}{Two bias suggestions show advantages especially for huge instances}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{28}{figure.20}}
-\newlabel{Experiment 7 k7 cactus plot}{{20}{28}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.20}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7: probSAT vs Average.}{28}{subsubsection.4.7.7}}
-\newlabel{sec:Experiment 7}{{4.7.7}{28}{Experiment 7: probSAT vs Average}{subsubsection.4.7.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Three suggestions have very similar performance.}}{28}{figure.21}}
-\newlabel{Experiment 7 k3 cactus plot}{{21}{28}{Three suggestions have very similar performance}{figure.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{29}{figure.22}}
-\newlabel{Experiment 7 k5 cactus plot}{{22}{29}{Two bias suggestions show advantages especially for huge instances}{figure.22}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{29}{figure.23}}
-\newlabel{Experiment 7 k7 cactus plot}{{23}{29}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.23}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.8}Experiment 8:probSAT vs Random-Flip.}{30}{subsubsection.4.7.8}}
-\newlabel{sec:Experiment 8}{{4.7.8}{30}{Experiment 8:probSAT vs Random-Flip}{subsubsection.4.7.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Three suggestions have very similar performance.}}{30}{figure.24}}
-\newlabel{Experiment 8 k3 cactus plot}{{24}{30}{Three suggestions have very similar performance}{figure.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{30}{figure.25}}
-\newlabel{Experiment 8 k5 cactus plot}{{25}{30}{Two bias suggestions show advantages especially for huge instances}{figure.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{31}{figure.26}}
-\newlabel{Experiment 8 k7 cactus plot}{{26}{31}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.26}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.9}Experiment 9: 2017-UNIF Comparision}{31}{subsubsection.4.7.9}}
-\newlabel{sec:Experiment 9}{{4.7.9}{31}{Experiment 9: 2017-UNIF Comparision}{subsubsection.4.7.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Three suggestions have very similar performance.}}{31}{figure.27}}
-\newlabel{Experiment 9 k3 cactus plot}{{27}{31}{Three suggestions have very similar performance}{figure.27}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{32}{figure.28}}
-\newlabel{Experiment 9 k5 cactus plot}{{28}{32}{Two bias suggestions show advantages especially for huge instances}{figure.28}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{32}{figure.29}}
-\newlabel{Experiment 9 k7 cactus plot}{{29}{32}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.29}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{33}{figure.30}}
-\newlabel{Experiment 9 all cactus plot}{{30}{33}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.30}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.10}Experiment 10: The pure portfolio approach}{33}{subsubsection.4.7.10}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.11}Experiment 11: Initialization with a guide of formula partitioning}{33}{subsubsection.4.7.11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces }}{34}{figure.31}}
-\newlabel{Experiment 11 k5 cactus plot}{{31}{34}{}{figure.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces }}{34}{figure.32}}
-\newlabel{Experiment 11 k7 cactus plot}{{32}{34}{}{figure.32}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces }}{35}{figure.33}}
-\newlabel{Experiment 11 all cactus plot}{{33}{35}{}{figure.33}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{36}{section.5}}
-\newlabel{sec:conc}{{5}{36}{Conclusion}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Further work}{36}{subsection.5.1}}
+\newlabel{Experiment 1 k357 cactus plot}{{2}{20}{Experiment 1: initAssign(F)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 3SAT 5SAT and 7SAT instances.}}{20}{figure.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Three suggestions have very similar performance. In our solver, we use $RanomInit$ for $3SAT$ as initiliazation method because of its simplify.}}{21}{figure.3}}
+\newlabel{Experiment 1 k3 cactus plot}{{3}{21}{Three suggestions have very similar performance. In our solver, we use $RanomInit$ for $3SAT$ as initiliazation method because of its simplify}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Two bias suggestions show advantages especially for huge 5SAT instances.}}{21}{figure.4}}
+\newlabel{Experiment 1 k5 cactus plot}{{4}{21}{Two bias suggestions show advantages especially for huge 5SAT instances}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{22}{figure.5}}
+\newlabel{Experiment 1 k7 cactus plot}{{5}{22}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.7.2}}
+\newlabel{sec:Experiment 2}{{4.7.2}{22}{Experiment 2: pickVar(F)}{subsubsection.4.7.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces For k3, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems.}}{22}{figure.6}}
+\newlabel{Experiment 2 k3 cactus plot}{{6}{22}{For k3, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces The improvement through our suggestions are big and stable. They solve more problems efficiently. The $Average$ (with $\alpha = 1$) can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema). }}{23}{figure.7}}
+\newlabel{Experiment 2 k5 cactus plot}{{7}{23}{The improvement through our suggestions are big and stable. They solve more problems efficiently. The $Average$ (with $\alpha = 1$) can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema)}{figure.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces For $7SAT$ problems, the $WALK$ and $Average$ have generally worse inperformance.The $Random-Flip$ can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds.}}{23}{figure.8}}
+\newlabel{Experiment 2 k7 cactus plot}{{8}{23}{For $7SAT$ problems, the $WALK$ and $Average$ have generally worse inperformance.The $Random-Flip$ can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: WALK with Simulated Annealing}{23}{subsubsection.4.7.3}}
+\newlabel{sec:Experiment 3}{{4.7.3}{23}{Experiment 3: WALK with Simulated Annealing}{subsubsection.4.7.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The combination with simulated Annealing show worse efficiency than the original $WALK$. They solve one less problems. }}{24}{figure.9}}
+\newlabel{Experiment 3 k3-w cactus plot}{{9}{24}{The combination with simulated Annealing show worse efficiency than the original $WALK$. They solve one less problems}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{24}{figure.10}}
+\newlabel{Experiment 3 k5-w cactus plot}{{10}{24}{Two bias suggestions show advantages especially for huge instances}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{25}{figure.11}}
+\newlabel{Experiment 3 k7-w cactus plot}{{11}{25}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: Average with Simulated Annealing}{25}{subsubsection.4.7.4}}
+\newlabel{sec:Experiment 4}{{4.7.4}{25}{Experiment 4: Average with Simulated Annealing}{subsubsection.4.7.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces The performances of these three algorithms are guiet semiliar for small problems within $50$ Seconds. The original Average can solve $15\%$ problems.}}{25}{figure.12}}
+\newlabel{Experiment 4 k3 cactus plot}{{12}{25}{The performances of these three algorithms are guiet semiliar for small problems within $50$ Seconds. The original Average can solve $15\%$ problems}{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces There are not big differences in $Average$ with different combination of simulated annealing. They have shown small Advantages in solving huge problems.}}{26}{figure.13}}
+\newlabel{Experiment 4 k5 cactus plot}{{13}{26}{There are not big differences in $Average$ with different combination of simulated annealing. They have shown small Advantages in solving huge problems}{figure.13}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces For $7SAT$ problems, the $Local$ version can solve 6 problems more than the original $Average$. It has also shown its efficiency in solving huge $7SAT$ problems. The $Local$ (with $\alpha = 2$) can solve $10\%$ more problems than the probSAT within less than $60\%$ time (in PAR-2 schema). }}{26}{figure.14}}
+\newlabel{Experiment 4 k7 cactus plot}{{14}{26}{For $7SAT$ problems, the $Local$ version can solve 6 problems more than the original $Average$. It has also shown its efficiency in solving huge $7SAT$ problems. The $Local$ (with $\alpha = 2$) can solve $10\%$ more problems than the probSAT within less than $60\%$ time (in PAR-2 schema)}{figure.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: Random-Flip with Simulated Annealing}{26}{subsubsection.4.7.5}}
+\newlabel{sec:Experiment 5}{{4.7.5}{26}{Experiment 5: Random-Flip with Simulated Annealing}{subsubsection.4.7.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Three suggestions have very similar performance.}}{27}{figure.15}}
+\newlabel{Experiment 5 k3 cactus plot}{{15}{27}{Three suggestions have very similar performance}{figure.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{27}{figure.16}}
+\newlabel{Experiment 5 k5 cactus plot}{{16}{27}{Two bias suggestions show advantages especially for huge instances}{figure.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{28}{figure.17}}
+\newlabel{Experiment 5 k7 cactus plot}{{17}{28}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: probSAT vs WALK.}{28}{subsubsection.4.7.6}}
+\newlabel{sec:Experiment 6}{{4.7.6}{28}{Experiment 6: probSAT vs WALK}{subsubsection.4.7.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Three suggestions have very similar performance.}}{28}{figure.18}}
+\newlabel{Experiment 6 k3 cactus plot}{{18}{28}{Three suggestions have very similar performance}{figure.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{29}{figure.19}}
+\newlabel{Experiment 6 k5 cactus plot}{{19}{29}{Two bias suggestions show advantages especially for huge instances}{figure.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{29}{figure.20}}
+\newlabel{Experiment 7 k7 cactus plot}{{20}{29}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.20}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7: probSAT vs Average.}{30}{subsubsection.4.7.7}}
+\newlabel{sec:Experiment 7}{{4.7.7}{30}{Experiment 7: probSAT vs Average}{subsubsection.4.7.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Three suggestions have very similar performance.}}{30}{figure.21}}
+\newlabel{Experiment 7 k3 cactus plot}{{21}{30}{Three suggestions have very similar performance}{figure.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{30}{figure.22}}
+\newlabel{Experiment 7 k5 cactus plot}{{22}{30}{Two bias suggestions show advantages especially for huge instances}{figure.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{31}{figure.23}}
+\newlabel{Experiment 7 k7 cactus plot}{{23}{31}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.23}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.8}Experiment 8:probSAT vs Random-Flip.}{31}{subsubsection.4.7.8}}
+\newlabel{sec:Experiment 8}{{4.7.8}{31}{Experiment 8:probSAT vs Random-Flip}{subsubsection.4.7.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Three suggestions have very similar performance.}}{31}{figure.24}}
+\newlabel{Experiment 8 k3 cactus plot}{{24}{31}{Three suggestions have very similar performance}{figure.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{32}{figure.25}}
+\newlabel{Experiment 8 k5 cactus plot}{{25}{32}{Two bias suggestions show advantages especially for huge instances}{figure.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{32}{figure.26}}
+\newlabel{Experiment 8 k7 cactus plot}{{26}{32}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.26}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.9}Experiment 9: 2017-UNIF Comparision}{32}{subsubsection.4.7.9}}
+\newlabel{sec:Experiment 9}{{4.7.9}{32}{Experiment 9: 2017-UNIF Comparision}{subsubsection.4.7.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Three suggestions have very similar performance.}}{33}{figure.27}}
+\newlabel{Experiment 9 k3 cactus plot}{{27}{33}{Three suggestions have very similar performance}{figure.27}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{33}{figure.28}}
+\newlabel{Experiment 9 k5 cactus plot}{{28}{33}{Two bias suggestions show advantages especially for huge instances}{figure.28}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{34}{figure.29}}
+\newlabel{Experiment 9 k7 cactus plot}{{29}{34}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.29}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{34}{figure.30}}
+\newlabel{Experiment 9 all cactus plot}{{30}{34}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.30}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.10}Experiment 10: The pure portfolio approach}{34}{subsubsection.4.7.10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.11}Experiment 11: Initialization with a guide of formula partitioning}{35}{subsubsection.4.7.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces }}{35}{figure.31}}
+\newlabel{Experiment 11 k5 cactus plot}{{31}{35}{}{figure.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces }}{36}{figure.32}}
+\newlabel{Experiment 11 k7 cactus plot}{{32}{36}{}{figure.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces }}{36}{figure.33}}
+\newlabel{Experiment 11 all cactus plot}{{33}{36}{}{figure.33}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{37}{section.5}}
+\newlabel{sec:conc}{{5}{37}{Conclusion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Further work}{37}{subsection.5.1}}
 \bibstyle{ieeetr}
 \bibdata{references}
 \bibcite{cook1971complexity}{1}
@@ -200,7 +201,7 @@
 \bibcite{hoos2002adaptive}{8}
 \bibcite{biere2014yet}{9}
 \bibcite{balyo2017proceedings}{10}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Bibliography}{37}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Bibliography}{38}{section.6}}
 \global\@namedef{scr@dte@section@lastmaxnumwidth}{11.8799pt}
 \global\@namedef{scr@dte@subsection@lastmaxnumwidth}{19.71382pt}
 \global\@namedef{scr@dte@subsubsection@lastmaxnumwidth}{34.72778pt}
