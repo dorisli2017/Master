@@ -69,100 +69,93 @@
 \@writefile{loa}{\contentsline {algocf}{\numberline {5}{\ignorespaces Our pickVar}}{8}{algocf.5}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {6}{\ignorespaces WALK}}{8}{algocf.6}}
 \@writefile{loa}{\contentsline {algocf}{\numberline {7}{\ignorespaces TieBreak}}{9}{algocf.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}pickVar(A,c) with Simulated Annealing}{9}{subsection.2.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}pickVar(A,c) with simulated annealing}{9}{subsection.2.4}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Data structures}{10}{subsection.2.5}}
 \newlabel{subsec:Data structures}{{2.5}{10}{Data structures}{subsection.2.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces probSAT}}{10}{table.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Our swpSAT solver}{10}{subsection.2.6}}
+\newlabel{subsec:swpSAT}{{2.6}{10}{Our swpSAT solver}{subsection.2.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Our Parallel Algorithm}{11}{section.3}}
+\newlabel{sec:parallel}{{3}{11}{Our Parallel Algorithm}{section.3}{}}
+\newlabel{sec:Our parallel Algorithm}{{3}{11}{Our Parallel Algorithm}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Focused Local Search}}{11}{algocf.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}}
+\newlabel{sec:2nd}{{3.2}{11}{2nd Approach: Solve Order of clauses}{subsection.3.2}{}}
+\newlabel{a2}{{2}{12}{2nd Approach: Solve Order of clauses}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}}
+\newlabel{a2}{{2}{12}{3nd Approach: Assignment combination}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Focused Local Search}}{14}{algocf.9}}
 \citation{balyo2017proceedings}
 \citation{balyo2017proceedings}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Evaluation}{11}{section.3}}
-\newlabel{sec:eva}{{3}{11}{Evaluation}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}DIMACS standard format}{11}{subsection.3.1}}
-\@writefile{brf}{\backcite{balyo2017proceedings}{{11}{3.1}{subsection.3.1}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Benchmarks}{11}{subsection.3.2}}
-\newlabel{benchmark}{{3.2}{11}{Benchmarks}{subsection.3.2}{}}
-\@writefile{brf}{\backcite{balyo2017proceedings}{{11}{3.2}{subsection.3.2}}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Used plots and tables}{11}{subsection.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Random seeds used in Experiments}{12}{subsection.3.4}}
-\newlabel{sec:seed}{{3.4}{12}{Random seeds used in Experiments}{subsection.3.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces probSAT}}{12}{table.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Soft- and Hardware}{12}{subsubsection.3.4.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Parameter Settings in Experiment}{13}{subsection.3.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Benchmark Generation}{13}{subsection.3.6}}
-\newlabel{tab:combine big}{{4}{14}{Benchmark Generation}{table.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Caption for LOF}}{14}{table.4}}
-\newlabel{tab:combine small}{{5}{15}{Benchmark Generation}{table.5}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces COMBINE problems with small intersection ($\frac  {numCIs}{numCs} < 1\%$)}}{15}{table.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Experiments}{16}{subsection.3.7}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}Experiment 1: initAssign(F)}{16}{subsubsection.3.7.1}}
-\newlabel{sec:Experiment 1}{{3.7.1}{16}{Experiment 1: initAssign(F)}{subsubsection.3.7.1}{}}
-\newlabel{tab:com}{{6}{16}{Experiment 1: initAssign(F)}{table.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces For 3SAT problems, the initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazatios show improvment with about $60\%$ percentage reduction in penalized runtime for 5SAT problems. the \emph  {BiasInit} shows its Efficiency in 7SAT problems. The search is about $14\%$ faster than the original \emph  {probSAT} algorithm with a (bias) randomly generated initilization. }}{16}{table.6}}
-\newlabel{Experiment cactus}{{2}{17}{Experiment 1: initAssign(F)}{figure.2}{}}
-\newlabel{Experiment 1 k357 cactus plot}{{2}{17}{Experiment 1: initAssign(F)}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three suggestions have very similar performance for 3SAT problems. In our solver, we use $RanomInit$ for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{17}{figure.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2}Experiment 2: pickVar(F)}{18}{subsubsection.3.7.2}}
-\newlabel{sec:Experiment 2}{{3.7.2}{18}{Experiment 2: pickVar(F)}{subsubsection.3.7.2}{}}
-\newlabel{parma}{{7}{18}{Experiment 2: pickVar(F)}{table.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces In this table, we list three examples in 3SAT , 5SAT and 7SAT problem with probabilitys of the probSAT. Here we have in the chosen clause a greedy literal and other literals with breakscore 1. With the $\Gamma $ function with the recommended parameters in the original probSAT paper, we show in the 3.column the probabilities of each literal for flipping.}}{18}{table.7}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces With the comparison of three Variant of \emph  {pickVar} with the staochastic selection in probSAT, our suggestions are faster and solve more instances in K3 and K5. For 3SAT, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems. The $Average$ shows advantages also for 5SAT problems, which can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema). For K7, there are no noticeable differences in results.}}{18}{table.8}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Our suggestions are faster than the probSAT algorithm in 3SAT problems. The \emph  {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph  {WALK} and \emph  {Average} have generally worse inperformance. The \emph  {Random-Flip} can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}}{19}{figure.3}}
-\newlabel{Experiment 2 cactus plot}{{3}{19}{Our suggestions are faster than the probSAT algorithm in 3SAT problems. The \emph {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph {WALK} and \emph {Average} have generally worse inperformance. The \emph {Random-Flip} can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}{figure.3}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.3}Experiment 3: Simulated Annealing}{20}{subsubsection.3.7.3}}
-\newlabel{sec:Experiment 3}{{3.7.3}{20}{Experiment 3: Simulated Annealing}{subsubsection.3.7.3}{}}
-\newlabel{Experiment 3 WALK cactus plot}{{4}{21}{Experiment 3: Simulated Annealing}{figure.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces }}{22}{figure.4}}
-\newlabel{Experiment 4 k3 cactus plot}{{4}{22}{}{figure.4}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.4}Experiment 6: probSAT vs WALK.}{24}{subsubsection.3.7.4}}
-\newlabel{sec:Experiment 6}{{3.7.4}{24}{Experiment 6: probSAT vs WALK}{subsubsection.3.7.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Three suggestions have very similar performance.}}{24}{figure.5}}
-\newlabel{Experiment 6 k3 cactus plot}{{5}{24}{Three suggestions have very similar performance}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{24}{figure.6}}
-\newlabel{Experiment 6 k5 cactus plot}{{6}{24}{Two bias suggestions show advantages especially for huge instances}{figure.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{25}{figure.7}}
-\newlabel{Experiment 7 k7 cactus plot}{{7}{25}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.7}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.5}Experiment 7: probSAT vs Average.}{25}{subsubsection.3.7.5}}
-\newlabel{sec:Experiment 7}{{3.7.5}{25}{Experiment 7: probSAT vs Average}{subsubsection.3.7.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Three suggestions have very similar performance.}}{25}{figure.8}}
-\newlabel{Experiment 7 k3 cactus plot}{{8}{25}{Three suggestions have very similar performance}{figure.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{26}{figure.9}}
-\newlabel{Experiment 7 k5 cactus plot}{{9}{26}{Two bias suggestions show advantages especially for huge instances}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{26}{figure.10}}
-\newlabel{Experiment 7 k7 cactus plot}{{10}{26}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.10}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.6}Experiment 8:probSAT vs Random-Flip.}{27}{subsubsection.3.7.6}}
-\newlabel{sec:Experiment 8}{{3.7.6}{27}{Experiment 8:probSAT vs Random-Flip}{subsubsection.3.7.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Three suggestions have very similar performance.}}{27}{figure.11}}
-\newlabel{Experiment 8 k3 cactus plot}{{11}{27}{Three suggestions have very similar performance}{figure.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{27}{figure.12}}
-\newlabel{Experiment 8 k5 cactus plot}{{12}{27}{Two bias suggestions show advantages especially for huge instances}{figure.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{28}{figure.13}}
-\newlabel{Experiment 8 k7 cactus plot}{{13}{28}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.7}Experiment 9: 2017-UNIF Comparision}{28}{subsubsection.3.7.7}}
-\newlabel{sec:Experiment 9}{{3.7.7}{28}{Experiment 9: 2017-UNIF Comparision}{subsubsection.3.7.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Three suggestions have very similar performance.}}{28}{figure.14}}
-\newlabel{Experiment 9 k3 cactus plot}{{14}{28}{Three suggestions have very similar performance}{figure.14}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Two bias suggestions show advantages especially for huge instances.}}{29}{figure.15}}
-\newlabel{Experiment 9 k5 cactus plot}{{15}{29}{Two bias suggestions show advantages especially for huge instances}{figure.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{29}{figure.16}}
-\newlabel{Experiment 9 k7 cactus plot}{{16}{29}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{30}{figure.17}}
-\newlabel{Experiment 9 all cactus plot}{{17}{30}{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency}{figure.17}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.8}Experiment 10: The pure portfolio approach}{31}{subsubsection.3.7.8}}
-\newlabel{tab:com}{{9}{31}{Experiment 10: The pure portfolio approach}{table.9}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces }}{31}{table.9}}
-\newlabel{Experiment cactus}{{18}{32}{Experiment 10: The pure portfolio approach}{figure.18}{}}
-\newlabel{Experiment 1 k357 cactus plot}{{18}{32}{Experiment 10: The pure portfolio approach}{figure.18}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces }}{32}{figure.18}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.9}Experiment 11: Initialization with a guide of formula partitioning}{33}{subsubsection.3.7.9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces }}{33}{figure.19}}
-\newlabel{Experiment 11 k5 cactus plot}{{19}{33}{}{figure.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces }}{33}{figure.20}}
-\newlabel{Experiment 11 k7 cactus plot}{{20}{33}{}{figure.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces }}{34}{figure.21}}
-\newlabel{Experiment 11 all cactus plot}{{21}{34}{}{figure.21}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{35}{section.4}}
-\newlabel{sec:conc}{{4}{35}{Conclusion}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Further work}{35}{subsection.4.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Evaluation}{15}{section.4}}
+\newlabel{sec:eva}{{4}{15}{Evaluation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{15}{subsection.4.1}}
+\@writefile{brf}{\backcite{balyo2017proceedings}{{15}{4.1}{subsection.4.1}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Benchmarks}{15}{subsection.4.2}}
+\newlabel{benchmark}{{4.2}{15}{Benchmarks}{subsection.4.2}{}}
+\@writefile{brf}{\backcite{balyo2017proceedings}{{15}{4.2}{subsection.4.2}}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Used plots and tables}{15}{subsection.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Random seeds used in Experiments}{16}{subsection.4.4}}
+\newlabel{sec:seed}{{4.4}{16}{Random seeds used in Experiments}{subsection.4.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces probSAT}}{16}{table.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}Soft- and Hardware}{16}{subsubsection.4.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Parameter Settings in Experiment}{17}{subsection.4.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Benchmark Generation}{17}{subsection.4.6}}
+\newlabel{tab:combine big}{{4}{18}{Benchmark Generation}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Caption for LOF}}{18}{table.4}}
+\newlabel{tab:combine small}{{5}{19}{Benchmark Generation}{table.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces COMBINE problems with small intersection ($\frac  {numCIs}{numCs} < 1\%$)}}{19}{table.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Experiments}{20}{subsection.4.7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.1}Experiment 1: initAssign(F)}{20}{subsubsection.4.7.1}}
+\newlabel{sec:Experiment 1}{{4.7.1}{20}{Experiment 1: initAssign(F)}{subsubsection.4.7.1}{}}
+\newlabel{tab:com}{{6}{20}{Experiment 1: initAssign(F)}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces For 3SAT problems, the initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazatios show improvment with about $60\%$ percentage reduction in penalized runtime for 5SAT problems. the \emph  {BiasInit} shows its Efficiency in 7SAT problems. The search is about $14\%$ faster than the original \emph  {probSAT} algorithm with a (bias) randomly generated initilization. }}{20}{table.6}}
+\newlabel{Experiment cactus}{{2}{21}{Experiment 1: initAssign(F)}{figure.2}{}}
+\newlabel{Experiment 1 k357 cactus plot}{{2}{21}{Experiment 1: initAssign(F)}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three suggestions have very similar performance for 3SAT problems. In our solver, we use $RanomInit$ for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}}{21}{figure.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.7.2}}
+\newlabel{sec:Experiment 2}{{4.7.2}{22}{Experiment 2: pickVar(F)}{subsubsection.4.7.2}{}}
+\newlabel{parma}{{7}{22}{Experiment 2: pickVar(F)}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces In this table, we list three examples in 3SAT , 5SAT and 7SAT problem with probabilitys of the probSAT. Here we have in the chosen clause a greedy literal and other literals with breakscore 1. With the $\Gamma $ function with the recommended parameters in the original probSAT paper, we show in the 3.column the probabilities of each literal for flipping.}}{22}{table.7}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces With the comparison of three Variant of \emph  {pickVar} with the staochastic selection in probSAT, our suggestions are faster and solve more instances in K3 and K5. For 3SAT, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems. The $Average$ shows advantages also for 5SAT problems, which can solve $8\%$ more problems than the probSAT with only $46\%$ time (in PAR-2 schema). For K7, there are no noticeable differences in results.}}{22}{table.8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Our suggestions are faster than the probSAT algorithm in 3SAT problems. The \emph  {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph  {WALK} and \emph  {Average} have generally worse inperformance. The \emph  {Random-Flip} can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}}{23}{figure.3}}
+\newlabel{Experiment 2 cactus plot}{{3}{23}{Our suggestions are faster than the probSAT algorithm in 3SAT problems. The \emph {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph {WALK} and \emph {Average} have generally worse inperformance. The \emph {Random-Flip} can solve some number of problems as the original $probSAT$ and has shown littel improvement in performance within $125$ Seconds}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: Simulated Annealing}{24}{subsubsection.4.7.3}}
+\newlabel{sec:Experiment 3}{{4.7.3}{24}{Experiment 3: Simulated Annealing}{subsubsection.4.7.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces To check that the simulated annealing with the parameters in our experiments will change the behavior of the search, we count the number of greedy flips and the number of random flips for the whole problem set. Through our observation, using the parameters we choose, the fraction of greedy flips in total flips are changed. This table shows the values for two variants \emph  {Average} and \emph  {Random-Flip} for example. }}{24}{table.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces For 3SAT, the two combination with simulated Annealing show worse performance than the original \emph  {WALK}. The combinations have also shown their efficiency in solving huge 5SAT problems. The \emph  {Global} shows its advantages for 7SAT problems. }}{25}{figure.4}}
+\newlabel{Experiment 3 WALK cactus plot}{{4}{25}{Experiment 3: Simulated Annealing}{figure.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  The original \emph  {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph  {Local} version can solve 6 huge problems more than the original \emph  {Average} within less runtime.}}{26}{figure.5}}
+\newlabel{Experiment 4 k3 cactus plot}{{5}{26}{The original \emph {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph {Local} version can solve 6 huge problems more than the original \emph {Average} within less runtime}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  The performances of these three algorithms are guiet semiliar for 3SAT and 5SAT problems. For 7SAT set, the \emph  {Local} get worst performance while the variant \emph  {Global} has shown advantages in solving huge problems.}}{27}{figure.6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: 2017-UNIF Comparision (local)}{28}{subsubsection.4.7.4}}
+\newlabel{sec:Experiment 4}{{4.7.4}{28}{Experiment 4: 2017-UNIF Comparision (local)}{subsubsection.4.7.4}{}}
+\newlabel{tab:UNIF}{{10}{28}{Experiment 4: 2017-UNIF Comparision (local)}{table.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Comparision in UNIF}}{28}{table.10}}
+\newlabel{tab:flips}{{11}{28}{Experiment 4: 2017-UNIF Comparision (local)}{table.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Average flips per second}}{28}{table.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces swpSAT get best performance in UNIF comparing to \emph  {probSAT} and \emph  {yalSAT} }}{28}{figure.7}}
+\newlabel{Experiment 9 all cactus plot}{{7}{28}{swpSAT get best performance in UNIF comparing to \emph {probSAT} and \emph {yalSAT}}{figure.7}{}}
+\newlabel{Experiment 9 k3 cactus plot}{{8}{29}{Experiment 4: 2017-UNIF Comparision (local)}{figure.8}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: The pure portfolio approach}{30}{subsubsection.4.7.5}}
+\newlabel{sec:Experiment 5}{{4.7.5}{30}{Experiment 5: The pure portfolio approach}{subsubsection.4.7.5}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Pseudo-random number generators in use}}{30}{table.12}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Pseudo-random number generators in use}}{30}{table.13}}
+\newlabel{Experiment 5 all cactus plot}{{9}{31}{Experiment 5: The pure portfolio approach}{figure.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver can solve $30\%$ more problems in same time. }}{31}{figure.9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: Initialization with a guide of formula partitioning}{32}{subsubsection.4.7.6}}
+\newlabel{sec:Experiment 6}{{4.7.6}{32}{Experiment 6: Initialization with a guide of formula partitioning}{subsubsection.4.7.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces }}{33}{figure.10}}
+\newlabel{Experiment 6 COMBINE}{{10}{33}{}{figure.10}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7:2017-UNIF Comparision (parallel)}{34}{subsubsection.4.7.7}}
+\newlabel{sec:Experiment 7}{{4.7.7}{34}{Experiment 7:2017-UNIF Comparision (parallel)}{subsubsection.4.7.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{34}{figure.11}}
+\newlabel{Experiment 6 COMBINE}{{11}{34}{}{figure.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{35}{section.5}}
+\newlabel{sec:conc}{{5}{35}{Conclusion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Further work}{35}{subsection.5.1}}
 \bibstyle{ieeetr}
 \bibdata{references}
 \bibcite{cook1971complexity}{1}
@@ -176,7 +169,7 @@
 \bibcite{hoos2002adaptive}{9}
 \bibcite{biere2014yet}{10}
 \bibcite{balyo2017proceedings}{11}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Bibliography}{36}{section.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Bibliography}{36}{section.6}}
 \global\@namedef{scr@dte@section@lastmaxnumwidth}{11.8799pt}
 \global\@namedef{scr@dte@subsection@lastmaxnumwidth}{19.71382pt}
 \global\@namedef{scr@dte@subsubsection@lastmaxnumwidth}{28.8528pt}

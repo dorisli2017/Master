@@ -228,8 +228,7 @@ Karlsruhe, 20th September 2018
 \selectlanguage{english}
 \begin{abstract}
 \centerline{\bf Abstract}
-{\noindent Stochastic local search (SLS) is an elementary technique for solving combinational problems. Probsat is an algorithm paradigm of the simplest SLS solvers for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. In the first section of this paper, we introduce an efficient Probsat heuristic. We experimentally evaluate and analyze the performance
-of our solver in a combination of different techniques, including simulated annealing and WalkSAT. With the approach of formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the efficiency of the solver. Using different random generator and other parameter settings in solving
+{\noindent Stochastic local search (SLS) is an elementary technique for solving combinational problems. In the first section of this paper, we introduce an efficient SLS heuristic solver for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. We experimentally evaluate and analyze the performance of our solver in a combination of different techniques, including simulated annealing and walkSAT. With formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the efficiency of the solver. Using different random generator in solving
 the sub-formula can bring further improvement in performance to our parallel solver.}
 \end{abstract}
 \vfill
@@ -237,7 +236,7 @@ the sub-formula can bring further improvement in performance to our parallel sol
 \selectlanguage{ngerman}
 \begin{abstract}
 \centerline{\bf Zusammenfassung}
-{\noindent Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Probsat ist einer der einfachsten SLS-Solver für das Erfüllbarkeitsproblem der Aussagenlogik (SAT), bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Im ersten Teil dieser Arbeit stellen wir eine effiziente Probsat-basierte Heuristik vor. Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und WalkSAT wurde auch experimentell bewertet und analysiert. Mit dem Ansatz der Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Lösers verbessert. Die flexible Parametereinstellungen bei der Lösung der Teil-formeln kann eine weitere Verbesserung unseres Algorithmus bringen.
+{\noindent Stochastische lokale Suche (SLS) stellt eine elementare Technik zur Lösung von komplizierten kombinatorischen Problemen dar. Im ersten Teil dieser Arbeit stellen wir eine effiziente SLS Heuristik für das Erfüllbarkeitsproblem der Aussagenlogik (SAT) vor, bei dem die Entscheidungen nur auf der Wahrscheinlichkeitsverteilung basieren. Die Leistung unseres Algorithmus in einer Kombination verschiedener Techniken, einschließlich simulierter Abkühlung und walkSAT, wurde auch experimentell bewertet und analysiert. Mit Formelpartition wird im zweiten Teil eine parallele Version unseres Algorithmus eingeführt, die die Effizienz des Solvers verbessert. Flexible Parametereinstellungen kann eine weitere Verbesserung unseres Algorithmus bringen.
  }
 \end{abstract}
 
@@ -268,14 +267,15 @@ the sub-formula can bring further improvement in performance to our parallel sol
 \section{Introduction} 
 \label{sec:Intro}
 \subsection{Problem/Motivation} 
-The \emph{\textbf{propositional satisfiability problem}} (\emph{\textbf{SAT}}) is the first proven NP-complete problem \cite{cook1971complexity}. The problem is to determine whether an assignment of Boolean values to variables in a  Boolean formula such that the expression evaluates to true. Hard combinational problems can be resolved with appropriate encoding as a sat problem.
-The SAT problem has many applications in computer science like chip model checking  \cite{clarke2001bounded}, software verification \cite{ivanvcic2008efficient} or in automated planning and scheduling in artificial intelligence  \cite{kautz1999unifying}. \\
-Formula partition is one of the promising approaches in DPLL-like solvers  \cite{mann2017guiding}. By giving the order to the variables according to a good formula partition, the search gets a relatively balanced decision tree. But formula partition is rarely used in a local search for the SAT problem. How to combine the formula partition with local search, will the local search benefit from the partitioning, if the formula partitioning can guide a parallel local search, are still open questions. 
+The \emph{\textbf{propositional satisfiability problem}} (\emph{\textbf{SAT}}) is the first proven NP-complete problem\cite{cook1971complexity}. The problem is to determine whether an assignment of boolean values to variables in a boolean formula exsits such that the expression evaluates to true. Hard combinational problems can be resolved with appropriate encoding as a SAT problem.
+The SAT problem has many applications in computer science like chip model checking\cite{clarke2001bounded}, software verification\cite{ivanvcic2008efficient} or in automated planning and scheduling in artificial intelligence\cite{kautz1999unifying}. \\
+Formula partition is one of the promising approaches in DPLL-like solvers\cite{mann2017guiding}. By prioritizing the variables according to a good formula partition, the search gets a relatively balanced decision tree. But formula partition is rarely used in a local search for the SAT problem. Questions such as how to combine the formula partition with local search, whether the local search can benefit from the partition, and whether the formula partition can guide a parallel local search still remain open. 
 
 \subsection{Content} 
-The SAT problem, as a well-known NP-complete problem, has received a great deal of attention and different local search heuristics have been developed. This paper is a survey on the stochastic local search on SAT problem with a guide of formula partition. \\
-In section~\ref{sec:Intro}, we summarize the formal concept and introduces techniques used in this paper. 
-One class of the most straightforward but efficient stochastic local search algorithms  \emph{Probsat} is the algorithm basic in our paper. \emph{Probsat}  was proposed in 2012 by Adrian Balint and Uwe Schoening \cite{balint2016engineering}. Section~\ref{sec:local} describes our \emph{Probsat} algorithm and discusses our attempts to improve the original algorithm. By experimentally evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{Probsat} search. With the partition of variables and its corresponding formulas, the problem can be separated into two subproblems of similar size.  In section~\ref{sec:parallel}, we search the potential benefit of formula partition in a parallel search. Section~\ref{sec:eva} describes the details in experiments and several empiric results mentioned in section 2 and section 3.  Section~\ref{sec:conc} concludes the paper with further works. 
+The SAT problem, as a well-known NP-complete problem, has drawn remarkable attention and different local search heuristics have been developed to tackle this problem. In this thesis, we introduced a stochastic local search on SAT problem using formula partition as guidance. \\
+In section~\ref{sec:Intro}, we summarized the formal concept and techniques used in this paper. 
+
+\emph{probSAT} was proposed in 2012 by Adrian Balint and Uwe Schoening\cite{balint2016engineering}. Section~\ref{sec:local} describes our method combined \emph{probSAT} and \emph{walkSAT} and discusses our attempts to improve the original algorithm. By experimentally evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{probSAT} search. With the partition of variables and its corresponding formulas, the problem can be separated into two subproblems of similar size.  In section~\ref{sec:parallel}, we search the potential benefit of formula partition in a parallel search. Section~\ref{sec:eva} describes the details in experiments and several empiric results mentioned in section 2 and section 3.  Section~\ref{sec:conc} concludes the paper with further works. 
 
 \subsection{Definitions and Notations} 
 \emph{\textbf{Propositional Satisfiability Problem}}\\
@@ -348,13 +348,13 @@ The initial hope of the local search is that through iterative greedy local impr
 The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen $p(\Gamma(s))$ corresponds to the score $\Gamma(s)$ of the solution $s$. In this way, the advantage a move is, the probability of choosing it as the next step is higher. This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. \\
 \\
 \emph{\textbf{Statistical Local Search }}\\
- Tabu search is created by Fred W. Glover in 1986 [15] and formalized in 1989.  For recognize the loop in a suboptimal region, the search trace is recorded in the process by mark the recently reached neighboring assignments as tabu. The tabu moves will not be touched in the further search to discourage getting stuck in a region. Inspired by the tabu search, a statistical search will record the whole search trach, in which the times each variable is chosen for flipping are counted. By using the stochastic information, the search will prefer the variables with fewer flippings before. By Experiments, a local statistic search can recognize besides short-term cycling like tabu search and permit long-term cyclings \cite{lisolving}.\\
+ Tabu search is created by Fred W. Glover in 1986 [15] and formalized in 1989.  For recognize the loop in a suboptimal region, the search trace is recorded in the process by mark the recently reached neighboring assignments as tabu. The tabu moves will not be touched in the further search to discourage getting stuck in a region. Inspired by the tabu search, a statistical search will record the whole search trach, in which the times each variable is chosen for flipping are counted. By using the stochastic information, the search will prefer the variables with fewer flippings before. By Experiments, a local statistic search can recognize besides short-term cycling like tabu search and permit long-term cyclings\cite{lisolving}.\\
 \\
 \emph{\textbf{Simulated Annealing}}\\
-Simulated Annealing is an approach of local search solver to difficult combinational optimization problems proposed by Kirkpatrick, Gelatt, and Vecchi \cite{kirkpatrick1983optimization}. This approach is inspired by the metallic process annealing of shaping the material by heating and then slowly cooling the material. This approach works as a local optimization algorithm guided by a controlling parameter \emph{\textbf{temperature}}. By high temperature, an uphill move is allowed with high probability while only small steps are allowed in low temperature. The temperature is varying according to the score of the current situation.  For a current solution with a nearly optimal score, the temperature is near zero. For an unattractive local extreme with a poor score, the active search is tending to make uphill moves in high temperature.\\
+Simulated Annealing is an approach of local search solver to difficult combinational optimization problems proposed by Kirkpatrick, Gelatt, and Vecchi\cite{kirkpatrick1983optimization}. This approach is inspired by the metallic process annealing of shaping the material by heating and then slowly cooling the material. This approach works as a local optimization algorithm guided by a controlling parameter \emph{\textbf{temperature}}. By high temperature, an uphill move is allowed with high probability while only small steps are allowed in low temperature. The temperature is varying according to the score of the current situation.  For a current solution with a nearly optimal score, the temperature is near zero. For an unattractive local extreme with a poor score, the active search is tending to make uphill moves in high temperature.\\
 \\
-\emph{\textbf{WalkSAT}}\\
-\emph{WalkSAT} is a focused random local search strategy to solve SAT problem, which is originally introduces in 1994 \cite{hoos2002adaptive}.  \emph{WalkSAT} may ignore the greedy flipping and flip a random variable in chosen unsatisfied clause wit probability $p$ . By introducing these ``uphill noises'', the WalkSAT combines greedy local search and random walk to get an effective and robust random solver. \\
+\emph{\textbf{walkSAT}}\\
+The focused random local search strategy \emph{walkSAT} to solve SAT problem, which is originally introduces in 1994\cite{hoos2002adaptive}.  \emph{walkSAT} may ignore the greedy flipping and flip a random variable in chosen unsatisfied clause wit probability $p$ . By introducing these ``uphill noises'', the walkSAT combines greedy local search and random walk to get an effective and robust random solver. \\
 \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -371,14 +371,14 @@ Simulated Annealing is an approach of local search solver to difficult combinati
  \caption{pickVar in WalkSAT}
 \end{algorithm}  
 
-\emph{\textbf{The Probsat}}\\
-Probsat is a class of SLS sat solver, which was introduced in 2012 by Adrian Balint and Uwe Schoening \cite{balint2016engineering}. In a probsat solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $\Gamma(v,A)$ based on break score of $v$ in the current assignment $A$ \footnote{As mentioned in the probsat paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one-parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
+\emph{\textbf{The probSAT}}\\
+The SLS sat solver probSAT, which was introduced in 2012 by Adrian Balint and Uwe Schoening\cite{balint2016engineering}. In a probSAT solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $\Gamma(v,A)$ based on break score of $v$ in the current assignment $A$\footnote{As mentioned in the probSAT paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one-parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
 \\
 $\Gamma(v,A) = (c_b)^{-break(v,A)}$ (break-only-exp-function) \\
 $\Gamma(v,A)=(\epsilon +break(v,A)^{-c_b})$  (break-only-poly-function)\\ 
 \\
 \clearpage
-The pseudo code of a typical Probsat is shown below:\\
+The pseudo code of probSAT is shown below:\\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
@@ -410,13 +410,13 @@ $G(F)$:
 Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, which is used in this paper, and another one is to separate the clauses. For the algorithms with the technique of decision tree like \emph{DPLL}, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. Based on this hypergraph represenation, we describe in this paper the formula partition with the notations in graph partition. For a hypergraph $G = (V,H)$,  a ($2$-way) partitioning is to seperate the verices set in two disjoint subsets. A good partition is to seperate $V$ in $P_0$ and $P_1$, which are of relative same size and only few hyperedges containing both verticse in $P_0$ and vertices in $P_1$.  Based on a vertices partitioning, the hyperedges are seperated in three disjoint subsets $H_0$, $H_1$ and $I$. $H1$ contains the edeges connecting verticse in $P_0$, $H_1$ are edges in $P_1$. The \textbf{intersection} $I$ are the edges containing vertices in $P_0$ and vertices in $P_1$.In our example formula above, a minimum cost balanced partition is $P_0$ = $\{v_1,v_2, v_3, v_4\}$ and $P_1$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_0$ = $\{C_1,C_2\}$ , $H_1$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
 \subsection{The Competitors}
 \label{comparision}
-Our heuristic is based on the \emph{probSAT} paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original \emph{ProbSAT}. Another random SAT solver used for a comparison with our algorithm is \emph{yalSAT}, which is the champion in random track category in SAT competition 2017 \cite{biere2014yet}.\\
+Our heuristic is based on the \emph{probSAT} paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original \emph{probSAT}. Another random SAT solver used for a comparison with our algorithm is \emph{yalSAT}, which is the champion in random track category in SAT competition 2017\cite{biere2014yet}.\\
 \\
-\emph{\textbf{probSAT}} \footnote{https://github.com/adrianopolus/probSAT}
+\emph{\textbf{probSAT}} 
 \\
-The authors of the original Paper implement the ProbSAT. We compare our Solver with this original code \footnote{Using same parameter settings our implementation gets similar performance to the original code}.  \\
+The authors of the original Paper implement the probSAT\footnote{https://github.com/adrianopolus/probSAT}. We compare our Solver with this original code\footnote{Using same parameter settings our implementation gets similar performance to the original code}.  \\
 In this original code, there are two implementation variants available. In the incremental approach, the \emph{breakScores} of variables are calculated in the initialization phase and only updated in the further search. The other straightforward approach is to compute breakScores of the variables in consideration of flipping. This method is called non-incremental approach in original paper. As suggested in Experiments, we take the non-incremental approach for the 3SAT problems and incremental method for 5SAT and 7SAT to get optimal results of the probSAT solver.\\
-The parameters of ProbSAT in our Experiments have been set as suggested in the original paper:\\
+The parameters of probSAT in our Experiments have been set as suggested in the original paper:\\
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -432,8 +432,8 @@ The parameters of ProbSAT in our Experiments have been set as suggested in the o
 %\end{minipage}
 \end{table} 
 
-\emph{\textbf{yalSAT}} \footnote{https://baldur.iti.kit.edu/sat-competition-2017/solvers/random/}\\
-We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver in our experiments. Armin Biere implements it as a reimplementation with extensions of probSAT.  With the implementation of different variants of probSAT, the yalSAT uses a different variant of probSAT randomly in the restart of a round of search. In our comparison, we use the default settings of the yalSAT with specific seeds (See ~\ref{sec:seed}).
+\emph{\textbf{yalSAT}}\\
+We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver in our experiments. Armin Biere implements it as a reimplementation with extensions of probSAT\footnote{https://baldur.iti.kit.edu/sat-competition-2017/solvers/random/}\\.  With the implementation of different variants of probSAT, the yalSAT uses a different variant of probSAT randomly in the restart of a round of search. In our comparison, we use the default settings of the yalSAT with specific seeds (See ~\ref{sec:seed}).
 \clearpage
 \section{Our local Solver}
 \label{sec:local}
@@ -455,10 +455,9 @@ We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver
  \caption{Our Local Search}
 \end{algorithm}
  In the following, we will describe the methods used in our local search.\\
-\\
 \subsection{initAssign(F)}
 In our algorithm, we have three variants to make assignment initialization.
-One is the $RandomInit$ which is the random initiation like in the original \emph{probSAT} suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias$-$RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 in Section 4 (see ~\ref{sec:Experiment 1}) we compare these three alternatives based on the probsat algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
+One is the $RandomInit$ which is the random initiation like in the original \emph{probSAT} suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias$-$RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 in Section 4 (see ~\ref{sec:Experiment 1}) we compare these three alternatives based on the probSAT algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
 \\
 \subsection{pickCla(A)}
 The number of $True$ values in each clause $c$, $numT(c)$ , are counted in Initilization phase and maintained in further search. The unsatisfying clauses will be cached in a set \emph{UNSAT}. During the local flipping, these numbers will be updated when the flipping variable is in the clauses (See~\ref{subsec:Data structures}).  Comparing to the $numT$, the \emph{UNSAT} is updated  ``lazily''. After Flipping, if the $numT$ of one clause is decreased to zero, it will be added in the \emph{UNSAT}.  To select an unsat clause in $pickCla(A)$, man needs to select a clause from the \emph{UNSAT} and check if it is still unsatisfied with its $numT$ is zero. Otherwise, if the chosen clause $c$ with $numT(c)$ as zero, it will be removed from the \emph{UNSAT} set. This step pickCla(A) will be repeated until one unsatisfied clause is found or the \emph{UNSAT} set is empty, which means the current Assignment $A$ is a satisfying assignment.\\ 
@@ -484,7 +483,7 @@ In observation of the experiments of the $probSAT$, this stochastic search bases
   with probability $1-p$:   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  
 \caption{Our pickVar}
 \end{algorithm}  
-We analyze experimentally the following variants for  \emph{pickVar}.\\
+We analyze experimentally the following variants for  \emph{pickVar} (see experiment in~\ref{sec:Experiment 2}).\\
 \\ 
  \emph{\textbf{1.Varinat: WALK}}\\
 \\
@@ -534,13 +533,12 @@ Instead of using a constant probability $p$ to choose between a greedy Literal w
   \;
 \caption{TieBreak}
 \end{algorithm} 
-\subsection{pickVar(A,c) with Simulated Annealing}
+\subsection{pickVar(A,c) with simulated annealing}
 \emph{Simulated annealing} is a technique, whose combination with \emph{walkSAT} is extensively studied. Besides the dynamic noises introduced above, we use \emph{simulated annealing} to improve our three suggestions of $pickVar$. That is, we define the $\alpha$ as a function depending on two parameters tolerence $\tau$, $c_b$ and the quality of current assignment $q$ (the $temperature$) instead of using a static parameter in the whole process:
 \begin{center}
  $\alpha = \tau \times (c_b)^{-q}$\\
  \end{center}
 To define the $q$, we have two variants: \emph{Global} and \emph{Local}.\\
-\\
 \textbf{Global}:\\
 In the process of search, the number of unsatisfied clauses is shown in $unsatN$. In this traditional variant $Global$, we use this number to define the quality of the current solution:
 \begin{center}
@@ -586,12 +584,106 @@ A \emph{solution} in our implementation includes the boolean assignment and thre
 \end{center}
 %\end{minipage}
 \end{table} 
+\subsection{Our swpSAT solver}
+\label{subsec:swpSAT}
+According to the comparison of performances of different variants,  we set the settings of our final SAT solver as following: For 3SAT problems, we choose \emph{randINIT} for initilizataion and the \emph{Average}  without simulated annealing as \emph{pickVar} heuristic. For 5SAT and 7SAT problems, we use the \emph{biasINIT} and \emph{Average-Local} (see experiment in ~\ref{sec:Experiment 4}).  Our local solver is statistisch search with a combination of walkSAT and probSAT, so the name $swpSAT$.
+\section{Our Parallel Algorithm}
+\label{sec:parallel}
+\label{sec:Our parallel Algorithm}
+\subsection{1st Approach: The pure portfolio approach}
+Section \ref{sec:local} introduces \emph{swpSAT} to solve the SAT problem.
+The result of the algorithm is a legal assignment of the boolean formula. In the observation of the experiments, which pseudo-random generator in use to make random values affect the performance. For each instance, there is one random generator that is most suitable in the aspect of the search path of this combination. So trying different random generator will improve the performance  (see experiment in~\ref{sec:Experiment 5}). In the pure portfolio version of our algorithm, the agents run the \emph{swpSAT} with different random generation policy. After a satisfying assignment found by an agent, the search will stop. This approach improved the performance compared to our sequential local search.\\ 
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula $F$}
+ \Parameter{$Timeout$, number of Processors $n_p$ }
+ \Output{a satisfying assignment $A$}
+  $sat \leftarrow False$\;
+    $A \leftarrow initAssign(F)$
+  \For{ $each$ $Processor_i$ for $i \in \{0,.., n_p-1\}$}{
+    $A_i \leftarrow A$
+ \While {$($!sat $ \land$ !Timeout$)$}{
+	swpSAT(P)\;
+	  $sat \leftarrow True$\;
+	  $A \leftarrow A_i$ \;
+ }
+ }
+ \caption{Focused Local Search}
+\end{algorithm}  
+Ideally, This pure portfolio approach can find a satisfying assignment for a formula as fast as the minimum time used in the one-thread local search. But the threads do the same jobs but not split the whole task. 
+In the following part, we will introduce some partitioning-based solving techniques to speed up the local search process. With a good formula partitions, the search tries to split independent jobs in threads. 
+\subsection{2nd Approach: Solve Order of clauses}
+\label{sec:2nd}
+With the information of the formula partitioning, the first idea to speed up our local search is to make the flipping in both partitioning set parallel. It is possible because the clauses in the different partitions do not share the same variables. The schema of this approach is following: The slave thread $t_0$ execute the \emph{swpSAT} with  conflict in clauses in $H_0$. The slave thread $t_1$ deals with $H_1$ in parallel.  Then the assignments of the corresponding partitioning set of each agent are written in the shared memory. The master thread check then the conflicts in intersection $I$ and make flips based on the assignment in shared memory.  Handle with conflicts in the intersection will lead to some flips in both partitioning set and so will make conflicts in $H_1$ and $H_2$. Then the both processes will start again to handle conflict in partitions individually. This process will continue until there is no conflicts in the whole problem.
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.3]{1/a2.png}
+  \end{center}
+  \label{a2}
+  \end{figure}
+We did an experiment to test the performance of this approach. It shows, however a worse performance compared to the original \emph{swpSAT} especially in the aspect of the number of solved problems. It can solve only trivial small problems. According to our observation in the implementation, we think the possible reason is the following: Its sequential version is precisely our swpSAT solver with priorities of unsatisfied clauses. Instead of choosing an unsatisfied clause in whole formula, this approach solves first $P_0$ and then $P_1$ (or inverse) and at last the Intersection $I$. So there is no reason $f$ an improved performance in this parallel search. Worsely, because the priority of the clauses in search, the flip works are done in slave threads are destroyed easily in solving the intersection part, even we take the breaks score in partitioning sets in the count. There are more local minimums are visited in the search path. These  ``traps'', which can be avoided before by an independent chosen clause with variables in another partitioning set, make the search much slower.
+\subsection{3nd Approach: Assignment combination}
+In consideration of the failure in approach above, in this approach we make the slave threads solve intersection part besides a partition set. First, each slave thread finds a satisfying sub-assignment for the corresponding partitioning set and also the intersection part. Not like the approach 2, here two slave threads may have some different assignments to variables in the boundary of the partitioning. Then the master threads may deal with these differences. That is, we combine these two sub-assignment such that we can get a satisfying assignment or an assignment with only a few conflicts. Then the slave threads will adjust this assignment by make flips in the part of their charge (including the intersection part). 
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.3]{1/a3.png}
+  \end{center}
+  \label{a2}
+  \end{figure}
+For the combination of two sub-assignments, if the assignments of one variable are different in  sub-solutions, there are several cases:\\ 
+\\
+1. This variable is not the critical one for at least one sub-assignment, so we can assign it as the value in the other sub-assignment.\\
+\\
+2. If the variable in consideration is critical in both sub-assignment, there are some different policies. The simple one is to assign the variable randomly. We call this policy further $randomCombine$. Another one is to assign the variable as the value suggested by its charging thread. In another word, we combine the assignment according to the partitioning. This policy will not break any clauses in partition set. The slave thread will deal with conflicts in intersection individually in the next round. This policy refers as $partition-based Combine$.\\
+\\ In experiment, we compare these two policies. Both policies can not bring a better performance compared with our $swpSAT$ solver. The possible reason is: According to the process in slaver threads, the subassignments  tend to make the variables in other partitioning set the critical ones. Because flipping of these varibales have lower breaks values. In the process of assignment combination, the efforts made in threads are destroyed.  The $partition-based Combine$ process suffers from repeated flips. Even the $randomCombine$ takes more time than the  $swpSAT$ solver to get a solution.
+\subsection{4th Approach: Initialization with a guide of formula partitioning}
+After the analysis of the failures in the 2 approaches above, we came up with this approach, in which the formula partition information is only used to get an initial solution, and the further search in the whole problem is like our pure portfolio approach. This approach intends to use the partitioning information to get a good initial solution.  A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared between the agents encourage the further search the flipping of non critical variables in clauses. \\
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula $F$, number of Processors $n_p$ }
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $sat_0 \leftarrow False$\;
+  $sat_1 \leftarrow False$\;
+  $sat \leftarrow False$\;
+  $A \leftarrow initAssign(F)$\;
+ \ForEach{$(Processor_t$ for $t \in \{1, .., n_p\})$}{
+    $A_t \leftarrow A$\;
+     $i\leftarrow t\%2$\;
+ \While {$(!sat_i$  $ \land$ !Timeout$)$}{
+	swpSAT($P_i$)\;
+	 $sat_i \leftarrow True$\;
+	 $A[j] \leftarrow A_i[j]$ for $v_j \in P_i$\;
+}
+ \While {$(!sat_{1-i}$  $ \land$ !Timeout$)$}{
+	 swpSAT($P_{1-i}$)\;
+	 $sat_{1-i} \leftarrow True$\;
+	 $A[j] \leftarrow A_i{1-i}[j]$ for $v_j \in P_{1-i}$\;
+ }
+ $A_i \leftarrow A$\;
+ \While {$(!sat$  $ \land$ !Timeout$)$}{
+ 	 swpSAT($F$)\;
+ 	 $sat\leftarrow True$\;
+ 	  $A \leftarrow A_i$\;
+ }
+ }
+ \caption{Focused Local Search}
+\end{algorithm}  
+
+
+
 \clearpage
 \section{Evaluation} 
 \label{sec:eva}
  %TODO some server information
 \subsection{DIMACS standard format}  
-All the benchmark formula used in experiments are encoded in the DIMACS standard format \cite{balyo2017proceedings}. This format is the standard format of benchmarks used in SAT competitions. A DIMACS file contains the description of an instance using three types of lines:\\
+All the benchmark formula used in experiments are encoded in the DIMACS standard format\cite{balyo2017proceedings}. This format is the standard format of benchmarks used in SAT competitions. A DIMACS file contains the description of an instance using three types of lines:\\
 \\ 1. Comment line: Comment lines give information about the formula for human readers, like the author of the file or the seed used in problem generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause descriptor: An clause $\{v_1, v_2,, v_n\}$ in the formula is described in an clause Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\;  \;v_n$}\\  
 \\
 Here is the DIMACS format of the formula $F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_1 \lor \bar{v_1})$:
@@ -606,7 +698,8 @@ p cnf 3 2\\
 
 \subsection{Benchmarks}
 \label{benchmark}
-The benchmark instances used in experiments are the 180 uniform instances ( \emph{UNIF}) in random benchmark categories in SAT competition 2017 \cite{balyo2017proceedings}. In an  \emph{UNIF} problem file, all the clause have the same length.\\
+The benchmark instances used in experiments are the 180 uniform instances ( \emph{UNIF}) in random benchmark categories in SAT competition 2017\cite{balyo2017proceedings}. In an  \emph{UNIF} problem file, all the clause have the same length.\\
+To generate an instance with $n$ variables and $m$ clauses, the Uniform generation will work in the following way: to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals. If the generated clause contains multiple copies of the same variables, it will be abandoned. The process generates clauses until m permitted clauses are gathered.\\
 In the name of an \emph{UNIF} file, the suffix $k$  denotes the length of clauses. The $r$ indicates the clause-to-variable ratio. The $c$ and $v$ are for the number of clauses and variables, while $s$ is for the seed used in the generation process.
 Without flitering, there are at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.
 \subsection{Used plots and tables}
@@ -615,7 +708,7 @@ the results of the following experiments are all shown in comparision tables and
 \emph{\textbf{Comparison Table}}\\
 See Table \ref{tab:com} for example.\\
 A comparison table shows the different results of algorithms. The first column contains the
-clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the  \emph{UNIF} benchmark problems without filtering contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. There are 61 $3$SAT instances, 89 $5$SAT instances and 66 $7$SAT instances found satisfied in our experiments. Besides the runtime score, the number of solved problems are in parentheses. The best results in comparison are in bold.
+clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the  \emph{UNIF} benchmark problems without filtering contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. There are 61 $3$SAT instances, 89 $5$SAT instances and 66 $7$SAT instances found satisfied in our experiments. Besides the runtime score, the number of solved problems are shown below. The best results in comparison are in bold.
 \\
 \\
 \emph{\textbf{Cactus Plot}}\\
@@ -646,7 +739,7 @@ The single-threaded experiments were run on computers that had Two Intel Xeon E5
 of  Ubuntu 14.04.5 LTS. The multi-threaded experiments were run on a computer that had Two Intel Xeon E5-2650 v2 processors (16 cores + 16 HT cores) with 128GB DDR3 RAM. The machine ran the 64-bit version of Ubuntu Devel. 
 \clearpage
 \subsection{Parameter Settings in Experiment}
-The $TimeOut$ is set to 5 Minutes in the experiments of local searches.  For the probSAT selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ and the $tolerence$ $ \tau$ in variances with simulated annealing are generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$ with step $0.5$ and randomly generated seeds. \footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}  .
+The $TimeOut$ is set to 5 Minutes in the experiments of local searches.  For the probSAT selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ and the $tolerence$ $ \tau$ in variances with simulated annealing are generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$ with step $0.5$ and randomly generated seeds\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}.
    \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -814,7 +907,7 @@ Experiment 1 compares three strategies of initialization in our solver. In the o
 \subsubsection{Experiment 2: pickVar(F)} 
 \label{sec:Experiment 2} 
 The probSAT algorithm paradigm introduced in section make pickVar as a randomized process To pick a variable for flipping in a chosen clause, we need to measure the score of all the literals in the classes and then model the probability distribution of the scores.  In the observation of the implementation, this stochastic process is very time-consuming.  The probSAT takes a lot of time in the first phase of the search and also go around with few conflicts in the last steps. However, in the first phase of the search, picking flippings greedy can lead the search quickly to the regions of interest.In our examples in the table \ref{parma}. The probability to ignore the greedy literal is 30\% for the 3SAT example and more than  50\% for 5SAT and 7SAT.  Then in the last steps of the search, where the search can reach the final satisfying assignment by a few deterministic steps, this probSAT algorithm may make  ``unintelligent'', decisions with some probability and miss the critical steps. \\
-To make the selection more greedily, we use a random walk to choose policy between greedy one and the probsat heuristic.  In our algorithm, we refer the literals with no clause breaking as a greedy literal where greedy literal means the one with least break scores in original \emph{WalkSAT}. The intention of not involving the literals with zero breaks in stochastic probSAT selection is the observation that the time-consuming probSAT will choose the non-breaking literal with high probability (see Table~\ref{parma}).  To speed up this selection process and increase the randomness of the process, we just picked one greedy literal randomly as the greedy candidate for flipping.  To avoid cycling in one region, we record the status information in the process.  If the flips of chosen greedy literal have not been repeated many times, the selection will prefer another variable with a little breakscore, which has not been flipped so many times.  
+To make the selection more greedily, we use a random walk to choose policy between greedy one and the probsat heuristic.  In our algorithm, we refer the literals with no clause breaking as a greedy literal where greedy literal means the one with least break scores in original \emph{walkSAT}. The greefy literal will be chosen in the greedy heuriscti and also be possible be chosen in \emph{probSAT} heuristic. The intention of giving the literals with zero breaks more probability to be chosen is the observation that the time-consuming probSAT may choose the breaking literals with high probability (see Table~\ref{parma}).  To speed up this selection process and increase the randomness of the process, we just picked one greedy literal randomly as the greedy candidate for flipping.  To avoid cycling in one region, we record the status information in the process.  If the flips of chosen greedy literal have not been repeated many times, the selection will prefer another variable with a little breakscore, which has not been flipped so many times.  
 
 \begin{table}[h!]
 \label{parma}
@@ -860,24 +953,31 @@ k&  Breaks &          Probability  \\ \hline
 \clearpage
 \subsubsection{Experiment 3: Simulated Annealing} 
 \label{sec:Experiment 3}
-To use the technique \emph{simulated annealing}, we need some quality to measure the quality of the current solution.  One traditional way is to use the number of conflicts. Besides it, we propose the number of greedy literals in the chosen clause. Our hyperthesis behind this idea is that if the current solution is near a satisfying assignment without conflicts,  it is likely to break a clause by a flipping.  And in such case, there should not be only a few greedy literals exist in the chosen clause. Furthermore,  this local quality is more specific about the chosen clause not generally about the whole search progress.  In the following three experiments, we try to improve our three variants \emph{WALK}, \emph{Average} and \emph{Random-Flip} with simulated annealing and compare these two definitions of qualities. \\
-The combination with simulated Annealing show worse performance than the original \emph{WALK} in 3SAT problems. they solve one less problems. The original \emph{Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph{Local} version can solve 6  problems more than the original \emph{Average}. It has also shown its efficiency in solving huge 7SAT problems.  The \emph{Local} (with $\alpha = 2$) can solve $10\%$ more problems than the \emph{probSAT} within less than $60\%$ time (in PAR-2 schema).
-Besides solving one less problem, the combination with simulated Annealing show also worse efficiency than the original \emph{WALK} for 3SAT insatnces..\\
-The performances of these three algorithms are guiet semiliar for small 3SAT problems within $50$ seconds. The \emph{Average} shows more adventages with the increasement of the problems size in 3SAT set. There are not big differences in  \emph{Average} with different combination of simulated annealing for 5SAT and 7SAT set while the variant \emph{Local} has shown  advantages in solving huge problems.
+To use the technique \emph{simulated annealing}, we need measure the quality of the current solution.  One traditional way is to use the number of conflicts. Besides it, we propose the number of greedy literals in the chosen clause. Our hyperthesis behind this idea is that if the current solution is near a satisfying assignment without conflicts,  it is likely to break a clause by a flipping.  And in such case, there should not be only a few greedy literals exist in the chosen clause. Furthermore,  this local quality is more specific about the chosen clause not generally about the whole search progress. \\
+\\
+With definition of the qualitity $q$, the paramters $\alpha$ is defined as $\alpha = \tau \times (c)^{-q}$. Here the paramter $c$ is in [2, 6]. The noise value $\alpha$ is proportional to the probability of a random walk. With the help of simulated annealing, the search to can measure its current situation. If the quality of the current solution is bad, the search will have a big noise, and thus the search will prefer random literals for flippings. The search can take advantages of random algorithm and can get out of stuck in one regions. That will spped up the search in the first phase. With the improvement of the solution quslity $q$, the search is close to a satisfying assignment. To avoid passing the critical steps, the search will prefer greedy literals. \\
+\\
+Another thing to mention is that in our implementation we set up a lookup table for the exponential values of the parameter $c_b$ for the repeated calculations of $\Gamma$ function. To reuse exponential values in variants with the simulated annealing, we use the same  $c_b$ as parameter. \\
+\\
 \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|l|p{2cm}|}
 \hline 
 
-    k &$Average$&$Average\-Local$&$Average\-Global$ &$RF$& $RF\-Local$& $RF\-Global$ \\ \hline      
+    k &\emph{Average}&\emph{Average-Local}&\emph{Average-Global} &\emph{RF}& \emph{RF-Local}& \emph{RF-Global} \\ \hline      
     3 &$5.43\%$&$2.43\%$&$5.43\%$&$9.98\%$&$10.01\%$&$3.13\%$\\ \hline
     5& $4.07\%$&$0.35\%$&$0.00\%$&$9.18\%$&$9.17\%$&$0.33\%$\\ \hline
     7&$2.28\%$&$0.03\%$&$0.00\%$&$4.30\%$&$4.14\%$&$0.05\%$\\ \hline
 \end{tabular}
 \end{center}
 %\end{minipage}
-\end{table}
+\caption{To check that the simulated annealing with the parameters in our experiments will change the behavior of the search, we count the number of greedy flips and the number of random flips for the whole problem set. Through our observation, using the parameters we choose, the fraction of greedy flips in total flips are changed. This table shows the values for two variants \emph{Average} and \emph{Random-Flip} for example. }
+\end{table} 
+Based on the results of experiment 3 (~\ref{sec:Experiment 3}) , we modify our three heuristics with improvement of simulated annealing. We refer the new improved varinats as \emph{Walk.}, \emph{Average.} and \emph{Random-flip.}. In erperiment 4, we list the performances of these variants.\\
+\\
+In the following, we show our results in our experiments  of  our three variants \emph{WALK}, \emph{Average} and \emph{Random-Flip} with simulated annealing and compare these two definitions of qualities.
+
 \clearpage
 \textbf{WALK with Simulated Annealing}\\
 \begin{table}[H]
@@ -899,6 +999,8 @@ The performances of these three algorithms are guiet semiliar for small 3SAT pro
   \includegraphics[scale = 0.8]{DATA/K3/e3w.pdf}
   \includegraphics[scale = 0.8]{DATA/K5/e3w.pdf} 
   \includegraphics[scale = 0.8]{DATA/K7/e3w.pdf} 
+  \caption{For 3SAT, the two combination with simulated Annealing show worse performance than the original \emph{WALK}. The combinations  have also shown their  efficiency in solving huge 5SAT problems. The \emph{Global} shows its advantages for 7SAT problems.
+}
   \end{center}
   \label{Experiment 3 WALK cactus plot}
   \end{figure}
@@ -923,7 +1025,7 @@ The performances of these three algorithms are guiet semiliar for small 3SAT pro
     \includegraphics[scale = 0.8]{DATA/K5/e3a.pdf}
       \includegraphics[scale = 0.8]{DATA/K7/e3a.pdf}
   \end{center}
-  \caption{}
+  \caption{ The original \emph{Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph{Local} version can solve 6  huge problems more than the original \emph{Average} within less runtime.}
   \label{Experiment 4 k3 cactus plot}
   \end{figure}
  \clearpage
@@ -946,173 +1048,119 @@ The performances of these three algorithms are guiet semiliar for small 3SAT pro
   \includegraphics[scale = 0.8]{DATA/K3/e3r.pdf}
   \includegraphics[scale = 0.8]{DATA/K5/e3r.pdf}
     \includegraphics[scale = 0.8]{DATA/K7/e3r.pdf}
+    \caption{
+The performances of these three algorithms are guiet semiliar for 3SAT and 5SAT problems.  For 7SAT set, the \emph{Local} get worst performance while the variant \emph{Global} has shown  advantages in solving huge problems.}
   \end{center}
   \end{figure}
   \clearpage  
-\subsubsection{Experiment 6: probSAT vs WALK.} 
-\label{sec:Experiment 6} 
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K7/e4w.pdf}
-  \end{center}
-  \caption{Three suggestions have very similar performance.}
-  \label{Experiment 6 k3 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K5/e4w.pdf}
-  \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 6 k5 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K7/e4w.pdf}
-  \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7 cactus plot}
-  \end{figure}
-
-\subsubsection{Experiment 7: probSAT vs Average.}  
-\label{sec:Experiment 7} 
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K3/e4a.pdf}
-  \end{center}
-  \caption{Three suggestions have very similar performance.}
-  \label{Experiment 7 k3 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K5/e4a.pdf}
-  \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 7 k5 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K7/e4a.pdf}
-  \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 7 k7 cactus plot}
-  \end{figure}
-\subsubsection{Experiment 8:probSAT vs Random-Flip.}  
-\label{sec:Experiment 8}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K3/e4r.pdf}
-  \end{center}
-  \caption{Three suggestions have very similar performance.}
-  \label{Experiment 8 k3 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K5/e4r.pdf}
-  \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
-  \label{Experiment 8 k5 cactus plot}
-  \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/K7/e4r.pdf}
-  \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 8 k7 cactus plot}
-  \end{figure} 
-\subsubsection{Experiment 9: 2017-UNIF Comparision} 
-\label{sec:Experiment 9}
+  
+\subsubsection{Experiment 4: 2017-UNIF Comparision (local)} 
+\label{sec:Experiment 4}
+In the table \ref{tab:UNIF}, we list the comparison of our variants with \emph{probSAT} and \emph{yalSAT}. generally, our variants get advantages in runtime and the number of solved problems.
+According to the comparison of performances of these three variants,  we set the settings of our final SAT solver \emph{swpSAT} as following: For 3SAT problems, we choose \emph{randINIT} for initilizataion and the \emph{Average}  without simulated annealing as \emph{pickVar} heuristic. For 5SAT and 7SAT problems, we use the \emph{biasINIT} and \emph{Average-Local}.  \\
+We count in the search the total number of flips for a problem set. There are no noticeable differences in the average number of flips per second\footnote{Here we consider the solved instances without runtime penalization}. That proves that the improvement we get with our variants is more from the advantages of our algorithms but not the implementation.
    \begin{table}[H]
+   \label{tab:UNIF}
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{3cm}|}
 \hline 
 
-    k &$probSAT$&$yalSAT$&$WALK$&$Average$/$swpSAT$&$Random-Flip$ \\ \hline      
-    3 &9221.9(55)&17062.35(41)&7430.12(57)&\textbf{6161.11}(\textbf{61})&7308.01(58)\\ \hline
-    5& 7143.9(82)&5676.63(85)&3330.61(89)&\textbf{2939.74}(\textbf{89})&4003.06(88)\\ \hline
-    7& 6238.51(60)&10063.4(54)&5409.67(61)&\textbf{3829.95}(\textbf{65})&4903.61(60)\\ \hline
+    k &\emph{probSAT}&\emph{yalSAT}&\emph{WALK}&\emph{Average/swpSAT}&\emph{Random-Flip} \\ \hline      
+    3 &9221.9&17062.35&7430.12&\textbf{6161.11} &7308.01\\ 
+    &55&41&57&\textbf{61}&58\\ \hline
+    5& 7143.9&5676.63&3330.61&\textbf{2939.74}&4003.06\\ 
+    &82&85&\textbf{89}&\textbf{89}&88\\ \hline
+    7& 6238.51&10063.4&5409.67&\textbf{3829.95}&4903.61\\
+    &60&54&61&\textbf{65}&60\\ \hline
 	
 \end{tabular}
 \end{center}
+\caption{Comparision in UNIF}
 %\end{minipage}
 \end{table}
-
    \begin{table}[H]
+   \label{tab:flips}
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{3cm}|}
 \hline 
 
-    k &$probSAT$&$WALK$&$Average$/$swpSAT$&$Random-Flip$ \\ \hline      
+    k &\emph{probSAT}&\emph{WALK}&\emph{Average}/\emph{swpSAT}&\emph{Random-Flip} \\ \hline      
     3& 954426 &946662 &\textbf{1012761}&988477 \\ \hline
     5& 389453&\textbf{443172}&414765&423364\\ \hline
     7& 248025 &237387 &\textbf{248028}&221107 \\ \hline
 	
 \end{tabular}
 \end{center}
+\caption{Average flips per second}
 %\end{minipage}
 \end{table}
   \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 1]{DATA/K3/e5.pdf}
+  \includegraphics[scale = 1]{DATA/UNIF/e5.pdf}
   \end{center}
-  \caption{Three suggestions have very similar performance.}
+  \caption{swpSAT get best performance in UNIF comparing to \emph{probSAT} and \emph{yalSAT} }
+  \label{Experiment 9 all cactus plot}
+  \end{figure} 
+\clearpage
+\clearpage
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.8]{DATA/K3/e4.pdf}
+    \includegraphics[scale = 0.8]{DATA/K5/e4.pdf}
+  \includegraphics[scale = 0.8]{DATA/K7/e4.pdf}
+  \end{center}
   \label{Experiment 9 k3 cactus plot}
   \end{figure}
   \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 1]{DATA/K5/e5.pdf}
+
   \end{center}
-  \caption{Two bias suggestions show advantages especially for huge instances.}
+  \caption{Our variants can get better performances and efficiencies for 3SAT and 5SAT problems in whole process. For 7SAT oroblems, our variants can solve more problems than the original \emph{probSAT}. }
   \label{Experiment 9 k5 cactus plot}
   \end{figure}
-  \begin{figure}[H]
+  \clearpage
+  \subsubsection{Experiment 5: The pure portfolio approach} 
+  \label{sec:Experiment 5}
+Our parallel implementation uses OpenMP to support shared memory multiprocessing. In our local \emph{C++} Implementation, we use the function \emph{rand}() in the standard library to generate pseudo-random integer. This function is not thread-safe. To implement a deterministic parallel implementation, we use \emph{rand}()  for in the first thread and use the thread safe random engine in \emph{C++} for random value generation for other threads. Based on the observation in our experiments, the sequential implementation with the simple \emph{rand}() function has the best performance for the whole set. For most problems, some random value generators can search following a valid search path to a satisfying assignment. But there is no one random generator that are advantages for all the problems. This approach takes advantage of the performances differences of random generator. The threads execute the swpSAT with different random engine in parallel. If one thread find a satisfying assignment,the whole parallel search can stop. With our experiment, the parallel search gets a performance like the minimum runtime of one-thread local search with different random value engines. \\
+\begin{table}[h!]
 \begin{center}
-  \includegraphics[scale = 1]{DATA/K7/e5.pdf}
-  \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 9 k7 cactus plot}
-  \end{figure} 
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/UNIF/e5.pdf}
-  \end{center}
-  \caption{For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
-  \label{Experiment 9 all cactus plot}
-  \end{figure} 
- \clearpage
-\subsubsection{Experiment 10: The pure portfolio approach} 
-Our parallel implementation uses OpenMP to support shared memory multiprocessing. In our local \emph{C++} Implementation, we use the function \emph{rand}() in the standard library to generate pseudo-random integer. This function is not thread-safe. To implement a deterministic parallel implementation, we use \emph{rand}()  for in the first thread and use the thread safe random engine in \emph{C++} for random value generation for other threads. Based on the observation in our Experiments, the sequential implementation with the simple \emph{rand}() function has the best performance for the whole set. For most problems, some random value generators can search following a valid search path to a satisfying assignment. But there is no one random generator that are advantages for all the problems. This approach takes advantage of the performances differences of random generator. The threads execute the swpSAT with different random engine in parallel. If one thread find a satisfying assignment,the whole parallel search can stop. With our experiment, the parallel search gets a performance like the minimum runtime of one-thread local search with different random value engines. 
-\begin{table}[H]
-\label{tab:com}
-%\begin{minipage}{\textwidth}                                                                                         
-\begin{center}
-    \begin{tabular}{|l|l|l|p{1cm}|}
+    \begin{tabular}{|l|l|l|l|l|p{1cm}|}
 \hline 
-    k &\emph{local swpSAT}&\emph{pure portfolio}\\ \hline
-	3&11171.3 &\textbf{5626.9} \\ 
-	&59 &\textbf{69} \\ \hline
-	5&5339.98&\textbf{2185.75}\\ 
-	&89 &\textbf{94} \\ \hline
-	7&13406.26&\textbf{2853.81}\\
-	&66 & \textbf{83} \\ \hline
-	
+$rand()$&$minstd\_rand$&$mt19937$\\ \hline
+$mt19937\_64$&$ranlux24\_base$&$ranlux48\_base$\\ \hline
+$ranlux24$&$ranlux48$&$knuth\_b$\\ \hline
+$default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \end{tabular}
-\caption{}
 \end{center}
-%\end{minipage}
+\caption{Pseudo-random number generators in use}
 \end{table} 
-\clearpage
-\begin{figure}[H]
- \label{Experiment cactus}
-  \includegraphics[scale =0.8]{Parallel/K3/e1.pdf}
-  \includegraphics[scale = 0.8]{Parallel/K5/e1.pdf}
+\begin{table}[h!]
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{1cm}|}
+\hline 
+$rand()$&$minstd\_rand$&$mt19937$\\ \hline
+$mt19937\_64$&$ranlux24\_base$&$ranlux48\_base$\\ \hline
+$ranlux24$&$ranlux48$&$knuth\_b$\\ \hline
+$default\_random\_engine$&$minstd\_rand0$&-\\ \hline
+\end{tabular}
+\end{center}
+\caption{Pseudo-random number generators in use}
+\end{table} 
+
+  \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.8]{Parallel/K3/e1.pdf}
+    \includegraphics[scale = 0.8]{Parallel/K5/e1.pdf}
   \includegraphics[scale = 0.8]{Parallel/K7/e1.pdf}
-  \label{Experiment 1 k357 cactus plot}
-  \caption{}
-\end{figure}
-\clearpage
-\subsubsection{Experiment 11: Initialization with a guide of formula partitioning} 
+  \end{center}
+    \label{Experiment 5 all cactus plot}
+    \caption{The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver  can solve $30\%$ more problems in same time. }
+  \end{figure}
+  \clearpage
+\subsubsection{Experiment 6: Initialization with a guide of formula partitioning} 
+\label{sec:Experiment 6}
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -1133,32 +1181,30 @@ Our parallel implementation uses OpenMP to support shared memory multiprocessing
  \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 1]{DATA/BIG/a4.pdf}
+    \includegraphics[scale = 1]{DATA/SMALL/a4.pdf}
+    \includegraphics[scale = 1]{DATA/COMBINE/a4.pdf}
   \end{center}
   \caption{}
-  \label{Experiment 11 k5 cactus plot}
+  \label{Experiment 6 COMBINE}
+  \end{figure} 
+\clearpage
+\subsubsection{Experiment 7:2017-UNIF Comparision (parallel)} 
+\label{sec:Experiment 7}
+
+ \begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.8]{Parallel/K3/e2.pdf}
+    \includegraphics[scale = 0.8]{Parallel/K5/e2.pdf}
+  \includegraphics[scale = 0.8]{Parallel/K7/e2.pdf}
+  \end{center}
+  \caption{}
+  \label{Experiment 6 COMBINE}
   \end{figure}
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/SMALL/a4.pdf}
-  \end{center}
-  \caption{}
-  \label{Experiment 11 k7 cactus plot}
-  \end{figure} 
-  \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 1]{DATA/COMBINE/a4.pdf}
-  \end{center}
-  \caption{}
-  \label{Experiment 11 all cactus plot}
-  \end{figure} 
-
-
-
 \clearpage
 \section{Conclusion}
 
 \label{sec:conc}
-Local search is a universally applicable approach to solve random SAT problems. Our paper presents a stochastic local search algorithm with the cooperation of WALKSAT and probSAT.\\
+Local search is a universally applicable approach to solve random SAT problems. Our paper presents a stochastic local search algorithm with the cooperation of walkSAT and probSAT.\\
 \\
 In section 3, we discussed the basic scheme of our sequential algorithm. In, we compare the original probSAT with a randomly generated initial solution and our version based on the occurrence of os literals in formel. Based on our experiment, our initialization is advantages n the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and use the robustness of the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the probSAT algorithm. \\
 Based on the performance of these searches in kSAT problems, we get our swpSAT solver, which combines the advantages of the local searches. \\

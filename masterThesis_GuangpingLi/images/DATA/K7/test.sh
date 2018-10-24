@@ -6,5 +6,5 @@ filename="e3r.pdf" title="K7" ./cactus.sh Random-Flip Random-Flip-Local Random-F
 filename="e4w.pdf" title="K7" ./cactus.sh probSAT WALK.|gnuplot
 filename="e4a.pdf" title="K7" ./cactus.sh probSAT Average.|gnuplot
 filename="e4r.pdf" title="K7" ./cactus.sh probSAT Random-Flip.|gnuplot
-filename="e4.pdf" title="K7" ./cactus.sh probSAT yalSAT WALK. Average. Random-Flip.|gnuplot
+filename="e4.pdf" title="K7" ./cactus.sh probSAT  WALK. Average. Random-Flip.|gnuplot
 filename="e5.pdf" title="K7" ./cactus.sh probSAT yalSAT swpSAT|gnuplot

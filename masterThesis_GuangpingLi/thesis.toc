@@ -12,26 +12,30 @@
 \contentsline {subsection}{\numberline {2.1}initAssign(F)}{7}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}pickCla(A)}{7}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}pickVar(A,c)}{8}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}pickVar(A,c) with Simulated Annealing}{9}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.4}pickVar(A,c) with simulated annealing}{9}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Data structures}{10}{subsection.2.5}
-\contentsline {section}{\numberline {3}Evaluation}{11}{section.3}
-\contentsline {subsection}{\numberline {3.1}DIMACS standard format}{11}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Benchmarks}{11}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Used plots and tables}{11}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Random seeds used in Experiments}{12}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Soft- and Hardware}{12}{subsubsection.3.4.1}
-\contentsline {subsection}{\numberline {3.5}Parameter Settings in Experiment}{13}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Benchmark Generation}{13}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}Experiments}{16}{subsection.3.7}
-\contentsline {subsubsection}{\numberline {3.7.1}Experiment 1: initAssign(F)}{16}{subsubsection.3.7.1}
-\contentsline {subsubsection}{\numberline {3.7.2}Experiment 2: pickVar(F)}{18}{subsubsection.3.7.2}
-\contentsline {subsubsection}{\numberline {3.7.3}Experiment 3: Simulated Annealing}{20}{subsubsection.3.7.3}
-\contentsline {subsubsection}{\numberline {3.7.4}Experiment 6: probSAT vs WALK.}{24}{subsubsection.3.7.4}
-\contentsline {subsubsection}{\numberline {3.7.5}Experiment 7: probSAT vs Average.}{25}{subsubsection.3.7.5}
-\contentsline {subsubsection}{\numberline {3.7.6}Experiment 8:probSAT vs Random-Flip.}{27}{subsubsection.3.7.6}
-\contentsline {subsubsection}{\numberline {3.7.7}Experiment 9: 2017-UNIF Comparision}{28}{subsubsection.3.7.7}
-\contentsline {subsubsection}{\numberline {3.7.8}Experiment 10: The pure portfolio approach}{31}{subsubsection.3.7.8}
-\contentsline {subsubsection}{\numberline {3.7.9}Experiment 11: Initialization with a guide of formula partitioning}{33}{subsubsection.3.7.9}
-\contentsline {section}{\numberline {4}Conclusion}{35}{section.4}
-\contentsline {subsection}{\numberline {4.1}Further work}{35}{subsection.4.1}
-\contentsline {section}{\numberline {5}Bibliography}{36}{section.5}
+\contentsline {subsection}{\numberline {2.6}Our swpSAT solver}{10}{subsection.2.6}
+\contentsline {section}{\numberline {3}Our Parallel Algorithm}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}
+\contentsline {section}{\numberline {4}Evaluation}{15}{section.4}
+\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{15}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Benchmarks}{15}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Used plots and tables}{15}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Random seeds used in Experiments}{16}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}Soft- and Hardware}{16}{subsubsection.4.4.1}
+\contentsline {subsection}{\numberline {4.5}Parameter Settings in Experiment}{17}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Benchmark Generation}{17}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}Experiments}{20}{subsection.4.7}
+\contentsline {subsubsection}{\numberline {4.7.1}Experiment 1: initAssign(F)}{20}{subsubsection.4.7.1}
+\contentsline {subsubsection}{\numberline {4.7.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.7.2}
+\contentsline {subsubsection}{\numberline {4.7.3}Experiment 3: Simulated Annealing}{24}{subsubsection.4.7.3}
+\contentsline {subsubsection}{\numberline {4.7.4}Experiment 4: 2017-UNIF Comparision (local)}{28}{subsubsection.4.7.4}
+\contentsline {subsubsection}{\numberline {4.7.5}Experiment 5: The pure portfolio approach}{30}{subsubsection.4.7.5}
+\contentsline {subsubsection}{\numberline {4.7.6}Experiment 6: Initialization with a guide of formula partitioning}{32}{subsubsection.4.7.6}
+\contentsline {subsubsection}{\numberline {4.7.7}Experiment 7:2017-UNIF Comparision (parallel)}{34}{subsubsection.4.7.7}
+\contentsline {section}{\numberline {5}Conclusion}{35}{section.5}
+\contentsline {subsection}{\numberline {5.1}Further work}{35}{subsection.5.1}
+\contentsline {section}{\numberline {6}Bibliography}{36}{section.6}
