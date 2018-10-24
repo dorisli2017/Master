@@ -273,15 +273,16 @@ Formula partition is one of the promising approaches in DPLL-like solvers\cite{m
 
 \subsection{Content} 
 The SAT problem, as a well-known NP-complete problem, has drawn remarkable attention and different local search heuristics have been developed to tackle this problem. In this thesis, we introduced a stochastic local search on SAT problem using formula partition as guidance. \\
-In section~\ref{sec:Intro}, we summarized the formal concept and techniques used in this paper. Section~\ref{sec:local} described our method combined \emph{probSAT} and \emph{walkSAT}. Then we  discussed some attempts to improve the algorithm. By experimentally evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{probSAT} search. In section~\ref{sec:parallel}, we search the potential benefit of formula partition in a parallel search. Section~\ref{sec:eva} described the details in experiments and several empiric results mentioned in section~\ref{sec:local} and section~\ref{sec:parallel}.  Section~\ref{sec:conc} concluded the paper with further works. 
+In section~\ref{sec:Intro}, we summarized the formal concept and techniques used in this thesis. Section~\ref{sec:local} described our method which is a combination of  \emph{probSAT} and \emph{walkSAT}. Then we  discussed some attempts at improving the algorithm. By experimental evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{probSAT} search. In section~\ref{sec:parallel}, we inspected the potential benefit of formula partition in a parallel search. Section~\ref{sec:eva} described the experiments mentioned in section~\ref{sec:local} and section~\ref{sec:parallel} with details and empiric results.  Section~\ref{sec:conc} concluded our work based on the experiments, alongside a discussion of some limitations of our solver and further work. 
 
 \subsection{Definitions and Notations} 
 \emph{\textbf{Propositional Satisfiability Problem}}\\
-A variable with two possible logical values  \textit{TRUE} or  \textit{False} is a \emph{\textbf{propositional variable}}, which will be referred to as \emph{\textbf{variable}} in this paper.     
-A \emph{\textbf{literal}} is an atomic formula in propositional logic. A literal can either be a \emph{\textbf{positive literal}} $v$ as the variable $v$ or a \emph{\textbf{negative literal}} $\bar{v}$ as negation of $v$.
-A \emph{\textbf{clause}} is a disjunction of literals. A formula in conjunctive normal form (CNF) is a conjunction of clauses. We refer it as  \emph{\textbf{CNF-formula}} or simply as \emph{\textbf{formula}} in this paper.
-An \emph{\textbf{assignment}} a as a function  $a$: $V\rightarrow \{True {, }\; False\}$ assigns the truth value to each variable $v$ in the formula. We say the assignment satisfies a formula if the truth value of the formula with this assignment turns out to be true. Specifically, an assignment satisfies a clause, if one literal in the clause with value  \textit{True} in this assignment. A formula is a satisfying formula if one assignment exists satisfies all its clauses. We say an assignment a satisfying assignment if it satisfies the formula. Otherwise, we say there are conflicts in some clauses with this assignment, or some clauses are unsatisfying clauses with this assignment. 
-The SAT problem is to determine whether a satisfying assignment exists for the given formula. If so, we denote the formula a \emph{\textbf{satisfiable formula}}. \\
+A variable with only two possible logical values  \textit{true} or  \textit{false} is a \emph{\textbf{propositional variable}}, which will be referred to as \emph{\textbf{variable}} in this thesis.     \\
+A \emph{\textbf{literal}} is an atomic formula in propositional logic. A literal can either be a \emph{\textbf{positive literal}} $v$ as the variable $v$ or a \emph{\textbf{negative literal}} $\bar{v}$ as negation of $v$.\\
+A \emph{\textbf{clause}} is a disjunction of literals. A formula in conjunctive normal form (CNF) is a conjunction of clauses. We refer it as  \emph{\textbf{CNF-formula}} or simply as \emph{\textbf{formula}} in this thesis.\\
+An \emph{\textbf{assignment}} $a$: $V\rightarrow \{true {, }\; false\}$ assigns a truth value to each variable $v$ in the formula. An assignment satisfies a formula if the truth value of the formula with this assignment evaluates to true. Specifically, an assignment satisfies a clause, if at least one literal in the clause is assigned with value  \textit{true}. \\
+An assignment $a$ is a satisfying assignment if it  satisfies all clauses in the formula. Otherwise, there are conflicts in some clauses with this assignment, or some clauses are unsatisfied clauses with this assignment. 
+A \emph{\textbf{satisfiable formula}} is a formula which can be satisfied by some assignment. The SAT problem is to determine whether a given formula is satisfiable or not.  \\
 \\
 Here is an example of SAT problem:
 \begin{center}
@@ -296,10 +297,10 @@ $numCs(F) = |Cls| = 2$\\
 $C_1 = \{v_1, \bar{v_3}\}$\\
 $C_2 = \{v_2, v_3, \bar{v_1}\}$\\
 \\
-$A(v_1)$ = $True$, $A(v_2)$ = $False$, $A(v_3)$ = $True$, \\
+$A(v_1)$ = $true$, $A(v_2)$ = $false$, $A(v_3)$ = $true$, \\
 $A$  is an assignment satisfies $F$.\\
 \\
-$\hat{A}(v_1)$ = $True$, $\hat{A}(v_2)$ = $False$, $\hat{A}(v_3)$ = $False$, \\
+$\hat{A}(v_1)$ = $true$, $\hat{A}(v_2)$ = $false$, $\hat{A}(v_3)$ = $false$, \\
 $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \\
 \end{tabular}
@@ -311,17 +312,17 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 
 
 \emph{\textbf{Set}}\\
-A set is a container of unique elements. A set of three objects$ a, b, c$ is written as $\{a, b, c\}$. The
+A set is a container of unique elements. A set of three objects $ a, b, c$ is written as $\{a, b, c\}$. The
 size of a set is the number of elements in the set.
 
 
 \emph{\textbf{Local Search}}\\
-For instance $I$ of a hard combinational Problem $P$, there is a set of solutions $S(I)$.  According to the constraints of the problem, an object function (score or cost) $\Gamma$ is used to evaluate the candidate solutions. The Goal of the local search is to find the solution of minimum cost ( or the solution with the maximal score).\\
-A local search starts with an initial complete solution. According to some heuristic, the local search makes local changes to its current solution iteratively, hence the name \emph{\textbf{local search}}. Starts from an initial solution, the search will evaluate the solutions which can be reached by applying a local change to the current solution and choose one of the neighbor solutions with local optimization. The search applies local moves until the optimal solution is reached, or in some cases, a generally good solution is reached.  Local search is widely used in hard combinational problems such as the traveling salesman problem [13] and the graph coloring problem [14]. \\
+For an instance $I$ of a hard combinational Problem $P$, there is a set of solutions $S(I)$. An object function (score or cost) $\Gamma$ is derived from the constraints of the problem to evaluate the candidate solutions. The goal of the local search is to find the solution with minimum cost ( or the solution with maximal score).\\
+A local search starts with an initial complete solution. According to some heuristic, the local search makes local changes to its current solution iteratively, hence the name \emph{\textbf{local search}}. Starting from an initial solution, the search will evaluate the neighbor solutions which are reached by applying a local change to the current solution and choose one of the neighbor solutions with local optimization. The search applies local moves until the optimal solution is reached, or in some cases, a generally good solution is reached.  Local search is widely used in hard combinational problems such as the traveling salesman problem\cite{johnson1990local} and the graph coloring problem\cite{galinier2006survey}. \\
 \\
 \emph{\textbf{Local Search in SAT Problem}}\\
-In the Boolean satisfiability problem, a local search operates primarily as follows: The search start from a randomly generated assignment as the initial solution. If this current assignment satisfied the formula, the search stops with success. Otherwise, a variable is chosen depends on some criterion. This selection is called \emph{\textbf{pickVar}}. By change the assignment of the selected variable $v$, a neighbor assignment of our current solution $A$ is reached in next step, which is also called  \emph{\textbf{flipp$(A,v)$}}. A local search will move in the space of the assignments by making the variable flipping until a satisfying assignment is reached by the search. \\
-The heuristic used for the flipping variable selection $pickVar$  is based on some scores of the variables in the current assignment. Consider the assignment $\hat{A}$  reached by taking a flip of the variable in the current assignment $A$. The number of clauses satisfied in $A$,but not in $\hat{A}$ is called the \emph{\textbf{breakcout}} of the local move from $A$ to $\hat{A}$. Accordingly, the number of clauses, which become satisfying because of the flipping, is the  \emph{\textbf{makecount}}. The number of newly satisfying clauses ($makecount$) minus the number of newly unsatisfying clauses ($breakcount$), which is denoted as \emph{\textbf{diffscore}}, represents the local improvement of the corresponding flipping. Apart from this, other aspects like the repetition number of one flip or the number of occurrences of the variables can be considered in a selection heuristic. An example is the unit propagation embedded local solver $EagleUp$, which prefers flipping of variables with the highest number of occurrences in the formula to create new unit clauses sooner. To get local improvement effectively, man can only consider variables in unsat clauses for the flipping selection. This process is called a \emph{\textbf{focused local search}} and commonly used. \\
+In the boolean satisfiability problem, a local search operates primarily as follows: The search starts from a randomly generated assignment as the initial solution. If this current assignment satisfies the formula, the search stops with success. Otherwise, a variable is chosen depending on some criterion. This selection is called \emph{\textbf{pickVar}}. By changing the assignment of the selected variable $v$, a neighbor assignment $\hat{A}$ of our current solution $A$ is reached in next step. The move is also called  \emph{\textbf{flip$(A,v)$}}. A local search will move in the space of the assignments by flipping the variables until a satisfying assignment is reached by the search. \\
+The heuristic used for \emph{pickVar}  is based on scores of the variables in the current assignment. Consider the assignment $\hat{A}$  reached by taking a flip of the variable in the current assignment $A$. The number of clauses satisfied in $A$, but not in $\hat{A}$ is called the \emph{\textbf{breakcount}} of the local move from $A$ to $\hat{A}$. Accordingly, the number of clauses which become satisfied because of the flipping, is the  \emph{\textbf{makecount}}. The number of newly satisfied clauses ($makecount$) minus the number of newly unsatisfied clauses ($breakcount$), which is denoted as \emph{\textbf{diffscore}}, represents the local improvement of the corresponding flipping. Apart from this, other aspects such as the repetition number of each flip or the number of occurrences of the variables can be included in a selection heuristic. An example is the local solver \emph{EagleUp}, which prefers flipping of variables with the highest number of occurrences in the formula to create new unit clauses for unit propagation. To get local improvement effectively, it is sufficient to only consider variables in unsatisfied clauses for the flipping selection. This commonly used process is called a \emph{\textbf{focused local search}}. \\
 \\
 \begin{algorithm}[h!]
 \SetKwInOut{Input}{input}
@@ -339,8 +340,8 @@ The heuristic used for the flipping variable selection $pickVar$  is based on so
  \caption{Focused Local Search}
 \end{algorithm}  
 
-By choosing the variable with best score in $pickVal$, the seach will get greedy local improvemnet. 
-The initial hope of the local search is that through iterative greedy local improvement the optimal global solution can be found. The typical problem of the local search is that the greedy local searches be trapped in local unattractive local optimal solution.  To avoid this , some random flips are picked or even a worse solution  will be chosen for the next step (\emph{\textbf{uphill moves}}). There are some techniques following used in local search to avoid getting stuck in local optimum.
+By choosing the variable with best score in \emph{pickVar}, the search will get greedy local improvement. 
+The initial intention of the local search is that the optimal global solution can be found through iterative greedy local improvement. The typical problem of the local search is that the greedy moves can be trapped in local optimal solutions, which are however not global optimums. To avoid this, some random flips are picked or even a worse solution  will be chosen for the next step (\emph{\textbf{uphill moves}}). The following techniques are commonly used to prevent local search from getting stuck in local regions.
 
 \emph{\textbf{Stochastic Local Search (SLS)}}\\
 The stochastic local search will use the probability distribution of the scores of candidate solutions instead of the static decision. For the candidate moves, the probability of being chosen $p(\Gamma(s))$ corresponds to the score $\Gamma(s)$ of the solution $s$. In this way, the advantage a move is, the probability of choosing it as the next step is higher. This randomization will avoid the stuck of the search in a local minimum and decrease the misguiding of the heuristic in specific situations. \\
@@ -370,7 +371,7 @@ The focused random local search strategy \emph{walkSAT} to solve SAT problem, wh
 \end{algorithm}  
 
 \emph{\textbf{The probSAT}}\\
-The SLS sat solver probSAT, which was introduced in 2012 by Adrian Balint and Uwe Schoening\cite{balint2016engineering}. In a probSAT solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfying clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $\Gamma(v,A)$ based on break score of $v$ in the current assignment $A$\footnote{As mentioned in the probSAT paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one-parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
+The SLS sat solver probSAT, which was introduced in 2012 by Adrian Balint and Uwe Schoening\cite{balint2016engineering}. In a probSAT solver, the score of a candidate flip is solely based on the make and break score. The paradigm is as follows: At first, a completely random assignment is set as the initial assignment. The algorithm performs local moves by flip a variable in a random chosen unsatisfied clause and stops as soon as there are no unsatisfied clauses exists, which means a satisfying assignment is found. The probability $p(v)$ of flipping the variable $v$ in the chosen clause proportina to the score of $v$, which is calculated in a function $\Gamma(v,A)$ based on break score of $v$ in the current assignment $A$\footnote{As mentioned in the probSAT paper, it turns out in experiments that the influence of make is rather weak in selection functions, so the one-parameter functions depends on $breakScore$ can also lead to an efficient algorithm.} The idea behind this selection heuristic is to give the advantageous flipping relative high score, but the other flipping with small score has chance to be chosen.  There are two kinds of score functions are considered in the paper of Adrian Balint: \\
 \\
 $\Gamma(v,A) = (c_b)^{-break(v,A)}$ (break-only-exp-function) \\
 $\Gamma(v,A)=(\epsilon +break(v,A)^{-c_b})$  (break-only-poly-function)\\ 
@@ -405,7 +406,7 @@ $G(F)$:
   \label{hypergraph representation}
   \end{figure}
 
-Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, which is used in this paper, and another one is to separate the clauses. For the algorithms with the technique of decision tree like \emph{DPLL}, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. Based on this hypergraph represenation, we describe in this paper the formula partition with the notations in graph partition. For a hypergraph $G = (V,H)$,  a ($2$-way) partitioning is to seperate the verices set in two disjoint subsets. A good partition is to seperate $V$ in $P_0$ and $P_1$, which are of relative same size and only few hyperedges containing both verticse in $P_0$ and vertices in $P_1$.  Based on a vertices partitioning, the hyperedges are seperated in three disjoint subsets $H_0$, $H_1$ and $I$. $H1$ contains the edeges connecting verticse in $P_0$, $H_1$ are edges in $P_1$. The \textbf{intersection} $I$ are the edges containing vertices in $P_0$ and vertices in $P_1$.In our example formula above, a minimum cost balanced partition is $P_0$ = $\{v_1,v_2, v_3, v_4\}$ and $P_1$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_0$ = $\{C_1,C_2\}$ , $H_1$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
+Formula partition is a promising way to improve the SAT problems solving. Two partitioning are investigated in some works. One is to split the variables, which is used in this thesis, and another one is to separate the clauses. For the algorithms with the technique of decision tree like \emph{DPLL}, the formula partition can guide the order of decisions. For the local search, there is nearly research of the use of formula partition in local search. Based on this hypergraph represenation, we describe in this thesis the formula partition with the notations in graph partition. For a hypergraph $G = (V,H)$,  a ($2$-way) partitioning is to seperate the verices set in two disjoint subsets. A good partition is to seperate $V$ in $P_0$ and $P_1$, which are of relative same size and only few hyperedges containing both verticse in $P_0$ and vertices in $P_1$.  Based on a vertices partitioning, the hyperedges are seperated in three disjoint subsets $H_0$, $H_1$ and $I$. $H1$ contains the edeges connecting verticse in $P_0$, $H_1$ are edges in $P_1$. The \textbf{intersection} $I$ are the edges containing vertices in $P_0$ and vertices in $P_1$.In our example formula above, a minimum cost balanced partition is $P_0$ = $\{v_1,v_2, v_3, v_4\}$ and $P_1$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_0$ = $\{C_1,C_2\}$ , $H_1$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
 \subsection{The Competitors}
 \label{comparision}
 Our heuristic is based on the \emph{probSAT} paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original \emph{probSAT}. Another random SAT solver used for a comparison with our algorithm is \emph{yalSAT}, which is the champion in random track category in SAT competition 2017\cite{biere2014yet}.\\
@@ -455,10 +456,10 @@ We use the version 03 submitted to the 2017 SAT competition of the yalSAT solver
  In the following, we will describe the methods used in our local search.\\
 \subsection{initAssign(F)}
 In our algorithm, we have three variants to make assignment initialization.
-One is the $RandomInit$ which is the random initiation like in the original \emph{probSAT} suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $True$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $False$. $Bias$-$RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 in Section 4 (see ~\ref{sec:Experiment 1}) we compare these three alternatives based on the probSAT algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
+One is the $RandomInit$ which is the random initiation like in the original \emph{probSAT} suggests. Two alternatives to this random assignment are with the consideration of number of literal occurrences. with the method $BiasInit$ we assign $true$ to a variable if the number of occurrences of its positive literal is more than its negative literal. Otherwise, a variable is assigned initially with $false$. $Bias$-$RandomInit$ combines the two initializations above, in which the assignment is generated bias randomly based on the occurrences of literals.  In Experiment 1 in Section 4 (see ~\ref{sec:Experiment 1}) we compare these three alternatives based on the probSAT algorithm. Our local search uses $RandomInit$ for 3SAT problems and $BiasInit$ for other problems.\\
 \\
 \subsection{pickCla(A)}
-The number of $True$ values in each clause $c$, $numT(c)$ , are counted in Initilization phase and maintained in further search. The unsatisfying clauses will be cached in a set \emph{UNSAT}. During the local flipping, these numbers will be updated when the flipping variable is in the clauses (See~\ref{subsec:Data structures}).  Comparing to the $numT$, the \emph{UNSAT} is updated  ``lazily''. After Flipping, if the $numT$ of one clause is decreased to zero, it will be added in the \emph{UNSAT}.  To select an unsat clause in $pickCla(A)$, man needs to select a clause from the \emph{UNSAT} and check if it is still unsatisfied with its $numT$ is zero. Otherwise, if the chosen clause $c$ with $numT(c)$ as zero, it will be removed from the \emph{UNSAT} set. This step pickCla(A) will be repeated until one unsatisfied clause is found or the \emph{UNSAT} set is empty, which means the current Assignment $A$ is a satisfying assignment.\\ 
+The number of $true$ values in each clause $c$, $numT(c)$ , are counted in Initilization phase and maintained in further search. The unsatisfied clauses will be cached in a set \emph{UNSAT}. During the local flipping, these numbers will be updated when the flipping variable is in the clauses (See~\ref{subsec:Data structures}).  Comparing to the $numT$, the \emph{UNSAT} is updated  ``lazily''. After flipping, if the $numT$ of one clause is decreased to zero, it will be added in the \emph{UNSAT}.  To select an unsatisfied clause in $pickCla(A)$, man needs to select a clause from the \emph{UNSAT} and check if it is still unsatisfied with its $numT$ is zero. Otherwise, if the chosen clause $c$ with $numT(c)$ as zero, it will be removed from the \emph{UNSAT} set. This step pickCla(A) will be repeated until one unsatisfied clause is found or the \emph{UNSAT} set is empty, which means the current Assignment $A$ is a satisfying assignment.\\ 
 \\
 \subsection{pickVar(A,c)}
 Inspired by \emph{probSAT} and \emph{walkSAT}, Our \emph{pickVar} combines the random walk and stochastic selection. 
@@ -485,7 +486,7 @@ We analyze experimentally the following variants for  \emph{pickVar} (see experi
 \\ 
  \emph{\textbf{1.Varinat: WALK}}\\
 \\
-Instead of using a constant probability $p$ to choose between a greedy Literal without clause break and the random Literal using \emph{probSAT} flipping directly, we see a list, called statistic list $S$ to record how many times each variable is chosen for flipping.  To avoid cycling, we see the variable $v_i$ with a high value of $S[i]$ to be disadvantages for flipping. After selecting a variable using the \emph{probSAT} stochastic distribution, we make the choice randomly according to the statistic values of these two variables.\\
+Instead of using a constant probability $p$ to choose between a greedy Literal without clause break and the random Literal using \emph{probSAT} flipping directly, we use a list, called statistic list $S$ to record how many times each variable is chosen for flipping.  To avoid cycling, the variable $v_i$ with a high value of $S[i]$ is not used for flipping with high probability. After selecting a variable using the \emph{probSAT} stochastic distribution, we make the choice randomly according to the statistic values of these two variables.\\
  \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -572,7 +573,7 @@ A \emph{solution} in our implementation includes the boolean assignment and thre
 \hline 
  	Name &Structure & Size & Meaning\\ \hline
     $assignment$&list & numVs & boolean assignment to variables\\ \hline
-	$numTs$&list & numCs& number of $True$ values in each clause \\ \hline
+	$numTs$&list & numCs& number of $true$ values in each clause \\ \hline
 	$numUnsat$& natural number & -&the number of unsatisfied clauses  \\ \hline
 	\emph{UNSAT}& set & - & indexes of unsatisfied clauses \footnote{This UNSAT is updated in flipping phase lazily by only adding new unsatisfied clauses and remove the clause chosen in $pickCla$.}\\ \hline
 
@@ -599,13 +600,13 @@ The result of the algorithm is a legal assignment of the boolean formula. In the
  \Input{A CNF Formula $F$}
  \Parameter{$Timeout$, number of Processors $n_p$ }
  \Output{a satisfying assignment $A$}
-  $sat \leftarrow False$\;
+  $sat \leftarrow false$\;
     $A \leftarrow initAssign(F)$
   \For{ $each$ $Processor_i$ for $i \in \{0,.., n_p-1\}$}{
     $A_i \leftarrow A$
  \While {$($!sat $ \land$ !Timeout$)$}{
 	swpSAT(P)\;
-	  $sat \leftarrow True$\;
+	  $sat \leftarrow true$\;
 	  $A \leftarrow A_i$ \;
  }
  }
@@ -647,27 +648,27 @@ After the analysis of the failures in the 2 approaches above, we came up with th
  \Input{A CNF Formula $F$, number of Processors $n_p$ }
  \Parameter{$Timeout$}
  \Output{a satisfying assignment $A$}
-  $sat_0 \leftarrow False$\;
-  $sat_1 \leftarrow False$\;
-  $sat \leftarrow False$\;
+  $sat_0 \leftarrow false$\;
+  $sat_1 \leftarrow false$\;
+  $sat \leftarrow false$\;
   $A \leftarrow initAssign(F)$\;
  \ForEach{$(Processor_t$ for $t \in \{1, .., n_p\})$}{
     $A_t \leftarrow A$\;
      $i\leftarrow t\%2$\;
  \While {$(!sat_i$  $ \land$ !Timeout$)$}{
 	swpSAT($P_i$)\;
-	 $sat_i \leftarrow True$\;
+	 $sat_i \leftarrow true$\;
 	 $A[j] \leftarrow A_i[j]$ for $v_j \in P_i$\;
 }
  \While {$(!sat_{1-i}$  $ \land$ !Timeout$)$}{
 	 swpSAT($P_{1-i}$)\;
-	 $sat_{1-i} \leftarrow True$\;
+	 $sat_{1-i} \leftarrow true$\;
 	 $A[j] \leftarrow A_i{1-i}[j]$ for $v_j \in P_{1-i}$\;
  }
  $A_i \leftarrow A$\;
  \While {$(!sat$  $ \land$ !Timeout$)$}{
  	 swpSAT($F$)\;
- 	 $sat\leftarrow True$\;
+ 	 $sat\leftarrow true$\;
  	  $A \leftarrow A_i$\;
  }
  }
@@ -871,7 +872,7 @@ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
 \label{sec:Experiment 1}
-Experiment 1 compares three strategies of initialization in our solver. In the original $pobSAT$ algorithm, the first step $randomInit$  builds a complete assignment randomly in the initialization phase. \\ \\The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns \emph{True} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numCs}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign True to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the $randomBiasInit$ permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original probSAT algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
+Experiment 1 compares three strategies of initialization in our solver. In the original $pobSAT$ algorithm, the first step $randomInit$  builds a complete assignment randomly in the initialization phase. \\ \\The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numCs}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the $randomBiasInit$ permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original probSAT algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
 \\
 \begin{table}[H]
 \label{tab:com}
@@ -1202,7 +1203,7 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \section{Conclusion}
 
 \label{sec:conc}
-Local search is a universally applicable approach to solve random SAT problems. Our paper presents a stochastic local search algorithm with the cooperation of walkSAT and probSAT.\\
+Local search is a universally applicable approach to solve random SAT problems. We present a stochastic local search algorithm with the cooperation of walkSAT and probSAT.\\
 \\
 In section 3, we discussed the basic scheme of our sequential algorithm. In, we compare the original probSAT with a randomly generated initial solution and our version based on the occurrence of os literals in formel. Based on our experiment, our initialization is advantages n the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and use the robustness of the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the probSAT algorithm. \\
 Based on the performance of these searches in kSAT problems, we get our swpSAT solver, which combines the advantages of the local searches. \\

@@ -24,10 +24,15 @@ Z.~{\'A}. Mann and P.~A. Papp, ``Guiding sat solving by formula partitioning,''
   {\em International Journal on Artificial Intelligence Tools}, vol.~26,
   no.~04, p.~1750011, 2017.
 
-\bibitem{balint2016engineering}
-A.~Balint and U.~Sch{\"o}ning, ``Engineering a lightweight and efficient local
-  search sat solver,'' in {\em Algorithm Engineering}, pp.~1--18, Springer,
-  2016.
+\bibitem{johnson1990local}
+D.~S. Johnson, ``Local optimization and the traveling salesman problem,'' in
+  {\em International colloquium on automata, languages, and programming},
+  pp.~446--461, Springer, 1990.
+
+\bibitem{galinier2006survey}
+P.~Galinier and A.~Hertz, ``A survey of local search methods for graph
+  coloring,'' {\em Computers \& Operations Research}, vol.~33, no.~9,
+  pp.~2547--2562, 2006.
 
 \bibitem{lisolving}
 G.~Li, ``Solving the graph coloring problem with cooperative local search,''
@@ -39,6 +44,11 @@ S.~Kirkpatrick, C.~D. Gelatt, and M.~P. Vecchi, ``Optimization by simulated
 \bibitem{hoos2002adaptive}
 H.~H. Hoos {\em et~al.}, ``An adaptive noise mechanism for walksat,'' in {\em
   AAAI/IAAI}, pp.~655--660, 2002.
+
+\bibitem{balint2016engineering}
+A.~Balint and U.~Sch{\"o}ning, ``Engineering a lightweight and efficient local
+  search sat solver,'' in {\em Algorithm Engineering}, pp.~1--18, Springer,
+  2016.
 
 \bibitem{biere2014yet}
 A.~Biere, ``Yet another local search solver and lingeling and friends entering
