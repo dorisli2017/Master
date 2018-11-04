@@ -34,6 +34,10 @@ P.~Galinier and A.~Hertz, ``A survey of local search methods for graph
   coloring,'' {\em Computers \& Operations Research}, vol.~33, no.~9,
   pp.~2547--2562, 2006.
 
+\bibitem{glover1989tabu}
+F.~Glover, ``Tabu search—part i,'' {\em ORSA Journal on computing}, vol.~1,
+  no.~3, pp.~190--206, 1989.
+
 \bibitem{lisolving}
 G.~Li, ``Solving the graph coloring problem with cooperative local search,''
 
