@@ -6,45 +6,45 @@ Database file #1: references.bib
 Warning--empty journal in lisolving
 Warning--empty year in lisolving
 Warning--empty journal in balyo2017proceedings
-You've used 14 entries,
+You've used 15 entries,
             1876 wiz_defined-function locations,
-            570 strings with 5609 characters,
-and the built_in function-call counts, 4159 in all, are:
-= -- 433
-> -- 113
+            576 strings with 5836 characters,
+and the built_in function-call counts, 4484 in all, are:
+= -- 465
+> -- 124
 < -- 0
-+ -- 44
-- -- 30
-* -- 276
-:= -- 552
-add.period$ -- 13
-call.type$ -- 14
-change.case$ -- 14
++ -- 48
+- -- 33
+* -- 298
+:= -- 594
+add.period$ -- 14
+call.type$ -- 15
+change.case$ -- 15
 chr.to.int$ -- 0
-cite$ -- 17
-duplicate$ -- 236
-empty$ -- 410
-format.name$ -- 30
-if$ -- 1034
+cite$ -- 18
+duplicate$ -- 255
+empty$ -- 444
+format.name$ -- 33
+if$ -- 1115
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 14
-newline$ -- 45
-num.names$ -- 14
-pop$ -- 52
+int.to.str$ -- 15
+missing$ -- 15
+newline$ -- 48
+num.names$ -- 15
+pop$ -- 58
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 173
+skip$ -- 185
 stack$ -- 0
-substring$ -- 320
-swap$ -- 104
+substring$ -- 344
+swap$ -- 111
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 3
-while$ -- 46
-width$ -- 16
-write$ -- 141
+while$ -- 50
+width$ -- 17
+write$ -- 151
 (There were 3 warnings)
