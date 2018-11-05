@@ -228,7 +228,7 @@ Karlsruhe, 20th September 2018
 \selectlanguage{english}
 \begin{abstract}
 \centerline{\bf Abstract}
-{\noindent Stochastic local search (SLS) is an elementary technique for solving combinational problems. In the first section of this paper, we introduce an efficient SLS heuristic solver for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. We experimentally evaluate and analyze the performance of our solver in a combination of different techniques, including simulated annealing and walkSAT. With formula partition, we introduce a parallel version of our solver in the second section. The parallelism improves the efficiency of the solver. Using different random generator in solving
+{\noindent Stochastic local search (SLS) is an elementary technique for solving combinational problems. In the first section of this paper, we introduce an efficient SLS heuristic solver for Boolean Satisfiability Problem (SAT), in which the decisions only based on the probability distribution. We experimentally evaluate and analyze the performance of our solver in a combination of different techniques, including simulated annealing and walkSAT. With formula partitioning, we introduce a parallel version of our solver in the second section. The parallelism improves the efficiency of the solver. Using different random generator in solving
 the sub-formula can bring further improvement in performance to our parallel solver.}
 \end{abstract}
 \vfill
@@ -269,11 +269,11 @@ the sub-formula can bring further improvement in performance to our parallel sol
 \subsection{Problem/Motivation} 
 The \emph{\textbf{propositional satisfiability problem}} (\emph{\textbf{SAT}}) is the first proven NP-complete problem\cite{cook1971complexity}. The problem is to determine whether an assignment of boolean values to variables in a boolean formula exsits such that the expression evaluates to true. Hard combinational problems can be resolved with appropriate encoding as a SAT problem.
 The SAT problem has many applications in computer science like chip model checking\cite{clarke2001bounded}, software verification\cite{ivanvcic2008efficient} or in automated planning and scheduling in artificial intelligence\cite{kautz1999unifying}. \\
-Formula partition is one of the promising approaches in DPLL-like solvers\cite{mann2017guiding}. By prioritizing the variables according to a good formula partition, the search gets a relatively balanced decision tree. But formula partition is rarely used in a local search for the SAT problem. Questions such as how to combine the formula partition with local search, whether the local search can benefit from the partition, and whether the formula partition can guide a parallel local search still remain open. 
+Formula partitioning is one of the promising approaches in DPLL-like solvers\cite{mann2017guiding}. By prioritizing the variables according to a good formula partitioning, the search gets a relatively balanced decision tree. But formula partitioning is rarely used in a local search for the SAT problem. Questions such as how to combine the formula partitioning with local search, whether the local search can benefit from the partition, and whether the formula partitioning can guide a parallel local search still remain open. 
 
 \subsection{Content} 
-The SAT problem, as a well-known NP-complete problem, has drawn remarkable attention and different local search heuristics have been developed to tackle this problem. In this thesis, we introduced a stochastic local search on SAT problem using formula partition as guidance. \\
-In section~\ref{sec:Intro}, we summarized the formal concept and techniques used in this thesis. Section~\ref{sec:local} described our method which is a combination of  \emph{probSAT} and \emph{walkSAT}. Then we  discussed some attempts at improving the algorithm. By experimental evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{probSAT} search. In section~\ref{sec:parallel}, we inspected the potential benefit of formula partition in a parallel search. Section~\ref{sec:eva} described the experiments mentioned in section~\ref{sec:local} and section~\ref{sec:parallel} with details and empiric results.  Section~\ref{sec:conc} concluded our work based on the experiments, alongside a discussion of some limitations of our solver and further work. 
+The SAT problem, as a well-known NP-complete problem, has drawn remarkable attention and different local search heuristics have been developed to tackle this problem. In this thesis, we introduced a stochastic local search on SAT problem using formula partitioning as guidance. \\
+In section~\ref{sec:Intro}, we summarized the formal concept and techniques used in this thesis. Section~\ref{sec:local} described our method which is a combination of  \emph{probSAT} and \emph{walkSAT}. Then we  discussed some attempts at improving the algorithm. By experimental evaluation and comparison, some techniques turned out to be more efficient than the simple \emph{probSAT} search. In section~\ref{sec:parallel}, we inspected the potential benefit of formula partitioning in a parallel search. Section~\ref{sec:eva} described the experiments mentioned in section~\ref{sec:local} and section~\ref{sec:parallel} with details and empiric results.  Section~\ref{sec:conc} concluded our work based on the experiments, alongside a discussion of some limitations of our solver and further work. 
 
 \subsection{Definitions and Notations} 
 \emph{\textbf{Propositional Satisfiability Problem}}\\
@@ -392,7 +392,7 @@ The pseudocode of \emph{probSAT} is shown below:\\
   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; 
  \caption{pickVar in \emph{probSAT}}
 \end{algorithm} 
-\emph{\textbf{Formula partition}}\\
+\emph{\textbf{Formula partitioning}}\\
 To introduce our parallel SAT solver with formula partitioning, we use a  hypergraph representation of the SAT problem. \\
 A hypergraph $G = (V,H)$ is a generalized graph, in which a hyperedge $h \in H$ is a non-empty subset of the vertices set $V$. For a SAT formula $F$, its hypergraph representation $G(F)$ = (\emph{Vars}(\emph{F}), \emph{Cls}(\emph{F})) consists of \emph{numV} vertices and \emph{numC} hyperedges. 
   Each vertex corresponds to a variable in $F$, and a hyperedge refers to a clause, which connects the variables in this clause. \\
@@ -408,7 +408,7 @@ $G(F)$:
   \label{hypergraph representation}
   \end{figure}
 
-Formula partition is a promising way to improve the SAT problem solving. Two partitioning have already been well investigated. One is to divide the variables, which is used in this thesis, and another one is to separate the clauses. For algorithms with the technique of decision tree like \emph{DPLL}\cite{nieuwenhuis2005abstract}, the formula partition can be used to prioritize decisions. For the local search, there is scarce research using formula partition in local search. Based on hypergraph represenation, we describe the formula partition with the notations of graph partition in this thesis. For a hypergraph $G = (V,H)$,  a two-way partitioning is to seperate the vertices in two disjoint subsets $P_0$ and $P_1$.  Based on the partitioning of vertices, the hyperedges are seperated in three disjoint subsets $H_0$, $H_1$ and $I$. $H_0$ contains the edeges connecting verticse in $P_0$, $H_1$ are edges in $P_1$. The \textbf{intersection} $I$ are the edges containing vertices in $P_0$ and vertices in $P_1$. In a good balanced partition, $P_0$ and $P_1$ are relatively of the same size and only few edges are in the intersection. In our example formula above, a minimum cost balanced partition is $P_0$ = $\{v_1,v_2, v_3, v_4\}$ and $P_1$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_0$ = $\{C_1,C_2\}$ , $H_1$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
+Formula partitioning is a promising way to improve the SAT problem solving. Two partitioning have already been well investigated. One is to divide the variables, which is used in this thesis, and another one is to separate the clauses. For algorithms with the technique of decision tree like \emph{DPLL}\cite{nieuwenhuis2005abstract}, the formula partitioning can be used to prioritize decisions. For the local search, there is scarce research using formula partitioning in local search. Based on hypergraph represenation, we describe the formula partitioning with the notations of graph partition in this thesis. For a hypergraph $G = (V,H)$,  a two-way partitioning is to seperate the vertices in two disjoint subsets $P_0$ and $P_1$.  Based on the partitioning of vertices, the hyperedges are seperated in three disjoint subsets $H_0$, $H_1$ and $I$. $H_0$ contains the edeges connecting verticse in $P_0$, $H_1$ are edges in $P_1$. The \textbf{intersection} $I$ are the edges containing vertices in $P_0$ and vertices in $P_1$. In a good balanced partition, $P_0$ and $P_1$ are relatively of the same size and only few edges are in the intersection. In our example formula above, a minimum cost balanced partition is $P_0$ = $\{v_1,v_2, v_3, v_4\}$ and $P_1$ = $\{v_5,v_6, v_7, v_8\}$. In this partition, $H_0$ = $\{C_1,C_2\}$ , $H_1$ = $\{C_4,C_5\}$ and the intersection $I$ = $\{C_5,C_6\}$ 
 \subsection{The Competitors}
 \label{comparision}
 Our heuristic is based on the \emph{probSAT} paradigm. To evaluate the performance of our algorithm, we compare our heustic with the original \emph{probSAT}. Another competitor is \emph{yalSAT}, which is the champion in random track category of the SAT competition 2017\cite{biere2014yet}.\\
@@ -455,7 +455,7 @@ We use the third version of yalSAT submitted to the 2017 SAT competition in our 
  }
  \caption{Our Local Search}
 \end{algorithm}
- In the following, we will describe the steps used in our local search.\\
+ In the following, we will describe the steps used in our local search.++\\
 \subsection{initAssign(F)}
 In our algorithm, there are three variants to initialize assignment.
 \emph{RandomInit} is the random initiation also used in the original \emph{probSAT}. The other two alternatives are \emph{BiasInit} and \emph{Bias-RandomInit}, which take the number of literal occurrences into consideration. With the method \emph{BiasInit} we assign \emph{true} to a variable if the number of occurrences of its positive literal is larger than that of its negative literal. Otherwise, a variable is initialized with \emph{false}. \emph{Bias-RandomInit} combines the two methods above by generating the assignment bias randomly based on the occurrences of literals.  In Experiment 1 (see \ref{sec:Experiment 1}) we compare these three alternatives based on the \emph{probSAT} algorithm. Our local search uses \emph{RandomInit} for 3SAT problems and \emph{BiasInit} for the other problems.\\
@@ -615,7 +615,7 @@ The result of the algorithm is a legal assignment of the boolean formula. In the
  \caption{Focused Local Search}
 \end{algorithm}  
 Ideally, This pure portfolio approach can find a satisfying assignment for a formula as fast as the minimum time used in the one-thread local search. But the threads do the same jobs but not split the whole task. 
-In the following part, we will introduce some partitioning-based solving techniques to speed up the local search process. With a good formula partitions, the search tries to split independent jobs in threads. 
+In the following part, we will introduce some partitioning-based solving techniques to speed up the local search process. With a good formula partitioning, the search tries to split independent jobs in threads. 
 \subsection{2nd Approach: Solve Order of clauses}
 \label{sec:2nd}
 With the information of the formula partitioning, the first idea to speed up our local search is to make the flipping in both partitioning set parallel. It is possible because the clauses in the different partitions do not share the same variables. The schema of this approach is following: The slave thread $t_0$ execute the \emph{swpSAT} with  conflict in clauses in $H_0$. The slave thread $t_1$ deals with $H_1$ in parallel.  Then the assignments of the corresponding partitioning set of each agent are written in the shared memory. The master thread check then the conflicts in intersection $I$ and make flips based on the assignment in shared memory.  Handle with conflicts in the intersection will lead to some flips in both partitioning set and so will make conflicts in $H_1$ and $H_2$. Then the both processes will start again to handle conflict in partitions individually. This process will continue until there is no conflicts in the whole problem.
@@ -641,7 +641,7 @@ For the combination of two sub-assignments, if the assignments of one variable a
 2. If the variable in consideration is critical in both sub-assignment, there are some different policies. The simple one is to assign the variable randomly. We call this policy further $randomCombine$. Another one is to assign the variable as the value suggested by its charging thread. In another word, we combine the assignment according to the partitioning. This policy will not break any clauses in partition set. The slave thread will deal with conflicts in intersection individually in the next round. This policy refers as $partition-based Combine$.\\
 \\ In experiment, we compare these two policies. Both policies can not bring a better performance compared with our $swpSAT$ solver. The possible reason is: According to the process in slaver threads, the subassignments  tend to make the variables in other partitioning set the critical ones. Because flipping of these varibales have lower breaks values. In the process of assignment combination, the efforts made in threads are destroyed.  The $partition-based Combine$ process suffers from repeated flips. Even the $randomCombine$ takes more time than the  $swpSAT$ solver to get a solution.
 \subsection{4th Approach: Initialization with a guide of formula partitioning}
-After the analysis of the failures in the 2 approaches above, we came up with this approach, in which the formula partition information is only used to get an initial solution, and the further search in the whole problem is like our pure portfolio approach. This approach intends to use the partitioning information to get a good initial solution.  A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared between the agents encourage the further search the flipping of non critical variables in clauses. \\
+After the analysis of the failures in the 2 approaches above, we came up with this approach, in which the formula partitioning information is only used to get an initial solution, and the further search in the whole problem is like our pure portfolio approach. This approach intends to use the partitioning information to get a good initial solution.  A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared between the agents encourage the further search the flipping of non critical variables in clauses. \\
 \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -684,10 +684,10 @@ After the analysis of the failures in the 2 approaches above, we came up with th
 \label{sec:eva}
  %TODO some server information
 \subsection{DIMACS standard format}  
-All the benchmark formula used in experiments are encoded in the DIMACS standard format\cite{balyo2017proceedings}. This format is the standard format of benchmarks used in SAT competitions. A DIMACS file contains the description of an instance using three types of lines:\\
-\\ 1. Comment line: Comment lines give information about the formula for human readers, like the author of the file or the seed used in problem generation. A comment line starts with a lower-case character $c$ and will be ignored by programs:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $nV$ variables and $nC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $nV$ $nC$}\\ \\ 3. Clause descriptor: An clause $\{v_1, v_2,, v_n\}$ in the formula is described in an clause Descriptor:\\ \centerline{\textbf{e} $v_1\; v_2\;  \;v_n$}\\  
+All the benchmark formulas used in experiments are encoded in the DIMACS standard format\cite{balyo2017proceedings}. This format is the standard format of benchmarks used in SAT competitions. A DIMACS file contains the description of an instance using three types of lines:\\
+\\ 1. Comment line: Comment lines give information about the formula for human readers, like the author of the file or the seed used in problem generation. A comment line starts with a lower-case character $c$ and will be ignored by DIMACS parser:\\ \centerline{\textbf{c} \emph{ this is an example of the comment line }}\\ \\ 2. Problem line: The problem line appears exactly once in each DIMACS format file. The problem line is signified by a lower-case character $p$.  For a formula with $numV$ variables and $numC$ clauses ,the problem line in its DIMACS file is:\\ \centerline{\textbf{p} cnf $numV$ $numC$}\\ \\ 3. Clause descriptor: A clause $\{v_1, v_2,\cdots, v_n\}$ in the formula is described in a clause descriptor ended with $0$:\\ \centerline{ $v_1\; v_2\;\cdots  \;v_n\;0$}\\  
 \\
-Here is the DIMACS format of the formula $F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_1 \lor \bar{v_1})$:
+Here is the DIMACS format of the formula $F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_3 \lor \bar{v_1})$:
 \begin{center}
 \begin{tabular}{l}
 c simple F.cnf\\
@@ -699,24 +699,25 @@ p cnf 3 2\\
 
 \subsection{Benchmarks}
 \label{benchmark}
-The benchmark instances used in experiments are the 180 uniform instances ( \emph{UNIF}) in random benchmark categories in SAT competition 2017\cite{balyo2017proceedings}. In an  \emph{UNIF} problem file, all the clause have the same length.\\
-To generate an instance with $n$ variables and $m$ clauses, the Uniform generation will work in the following way: to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals. If the generated clause contains multiple copies of the same variables, it will be abandoned. The process generates clauses until m permitted clauses are gathered.\\
-In the name of an \emph{UNIF} file, the suffix $k$  denotes the length of clauses. The $r$ indicates the clause-to-variable ratio. The $c$ and $v$ are for the number of clauses and variables, while $s$ is for the seed used in the generation process.
-Without flitering, there are at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.
+The benchmark instances used in our experiments are the 180 uniform instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017\cite{balyo2017proceedings}. In a \emph{UNIF} problem file, all the clause have the same length.\\
+To generate an instance with $n$ variables and $m$ clauses, the uniform generation will work in the following way: to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals. If the generated clause contains multiple copies of the same variables, it will be abandoned. The process generates clauses until $m$ permitted clauses are gathered.\\
+A \emph{UNIF} file name contains some basic information of the problem. The suffix $k$  denotes the length of clauses. The $r$ indicates the clause-to-variable ratio. The $c$ and $v$ are the number of clauses and variables respectively, while $s$ is the seed used in the generation process.
+Without flitering, at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.
+\clearpage
 \subsection{Used plots and tables}
-the results of the following experiments are all shown in comparision tables and  illusatrated in cactus plots.  \\
+the results of the following experiments are shown in comparison tables and  illusatrated in cactus plots.  \\
 \\
 \emph{\textbf{Comparison Table}}\\
-See Table \ref{tab:com} for example.\\
-A comparison table shows the different results of algorithms. The first column contains the
-clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the  \emph{UNIF} benchmark problems without filtering contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. There are 61 $3$SAT instances, 89 $5$SAT instances and 66 $7$SAT instances found satisfied in our experiments. Besides the runtime score, the number of solved problems are shown below. The best results in comparison are in bold.
+A comparison table shows the results of different algorithms. The first column contains the
+clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the  \emph{UNIF} benchmark problems contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. Besides the runtime score, the number of solved problems are shown below. The best results in comparison are in bold.
 \\
+See Table \ref{tab:com} for example.\\
 \\
 \emph{\textbf{Cactus Plot}}\\
+A cactus plot shows the performance of different algorithms. The y-axis shows the time in second used to solve the benchmark problems.  The x-axis is for the number of solved problems by a certain time. Each algorithm corresponds to a curve in different colors. The point $(u, v)$ on a curve means by $v$ seconds the corresponding algorithm have solved  $u$ problems.  \\
 See Figure \ref{Experiment cactus} for an example.\\
-A cactus plot shows the performance of different algorithms. The y-axis shows the time in second used to solve the benchmark graphs.  The x-axis is for the number of solved problems by a certain time. Each algorithm corresponds to a curve in different colors. The point $(u, v)$ on a curve means by $v$ seconds the corresponding algorithm have solved  $u$ problems.  \\
 
-\subsection{Random seeds used in Experiments}
+\subsection{Random Seeds used in Experiments}
 \label{sec:seed}
 To make our experiments results reproducible and robust, we repeat our tests with three specific seeds. We produce the seeds in experiments as follows: First, we use the sum of characters of the name of the solver to seed the pseudo-random generator in c++.  Then we use this reinitialized generator to produce three random values, which are the seeds used later in our experiments. 
 \begin{table}[h!]
@@ -728,19 +729,18 @@ To make our experiments results reproducible and robust, we repeat our tests wit
 	\emph{probSAT}&probsat&1988822874&338954226 &858910419 \\ \hline
 	yalSAT &yalsat&1851831967&280788293&1956345180 \\ \hline
 	our local solver & local&1962042455&1112841915&566263966 \\ \hline
-	our parallel solver & parallel &1749729997& 68910537& 473644167 \\ \hline
 	
 \end{tabular}
 \caption[probSAT]{Parameter setting for our solvers and competitors}
 \end{center}
 %\end{minipage}
 \end{table} 
-\subsubsection{Soft- and Hardware}
-The single-threaded experiments were run on computers that had Two Intel Xeon E5-2683 v4 processors  (2.1 GHz 2x16-cores + 2x16-HT cores) and 512GB RAM. The machine ran the 64-bit version
-of  Ubuntu 14.04.5 LTS. The multi-threaded experiments were run on a computer that had Two Intel Xeon E5-2650 v2 processors (16 cores + 16 HT cores) with 128GB DDR3 RAM. The machine ran the 64-bit version of Ubuntu Devel. 
+\subsection{Soft- and Hardware}
+The single-threaded experiments were run on computers that had two Intel Xeon E5-2683 v4 processors  (2.1 GHz 2x16-cores + 2x16-HT cores) and 512GB RAM. The machine ran the 64-bit version
+of  Ubuntu 14.04.5 LTS. The multi-threaded experiments were run on a computer that had two Intel Xeon E5-2650 v2 processors (16 cores + 16 HT cores) with 128GB DDR3 RAM. The machine ran the 64-bit version of Ubuntu Devel. 
 \clearpage
 \subsection{Parameter Settings in Experiment}
-The $TimeOut$ is set to 5 Minutes in the experiments of local searches.  For the \emph{probSAT} selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ and the $tolerence$ $ \tau$ in variances with simulated annealing are generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$ with step $0.5$ and randomly generated seeds\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}.
+The \emph{TimeOut} is set to 5 Minutes in our experiments of local searches.  For the \emph{probSAT} selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ and the $tolerence$ $ \tau$ in variants with simulated annealing are generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$ with step $0.5$ and randomly generated seeds\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}.
    \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -759,6 +759,7 @@ The $TimeOut$ is set to 5 Minutes in the experiments of local searches.  For the
 
 	
 \end{tabular}
+\caption{Settings of $\alpha$ or $\tau$ in solvers}
 \end{center}
 %\end{minipage}
 \end{table}
@@ -874,7 +875,7 @@ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
 \label{sec:Experiment 1}
-Experiment 1 compares three strategies of initialization in our solver. In the original $pobSAT$ algorithm, the first step $randomInit$  builds a complete assignment randomly in the initialization phase. \\ \\The $biasInit$ suggestion is assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the $randomBiasInit$, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the $randomBiasInit$ permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original \emph{probSAT} algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
+Experiment 1 compares three strategies of initialization in our solver. In the original \emph{pobSAT} algorithm, the first step \emph{RandomInit}  builds a complete assignment randomly in the initialization phase. \\ \\The \emph{BiasInit} suggestion is assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the \emph{randomBiasInit}, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the \emph{Bias-RandomInit} permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original \emph{probSAT} algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
 \\
 \begin{table}[H]
 \label{tab:com}
@@ -882,7 +883,7 @@ Experiment 1 compares three strategies of initialization in our solver. In the o
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{1cm}|}
 \hline 
-    k &$RandomInit$&$BiasInit$&$Bias$-$RandomInit$ \\ \hline
+    k &\emph{RandomInit}&\emph{BiasInit}&\emph{Bias-RandomInit} \\ \hline
 	3&9221.9 &9157.76 &\textbf{9078.27} \\ 
 	&\textbf{55} &54 & \textbf{55} \\ \hline
 	5&7143.9&\textbf{4351.09}&4582.54\\ 
@@ -902,12 +903,12 @@ Experiment 1 compares three strategies of initialization in our solver. In the o
   \includegraphics[scale = 0.8]{DATA/K5/e1.pdf}
   \includegraphics[scale = 0.8]{DATA/K7/e1.pdf}
   \label{Experiment 1 k357 cactus plot}
-  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use $RanomInit$ for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
 \end{figure}
 \clearpage
 \subsubsection{Experiment 2: pickVar(F)} 
 \label{sec:Experiment 2} 
-The \emph{probSAT} algorithm paradigm introduced in section make pickVar as a randomized process To pick a variable for flipping in a chosen clause, we need to measure the score of all the literals in the classes and then model the probability distribution of the scores.  In the observation of the implementation, this stochastic process is very time-consuming.  The \emph{probSAT} takes a lot of time in the first phase of the search and also go around with few conflicts in the last steps. However, in the first phase of the search, picking flippings greedy can lead the search quickly to the regions of interest.In our examples in the table \ref{parma}. The probability to ignore the greedy literal is 30\% for the 3SAT example and more than  50\% for 5SAT and 7SAT.  Then in the last steps of the search, where the search can reach the final satisfying assignment by a few deterministic steps, this \emph{probSAT} algorithm may make  ``unintelligent'', decisions with some probability and miss the critical steps. \\
+the \emph{probSAT} algorithm, to pick a variable for flipping in a chosen clause, we need to measure the score of all the literals in the classes and then model the probability distribution of the scores. This stochastic process is very time-consuming.  The \emph{probSAT} takes a lot of time in the first phase of the search and also go around with few conflicts in the last steps. However, in the first phase of the search, picking flippings greedy can lead the search quickly to the regions of an optimal solution. In our examples in the table \ref{parma}. The probability to ignore the greedy literal is 30\% for the 3SAT example and more than  50\% for 5SAT and 7SAT.  Then in the last steps of the search, where the search can reach the final satisfying assignment by a few deterministic steps, this \emph{probSAT} algorithm may make  ``unintelligent'', decisions with some probability and miss the critical steps. \\
 To make the selection more greedily, we use a random walk to choose policy between greedy one and the \emph{probSAT} heuristic.  In our algorithm, we refer the literals with no clause breaking as a greedy literal where greedy literal means the one with least break scores in original \emph{walkSAT}. The greefy literal will be chosen in the greedy heuriscti and also be possible be chosen in \emph{probSAT} heuristic. The intention of giving the literals with zero breaks more probability to be chosen is the observation that the time-consuming \emph{probSAT} may choose the breaking literals with high probability (see Table~\ref{parma}).  To speed up this selection process and increase the randomness of the process, we just picked one greedy literal randomly as the greedy candidate for flipping.  To avoid cycling in one region, we record the status information in the process.  If the flips of chosen greedy literal have not been repeated many times, the selection will prefer another variable with a little breakscore, which has not been flipped so many times.  
 
 \begin{table}[h!]
