@@ -68,4 +68,9 @@ A.~Biere, ``Yet another local search solver and lingeling and friends entering
 T.~Balyo, M.~J. Heule, and M.~Jaervisalo, ``Proceedings of sat competition
   2017: Solver and benchmark descriptions,'' 2017.
 
+\bibitem{SMAC}
+``Smac: Sequential model-based algorithm configuration.''
+  \url{http://www.cs.ubc.ca/labs/beta/Projects/SMAC/}.
+\newblock Accessed: 2017-03-10.
+
 \end{thebibliography}

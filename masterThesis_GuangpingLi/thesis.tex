@@ -705,42 +705,42 @@ A \emph{UNIF} file name contains some basic information of the problem. The suff
 Without flitering, at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.
 \clearpage
 \subsection{Used plots and tables}
-the results of the following experiments are shown in comparison tables and  illusatrated in cactus plots.  \\
+The results of the following experiments are shown in comparison tables and  illusatrated in cactus plots.  \\
 \\
 \emph{\textbf{Comparison Table}}\\
 A comparison table shows the results of different algorithms. The first column contains the
-clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns corresponds to a penalized runtime for the whole $k$SAT set, which assigns a runtime of two times the time limit for an unsolved instance. Because the  \emph{UNIF} benchmark problems contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. Besides the runtime score, the number of solved problems are shown below. The best results in comparison are in bold.
+clause length $k$. The  \emph{UNIF} benchmark has $3$ different sizes: $3$SAT, $5$SAT, and $7$SAT. For a $k$SAT instance, each clause contains $k$ variables. The fields of a comparison table in the following columns correspond to a PAR-2 runtime for the whole $k$SAT set\cite{balyo2017proceedings}. Because the  \emph{UNIF} benchmark problems contain a part of unsatisfied problems, we assign penalized time only to problems which can not be solved by any solvers in our whole experiments. The number of solved problems are shown below the runtime. The best results in comparison are in bold.
 \\
-See Table \ref{tab:com} for example.\\
+See Table \ref{tab:com} for an example.\\
 \\
 \emph{\textbf{Cactus Plot}}\\
-A cactus plot shows the performance of different algorithms. The y-axis shows the time in second used to solve the benchmark problems.  The x-axis is for the number of solved problems by a certain time. Each algorithm corresponds to a curve in different colors. The point $(u, v)$ on a curve means by $v$ seconds the corresponding algorithm have solved  $u$ problems.  \\
+A cactus plot shows the performance of different algorithms. The y-axis shows the time in second used to solve the benchmark problems.  The x-axis represents the number of solved problems by a certain time. Each algorithm corresponds to a curve in a unique color. A point $(u, v)$ on a curve means by $v$ seconds the corresponding algorithm has solved  $u$ problems.  \\
 See Figure \ref{Experiment cactus} for an example.\\
 
 \subsection{Random Seeds used in Experiments}
 \label{sec:seed}
-To make our experiments results reproducible and robust, we repeat our tests with three specific seeds. We produce the seeds in experiments as follows: First, we use the sum of characters of the name of the solver to seed the pseudo-random generator in c++.  Then we use this reinitialized generator to produce three random values, which are the seeds used later in our experiments. 
+To make our experiments results reproducible and robust, we repeat our tests with three specific seeds. We produce the seeds as follows: First, we use the sum of characters of the name of the solver to seed the pseudo-random generator in C++.  Then we use this reinitialized generator to produce three random values, which are later used as seeds in our experiments. 
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{1cm}|}
 \hline 
-    solver&name&1.seed&2.seed&3.seed \\ \hline
+    solver&name&seed 1&seed 2&seed 3 \\ \hline
 	\emph{probSAT}&probsat&1988822874&338954226 &858910419 \\ \hline
 	yalSAT &yalsat&1851831967&280788293&1956345180 \\ \hline
 	our local solver & local&1962042455&1112841915&566263966 \\ \hline
 	
 \end{tabular}
-\caption[probSAT]{Parameter setting for our solvers and competitors}
+\caption[probSAT]{Seeds in our solvers and competitors}
 \end{center}
 %\end{minipage}
 \end{table} 
 \subsection{Soft- and Hardware}
-The single-threaded experiments were run on computers that had two Intel Xeon E5-2683 v4 processors  (2.1 GHz 2x16-cores + 2x16-HT cores) and 512GB RAM. The machine ran the 64-bit version
-of  Ubuntu 14.04.5 LTS. The multi-threaded experiments were run on a computer that had two Intel Xeon E5-2650 v2 processors (16 cores + 16 HT cores) with 128GB DDR3 RAM. The machine ran the 64-bit version of Ubuntu Devel. 
+The single-thread experiments were run on computers that equipped with two Intel Xeon E5-2683 v4 processors  (2.1 GHz 2x16-cores + 2x16-HT cores) and 512GB RAM. The machine ran the 64-bit version
+of  Ubuntu 14.04.5 LTS. The multi-thread experiments were run on a computer that had two Intel Xeon E5-2650 v2 processors (16 cores + 16 HT cores) with 128GB RAM. The machine ran the 64-bit version of Ubuntu Devel. 
 \clearpage
 \subsection{Parameter Settings in Experiment}
-The \emph{TimeOut} is set to 5 Minutes in our experiments of local searches.  For the \emph{probSAT} selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ and the $tolerence$ $ \tau$ in variants with simulated annealing are generated with the help of the algorithm parameter optimization tool SMAC [29] (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$ with step $0.5$ and randomly generated seeds\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}.
+The \emph{TimeOut} is set to 5 Minutes in our experiments.  For the \emph{probSAT} selection heuristic, our local search uses the values for $c_b$ and $\epsilon$ suggested in the \emph{probSAT} paper.  The parameter $\alpha$ (or the $tolerence$ $ \tau$ in variants with simulated annealing) is  configured with the help of the algorithm parameter optimization tool SMAC\cite{SMAC} (sequential model-based algorithm configuration). SMAC ran our algorithms on LARGE problems in the \emph{UNIF} category in SAT 2012 ($75\%$ of the instances training instances,  $25\%$ as test instances) with values $\in [0, 10]$, step equal to $0.5$ and randomly generated seeds\footnote{Because of high time consume in parameter optimation, we solely compare $\tau$  as a natural number form One to Ten.}.
    \begin{table}[H]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -763,12 +763,13 @@ The \emph{TimeOut} is set to 5 Minutes in our experiments of local searches.  Fo
 \end{center}
 %\end{minipage}
 \end{table}
-\subsection{Benchmark Generation}
-To combine the formula partitioning and SAT local solver, we try to get a relatively balanced partition with small intersection for the hypergraphgraph representation of benchmark SAT problems.  On  \emph{UNIF} benchmark, we try to get graph partitioning using some partitioning algorithms (KaHypar and hmetis). Since the uniform random generation of this benchmark, these problems are without a real-world-like structure. Even with a high imbalance like $0.3$ and high tolerance of intersection size ($50\%$ of edge sizes), the partitioning algorithms take more time than our SAT solver for more than half of our  \emph{UNIF} benchmarks.  To investigate the local search on graphs with proper partitioning, we generate our benchmark COMBINE  using the  \emph{UNIF} benchmark instances.  As the name \emph{COMBINE} suggested, we combine two \emph{UNIF} benchmark instances in one SAT problem and make for the new generated problem with two disjoint subproblems an intersection.  To create a satisfiable formula, we build the intersection based on a pair of random chosen satisfying assignments of the two \emph{UNIF} problems in combination. To get satisfying assignments of  \emph{UNIF} benchmarks, we run different solvers in SAT competitions including \emph{CSCCSAT}, \emph{DCCASAT}, \emph{score2SAT}, \emph{probSAT}, and \emph{yalSAT}. We do not use our local search to collect satisfying assignments. Otherwise, it is possible that after solve the two partitioning sets individually using our local solver, the current assignment is the same or a similar one used for the intersection generation.\\
+\subsection{COMBINE Benchmark Generation}
+To combine the formula partitioning and SAT local solver, we tried to get a relatively balanced partitioning with small intersection for the hypergraphgraph representation of benchmark SAT problems.  We tried to get formula partitioning in problems of \emph{UNIF} benchmark using some partitioning algorithms (KaHypar and hmetis). Due to the uniform random generation of this benchmark, these problems do not possess a real-world-like structure. Even with a high imbalance like $0.3$ and high tolerance of intersection size ($50\%$ of edge sizes), the partitioning algorithms take more time than our SAT solver for more than half of the  \emph{UNIF} benchmarks.  To investigate the local search on graphs with proper partitioning, we generate our benchmark /emph{COMBINE}  using the  \emph{UNIF} benchmark instances.  As suggested by the name \emph{COMBINE}, we combine two \emph{UNIF} benchmark instances in one SAT problem and make an intersection for the new generated problem.  To create a satisfiable formula, we build the intersection based on a pair of randomly chosen satisfying assignments of the two \emph{UNIF} problems. To get satisfying assignments of  \emph{UNIF} benchmarks, we run different solvers in SAT competitions including \emph{CSCCSAT}, \emph{DCCASAT}, \emph{score2SAT}, \emph{probSAT}, and \emph{yalSAT}. We do not use our local search to collect satisfying assignments. Otherwise, it is possible that after solving the two partitioning sets individually using our local solver, the assignment is the same as or similar to the one used for the intersection generation.\\
 We combine the \emph{UNIF} problems in consideration of real-world uses. 
-We combine 4  pairs of instances in  $3$SAT, $5$SAT problems $7$SAT problems. Besides that, we consider five combinations between  3SAT and 5 SAT instances and three combination of $5$SAT and $7$SAT instances. 
-We combine problem in similar vertices size, which corresponds to balanced partitioning in the structure. We also combine one massive problem with a small instance of an imbalanced partitioning. For the intersection generation part, we generate clauses with three vertices in different partitioning sets. \\
-We first choose vertices of two partition sets for intersection generation randomly. Here we consider also the balanced intersection and imbalanced intersection. In a balanced intersection, same proportion of vertices in both partitioning sets are chosen to generate the intersection. In an imbalanced intersection, the portions are not the same.  To control the size of the intersection, we also count the number of the clauses in an intersection, if the proposition of the intersection clauses in the clauses number in whole combined problems is upper a specified limit, the generation of intersection is stopped.
+We combine 4 pairs of instances in  3SAT, 5SAT problems and 7SAT problems. Besides that, we consider five combinations between  3SAT and 5SAT instances and three combinations of 5SAT and 7SAT instances. 
+We combine problems in similar vertex size, which corresponds to balanced partitioning in the structure. We also combine one massive problem with a small instance. For the intersection generation part, we generate clauses with three vertices in different partitioning sets. \\
+We first choose vertices of two partition sets for intersection generation randomly. Here we also consider the balanced intersection and imbalanced intersection. In a balanced intersection, same proportion of vertices in both partitioning sets are chosen to generate the intersection. In an imbalanced intersection, the portions are not of the same size.  To control the size of the intersection, we also count the number of the clauses in an intersection, if the propotions of the intersection clauses reaches a specified limit, the generation of intersection is stopped.\\
+In a \emph{COMBINE} file name f1.cnf-f2.cnf-$x$-$y$-$z$.cnf, $x$ and $y$ are the proportions of vertices in the two partitioning set respectively, whereas $z$ is the proportion of the clauses of the intersection in the whole problem.
 \begin{table}[H]
 \label{tab:combine big} 
 %\begin{minipage}{\textwidth}                                                                                         
@@ -776,43 +777,43 @@ We first choose vertices of two partition sets for intersection generation rando
     \begin{tabular}{|l|l|p{1cm}|}
 \hline 
 Problem &Intersection \\ \hline
-k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.1-0.1.cnfP&	1.04\%\\  \hline
-k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.1-0.2.cnfP&	1.00\%\\  \hline
-k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.1-0.4.cnfP&	1.03\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.2-0.2.cnfP&	15.53\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.4-0.1.cnfP&	6.84\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.2-0.2.cnfP&	12.04\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.4-0.1.cnfP&	7.53\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.1-0.4.cnfP&	6.38\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.2-0.1.cnfP&	7.35\%\\  \hline
-k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.4-0.2.cnfP&	6.11\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.2.cnfP&	16.67\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.4.cnfP&	25.21\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.2-0.2.cnfP&	14.77\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.4-0.1.cnfP&	6.46\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.1-0.2.cnfP&	13.92\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.2-0.4.cnfP&	11.40\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.4-0.2.cnfP&	7.08\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.1-0.4.cnfP&	5.88\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.2-0.4.cnfP&	6.86\%\\  \hline
-k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.4-0.4.cnfP&	5.81\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.1.cnfP&	9.09\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.2.cnfP&	16.67\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.4.cnfP&	25.07\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.1.cnfP&	9.09\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.4.cnfP&	14.68\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.4-0.4.cnfP&	6.36\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.1.cnfP&	9.09\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.2.cnfP&	13.96\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.2-0.2.cnfP&	11.58\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.4-0.2.cnfP&	6.97\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.1-0.4.cnfP&	5.98\%\\  \hline
-k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.4-0.4.cnfP&	5.60\%\\  \hline
-k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.1-0.4.cnfP&	1.30\%\\  \hline
-k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.2-0.2.cnfP&	2.52\%\\  \hline
-k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.4-0.2.cnfP&	4.88\%\\  \hline
+k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.1-0.1.cnf&	1.04\%\\  \hline
+k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.1-0.2.cnf&	1.00\%\\  \hline
+k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.1-0.4.cnf&	1.03\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.2-0.2.cnf&	15.53\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.1-0.4-0.1.cnf&	6.84\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.2-0.2.cnf&	12.04\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.2-0.4-0.1.cnf&	7.53\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.1-0.4.cnf&	6.38\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.2-0.1.cnf&	7.35\%\\  \hline
+k7-r55.0.cnf-k7-r56.0.cnf-0.4-0.4-0.2.cnf&	6.11\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.2.cnf&	16.67\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.1-0.4.cnf&	25.21\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.2-0.2.cnf&	14.77\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.1-0.4-0.1.cnf&	6.46\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.1-0.2.cnf&	13.92\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.2-0.4.cnf&	11.40\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.2-0.4-0.2.cnf&	7.08\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.1-0.4.cnf&	5.88\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.2-0.4.cnf&	6.86\%\\  \hline
+k7-r57.0.cnf-k7-r60.0.cnf-0.4-0.4-0.4.cnf&	5.81\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.1.cnf&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.2.cnf&	16.67\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.1-0.4.cnf&	25.07\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.1.cnf&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.2-0.4.cnf&	14.68\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.1-0.4-0.4.cnf&	6.36\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.1.cnf&	9.09\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.1-0.2.cnf&	13.96\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.2-0.2.cnf&	11.58\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.2-0.4-0.2.cnf&	6.97\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.1-0.4.cnf&	5.98\%\\  \hline
+k7-r58.0.cnf-k7-r62.0.cnf-0.4-0.4-0.4.cnf&	5.60\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.1-0.4.cnf&	1.30\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.2-0.2.cnf&	2.52\%\\  \hline
+k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.4-0.2.cnf&	4.88\%\\  \hline
 \end{tabular}
- \caption[Caption for LOF]{COMBINE problems with small intersection ($\frac{numCI}{numC} > 1\%$)\footnotemark}
+ \caption[Caption for LOF]{COMBINE problems with big intersection ($\frac{numCI}{numC} > 1\%$)\footnotemark}
 \end{center}
 %\end{minipage}
 \end{table} 
@@ -826,45 +827,45 @@ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.4-0.2.cnfP&	4.88\%\\  \hline
 \hline 
 Problem &Intersection \\ \hline
 k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
- k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.4-0.1.cnfP&	0.13\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.2-0.1.cnfP&	0.36\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.4-0.4.cnfP&	0.11\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.1-0.2.cnfP&	0.37\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.2-0.1.cnfP&	0.27\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.2-0.4.cnfP&	0.11\%	\\   \hline
- k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.4-0.4.cnfP&	0.09\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.2-0.2.cnfP&	0.37\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.4-0.1.cnfP&	0.11\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.1-0.2.cnfP&	0.35\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.2-0.2.cnfP&	0.27\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.4-0.2.cnfP&	0.13\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.4-0.1-0.2.cnfP&	0.10\%	\\   \hline
- k3-r3.96.cnf-k3-r4.06.cnf-0.8-0.8-0.05.cnfP&	0.06\%	\\   \hline
- k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.2-0.1.cnfP&	0.38\%	\\   \hline
- k3-r4.267-v11000.cnf-k5-r16.2.cnf-0.8-0.8-0.05.cnfP&	0.52\%	\\   \hline
- k3-r4.267-v11200.cnf-k5-r16.8.cnf-0.8-0.8-0.05.cnfP&	0.49\%	\\   \hline
- k3-r4.267-v11600.cnf-k5-r17.0.cnf-0.8-0.8-0.05.cnfP&	0.52\%	\\   \hline
- k3-r4.267-v7400.cnf-k5-r17.2.cnf-0.8-0.8-0.05.cnfP&	0.34\%	\\   \hline
- k3-r4.267-v9600.cnf-k5-r17.4.cnf-0.8-0.8-0.05.cnfP&	0.42\%	\\   \hline
- k5-r21.117-v200.cnf-k5-r16.0.cnf-0.1-0.1-0.2.cnfP&	0.04\%	\\   \hline
- k5-r21.117-v200.cnf-k5-r16.0.cnf-0.2-0.1-0.2.cnfP&	0.09\%	\\   \hline
- k5-r21.117-v200.cnf-k5-r16.0.cnf-0.4-0.1-0.4.cnfP&	0.17\%	\\   \hline
- k5-r21.117-v220.cnf-k5-r17.6.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
- k5-r21.117-v280.cnf-k5-r16.4.cnf-0.1-0.1-0.4.cnfP&	0.06\%	\\   \hline
- k5-r21.117-v280.cnf-k5-r16.4.cnf-0.2-0.1-0.1.cnfP&	0.12\%	\\   \hline
- k5-r21.117-v280.cnf-k5-r16.4.cnf-0.4-0.1-0.1.cnfP&	0.23\%	\\   \hline
- k5-r21.117-v290.cnf-k5-r16.6.cnf-0.1-0.1-0.2.cnfP&	0.06\%	\\   \hline
- k5-r21.117-v290.cnf-k5-r16.6.cnf-0.2-0.1-0.4.cnfP&	0.12\%	\\   \hline
- k5-r21.117-v290.cnf-k5-r16.6.cnf-0.4-0.1-0.1.cnfP&	0.24\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.1-0.4.cnfP&	0.21\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.2-0.4.cnfP&	0.41\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.4-0.2.cnfP&	0.80\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.1-0.4.cnfP&	0.04\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.2-0.4.cnfP&	0.09\%	\\   \hline
- k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.4-0.2.cnfP&	0.18\%	\\   \hline
- k7-r87.79-v102.cnf-k5-r17.8.cnf-0.8-0.8-0.05.cnfP&	0.00\%	\\   \hline
- k7-r87.79-v106.cnf-k5-r18.0.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
- k7-r87.79-v110.cnf-k5-r18.2.cnf-0.8-0.8-0.05.cnfP&	0.01\%	\\   \hline
+ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.4-0.1.cnf&	0.13\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.2-0.1.cnf&	0.36\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.1-0.4-0.4.cnf&	0.11\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.1-0.2.cnf&	0.37\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.2-0.2-0.1.cnf&	0.27\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.2-0.4.cnf&	0.11\%	\\   \hline
+ k3-r3.94.cnf-k3-r4.04.cnf-0.4-0.4-0.4.cnf&	0.09\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.2-0.2.cnf&	0.37\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.1-0.4-0.1.cnf&	0.11\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.1-0.2.cnf&	0.35\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.2-0.2.cnf&	0.27\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.2-0.4-0.2.cnf&	0.13\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.4-0.1-0.2.cnf&	0.10\%	\\   \hline
+ k3-r3.96.cnf-k3-r4.06.cnf-0.8-0.8-0.05.cnf&	0.06\%	\\   \hline
+ k3-r3.98.cnf-k3-r4.0.cnf-0.1-0.2-0.1.cnf&	0.38\%	\\   \hline
+ k3-r4.267-v11000.cnf-k5-r16.2.cnf-0.8-0.8-0.05.cnf&	0.52\%	\\   \hline
+ k3-r4.267-v11200.cnf-k5-r16.8.cnf-0.8-0.8-0.05.cnf&	0.49\%	\\   \hline
+ k3-r4.267-v11600.cnf-k5-r17.0.cnf-0.8-0.8-0.05.cnf&	0.52\%	\\   \hline
+ k3-r4.267-v7400.cnf-k5-r17.2.cnf-0.8-0.8-0.05.cnf&	0.34\%	\\   \hline
+ k3-r4.267-v9600.cnf-k5-r17.4.cnf-0.8-0.8-0.05.cnf&	0.42\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.1-0.1-0.2.cnf&	0.04\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.2-0.1-0.2.cnf&	0.09\%	\\   \hline
+ k5-r21.117-v200.cnf-k5-r16.0.cnf-0.4-0.1-0.4.cnf&	0.17\%	\\   \hline
+ k5-r21.117-v220.cnf-k5-r17.6.cnf-0.8-0.8-0.05.cnf&	0.01\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.1-0.1-0.4.cnf&	0.06\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.2-0.1-0.1.cnf&	0.12\%	\\   \hline
+ k5-r21.117-v280.cnf-k5-r16.4.cnf-0.4-0.1-0.1.cnf&	0.23\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.1-0.1-0.2.cnf&	0.06\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.2-0.1-0.4.cnf&	0.12\%	\\   \hline
+ k5-r21.117-v290.cnf-k5-r16.6.cnf-0.4-0.1-0.1.cnf&	0.24\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.1-0.4.cnf&	0.21\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.2-0.4.cnf&	0.41\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.2-0.4-0.2.cnf&	0.80\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.1-0.4.cnf&	0.04\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.2-0.4.cnf&	0.09\%	\\   \hline
+ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.4-0.4-0.2.cnf&	0.18\%	\\   \hline
+ k7-r87.79-v102.cnf-k5-r17.8.cnf-0.8-0.8-0.05.cnf&	0.00\%	\\   \hline
+ k7-r87.79-v106.cnf-k5-r18.0.cnf-0.8-0.8-0.05.cnf&	0.01\%	\\   \hline
+ k7-r87.79-v110.cnf-k5-r18.2.cnf-0.8-0.8-0.05.cnf&	0.01\%	\\   \hline
 
 \end{tabular}
 \caption{COMBINE problems with small intersection ($\frac{numCI}{numC} < 1\%$)}
@@ -875,7 +876,7 @@ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
 \label{sec:Experiment 1}
-Experiment 1 compares three strategies of initialization in our solver. In the original \emph{pobSAT} algorithm, the first step \emph{RandomInit}  builds a complete assignment randomly in the initialization phase. \\ \\The \emph{BiasInit} suggestion is assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the \emph{randomBiasInit}, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the \emph{Bias-RandomInit} permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original \emph{probSAT} algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
+Experiment 1 compares three strategies of initialization in our solver. The original \emph{probSAT} algorithm builds a complete assignment randomly in the initialization phase. \\ \\The \emph{BiasInit} is to assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the \emph{Bias-RandomInit}, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the \emph{Bias-RandomInit} permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original \emph{probSAT} algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
 \\
 \begin{table}[H]
 \label{tab:com}
@@ -892,7 +893,7 @@ Experiment 1 compares three strategies of initialization in our solver. In the o
 	&60 & 60 & 60 \\ \hline
 	
 \end{tabular}
-\caption{For 3SAT problems, the initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazatios show improvment with about $60\%$ percentage reduction in penalized runtime for 5SAT problems.  the \emph{BiasInit} shows its Efficiency in 7SAT problems. The search is about $14\%$ faster than the original \emph{probSAT} algorithm with a (bias) randomly generated initilization. }
+\caption{For 3SAT problems, the initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazatios show improvement with about $60\%$ percentage reduction in penalized runtime for 5SAT problems.  the \emph{BiasInit} shows its Efficiency in 7SAT problems. The search is about $14\%$ faster than the original \emph{probSAT} algorithm with a (bias) randomly generated initilization. }
 \end{center}
 %\end{minipage}
 \end{table} 
@@ -903,7 +904,7 @@ Experiment 1 compares three strategies of initialization in our solver. In the o
   \includegraphics[scale = 0.8]{DATA/K5/e1.pdf}
   \includegraphics[scale = 0.8]{DATA/K7/e1.pdf}
   \label{Experiment 1 k357 cactus plot}
-  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random Initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}
 \end{figure}
 \clearpage
 \subsubsection{Experiment 2: pickVar(F)} 

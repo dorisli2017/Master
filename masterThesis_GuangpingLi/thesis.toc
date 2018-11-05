@@ -27,7 +27,7 @@
 \contentsline {subsection}{\numberline {4.4}Random Seeds used in Experiments}{16}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Soft- and Hardware}{16}{subsection.4.5}
 \contentsline {subsection}{\numberline {4.6}Parameter Settings in Experiment}{17}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}Benchmark Generation}{17}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.7}COMBINE Benchmark Generation}{17}{subsection.4.7}
 \contentsline {subsection}{\numberline {4.8}Experiments}{20}{subsection.4.8}
 \contentsline {subsubsection}{\numberline {4.8.1}Experiment 1: initAssign(F)}{20}{subsubsection.4.8.1}
 \contentsline {subsubsection}{\numberline {4.8.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.8.2}
