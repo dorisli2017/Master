@@ -367,7 +367,7 @@ The focused random local search strategy \emph{walkSAT} to solve SAT problem, wh
  }
   with probability $p$: $x \leftarrow$   $v$ with maximum $\Gamma(A,v)$; \;
   with probability $1-p$:  $x \leftarrow$  randomly selected $v$ in $c$. 
- \caption{pickVar in WalkSAT}
+ \caption{PvariantickVar in walkSAT}
 \end{algorithm}  
 
 \emph{\textbf{The probSAT}}\\
@@ -390,7 +390,7 @@ The pseudocode of \emph{probSAT} is shown below:\\
   Evaluate $v$ with function $\Gamma(A,v)$;\;
  }
   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; 
- \caption{pickVar in \emph{probSAT}}
+ \caption{PickVar in \emph{probSAT}}
 \end{algorithm} 
 \emph{\textbf{Formula partitioning}}\\
 To introduce our parallel SAT solver with formula partitioning, we use a  hypergraph representation of the SAT problem. \\
@@ -486,7 +486,7 @@ The selection procedure in \emph{probSAT} is a random heuristic. Judging from th
 \end{algorithm}  
 We analyze the following variants for  \emph{pickVar} experimentally (see experiment in~\ref{sec:Experiment 2}).\\
 \\ 
- \emph{\textbf{Variant 1: WALK}}\\
+ \emph{\textbf{Variant 1: Walk}}\\
 \\
 Instead of using a constant probability $p$ to choose between a greedy literal without clause break and the random literal using \emph{probSAT} selection directly, we use a statistic list $S$ to record how many times each variable is chosen for flipping. To avoid cycling, the variable $v_i$ with a high value of $S[i]$ is used for flipping with low probability. After selecting a greedy literal and a variable using the \emph{probSAT} stochastic distribution, we make the choice randomly according to the statistic values of these two variables.\\
  \\
@@ -507,7 +507,7 @@ Instead of using a constant probability $p$ to choose between a greedy literal w
   $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  \;
   with probability $p = \alpha \times \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
     with probability $1-p$: $x\leftarrow$ greedyV;\;
-\caption{WALK}
+\caption{Walk}
 \end{algorithm} 
 \clearpage
  \emph{\textbf{Varinat 2: GreedyBreak}}\\
@@ -747,7 +747,7 @@ The \emph{TimeOut} is set to 5 Minutes in our experiments.  For the \emph{probSA
     \begin{tabular}{|l|l|l|l||l|l|l|l|p{1cm}|}
 \hline 
 
-    k &\emph{WALK}&\emph{WALK-Local}&\emph{WALK-Global}&\emph{Average}&\emph{Average-Local}&\emph{Average-Global} \\ \hline
+    k &\emph{Walk}&\emph{Walk-Local}&\emph{Walk-Global}&\emph{Average}&\emph{Average-Local}&\emph{Average-Global} \\ \hline
     3 & 1& 1 & 10 &  1 & 2& 0.5       \\ \hline  
     5 & 0.5& 1 & 1&  1 & 2& 2 \\ \hline  
     7 & 1& 0.5 & 2&  1 & 2& 0.5  \\ \hline  
@@ -876,7 +876,7 @@ k3-r3.92.cnf-k3-r3.88.cnf-0.2-0.1-0.4.cnfP&	0.38\%	\\   \hline
 \subsection{Experiments}
 \subsubsection{Experiment 1: initAssign(F)}
 \label{sec:Experiment 1}
-Experiment 1 compares three strategies of initialization in our solver. The original \emph{probSAT} algorithm builds a complete assignment randomly in the initialization phase. \\ \\The \emph{BiasInit} is to assign variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal.The number of unsatisfied clauses in the bias initialized assignment of a kSAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the \emph{Bias-RandomInit}, the boolean value is assigned to variables based on bias randomly on literals occurrences. The probability to assign true to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$. As a stochastic bias initialization, it can get an assignment with expectedly few unsatisfied clauses. With the robustness of a random process, the \emph{Bias-RandomInit} permit local stucks. \\\\ In a local search algorithm, it is normal that a replacement of the current solution by a new initial solution after a limit of the number of tries. However, in our implementation, the current assignment will be changed locally with flippings of variables after the initialization. In the following table, we compare three variants in the original \emph{probSAT} algorithms. Based on the results of this experiments, we will determine the way of initialization in our heuristic solver for the problems with different length. 
+Experiment 1 compares three strategies of initialization in our solver. The original \emph{probSAT} algorithm builds a complete assignment randomly in the initialization phase. \\ \\The \emph{BiasInit} assigns boolean values to variables based on occurrences of their literals. It assigns \emph{true} to variables whose positive literal occurs more than its negative literal. The number of unsatisfied clauses in the bias initialized assignment of a $k$SAT problem is limited to $\frac{numC}{2^k}$. Our hyperthesis in the assignment initialization is that an initial solution with good quality can speed up the search generally. \\ \\ In a combination of these two variants, the \emph{Bias-RandomInit}, the boolean value is assigned to variables bias randomly  based on literals occurrences. The probability of assigning \emph{true} to variable $v_i$ is $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$.\\\\ In a local search algorithm, it is common practise to replace the current solution with a new initial solution after a certain number of tries. However, in our implementation, the current assignment will be changed by locally flipping of variables after the initialization. In the following table, we compare three variants with the original \emph{probSAT} algorithms. Based on the results of this experiments, we determined the way of initialization in our heuristic solver. 
 \\
 \begin{table}[H]
 \label{tab:com}
@@ -893,7 +893,7 @@ Experiment 1 compares three strategies of initialization in our solver. The orig
 	&60 & 60 & 60 \\ \hline
 	
 \end{tabular}
-\caption{For 3SAT problems, the initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazatios show improvement with about $60\%$ percentage reduction in penalized runtime for 5SAT problems.  the \emph{BiasInit} shows its Efficiency in 7SAT problems. The search is about $14\%$ faster than the original \emph{probSAT} algorithm with a (bias) randomly generated initilization. }
+\caption{For 3SAT problems, different initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazations show improvement of about $40\%$ percentage reduction in runtime for 5SAT problems.  the \emph{BiasInit} shows its efficiency in 7SAT problems.}
 \end{center}
 %\end{minipage}
 \end{table} 
@@ -904,13 +904,14 @@ Experiment 1 compares three strategies of initialization in our solver. The orig
   \includegraphics[scale = 0.8]{DATA/K5/e1.pdf}
   \includegraphics[scale = 0.8]{DATA/K7/e1.pdf}
   \label{Experiment 1 k357 cactus plot}
-  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT as initiliazation method because of its simplify. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}
+  \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT because of its simplicity. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}
 \end{figure}
 \clearpage
 \subsubsection{Experiment 2: pickVar(F)} 
 \label{sec:Experiment 2} 
-the \emph{probSAT} algorithm, to pick a variable for flipping in a chosen clause, we need to measure the score of all the literals in the classes and then model the probability distribution of the scores. This stochastic process is very time-consuming.  The \emph{probSAT} takes a lot of time in the first phase of the search and also go around with few conflicts in the last steps. However, in the first phase of the search, picking flippings greedy can lead the search quickly to the regions of an optimal solution. In our examples in the table \ref{parma}. The probability to ignore the greedy literal is 30\% for the 3SAT example and more than  50\% for 5SAT and 7SAT.  Then in the last steps of the search, where the search can reach the final satisfying assignment by a few deterministic steps, this \emph{probSAT} algorithm may make  ``unintelligent'', decisions with some probability and miss the critical steps. \\
-To make the selection more greedily, we use a random walk to choose policy between greedy one and the \emph{probSAT} heuristic.  In our algorithm, we refer the literals with no clause breaking as a greedy literal where greedy literal means the one with least break scores in original \emph{walkSAT}. The greefy literal will be chosen in the greedy heuriscti and also be possible be chosen in \emph{probSAT} heuristic. The intention of giving the literals with zero breaks more probability to be chosen is the observation that the time-consuming \emph{probSAT} may choose the breaking literals with high probability (see Table~\ref{parma}).  To speed up this selection process and increase the randomness of the process, we just picked one greedy literal randomly as the greedy candidate for flipping.  To avoid cycling in one region, we record the status information in the process.  If the flips of chosen greedy literal have not been repeated many times, the selection will prefer another variable with a little breakscore, which has not been flipped so many times.  
+In the \emph{probSAT} algorithm, to pick a variable for flipping in a chosen clause, we need to measure the score of all the literals in the classes and then model the probability distribution of the scores. This stochastic process is very time-consuming. However, in the first phase of the search, picking flippings greedy can lead the search quickly to the regions of an optimal solution. In our examples in the table \ref{parma}. The probability to ignore the greedy literal is 30\% for the 3SAT example and more than  50\% for 5SAT and 7SAT.  Then in the last steps of the search, where the search can reach the final satisfying assignment by a few deterministic steps, this \emph{probSAT} algorithm may make  ``unintelligent'' decisions with some probability and miss the critical steps. \\
+\\
+To make the selection more greedily, we use a random walk to choose policy between greedy one and the \emph{probSAT} heuristic.  In our algorithm, we refer the literals with no clause breaking as a greedy literal where greedy literal means the one with least break scores in original \emph{walkSAT}. The greefy literal will be chosen in the greedy heuristic and also be possible be chosen in \emph{probSAT} heuristic. To speed up this selection process and increase the randomness of the process, we just picked one greedy literal randomly as the greedy candidate for flipping.  To avoid cycling in one region, we record the status information in the process.  If the flips of chosen greedy literal have been repeated many times, the selection will prefer another variable with a little breakscore, which has not been flipped so many times.  
 
 \begin{table}[h!]
 \label{parma}
@@ -930,14 +931,14 @@ k&  Breaks &          Probability  \\ \hline
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{3cm}|}
 \hline 
-    k &\emph{probSAT}&\emph{WALK}&\emph{Average}&\emph{Random-Flip} \\ \hline
+    k &\emph{probSAT}&\emph{Walk}&\emph{Average}&\emph{Random-Flip} \\ \hline
 	3&9221.9 (55)&7430.12 (57)&\textbf{6161.11}(\textbf{61})&8362.42 (55) \\ \hline
 	5&7143.9 (82)&4433.05 (87)&\textbf{3308.16}(\textbf{89})&4052.47(87)\\ \hline
 
 	7& 	6238.51(\textbf{60})& 6358.76(\textbf{60})&6525.597(59)&\textbf{5800.46}(\textbf{60})\\ \hline
 	
 \end{tabular}
-\caption{With the comparison of three Variant of \emph{pickVar}  with the staochastic selection in \emph{probSAT}, our suggestions are faster and solve more instances in K3 and K5. For 3SAT, our suggestions have better performances. The $WALK$ and $Average$ can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems. The $Average$ shows advantages also for 5SAT problems, which can solve $8\%$ more problems than the \emph{probSAT} with only $46\%$ time (in PAR-2 schema). For K7,  there are no noticeable differences in results.}
+\caption{With the comparison of three Variant of \emph{pickVar}  with the staochastic selection in \emph{probSAT}, our suggestions are faster and solve more instances in K3 and K5. For 3SAT, our suggestions have better performances. The \emph{Walk} and \emph{Average} can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems. The $Average$ shows advantages also for 5SAT problems, which can solve $8\%$ more problems than the \emph{probSAT} with only $46\%$ time (in PAR-2 schema). For K7,  there are no noticeable differences in results.}
 \end{center}
 %\end{minipage}
 \end{table} 
@@ -949,7 +950,7 @@ k&  Breaks &          Probability  \\ \hline
       \includegraphics[scale = 0.8]{DATA/K7/e2.pdf}
 
   \end{center}
-  \caption{Our suggestions are faster than the \emph{probSAT} algorithm in 3SAT problems. The \emph{Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph{WALK} and \emph{Average} have generally worse inperformance. The \emph{Random-Flip} can solve some number of problems as the original \emph{probSAT} and has shown littel improvement in performance within $125$ Seconds}
+  \caption{Our suggestions are faster than the \emph{probSAT} algorithm in 3SAT problems. The \emph{Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph{Walk} and \emph{Average} have generally worse inperformance. The \emph{Random-Flip} can solve some number of problems as the original \emph{probSAT} and has shown littel improvement in performance within $125$ Seconds}
 
   \label{Experiment 2 cactus plot}
   \end{figure}
@@ -979,16 +980,16 @@ Another thing to mention is that in our implementation we set up a lookup table 
 \end{table} 
 Based on the results of experiment 3 (~\ref{sec:Experiment 3}) , we modify our three heuristics with improvement of simulated annealing. We refer the new improved varinats as \emph{Walk.}, \emph{Average.} and \emph{Random-flip.}. In erperiment 4, we list the performances of these variants.\\
 \\
-In the following, we show our results in our experiments  of  our three variants \emph{WALK}, \emph{Average} and \emph{Random-Flip} with simulated annealing and compare these two definitions of qualities.
+In the following, we show our results in our experiments  of  our three variants \emph{Walk}, \emph{Average} and \emph{Random-Flip} with simulated annealing and compare these two definitions of qualities.
 
 \clearpage
-\textbf{WALK with Simulated Annealing}\\
+\textbf{Walk with Simulated Annealing}\\
 \begin{table}[H]
 %begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|p{3cm}|}
 \hline 
-    k &\emph{WALK}&\emph{WALK-Local}&\emph{WALK-Global} \\ \hline      
+    k &\emph{Walk}&\emph{Walk-Local}&\emph{Walk-Global} \\ \hline      
     3 &\textbf{7430.12}(\textbf{57})&	8346.76(56)	&9023.96(56)  \\ \hline
     5&4433.05(87)	&3330.61(89)	&\textbf{3117.45}(\textbf{89}) \\ \hline
     7&6358.76(60)	&\textbf{5409.67}(\textbf{61})&	6566.06(59) \\ \hline	
@@ -1002,10 +1003,10 @@ In the following, we show our results in our experiments  of  our three variants
   \includegraphics[scale = 0.8]{DATA/K3/e3w.pdf}
   \includegraphics[scale = 0.8]{DATA/K5/e3w.pdf} 
   \includegraphics[scale = 0.8]{DATA/K7/e3w.pdf} 
-  \caption{For 3SAT, the two combination with simulated Annealing show worse performance than the original \emph{WALK}. The combinations  have also shown their  efficiency in solving huge 5SAT problems. The \emph{Global} shows its advantages for 7SAT problems.
+  \caption{For 3SAT, the two combination with simulated Annealing show worse performance than the original \emph{Walk}. The combinations  have also shown their  efficiency in solving huge 5SAT problems. The \emph{Global} shows its advantages for 7SAT problems.
 }
   \end{center}
-  \label{Experiment 3 WALK cactus plot}
+  \label{Experiment 3 Walk cactus plot}
   \end{figure}
   \clearpage
 \textbf{ Average with Simulated Annealing}
@@ -1069,7 +1070,7 @@ We count in the search the total number of flips for a problem set. There are no
     \begin{tabular}{|l|l|l|l|l|p{3cm}|}
 \hline 
 
-    k &\emph{probSAT}&\emph{yalSAT}&\emph{WALK}&\emph{Average/swpSAT}&\emph{Random-Flip} \\ \hline      
+    k &\emph{probSAT}&\emph{yalSAT}&\emph{Walk}&\emph{Average/swpSAT}&\emph{Random-Flip} \\ \hline      
     3 &9221.9&17062.35&7430.12&\textbf{6161.11} &7308.01\\ 
     &55&41&57&\textbf{61}&58\\ \hline
     5& 7143.9&5676.63&3330.61&\textbf{2939.74}&4003.06\\ 
@@ -1089,7 +1090,7 @@ We count in the search the total number of flips for a problem set. There are no
     \begin{tabular}{|l|l|l|l|l|p{3cm}|}
 \hline 
 
-    k &\emph{probSAT}&\emph{WALK}&\emph{Average}/\emph{swpSAT}&\emph{Random-Flip} \\ \hline      
+    k &\emph{probSAT}&\emph{Walk}&\emph{Average}/\emph{swpSAT}&\emph{Random-Flip} \\ \hline      
     3& 954426 &946662 &\textbf{1012761}&988477 \\ \hline
     5& 389453&\textbf{443172}&414765&423364\\ \hline
     7& 248025 &237387 &\textbf{248028}&221107 \\ \hline
