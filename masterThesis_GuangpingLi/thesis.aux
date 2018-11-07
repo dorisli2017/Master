@@ -85,14 +85,15 @@
 \newlabel{sec:parallel}{{3}{11}{Our Parallel Algorithm}{section.3}{}}
 \newlabel{sec:Our parallel Algorithm}{{3}{11}{Our Parallel Algorithm}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Focused Local Search}}{11}{algocf.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}}
-\newlabel{sec:2nd}{{3.2}{11}{2nd Approach: Solve Order of clauses}{subsection.3.2}{}}
-\newlabel{a2}{{2}{12}{2nd Approach: Solve Order of clauses}{figure.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}}
-\newlabel{a2}{{2}{12}{3nd Approach: Assignment combination}{figure.2}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {8}{\ignorespaces Pure portfolio approach}}{11}{algocf.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}2nd Approach: Solver with formula partitioning}{11}{subsection.3.2}}
+\newlabel{sec:2nd}{{3.2}{11}{2nd Approach: Solver with formula partitioning}{subsection.3.2}{}}
+\newlabel{a2}{{2}{12}{2nd Approach: Solver with formula partitioning}{figure.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Solver with formula partitioning}}{12}{figure.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}3nd Approach: Solver with combination of sub-assignments}{12}{subsection.3.3}}
+\newlabel{a2}{{3}{13}{3nd Approach: Solver with combination of sub-assignments}{figure.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}}
-\@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Focused Local Search}}{14}{algocf.9}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {9}{\ignorespaces Our parallel solver}}{14}{algocf.9}}
 \citation{balyo2017proceedings}
 \citation{balyo2017proceedings}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Evaluation}{15}{section.4}}
@@ -123,47 +124,46 @@
 \newlabel{sec:Experiment 1}{{4.8.1}{20}{Experiment 1: initAssign(F)}{subsubsection.4.8.1}{}}
 \newlabel{tab:com}{{7}{20}{Experiment 1: initAssign(F)}{table.7}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces For 3SAT problems, different initializations get similar performances. According to the PAR2-score of the benchmark sets, the two bias initiliazations show improvement of about $40\%$ percentage reduction in runtime for 5SAT problems. the \emph  {BiasInit} shows its efficiency in 7SAT problems.}}{20}{table.7}}
-\newlabel{Experiment cactus}{{2}{21}{Experiment 1: initAssign(F)}{figure.2}{}}
-\newlabel{Experiment 1 k357 cactus plot}{{2}{21}{Experiment 1: initAssign(F)}{figure.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph  {RandomInit} for 3SAT because of its simplicity. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}}{21}{figure.2}}
+\newlabel{Experiment cactus}{{3}{21}{Experiment 1: initAssign(F)}{figure.3}{}}
+\newlabel{Experiment 1 k357 cactus plot}{{3}{21}{Experiment 1: initAssign(F)}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph  {RandomInit} for 3SAT because of its simplicity. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}}{21}{figure.3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.8.2}}
 \newlabel{sec:Experiment 2}{{4.8.2}{22}{Experiment 2: pickVar(F)}{subsubsection.4.8.2}{}}
 \newlabel{parma}{{8}{22}{Experiment 2: pickVar(F)}{table.8}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces In this table, we list three examples in 3SAT , 5SAT and 7SAT problem with probabilitys of the \emph  {probSAT}. Here we have in the chosen clause a greedy literal and other literals with breakscore 1. With the $\Gamma $ function with the recommended parameters in the original \emph  {probSAT} paper, we show in the 3.column the probabilities of each literal for flipping.}}{22}{table.8}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces With the comparison of three Variant of \emph  {pickVar} with the staochastic selection in \emph  {probSAT}, our suggestions are faster and solve more instances in K3 and K5. For 3SAT, our suggestions have better performances. The \emph  {Walk} and \emph  {Average} can solve more problems. The best one is the $Average$ (with $\alpha = 1$), which solves $10\%$ more problems. The $Average$ shows advantages also for 5SAT problems, which can solve $8\%$ more problems than the \emph  {probSAT} with only $46\%$ time (in PAR-2 schema). For K7, there are no noticeable differences in results.}}{22}{table.9}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Our suggestions are faster than the \emph  {probSAT} algorithm in 3SAT problems. The \emph  {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph  {Walk} and \emph  {Average} have generally worse inperformance. The \emph  {Random-Flip} can solve some number of problems as the original \emph  {probSAT} and has shown littel improvement in performance within $125$ Seconds}}{23}{figure.3}}
-\newlabel{Experiment 2 cactus plot}{{3}{23}{Our suggestions are faster than the \emph {probSAT} algorithm in 3SAT problems. The \emph {Averrage} shows an absolute improvement except for a few trivial small instances. For 5SAT problems,the improvement through our suggestions are big and stable. They solve more problems efficiently. For 7SAT problems, the \emph {Walk} and \emph {Average} have generally worse inperformance. The \emph {Random-Flip} can solve some number of problems as the original \emph {probSAT} and has shown littel improvement in performance within $125$ Seconds}{figure.3}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Three clause examples in 3SAT , 5SAT and 7SAT problem with a greedy literal and other literals with breakcount 1. With the $\Gamma $ function and the recommended parameters in the original \emph  {probSAT} paper, the probabilities of literals for flipping are schown in the 3rd column.}}{22}{table.8}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces In the comparison with \emph  {probSAT}, our three variants of \emph  {pickVar} are faster and solve more instances in 3SAT and 5SAT. For 3SAT, our suggestions have better performances. The \emph  {Walk} and \emph  {Average} can solve more problems. The best one is the \emph  {Average}, which solves $10\%$ more problems. The \emph  {Average} also shows advantages for 5SAT problems, which can solve $8\%$ more problems than the \emph  {probSAT} using only $46\%$ time. For 7SAT, there are no noticeable differences in results.}}{22}{table.9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Our suggestions are faster than the \emph  {probSAT} algorithm in 3SAT problems. The \emph  {Averrage} shows an improvement except for a few trivial small instances. For 5SAT problems, the improvement through our suggestions are obvious. They can efficiently solve more problems. For 7SAT problems, the \emph  {Walk} and \emph  {Average} have generally worse inperformance. The \emph  {Random-Flip} can solve the same number of problems as the original \emph  {probSAT} and has shown littel improvement in performance within $125$ seconds.}}{23}{figure.4}}
+\newlabel{Experiment 2 cactus plot}{{4}{23}{Our suggestions are faster than the \emph {probSAT} algorithm in 3SAT problems. The \emph {Averrage} shows an improvement except for a few trivial small instances. For 5SAT problems, the improvement through our suggestions are obvious. They can efficiently solve more problems. For 7SAT problems, the \emph {Walk} and \emph {Average} have generally worse inperformance. The \emph {Random-Flip} can solve the same number of problems as the original \emph {probSAT} and has shown littel improvement in performance within $125$ seconds}{figure.4}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.3}Experiment 3: Simulated Annealing}{24}{subsubsection.4.8.3}}
 \newlabel{sec:Experiment 3}{{4.8.3}{24}{Experiment 3: Simulated Annealing}{subsubsection.4.8.3}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces To check that the simulated annealing with the parameters in our experiments will change the behavior of the search, we count the number of greedy flips and the number of random flips for the whole problem set. Through our observation, using the parameters we choose, the fraction of greedy flips in total flips are changed. This table shows the values for two variants \emph  {Average} and \emph  {Random-Flip} for example. }}{24}{table.10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces For 3SAT, the two combination with simulated Annealing show worse performance than the original \emph  {Walk}. The combinations have also shown their efficiency in solving huge 5SAT problems. The \emph  {Global} shows its advantages for 7SAT problems. }}{25}{figure.4}}
-\newlabel{Experiment 3 Walk cactus plot}{{4}{25}{Experiment 3: Simulated Annealing}{figure.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces  The original \emph  {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph  {Local} version can solve 6 huge problems more than the original \emph  {Average} within less runtime.}}{26}{figure.5}}
-\newlabel{Experiment 4 k3 cactus plot}{{5}{26}{The original \emph {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticabel differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph {Local} version can solve 6 huge problems more than the original \emph {Average} within less runtime}{figure.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  The performances of these three algorithms are guiet semiliar for 3SAT and 5SAT problems. For 7SAT set, the \emph  {Local} get worst performance while the variant \emph  {Global} has shown advantages in solving huge problems.}}{27}{figure.6}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces To confirm that the simulated annealing with the parameters in our experiments changes the behavior of the search, we count the number of greedy flips and the number of random flips for the whole problem set. Through our observation, using the parameters we choose, the fraction of greedy flips in total flips are changed. This table shows the values for two variants \emph  {Average} and \emph  {Random-Flip}.}}{24}{table.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces For 3SAT, the two combination with simulated annealing show worse performance than the original \emph  {Walk}. The combinations have shown their efficiency in solving huge 5SAT problems. The \emph  {Local} shows its advantages for 7SAT problems. }}{25}{figure.5}}
+\newlabel{Experiment 3 Walk cactus plot}{{5}{25}{Experiment 3: Simulated Annealing}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces  The original \emph  {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticable differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph  {Local} version can solve $6$ more huge problems than the original \emph  {Average} within less runtime.}}{26}{figure.6}}
+\newlabel{Experiment 4 k3 cactus plot}{{6}{26}{The original \emph {Average} can solve $15\%$ more problems in 3SAT. For 5SAT, there are not noticable differences in aspect of number of solved problems or the runtime. For 7SAT problems, the \emph {Local} version can solve $6$ more huge problems than the original \emph {Average} within less runtime}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces  The performances of these three algorithms are quiet similar for 3SAT and 5SAT problems. For 7SAT set, the \emph  {Local} get worst performance while the variant \emph  {Global} has shown advantages in solving huge problems.}}{27}{figure.7}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.4}Experiment 4: 2017-UNIF Comparision (local)}{28}{subsubsection.4.8.4}}
 \newlabel{sec:Experiment 4}{{4.8.4}{28}{Experiment 4: 2017-UNIF Comparision (local)}{subsubsection.4.8.4}{}}
 \newlabel{tab:UNIF}{{11}{28}{Experiment 4: 2017-UNIF Comparision (local)}{table.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Comparision in UNIF}}{28}{table.11}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Comparison in UNIF}}{28}{table.11}}
 \newlabel{tab:flips}{{12}{28}{Experiment 4: 2017-UNIF Comparision (local)}{table.12}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Average flips per second}}{28}{table.12}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces swpSAT get best performance in UNIF comparing to \emph  {probSAT} and \emph  {yalSAT} }}{28}{figure.7}}
-\newlabel{Experiment 9 all cactus plot}{{7}{28}{swpSAT get best performance in UNIF comparing to \emph {probSAT} and \emph {yalSAT}}{figure.7}{}}
-\newlabel{Experiment 9 k3 cactus plot}{{8}{29}{Experiment 4: 2017-UNIF Comparision (local)}{figure.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces \emph  {swpSAT} gets best performance in UNIF compared with \emph  {probSAT} and \emph  {yalSAT} }}{28}{figure.8}}
+\newlabel{Experiment 9 all cactus plot}{{8}{28}{\emph {swpSAT} gets best performance in UNIF compared with \emph {probSAT} and \emph {yalSAT}}{figure.8}{}}
+\newlabel{Experiment 9 k3 cactus plot}{{9}{29}{Experiment 4: 2017-UNIF Comparision (local)}{figure.9}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.5}Experiment 5: The pure portfolio approach}{30}{subsubsection.4.8.5}}
 \newlabel{sec:Experiment 5}{{4.8.5}{30}{Experiment 5: The pure portfolio approach}{subsubsection.4.8.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Pseudo-random number generators in use}}{30}{table.13}}
-\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Pseudo-random number generators in use}}{30}{table.14}}
-\newlabel{Experiment 5 all cactus plot}{{9}{31}{Experiment 5: The pure portfolio approach}{figure.9}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver can solve $30\%$ more problems in same time. }}{31}{figure.9}}
+\newlabel{Experiment 5 all cactus plot}{{10}{31}{Experiment 5: The pure portfolio approach}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver can solve $30\%$ more problems in same time. }}{31}{figure.10}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.6}Experiment 6: Initialization with a guide of formula partitioning}{32}{subsubsection.4.8.6}}
 \newlabel{sec:Experiment 6}{{4.8.6}{32}{Experiment 6: Initialization with a guide of formula partitioning}{subsubsection.4.8.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces }}{33}{figure.10}}
-\newlabel{Experiment 6 COMBINE}{{10}{33}{}{figure.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{33}{figure.11}}
+\newlabel{Experiment 6 COMBINE}{{11}{33}{}{figure.11}{}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.8.7}Experiment 7:2017-UNIF Comparision (parallel)}{34}{subsubsection.4.8.7}}
 \newlabel{sec:Experiment 7}{{4.8.7}{34}{Experiment 7:2017-UNIF Comparision (parallel)}{subsubsection.4.8.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces }}{34}{figure.11}}
-\newlabel{Experiment 6 COMBINE}{{11}{34}{}{figure.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces }}{34}{figure.12}}
+\newlabel{Experiment 6 COMBINE}{{12}{34}{}{figure.12}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{35}{section.5}}
 \newlabel{sec:conc}{{5}{35}{Conclusion}{section.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Further work}{35}{subsection.5.1}}

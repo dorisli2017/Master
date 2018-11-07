@@ -17,8 +17,8 @@
 \contentsline {subsection}{\numberline {2.6}Our swpSAT solver}{10}{subsection.2.6}
 \contentsline {section}{\numberline {3}Our Parallel Algorithm}{11}{section.3}
 \contentsline {subsection}{\numberline {3.1}1st Approach: The pure portfolio approach}{11}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}2nd Approach: Solve Order of clauses}{11}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}3nd Approach: Assignment combination}{12}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.2}2nd Approach: Solver with formula partitioning}{11}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}3nd Approach: Solver with combination of sub-assignments}{12}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}
 \contentsline {section}{\numberline {4}Evaluation}{15}{section.4}
 \contentsline {subsection}{\numberline {4.1}DIMACS standard format}{15}{subsection.4.1}
