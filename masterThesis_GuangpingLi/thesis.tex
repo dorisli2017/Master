@@ -641,37 +641,8 @@ If one variable is assigned with different values in different sub-solutions, th
 \\ In experiments, we compare these two policies. Neither policy can bring a better performance compared with our \emph{swpSAT} solver. The \emph{partitionCombine} process suffers from repeated flips and may not terminate. The possible reason is that the slave threads tend to make the variables in other partitioning set the critical ones. Because flippings of these varibales will not break any clauses in the corresponding partitioning set of the threads.
  
 \subsection{4th Approach: Initialization with a guide of formula partitioning}
+\label{sec:4th}
 After the analysis of the failures in the two approaches above, we came up with this approach, in which the formula partitioning information is only used to get an initial solution, and the further search in the whole problem is the same as our pure portfolio approach. A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared among the agents encourages the further search to flip non-critical variables in clauses. \\
-\\
-\begin{algorithm}[H]
-\SetKwInOut{Input}{input}
-\SetKwInOut{Output}{output}
-\SetKwInOut{Parameter}{parameter}
- \Input{A CNF Formula $F$, number of Processors $n_p$ }
- \Parameter{$Timeout$}
- \Output{a satisfying assignment $A$}
-  $sat_0 \leftarrow false$\;
-  $sat_1 \leftarrow false$\;
-  $sat \leftarrow false$\;
-  $A \leftarrow initAssign(F)$\;
- \ForEach{$(Processor_t$ for $t \in \{1, .., n_p\})$}{
-    $A_t \leftarrow A$\;
-     $i\leftarrow t\%2$\;
-    //The search swpSAT($P_i$) will be interrupted if \emph{$sat_i$} is set to true. \;
-     // If a satisfying sub-assignment is found, it will be written in the\;
-    //  assignment $A$ in shared memory.\;
-	swpSAT($P_i$)\;
-	swpSAT($P_{1-i}$) \;
- \While {$(!sat$  $ \land$ !Timeout$)$}{
-     $A_t \leftarrow A$\;
- 	 swpSAT($F$)\;
- 	 $sat\leftarrow true$\;
- }
- }
- \caption{Our parallel solver}
-\end{algorithm}  
-
-
 
 \clearpage
 \section{Evaluation} 
@@ -891,12 +862,11 @@ Experiment 1 compares three strategies of initialization in our solver. The orig
 \end{center}
 %\end{minipage}
 \end{table} 
-\clearpage
 \begin{figure}[H]
  \label{Experiment cactus}
-  \includegraphics[scale =0.8]{DATA/K3/e1.pdf}
-  \includegraphics[scale = 0.8]{DATA/K5/e1.pdf}
-  \includegraphics[scale = 0.8]{DATA/K7/e1.pdf}
+  \includegraphics[scale =1]{DATA/K3/e1.pdf}
+  \includegraphics[scale = 1]{DATA/K5/e1.pdf}
+  \includegraphics[scale = 1]{DATA/K7/e1.pdf}
   \label{Experiment 1 k357 cactus plot}
   \caption{Three suggestions have very similar performance for 3SAT problems. In our solver, we use \emph{RandomInit} for 3SAT because of its simplicity. Two bias suggestions show advantages especially for huge 5SAT instances. For 7SAT problems, the two random initialization are similar in performance, while the bias initialization shows its efficiency.}
 \end{figure}
@@ -935,12 +905,11 @@ To make the selection more greedily, we use a random walk to choose policy betwe
 \end{center}
 %\end{minipage}
 \end{table} 
-\clearpage
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 0.8]{DATA/K3/e2.pdf}
-    \includegraphics[scale = 0.8]{DATA/K5/e2.pdf}
-      \includegraphics[scale = 0.8]{DATA/K7/e2.pdf}
+  \includegraphics[scale = 1]{DATA/K3/e2.pdf}
+    \includegraphics[scale = 1]{DATA/K5/e2.pdf}
+      \includegraphics[scale = 1]{DATA/K7/e2.pdf}
 
   \end{center}
   \caption{Our suggestions are faster than the \emph{probSAT} algorithm in 3SAT problems. The \emph{Averrage} shows an improvement except for a few trivial small instances. For 5SAT problems, the improvement through our suggestions are obvious. They can efficiently solve more problems. For 7SAT problems, the \emph{Walk} and \emph{Average} have generally worse inperformance. The \emph{Random-Flip} can solve the same number of problems as the original \emph{probSAT} and has shown littel improvement in performance within $125$ seconds.}
@@ -1104,9 +1073,9 @@ We count in the search the total number of flips for a problem set. There are no
 \clearpage
   \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 0.8]{DATA/K3/e4.pdf}
-    \includegraphics[scale = 0.8]{DATA/K5/e4.pdf}
-  \includegraphics[scale = 0.8]{DATA/K7/e4.pdf}
+  \includegraphics[scale = 1]{DATA/K3/e4.pdf}
+    \includegraphics[scale = 1]{DATA/K5/e4.pdf}
+  \includegraphics[scale =1]{DATA/K7/e4.pdf}
   \end{center}
   \label{Experiment 9 k3 cactus plot}
   \end{figure}
@@ -1120,7 +1089,9 @@ We count in the search the total number of flips for a problem set. There are no
   \clearpage
   \subsubsection{Experiment 5: The pure portfolio approach} 
   \label{sec:Experiment 5}
-Our parallel implementation uses \emph{OpenMP} to support shared memory multiprocessing. In our local \emph{C++} Implementation, we use the function \emph{rand}() in the standard library to generate pseudo-random integer. This function is not thread-safe. To implement a deterministic parallel implementation, we use \emph{rand}()  for in the first thread and use the thread-safe random engine in \emph{C++} for random value generation in other threads. Based on our experiments, the sequential implementation with the simple \emph{rand}() function has the best performance for the whole set. But there is no one random generator that are advantages for all the problems. This approach takes advantage of the differences of random generator in performance. The threads execute the \emph{swpSAT} with different random engines in parallel. If one thread find a satisfying assignment,the whole parallel search can stop. With our experiment, the parallel search gets a performance like the minimum runtime of one-thread local search with different random value engines. \\
+Our parallel implementation uses \emph{OpenMP} to support shared memory multiprocessing. In the \emph{C++} implementation of our local solver, we use the function \emph{rand}() in the standard library to generate pseudo-random integers. This function is not thread-safe. To implement a deterministic parallel implementation, we use \emph{rand}()  for in the first thread and use the thread-safe random engine in \emph{C++} for random value generation in other threads. Based on our experiments, the sequential implementation with the simple \emph{rand}() function has the best performance for the whole set. But there is no single random generator that is advantageous for all the problems.\\
+\\
+ This approach takes advantage of the differences of random generator in performance. The threads execute the \emph{swpSAT} with different random engines in parallel. If one thread find a satisfying assignment, the whole parallel search will be stopped.\\
 \begin{table}[h!]
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{1cm}|}
@@ -1131,15 +1102,36 @@ $ranlux24$&$ranlux48$&$knuth\_b$\\ \hline
 $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \end{tabular}
 \end{center}
-\caption{Pseudo-random number generators in use}
+\caption{Pseudo-random number generators in use. In our pure portfolio approach, we set 11 threads, each of which uses a random generator for generation of all boolean and integer values in the whole search process.}
 \end{table} 
-TODO: Table
+
+   \begin{table}[H]
+   \label{tab:UNIF}
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{3cm}|}
+\hline 
+
+    k &\emph{swpSAT}&\emph{pure portfolio}&Speedup&Efficiency\\ \hline      
+    3 &12971.3&7426.9 & 1.75& 0.16 \\ 
+    &59&69&&\\ \hline
+    5&8339.98&5185.75&1.61&0.14\\ 
+    &89&94&&\\ \hline
+    7&13406.26&2853.81&4.70&0.43\\
+    &66&83&&\\ \hline
+	
+\end{tabular}
+\end{center}
+\caption{Our pure portfolio approach can solve more problems compared to our local swpSolver.  The ratio of the sequential execution time to the parallel execution time is shown in the column Speedup. According to the speedup values, our pure portfolio parallel approach accelerates the process.  Another metric to measure the performance of a parallel algorithm, efficiency, is defined as the ratio of speedup to the number of threads. The best speedup and efficiency values we got are the ones in the 7SAT problem set. 
+}
+%\end{minipage}
+\end{table}
 
   \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 0.8]{Parallel/K3/e1.pdf}
-    \includegraphics[scale = 0.8]{Parallel/K5/e1.pdf}
-  \includegraphics[scale = 0.8]{Parallel/K7/e1.pdf}
+  \includegraphics[scale = 1]{Parallel/K3/e1.pdf}
+    \includegraphics[scale = 1]{Parallel/K5/e1.pdf}
+  \includegraphics[scale = 1]{Parallel/K7/e1.pdf}
   \end{center}
     \label{Experiment 5 all cactus plot}
     \caption{The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver  can solve $30\%$ more problems in same time. }
@@ -1147,22 +1139,56 @@ TODO: Table
   \clearpage
 \subsubsection{Experiment 6: Initialization with a guide of formula partitioning} 
 \label{sec:Experiment 6}
+A file of  \emph{COMBINE}  benchmark file contains a combination of two UNIF problems and a relatively small intersection between them. So according to the number of vertices in two partitioning sets, the solver can easily divide the clauses into $H_0$, $H_1$, and intersection $I$. 
+This experiment simulated a situation, in which the SAT problem is form some real-world application and a proper partitioning is available. \\
+In this experiment, we solve the \emph{COMBINE} benchmark with the 4th parallel approach (see \ref{sec:4th}).\\ In the initialization phase, two slaver threads solve the partitioning sets in parallel and then use the assignment without conflicts in both partitioning sets as the initial solution. This approach is called \emph{FeinInit} in the following.
+The pseudocode of the approach is shown below:\\
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula $F$ }
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $sat \leftarrow false$\;
+  $A \leftarrow initAssign(F)$\;
+ \ForEach{$(Processor_t$ for $t \in \{0,1\})$}{
+    $A_t \leftarrow A$\;
+     // If a satisfying sub-assignment is found, it will be written in the\;
+    //  assignment $A$ in shared memory.\;
+	swpSAT($P_i$)\;
+ \While {$(!sat$  $ \land$ !Timeout$)$}{
+     $A_t \leftarrow A$\;
+ 	 swpSAT($F$)\;
+ 	 $sat\leftarrow true$\;
+ }
+ }
+ \caption{FeinInit}
+\end{algorithm}  
+
+
 \begin{table}[h!]
 %\begin{minipage}{\textwidth}                                                                                         
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{1cm}|}
 \hline 
-    Solver &$3-3(big)$&$3-3(small)$&$3-5$&$5-5$&$5-7$\\ \hline
-   	swpSAT &1861.73	&7955.19 &-	&2748.13&-\\ \hline
-    FineInit& 501.78 (26.95\%)& 1734.79 (21.81\%) &-&621.47(22.61\%)&- \\ \hline
-     \hline
-    Solver & $7-7$ & BIG & SMALL & COMBINE &\\ \hline
-    swpSAT &3276.39	&	2794.15 &15579.71& 18373.86&\\ \hline
-    FineInit&376.06 (11.48\% )&902.69(32.31\%) & 3099.02(19.89\%)&4001.71(21.78\%)&\\ \hline
+    problems &\emph{swpSAT}&FineInit&Speedup&Efficiency\\ \hline
+    $3-3$(big)&1861.73 &501.78&3.71&1.86\\ \hline
+    $3-3$(small)&7955.19& 1734.79& 4.59&2.30\\ \hline
+    $3-5$&-&-&-&-\\ \hline
+    $5-5$&2748.13&621.47&4.42&2.21\\ \hline
+    $5-7$&-&-&-&-\\ \hline
+    $7-7$&3276.39&376.06&8.71&4.36\\ \hline
+    BIG&2794.15&902.69&3.10& 1.55\\ \hline
+    SMALL&15579.71&3099.02&5.03&2.52\\ \hline
+    COMBINE&18373.86&4001.71&4.59& 2.30\\ \hline
 \end{tabular}
 \end{center}
+\caption{We compare our local swpSolver and our 4th approach of the parallel solver, which is referred as FeinInit in this table. This approach get a super-linear speedup due to the  guide of formula partition information. }
 %\end{minipage}
 \end{table} 
+
 
  \begin{figure}[H]
 \begin{center}
@@ -1170,12 +1196,60 @@ TODO: Table
     \includegraphics[scale = 1]{DATA/SMALL/a4.pdf}
     \includegraphics[scale = 1]{DATA/COMBINE/a4.pdf}
   \end{center}
-  \caption{}
+  \caption{The green curve represents the half of execution times with swpSolver. With a comparison of the swpSAT-half curve and the FineInit curve, the Efficiency of our femininity solver with two threads are shown in figures. Our FineInit solver get a super-linear efficiency for problems with relative big intersections (BIG)}
   \label{Experiment 6 COMBINE}
   \end{figure} 
 \clearpage
-\subsubsection{Experiment 7:2017-UNIF Comparision (parallel)} 
+\subsubsection{Experiment 7:2017-UNIF Comparison (parallel)} 
 \label{sec:Experiment 7}
+Our final parallel solver uses \emph{FeinInit} as initialization. Then the pure portfolio approach tries different search paths. The pseudocode is shown below.\\
+\\
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula $F$, number of Processors $n_p$ }
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $sat_0 \leftarrow false$\;
+  $sat_1 \leftarrow false$\;
+  $sat \leftarrow false$\;
+  $A \leftarrow initAssign(F)$\;
+ \ForEach{$(Processor_t$ for $t \in \{1, .., n_p\})$}{
+    $A_t \leftarrow A$\;
+     $i\leftarrow t\%2$\;
+    //The search swpSAT($P_i$) will be interrupted if \emph{$sat_i$} is set to true. \;
+     // If a satisfying sub-assignment is found, it will be written in the\;
+    //  assignment $A$ in shared memory.\;
+	swpSAT($P_i$)\;
+	swpSAT($P_{1-i}$) \;
+ \While {$(!sat$  $ \land$ !Timeout$)$}{
+     $A_t \leftarrow A$\;
+ 	 swpSAT($F$)\;
+ 	 $sat\leftarrow true$\;
+ }
+ }
+ \caption{Our parallel solver}
+\end{algorithm}  
+
+A \emph{UNIF} problem is generated uniform randomly. It is hard to get a relatively balanced partitioning with a small intersection. In this experiment, we test our final parallel solver on the \emph{UNIF}  benchmark with one certain partitioning. We separate the vertices according their indices in two partition set. All vertices $v_i$ with $i <\frac{numV}{2}$  belong to $P_0$. Otherweise, vertices with indices bigger than $\frac{numV}{2}$  belong to $P_1$.
+ \begin{table}[H]
+%begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l||l|l|l||l|l|l|p{3cm}|}
+\hline 
+   k &\emph{swpSolver}&\emph{swp-4}&Speedup& Efficiency&\emph{swp-11}&Speedup& Efficiency\\ \hline      
+    3 &4990.53&3350.36&1.49&0.37&2376.26&2.10&0.19 \\
+     &19 &21&&&24&& \\ \hline
+    5&3109.75	&2535.86&1.23&0.31&1115.99&2.79&0.25\\ 
+    &29&30&&&33&&\\ \hline
+    7& 4974.01&3874.51	&1.28&0.32&1076.26&4.62&0.42\\ 
+    &21&22&&&27&&\\ \hline
+    \end{tabular}
+\end{center}
+
+%\end{minipage}
+\end{table}
 
  \begin{figure}[H]
 \begin{center}
@@ -1192,14 +1266,15 @@ TODO: Table
 \label{sec:conc}
 Local search is a universally applicable approach to solve random SAT problems. We present a stochastic local search algorithm with the cooperation of \emph{walkSAT} and \emph{probSAT}.\\
 \\
-In section 3, we discussed the basic scheme of our sequential algorithm. In, we compare the original \emph{probSAT} with a randomly generated initial solution and our version based on the occurrence of os literals in formel. Based on our experiment, our initialization is advantages n the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and use the robustness of the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the \emph{probSAT} algorithm. \\
-Based on the performance of these searches in kSAT problems, we get our swpSAT solver, which combines the advantages of the local searches. \\
+In section \ref{sec:local} we discussed the basic scheme of our sequential algorithm. We compare the original \emph{probSAT} with a randomly generated initial solution and our initialization which is based on the occurrence of literals in formula. Based on our experiments, our initialization is advantages in the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the \emph{probSAT} algorithm. \\
+Based on the performance of these searches in \emph{UNIF} problems, we get our \emph{swpSAT} solver, which combines the advantages of the local searches. \\
 \\
-In section 4, we make our swpSAT solver parallel with different approaches. Most problems get similar results with the different seed of one random generator. However, the formulas get different results with different random generation. With this fact, we make the parallel version of our local search, in which the agents run the search with different random generators and then take advantages of the suitable one.\\
-In the following part of this section, we discussed the combination of formula partitioning and our parallel solver. After trying several approaches with failure, we found the way of using formula partitioning to make a fine initial solution save search time and furthermore solve more problems. Our experiments evaluate the hyperthesis that the formula partitioning information can guide the local search and improve the efficiency in the parallel search.
+In section \ref{sec:parallel}, we make our \emph{swpSAT} solver parallel with different approaches. Most formulas get different results with different random generation. With this fact, we make the parallel version of our local search, in which the agents run the search with different random generators.\\
+In the following part of this section, we discussed the combination of formula partitioning and our parallel solver. After trying several approaches with failures, we found the way of using formula partitioning to make a fine initial solution. This approach saves search time.  Furthermore, it solves more problems. Our experiments evaluate the hyperthesis that the formula partitioning information can guide the local search and improve the efficiency in the parallel search.
 \subsection{Further work}
+
 \clearpage
 \section{Bibliography}
 \bibliographystyle{ieeetr}
 \bibliography{references}
-\end{document}
+\end{document}1

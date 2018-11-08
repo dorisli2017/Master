@@ -20,22 +20,22 @@
 \contentsline {subsection}{\numberline {3.2}2nd Approach: Solver with formula partitioning}{11}{subsection.3.2}
 \contentsline {subsection}{\numberline {3.3}3nd Approach: Solver with combination of sub-assignments}{12}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}4th Approach: Initialization with a guide of formula partitioning}{13}{subsection.3.4}
-\contentsline {section}{\numberline {4}Evaluation}{15}{section.4}
-\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{15}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Benchmarks}{15}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Used plots and tables}{16}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Random Seeds used in Experiments}{16}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Soft- and Hardware}{16}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Parameter Settings in Experiment}{17}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}COMBINE Benchmark Generation}{17}{subsection.4.7}
-\contentsline {subsection}{\numberline {4.8}Experiments}{20}{subsection.4.8}
-\contentsline {subsubsection}{\numberline {4.8.1}Experiment 1: initAssign(F)}{20}{subsubsection.4.8.1}
-\contentsline {subsubsection}{\numberline {4.8.2}Experiment 2: pickVar(F)}{22}{subsubsection.4.8.2}
-\contentsline {subsubsection}{\numberline {4.8.3}Experiment 3: Simulated Annealing}{24}{subsubsection.4.8.3}
-\contentsline {subsubsection}{\numberline {4.8.4}Experiment 4: 2017-UNIF Comparision (local)}{28}{subsubsection.4.8.4}
-\contentsline {subsubsection}{\numberline {4.8.5}Experiment 5: The pure portfolio approach}{30}{subsubsection.4.8.5}
-\contentsline {subsubsection}{\numberline {4.8.6}Experiment 6: Initialization with a guide of formula partitioning}{32}{subsubsection.4.8.6}
-\contentsline {subsubsection}{\numberline {4.8.7}Experiment 7:2017-UNIF Comparision (parallel)}{34}{subsubsection.4.8.7}
+\contentsline {section}{\numberline {4}Evaluation}{14}{section.4}
+\contentsline {subsection}{\numberline {4.1}DIMACS standard format}{14}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Benchmarks}{14}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Used plots and tables}{15}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Random Seeds used in Experiments}{15}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Soft- and Hardware}{15}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Parameter Settings in Experiment}{16}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.7}COMBINE Benchmark Generation}{16}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.8}Experiments}{19}{subsection.4.8}
+\contentsline {subsubsection}{\numberline {4.8.1}Experiment 1: initAssign(F)}{19}{subsubsection.4.8.1}
+\contentsline {subsubsection}{\numberline {4.8.2}Experiment 2: pickVar(F)}{21}{subsubsection.4.8.2}
+\contentsline {subsubsection}{\numberline {4.8.3}Experiment 3: Simulated Annealing}{23}{subsubsection.4.8.3}
+\contentsline {subsubsection}{\numberline {4.8.4}Experiment 4: 2017-UNIF Comparision (local)}{27}{subsubsection.4.8.4}
+\contentsline {subsubsection}{\numberline {4.8.5}Experiment 5: The pure portfolio approach}{29}{subsubsection.4.8.5}
+\contentsline {subsubsection}{\numberline {4.8.6}Experiment 6: Initialization with a guide of formula partitioning}{31}{subsubsection.4.8.6}
+\contentsline {subsubsection}{\numberline {4.8.7}Experiment 7:2017-UNIF Comparison (parallel)}{33}{subsubsection.4.8.7}
 \contentsline {section}{\numberline {5}Conclusion}{35}{section.5}
 \contentsline {subsection}{\numberline {5.1}Further work}{35}{subsection.5.1}
 \contentsline {section}{\numberline {6}Bibliography}{36}{section.6}
