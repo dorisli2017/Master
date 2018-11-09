@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  9 NOV 2018 17:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  9 NOV 2018 23:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2270,20 +2270,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 1205--1233
 
  []
 
+
+Underfull \hbox (badness 10000) in paragraph at lines 1235--1254
+
+ []
+
 <images/Parallel/K3/e2.pdf, id=768, 361.35pt x 216.81pt>
 File: images/Parallel/K3/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K3/e2.pdf>
-Package pdftex.def Info: images/Parallel/K3/e2.pdf  used on input line 1257.
+Package pdftex.def Info: images/Parallel/K3/e2.pdf  used on input line 1258.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 <images/Parallel/K5/e2.pdf, id=769, 361.35pt x 216.81pt>
 File: images/Parallel/K5/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K5/e2.pdf>
-Package pdftex.def Info: images/Parallel/K5/e2.pdf  used on input line 1258.
+Package pdftex.def Info: images/Parallel/K5/e2.pdf  used on input line 1259.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 <images/Parallel/K7/e2.pdf, id=770, 361.35pt x 216.81pt>
 File: images/Parallel/K7/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K7/e2.pdf>
-Package pdftex.def Info: images/Parallel/K7/e2.pdf  used on input line 1259.
+Package pdftex.def Info: images/Parallel/K7/e2.pdf  used on input line 1260.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2303,27 +2308,27 @@ tiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/Parallel/K7/e2.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1268--1275
+Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1268--1275
+Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1276--1279
+Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1280--1282
+Underfull \hbox (badness 10000) in paragraph at lines 1281--1283
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1283--1285
+Underfull \hbox (badness 10000) in paragraph at lines 1284--1286
 
  []
 
@@ -2336,11 +2341,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 1283--1285
 ) [36
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1292.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1292.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1293.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1293.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1292.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1292.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1293.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1293.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 4D84AB5D46F02033DC498D56C60B613A;7804.
@@ -2350,12 +2355,12 @@ Package rerunfilecheck Info: File `thesis.brf' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1292.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1293.
  ) 
 Here is how much of TeX's memory you used:
  27547 strings out of 492982
  481366 string characters out of 6134895
- 635826 words of memory out of 5000000
+ 635840 words of memory out of 5000000
  30354 multiletter control sequences out of 15000+600000
  96235 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2376,7 +2381,7 @@ xmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
 ts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (44 pages, 809812 bytes).
+Output written on thesis.pdf (44 pages, 809665 bytes).
 PDF statistics:
  977 PDF objects out of 1000 (max. 8388607)
  813 compressed objects within 9 object streams

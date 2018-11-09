@@ -1,8 +1,8 @@
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
-\headcommand {\sectionentry {1}{Presentation}{2}{Presentation}{0}}
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
+\headcommand {\sectionentry {1}{Presentation}{2}{Presentation}{0}}
 \headcommand {\slideentry {1}{0}{1}{2/3}{}{0}}
 \headcommand {\beamer@framepages {2}{3}}
 \headcommand {\slideentry {1}{0}{2}{4/4}{}{0}}
@@ -67,4 +67,4 @@
 \headcommand {\beamer@subsectionpages {2}{32}}
 \headcommand {\beamer@sectionpages {2}{32}}
 \headcommand {\beamer@documentpages {32}}
-\headcommand {\def \inserttotalframenumber {31}}
+\headcommand {\gdef \inserttotalframenumber {31}}

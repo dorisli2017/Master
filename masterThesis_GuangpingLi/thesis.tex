@@ -693,7 +693,7 @@ To make our experiments results reproducible and robust, we repeat our tests wit
     solver&name&seed 1&seed 2&seed 3 \\ \hline
 	\emph{probSAT}&probsat&1988822874&338954226 &858910419 \\ \hline
 	yalSAT &yalsat&1851831967&280788293&1956345180 \\ \hline
-	our local solver & local&1962042455&1112841915&566263966 \\ \hline
+	our local/parallel solver & local&1962042455&1112841915&566263966 \\ \hline
 	
 \end{tabular}
 \caption[probSAT]{Seeds in our solvers and competitors}
@@ -729,7 +729,7 @@ The \emph{TimeOut} is set to 5 Minutes in our experiments.  For the \emph{probSA
 %\end{minipage}
 \end{table}
 \subsection{COMBINE Benchmark Generation}
-To combine the formula partitioning and SAT local solver, we tried to get a relatively balanced partitioning with small intersection for the hypergraphgraph representation of benchmark SAT problems.  We tried to get formula partitioning in problems of \emph{UNIF} benchmark using some partitioning algorithms (KaHypar and hmetis). Due to the uniform random generation of this benchmark, these problems do not possess a real-world-like structure. Even with a high imbalance like $0.3$ and high tolerance of intersection size ($50\%$ of edge sizes), the partitioning algorithms take more time than our SAT solver for more than half of the  \emph{UNIF} benchmarks.  To investigate the local search on graphs with proper partitioning, we generate our benchmark /emph{COMBINE}  using the  \emph{UNIF} benchmark instances.  As suggested by the name \emph{COMBINE}, we combine two \emph{UNIF} benchmark instances in one SAT problem and make an intersection for the new generated problem.  To create a satisfiable formula, we build the intersection based on a pair of randomly chosen satisfying assignments of the two \emph{UNIF} problems. To get satisfying assignments of  \emph{UNIF} benchmarks, we run different solvers in SAT competitions including \emph{CSCCSAT}, \emph{DCCASAT}, \emph{score2SAT}, \emph{probSAT}, and \emph{yalSAT}. We do not use our local search to collect satisfying assignments. Otherwise, it is possible that after solving the two partitioning sets individually using our local solver, the assignment is the same as or similar to the one used for the intersection generation.\\
+To combine the formula partitioning and SAT local solver, we tried to get a relatively balanced partitioning with small intersection for the hypergraphgraph representation of benchmark SAT problems.  We tried to get formula partitioning in problems of \emph{UNIF} benchmark using some partitioning algorithms (KaHypar and hmetis). Due to the uniform random generation of this benchmark, these problems do not possess a real-world-like structure. Even with a high imbalance like $0.3$ and high tolerance of intersection size ($50\%$ of edge sizes), the partitioning algorithms take more time than our SAT solver for more than half of the  \emph{UNIF} benchmarks.  To investigate the local search on graphs with proper partitioning, we generate our benchmark \emph{COMBINE}  using the  \emph{UNIF} benchmark instances.  As suggested by the name \emph{COMBINE}, we combine two \emph{UNIF} benchmark instances in one SAT problem and make an intersection for the new generated problem.  To create a satisfiable formula, we build the intersection based on a pair of randomly chosen satisfying assignments of the two \emph{UNIF} problems. To get satisfying assignments of  \emph{UNIF} benchmarks, we run different solvers in SAT competitions including \emph{CSCCSAT}, \emph{DCCASAT}, \emph{score2SAT}, \emph{probSAT}, and \emph{yalSAT}. We do not use our local search to collect satisfying assignments. Otherwise, it is possible that after solving the two partitioning sets individually using our local solver, the assignment is the same as or similar to the one used for the intersection generation.\\
 We combine the \emph{UNIF} problems in consideration of real-world uses. 
 We combine 4 pairs of instances in  3SAT, 5SAT problems and 7SAT problems. Besides that, we consider five combinations between  3SAT and 5SAT instances and three combinations of 5SAT and 7SAT instances. 
 We combine problems in similar vertex size, which corresponds to balanced partitioning in the structure. We also combine one massive problem with a small instance. For the intersection generation part, we generate clauses with three vertices in different partitioning sets. \\
@@ -778,7 +778,7 @@ k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.1-0.4.cnf&	1.30\%\\  \hline
 k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.2-0.2.cnf&	2.52\%\\  \hline
 k7-r59.0.cnf-k7-r87.79-v90.cnf-0.1-0.4-0.2.cnf&	4.88\%\\  \hline
 \end{tabular}
- \caption[Caption for LOF]{COMBINE problems with big intersection ($\frac{numCI}{numC} > 1\%$)\footnotemark}
+ \caption[Caption for LOF]{\emph{COMBINE} problems with big intersection ($\frac{numCI}{numC} > 1\%$)\footnotemark}
 \end{center}
 %\end{minipage}
 \end{table} 
@@ -1066,7 +1066,7 @@ We count in the search the total number of flips for a problem set. There are no
 \begin{center}
   \includegraphics[scale = 1]{DATA/UNIF/e5.pdf}
   \end{center}
-  \caption{\emph{swpSAT} gets best performance in UNIF compared with \emph{probSAT} and \emph{yalSAT} }
+  \caption{\emph{swpSAT} gets best performance in \emph{UNIF} compared with \emph{probSAT} and \emph{yalSAT} }
   \label{Experiment 9 all cactus plot}
   \end{figure} 
 \clearpage
@@ -1102,7 +1102,7 @@ $ranlux24$&$ranlux48$&$knuth\_b$\\ \hline
 $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \end{tabular}
 \end{center}
-\caption{Pseudo-random number generators in use. In our pure portfolio approach, we set 11 threads, each of which uses a random generator for generation of all boolean and integer values in the whole search process.}
+\caption{Pseudo-random number generators in use. In our pure portfolio approach, we run 11 threads. Each thread uses a random generator for generation of all boolean and integer values in the whole search process.}
 \end{table} 
 
    \begin{table}[H]
@@ -1122,7 +1122,7 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 	
 \end{tabular}
 \end{center}
-\caption{Our pure portfolio approach can solve more problems compared to our local swpSolver.  The ratio of the sequential execution time to the parallel execution time is shown in the column Speedup. According to the speedup values, our pure portfolio parallel approach accelerates the process.  Another metric to measure the performance of a parallel algorithm, efficiency, is defined as the ratio of speedup to the number of threads. The best speedup and efficiency values we got are the ones in the 7SAT problem set. 
+\caption{Our pure portfolio approach can solve more problems compared to our local \emph{swpSolver}.  The ratio of the sequential execution time to the parallel execution time is shown in the column Speedup. According to the speedup values, our pure portfolio parallel approach accelerates the process.  Another metric to measure the performance of a parallel algorithm, namely efficiency, is defined as the ratio of speedup to the number of threads. The best speedup and efficiency values we got are the ones in the 7SAT problem set. 
 }
 %\end{minipage}
 \end{table}
@@ -1134,14 +1134,14 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
   \includegraphics[scale = 1]{Parallel/K7/e1.pdf}
   \end{center}
     \label{Experiment 5 all cactus plot}
-    \caption{The pure portfolio approach can get better performances and efficiencies in whole process. Expecially for 7SAT oroblems, the parallel solver  can solve $30\%$ more problems in same time. }
+    \caption{The pure portfolio approach can get better performances and efficiencies in whole problem set. Expecially for 7SAT problems, the parallel solver  can solve $30\%$ more problems in the same amount of execution time. }
   \end{figure}
   \clearpage
 \subsubsection{Experiment 6: Initialization with a guide of formula partitioning} 
 \label{sec:Experiment 6}
-A file of  \emph{COMBINE}  benchmark file contains a combination of two UNIF problems and a relatively small intersection between them. So according to the number of vertices in two partitioning sets, the solver can easily divide the clauses into $H_0$, $H_1$, and intersection $I$. 
-This experiment simulated a situation, in which the SAT problem is form some real-world application and a proper partitioning is available. \\
-In this experiment, we solve the \emph{COMBINE} benchmark with the 4th parallel approach (see \ref{sec:4th}).\\ In the initialization phase, two slaver threads solve the partitioning sets in parallel and then use the assignment without conflicts in both partitioning sets as the initial solution. This approach is called \emph{FeinInit} in the following.
+A file of  \emph{COMBINE}  benchmark contains a combination of two UNIF problems and a relatively small intersection between them. So according to the number of vertices in two partitioning sets, the solver can easily divide the clauses into $H_0$, $H_1$, and intersection $I$. 
+This experiment simulated a situation, in which the SAT problem is from some real-world application and a proper partitioning is available. \\
+In this experiment, we solve the \emph{COMBINE} benchmark with the 4th parallel approach (see \ref{sec:4th}).\\ In the initialization phase, two slave threads solve the partitioning sets in parallel and then use the assignment without conflicts in both partitioning sets as the initial solution. This approach is called \emph{FineInit} in the following.
 The pseudocode of the approach is shown below:\\
 \\
 \begin{algorithm}[H]
@@ -1164,7 +1164,7 @@ The pseudocode of the approach is shown below:\\
  	 $sat\leftarrow true$\;
  }
  }
- \caption{FeinInit}
+ \caption{FineInit}
 \end{algorithm}  
 
 
@@ -1185,7 +1185,7 @@ The pseudocode of the approach is shown below:\\
     COMBINE&18373.86&4001.71&4.59& 2.30\\ \hline
 \end{tabular}
 \end{center}
-\caption{We compare our local swpSolver and our 4th approach of the parallel solver, which is referred as FeinInit in this table. This approach get a super-linear speedup due to the  guide of formula partition information. }
+\caption{We compare our local swpSolver and our 4th approach of the parallel solver, which is referred as FineInit in this table. This approach gets a super-linear speedup thanks to the  guide of formula partition information. }
 %\end{minipage}
 \end{table} 
 
@@ -1196,13 +1196,13 @@ The pseudocode of the approach is shown below:\\
     \includegraphics[scale = 1]{DATA/SMALL/a4.pdf}
     \includegraphics[scale = 1]{DATA/COMBINE/a4.pdf}
   \end{center}
-  \caption{The green curve represents the half of execution times with swpSolver. With a comparison of the swpSAT-half curve and the FineInit curve, the Efficiency of our femininity solver with two threads are shown in figures. Our FineInit solver get a super-linear efficiency for problems with relative big intersections (BIG)}
+  \caption{The green curve represents the half of execution times with swpSolver. With a comparison of the swpSAT-half curve and the FineInit curve, the efficiency of our \emph{FineInit} solver with two threads are shown in figures. Our FineInit solver get a super-linear efficiency for problems with relative big intersections.}
   \label{Experiment 6 COMBINE}
   \end{figure} 
 \clearpage
 \subsubsection{Experiment 7:2017-UNIF Comparison (parallel)} 
 \label{sec:Experiment 7}
-Our final parallel solver uses \emph{FeinInit} as initialization. Then the pure portfolio approach tries different search paths. The pseudocode is shown below.\\
+Our final parallel solver uses \emph{FineInit} as initialization. Then the pure portfolio approach tries different search paths. The pseudocode is shown below.\\
 \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -1232,8 +1232,9 @@ Our final parallel solver uses \emph{FeinInit} as initialization. Then the pure 
  \caption{Our parallel solver}
 \end{algorithm}  
 
-A \emph{UNIF} problem is generated uniform randomly. It is hard to get a relatively balanced partitioning with a small intersection. In this experiment, we test our final parallel solver on the \emph{UNIF}  benchmark with one certain partitioning. We separate the vertices according their indices in two partition set. All vertices $v_i$ with $i <\frac{numV}{2}$  belong to $P_0$. Otherweise, vertices with indices bigger than $\frac{numV}{2}$  belong to $P_1$.\\
-The solvers in comparison uses a seed, which is generated by the function 
+A \emph{UNIF} problem is generated uniform randomly. It is hard to get a relatively balanced partitioning with a small intersection. In this experiment, we test our final parallel solver on the \emph{UNIF}  benchmark with one certain partitioning. We separate the vertices according their indices in two partition sets. All vertices $v_i$ with $i <\frac{numV}{2}$  belong to $P_0$. The rest vertices belong to $P_1$.\\
+\\
+Random number generator used in solvers for comparison are seeded from system time. 
  \begin{table}[H]
 %begin{minipage}{\textwidth}                                                                                         
 \begin{center}
@@ -1248,7 +1249,7 @@ The solvers in comparison uses a seed, which is generated by the function
     &21&22&&&27&&\\ \hline
     \end{tabular}
 \end{center}
-\caption{With the increasement of the number of threads, our solver can solver more problems.}
+\caption{With the increment of the number of threads, our solver can solver more problems.}
 %\end{minipage}
 \end{table}
 
@@ -1258,33 +1259,33 @@ The solvers in comparison uses a seed, which is generated by the function
     \includegraphics[scale = 1]{Parallel/K5/e2.pdf}
   \includegraphics[scale = 1]{Parallel/K7/e2.pdf}
   \end{center}
-  \caption{For 3SAT and 5SAT problems, more threads the solver processes, more problems are solved. The time used for solving small and medium problems are quite similar. For 7SAT problems, our parallel solver shows advantages in the number of solved problems and also in the runtime.}
+  \caption{For 3SAT and 5SAT problems, the more threads the solver spawns, the more problems are solved. The time used for solving small and medium problems are quite similar. For 7SAT problems, our parallel solver shows advantages in terms of both the number of solved problems and the runtime.}
   \label{Experiment 6 COMBINE}
   \end{figure}
 \clearpage
 \section{Conclusion}
 
 \label{sec:conc}
-Local search is a universally applicable approach to solve random SAT problems. We present a stochastic local search algorithm with the cooperation of \emph{walkSAT} and \emph{probSAT}.\\
+Local search is a universally applicable approach to solve random SAT problems. We presented a stochastic local search algorithm with the incorporation of \emph{walkSAT} and \emph{probSAT}.\\
 \\
-In section \ref{sec:local} we discussed the basic scheme of our sequential algorithm. We compare the original \emph{probSAT} with a randomly generated initial solution and our initialization which is based on the occurrence of literals in formula. Based on our experiments, our initialization is advantages in the number of solved problems and also in the execution time of the search. To get the advantage of the greedy algorithm and the stochastic process, we introduce the data structure statistic list to guide the decision between these two processes in step $pickVar()$. Here we propose some variants to make the distinction between greedy choice and a random choice. Generally, our local searches get better performance than the \emph{probSAT} algorithm. \\
-Based on the performance of these searches in \emph{UNIF} problems, we get our \emph{swpSAT} solver, which combines the advantages of the local searches. \\
+In section \ref{sec:local} we discussed the basic scheme of our sequential algorithm. We oprimized the assignment initialization. As shown in our experiments, our initialization,  which is based on the occurrence of literals in formula, is advantageous with respect to both the number of solved problems and the execution time of the search. To get the advantage of the greedy algorithm and the stochastic process, we introduced a data structure called statistic list to guide the decision between these two processes in step $pickVar()$. Here we proposed some variants to combine greedy choice and statistic heuristic. Generally, our local searches get better performance than the \emph{probSAT} algorithm. \\
 \\
-In section \ref{sec:parallel}, we make our \emph{swpSAT} solver parallel with different approaches. Most formulas get different results with different random generation. With this fact, we make the parallel version of our local search, in which the agents run the search with different random generators.\\
-In the following part of this section, we discussed the combination of formula partitioning and our parallel solver. After trying several approaches with failures, we found the way of using formula partitioning to make a fine initial solution. This approach saves search time.  Furthermore, it solves more problems. Our experiments evaluate the hyperthesis that the formula partitioning information can guide the local search and improve the efficiency in the parallel search.
+Based on the performance of these variants in differnt categories of \emph{UNIF} problems, we got our \emph{swpSAT} solver, which combined the advantages of the local searches. \\
+\\
+In section \ref{sec:parallel}, we parallelized our \emph{swpSAT} solver with different approaches, in which the agents run the search with different random generators. Then we discussed different combinations of formula partitioning with our parallel solver. After trying several approaches with failures, we found that the approcah \emph{FineInit} which used formula partitioning to guide the assignment initialization is able to reduce the time expense.  Furthermore, it solved more problems. Our experiments verified the hyperthesis that the formula partitioning information can guide the local search and improve the efficiency in the parallel search.
 \subsection{Further work}
-While this thesis has demonstrated the potential of cooperation of parallel searches for the
+While this thesis has demonstrated the potential of parallel searches for the
 SAT problem, many opportunities of other investigation directions remain. This section presents some of these directions.
-While this thesis has demonstrated the potential of cooperation of parallel searches for the GCP, many opportunities of other investigation directions remain. This section presents some of these directions.\\
+
 
 \emph{\textbf{Using different  search strategies}}\\
-In our parallel algorithm, we use the stochastic algorithm swpSolver as the subroutine. In further research, the agents can use a different search strategy. It is to investigate, whether a cooperation is beneficial for different local searches.\\
+In our parallel algorithm, we use the stochastic algorithm \emph{swpSolver} as the subroutine. In further research, the agents can use different search strategy. It is meaningful to investigate the cooperation of different local searches.\\
 
 \emph{\textbf{Using different cooperation strategies}}\\
 In this thesis, the cooperation is limited to sub-assignment combination. Some other directions like generic population-based metaheuristic are definitely worth further research.\\
 
 \emph{\textbf{Using different random generation in local search}}\\
-Our parallel solve try different search paths by using different random generation strategies in agents. An interesting topic is the cooperation of these generation strategies in one search.
+Our parallel solver explored different search paths by using different random generation strategies in different agents. An interesting topic is the cooperation of these generation strategies in one sequential search.
 \clearpage
 \section{Bibliography}
 \bibliographystyle{ieeetr}

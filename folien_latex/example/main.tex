@@ -27,8 +27,7 @@
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}	%required to prevent color shifting withd transparent images
 
 
-\title{Solving the Graph Coloring Problem \\with
-Cooperative Local Search}
+\title{SAT Solving with distributed local search}
 \subtitle{Guangping Li -- \textit{uzdif@student.kit.edu}}
 
 \author[Guangping Li]{Guangping Li}
@@ -56,23 +55,22 @@ Cooperative Local Search}
 \begin{frame}
   \frametitle{Outline}
 
-\heading{ \color<beamer:2>{red}{The vertex coloring problem}}
+\heading{ \color<beamer:2>{red}{propositional satisfiability problem (\emph{\textbf{SAT}})}}
   \begin{itemize}
-  \item k-VCP
-  \item VCP
+  \item Notations
+  \item Local Search in SAT Problem
   \end{itemize}
-  
-\heading{The Tabucol algorithm}
-\heading{Solving VCP by Tabucol}
+\heading{Solving SAT by swpSolver}
   \begin{itemize}
   \item Basic scheme
   \item Data structure
   \item Our improvements
   \end{itemize}
-\heading{Our Parallel GCP-solver}
+\heading{Our Parallel SAT-solver}
   \begin{itemize}
-  \item Parameter combinations
-  \item Our approaches
+  \item The pure portfolio approach
+  \item Two failures
+  \item Initialization with a guide of formula partitioning
   \end{itemize}
 \heading{Conclusion}
   
