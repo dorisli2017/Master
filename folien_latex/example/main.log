@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  11 NOV 2018 11:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  11 NOV 2018 16:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1562,7 +1562,11 @@ File: images/titel.png Graphic file (type png)
 <use images/titel.png>
 Package pdftex.def Info: images/titel.png  used on input line 38.
 (pdftex.def)             Requested size: 355.57559pt x 111.11938pt.
- (./main.aux)
+ (./main.aux
+
+LaTeX Warning: Label `a2' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
@@ -1581,8 +1585,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
 LaTeX Font Info:    ... okay on input line 45.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 45.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 45.
@@ -1887,7 +1890,12 @@ Overfull \hbox (0.50392pt too wide) in paragraph at lines 188--188
 
  <./kit_logo_de_4c_positiv.pdf>] [9
 
- <./kit_logo_de_4c_positiv.pdf>] [10
+ <./kit_logo_de_4c_positiv.pdf>]
+LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <15.1181> not available
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 228.
+LaTeX Font Info:    Font shape `T1/phv/b/it' in size <15.1181> not available
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 228.
+ [10
 
  <./kit_logo_de_4c_positiv.pdf>] [11
 
@@ -1949,147 +1957,171 @@ Overfull \vbox (5.47726pt too high) detected at line 340
  <./kit_logo_de_4c_positiv.pdf>] [18
 
  <./kit_logo_de_4c_positiv.pdf>]
-<images/Experiments/E1/imp/impro.pdf, id=199, 361.35pt x 216.81pt>
-File: images/Experiments/E1/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E1/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E1/imp/impro.pdf  used on input lin
-e 360.
-(pdftex.def)             Requested size: 144.53743pt x 86.72246pt.
+<images/DATA/K3/e4.pdf, id=199, 361.35pt x 216.81pt>
+File: images/DATA/K3/e4.pdf Graphic file (type pdf)
+<use images/DATA/K3/e4.pdf>
+Package pdftex.def Info: images/DATA/K3/e4.pdf  used on input line 373.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
+
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 373--373
+[][]  
+ []
 
 [19
 
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E1/imp/impro.pdf>]
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/K3/e4.pdf>]
+<images/DATA/K5/e4.pdf, id=218, 361.35pt x 216.81pt>
+File: images/DATA/K5/e4.pdf Graphic file (type pdf)
+<use images/DATA/K5/e4.pdf>
+Package pdftex.def Info: images/DATA/K5/e4.pdf  used on input line 378.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
+
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 378--378
+[][]  
+ []
+
 [20
 
- <./kit_logo_de_4c_positiv.pdf>]
-File: images/Experiments/E1/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E1/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E1/imp/impro.pdf  used on input lin
-e 385.
-(pdftex.def)             Requested size: 144.53743pt x 86.72246pt.
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/K5/e4.pdf>]
+<images/DATA/K7/e4.pdf, id=236, 361.35pt x 216.81pt>
+File: images/DATA/K7/e4.pdf Graphic file (type pdf)
+<use images/DATA/K7/e4.pdf>
+Package pdftex.def Info: images/DATA/K7/e4.pdf  used on input line 383.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
 
-Overfull \hbox (0.50392pt too wide) in paragraph at lines 385--385
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 383--383
 [][]  
  []
 
 [21
 
- <./kit_logo_de_4c_positiv.pdf>]
-<images/Experiments/E3/imp/impro.pdf, id=236, 361.35pt x 216.81pt>
-File: images/Experiments/E3/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E3/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E3/imp/impro.pdf  used on input lin
-e 400.
-(pdftex.def)             Requested size: 144.53743pt x 86.72246pt.
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/K7/e4.pdf>]
+<images/DATA/UNIF/e5.pdf, id=254, 361.35pt x 216.81pt>
+File: images/DATA/UNIF/e5.pdf Graphic file (type pdf)
+<use images/DATA/UNIF/e5.pdf>
+Package pdftex.def Info: images/DATA/UNIF/e5.pdf  used on input line 389.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
 
-Overfull \hbox (0.50392pt too wide) in paragraph at lines 400--400
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 389--389
 [][]  
  []
 
 [22
 
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E3/imp/impro.pdf>]
-<images/Experiments/E4/imp/impro.pdf, id=254, 361.35pt x 216.81pt>
-File: images/Experiments/E4/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E4/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E4/imp/impro.pdf  used on input lin
-e 415.
-(pdftex.def)             Requested size: 144.53743pt x 86.72246pt.
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/UNIF/e5.pdf>] [23
 
-Overfull \hbox (0.50392pt too wide) in paragraph at lines 415--415
-[][]  
- []
-
-
-Overfull \vbox (5.51811pt too high) detected at line 415
- []
-
-[23
-
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E4/imp/impro.pdf>]
-<images/Experiments/E2/imp/impro.pdf, id=272, 361.35pt x 216.81pt>
-File: images/Experiments/E2/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E2/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E2/imp/impro.pdf  used on input lin
-e 428.
-(pdftex.def)             Requested size: 144.53743pt x 86.72246pt.
-
-Overfull \hbox (0.50392pt too wide) in paragraph at lines 428--428
-[][] 
- []
-
-
-Overfull \hbox (0.50392pt too wide) in paragraph at lines 428--428
-[]  
- []
-
-[24
-
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E2/imp/impro.pdf>]
-[25
-
- <./kit_logo_de_4c_positiv.pdf>] [26
+ <./kit_logo_de_4c_positiv.pdf>] [24
 
  <./kit_logo_de_4c_positiv.pdf>]
+LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <9.12125> not available
+(Font)              Font shape `T1/phv/b/it' tried instead on input line 461.
+LaTeX Font Info:    Font shape `T1/phv/b/it' in size <9.12125> not available
+(Font)              Font shape `T1/phv/b/sl' tried instead on input line 461.
+ [25
+
+ <./kit_logo_de_4c_positiv.pdf>]
+<images/1/a2.png, id=304, 998.73125pt x 528.97626pt>
+File: images/1/a2.png Graphic file (type png)
+<use images/1/a2.png>
+Package pdftex.def Info: images/1/a2.png  used on input line 479.
+(pdftex.def)             Requested size: 179.76385pt x 95.21161pt.
+
+Overfull \vbox (1.68803pt too high) detected at line 479
+ []
+
+[26
+
+ <./kit_logo_de_4c_positiv.pdf> <./images/1/a2.png>]
+<images/1/a3.png, id=315, 1560.83125pt x 552.0625pt>
+File: images/1/a3.png Graphic file (type png)
+<use images/1/a3.png>
+Package pdftex.def Info: images/1/a3.png  used on input line 500.
+(pdftex.def)             Requested size: 234.11458pt x 82.8058pt.
+pdfTeX warning (ext4): destination with the same identifier (name{a2}) has been
+ already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.500 \end{frame}
+                 
+Overfull \vbox (3.40916pt too high) detected at line 500
+ []
+
 [27
 
- <./kit_logo_de_4c_positiv.pdf>] [28
+ <./kit_logo_de_4c_positiv.pdf> <./images/1/a3.png>] [28
 
  <./kit_logo_de_4c_positiv.pdf>]
-[29
+<images/DATA/BIG/a4.pdf, id=334, 361.35pt x 216.81pt>
+File: images/DATA/BIG/a4.pdf Graphic file (type pdf)
+<use images/DATA/BIG/a4.pdf>
+Package pdftex.def Info: images/DATA/BIG/a4.pdf  used on input line 516.
+(pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
+ [29
 
- <./kit_logo_de_4c_positiv.pdf>]
-<images/Experiments/E6/imp/impro.pdf, id=337, 361.35pt x 216.81pt>
-File: images/Experiments/E6/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E6/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E6/imp/impro.pdf  used on input lin
-e 530.
-(pdftex.def)             Requested size: 216.81168pt x 130.08699pt.
-
-Overfull \vbox (7.27368pt too high) detected at line 530
- []
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/BIG/a4.pdf>]
+<images/DATA/SMALL/a4.pdf, id=352, 361.35pt x 216.81pt>
+File: images/DATA/SMALL/a4.pdf Graphic file (type pdf)
+<use images/DATA/SMALL/a4.pdf>
+Package pdftex.def Info: images/DATA/SMALL/a4.pdf  used on input line 521.
+(pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
 
 [30
 
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E6/imp/impro.pdf>]
-<images/Experiments/E7/imp/impro.pdf, id=355, 361.35pt x 216.81pt>
-File: images/Experiments/E7/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E7/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E7/imp/impro.pdf  used on input lin
-e 540.
-(pdftex.def)             Requested size: 216.81168pt x 130.08699pt.
+ <./kit_logo_de_4c_positiv.pdf> <./images/DATA/SMALL/a4.pdf>] [31
 
-[31
-
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E7/imp/impro.pdf>]
-<images/Experiments/E8/imp/impro.pdf, id=374, 361.35pt x 216.81pt>
-File: images/Experiments/E8/imp/impro.pdf Graphic file (type pdf)
-<use images/Experiments/E8/imp/impro.pdf>
-Package pdftex.def Info: images/Experiments/E8/imp/impro.pdf  used on input lin
-e 552.
-(pdftex.def)             Requested size: 216.81168pt x 130.08699pt.
-
-Overfull \vbox (19.56342pt too high) detected at line 552
- []
-
-[32
-
- <./kit_logo_de_4c_positiv.pdf> <./images/Experiments/E8/imp/impro.pdf>]
-[33
-
- <./kit_logo_de_4c_positiv.pdf>] [34
+ <./kit_logo_de_4c_positiv.pdf>] [32
 
  <./kit_logo_de_4c_positiv.pdf>]
-<images/1/thank-you-for-your-attention-any-questions-78.png, id=410, 903.375pt 
+<images/Parallel/K3/e2.pdf, id=389, 361.35pt x 216.81pt>
+File: images/Parallel/K3/e2.pdf Graphic file (type pdf)
+<use images/Parallel/K3/e2.pdf>
+Package pdftex.def Info: images/Parallel/K3/e2.pdf  used on input line 574.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
+
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 574--574
+[][]  
+ []
+
+[33
+
+ <./kit_logo_de_4c_positiv.pdf> <./images/Parallel/K3/e2.pdf>]
+<images/Parallel/K5/e2.pdf, id=407, 361.35pt x 216.81pt>
+File: images/Parallel/K5/e2.pdf Graphic file (type pdf)
+<use images/Parallel/K5/e2.pdf>
+Package pdftex.def Info: images/Parallel/K5/e2.pdf  used on input line 578.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
+
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 578--578
+[][]  
+ []
+
+[34
+
+ <./kit_logo_de_4c_positiv.pdf> <./images/Parallel/K5/e2.pdf>]
+<images/Parallel/K7/e2.pdf, id=425, 361.35pt x 216.81pt>
+File: images/Parallel/K7/e2.pdf Graphic file (type pdf)
+<use images/Parallel/K7/e2.pdf>
+Package pdftex.def Info: images/Parallel/K7/e2.pdf  used on input line 582.
+(pdftex.def)             Requested size: 325.21199pt x 195.12718pt.
+
+Overfull \hbox (1.1641pt too wide) in paragraph at lines 582--582
+[][]  
+ []
+
+[35
+
+ <./kit_logo_de_4c_positiv.pdf> <./images/Parallel/K7/e2.pdf>] [36
+
+ <./kit_logo_de_4c_positiv.pdf>]
+<images/1/thank-you-for-your-attention-any-questions-78.png, id=453, 903.375pt 
 x 803.0pt>
 File: images/1/thank-you-for-your-attention-any-questions-78.png Graphic file (
 type png)
 <use images/1/thank-you-for-your-attention-any-questions-78.png>
 Package pdftex.def Info: images/1/thank-you-for-your-attention-any-questions-78
-.png  used on input line 601.
+.png  used on input line 603.
 (pdftex.def)             Requested size: 180.6718pt x 160.59715pt.
-
-[35
+ [37
 
  <./kit_logo_de_4c_positiv.pdf> <./images/1/thank-you-for-your-attention-any-qu
 estions-78.png (PNG copy)>]
@@ -2102,11 +2134,11 @@ estions-78.png (PNG copy)>]
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 602.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 602.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 604.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 604.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 602.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 602.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 604.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 604.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 7E899718AD52A59387DDBB9939CF8156;47.
 
@@ -2114,30 +2146,35 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.4728pt have occurred.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
  ) 
 Here is how much of TeX's memory you used:
- 32493 strings out of 492982
- 630988 string characters out of 6134895
- 730861 words of memory out of 5000000
- 35317 multiletter control sequences out of 15000+600000
- 631843 words of font info for 145 fonts, out of 8000000 for 9000
+ 32540 strings out of 492982
+ 631372 string characters out of 6134895
+ 730974 words of memory out of 5000000
+ 35347 multiletter control sequences out of 15000+600000
+ 637555 words of font info for 149 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,16n,71p,10414b,942s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,16n,71p,10414b,934s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/mathpazo/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/math
-pazo/fplmri.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on main.pdf (35 pages, 711554 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmss8.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpaz
+o/fplmr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/mathpazo/fplmri.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvbo8a.pfb></usr/share/texlive/
+texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/palatino/uplr8a.pfb>
+Output written on main.pdf (37 pages, 847515 bytes).
 PDF statistics:
- 476 PDF objects out of 1000 (max. 8388607)
- 358 compressed objects within 4 object streams
- 73 named destinations out of 1000 (max. 500000)
- 280 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 528 PDF objects out of 1000 (max. 8388607)
+ 396 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 310 words of extra memory for PDF output out of 10000 (max. 10000000)
 

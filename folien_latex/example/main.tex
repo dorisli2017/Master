@@ -62,7 +62,7 @@
   \item Notations
   \item Local search in SAT problem
   \end{itemize}
-\heading{Solving SAT by swpSolver}
+\heading{Solving SAT by \emph{swpSolver}}
   \begin{itemize}
   \item Basic scheme
   \item Our improvements
@@ -70,7 +70,7 @@
 \heading{Our Parallel SAT-solver}
   \begin{itemize}
   \item The pure portfolio approach
-  \item Two failures
+  \item Failures
   \item Initialization with a guide of formula partitioning
   \end{itemize}
 \heading{Conclusion}
@@ -87,9 +87,9 @@
 	\item propositional variable: variable with two possible logical values  \textit{true} or  \textit{false}
 	\item literal: an atomic formula either be a positive literal $v$ or a negative literal $\bar{v}$.\\
 	\item clause: disjunction of literals.
-	\item CNF-formula: conjunction of clauses.
+	\item CNF-formula: conjunction of clauses
 	\item assignment: $V\rightarrow \{true {, }\; false\}$ 
-	\item SAT problem: to determine whether a given formula is satisfiable or not.  \\
+	\item SAT problem: to determine whether a given formula is satisfiable or not  \\
 	\end{itemize}
 	\end{KITalertblock}
 \end{frame}
@@ -193,7 +193,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
   \item Notations
   \item Local search in SAT problem
   \end{itemize}
-\heading{\color<beamer:1>{red}{Solving SAT by swpSolver}}
+\heading{\color<beamer:1>{red}{Solving SAT by \emph{swpSolver}}}
   \begin{itemize}
   \item Basic scheme
   \item Our improvements
@@ -201,14 +201,14 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \heading{Our Parallel SAT-solver}
   \begin{itemize}
   \item The pure portfolio approach
-  \item Two failures
+   \item Failures
   \item Initialization with a guide of formula partitioning
   \end{itemize}
 \heading{Conclusion}
 \end{frame}
 % blocks continued
 \begin{frame}
-	\frametitle{Solving SAT by swpSolver}
+	\frametitle{Solving SAT by \emph{swpSolver}}
 	\framesubtitle{Basic scheme}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -230,7 +230,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \frametitle{Evaluation}
 \begin{itemize}
 \item 180  benchmark instances used in our experiments are the 180 instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017.
-\item all the clause have the same length in a \emph{UNIF} problem file
+\item all the clause have the same length $k$ in a \emph{UNIF} problem file
 \item to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals
 \item at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable
 \item each experiment is repeated three times
@@ -276,7 +276,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{itemize}
 \item combine the random walk and stochastic selection
 \item pick greedy flips with zero breakcounts with a certain probability $p$.
-\item using the \emph{probSAT} with probability ($1-p$) 
+\item using the \emph{SLS} with probability ($1-p$) 
 \end{itemize}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -300,7 +300,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{frame}
 \frametitle{Variant 1: Walk}
 \begin{itemize}
-\item a statistic list $S$ to record how many times each variable is chosen for flipping.
+\item statistic list $S$: how many times each variable is chosen for flipping
 \item The candidate with the small statistic value will be chosen.
 \item $p = \alpha \times \frac{s(randomV)}{s(greedyV)+s(randomV)}$
 \item Getting the random literals using stochastic process consumes the most runtime.
@@ -311,7 +311,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{itemize}
 \item  \emph{permitted greedy literal}: literal with zero breakcount and its statistic value is under a certain threshold $t$
 \item choose a permitted greedy literal randomly for flipping. 
-\item if no permitted greefy literal exists, we pick a literal using \emph{probSAT} heuristic.
+\item if no permitted greefy literal exists, we pick a literal using \emph{SLS} heuristic.
 \item 1.approach \emph{Average}: $t = \alpha \times \frac{numF}{numV}$
 \item 2.approach \emph{Random-Flip}: $t =\alpha \times r$  with $r \in [0, numF]$.
 \end{itemize}
@@ -327,7 +327,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \end{itemize}
 \end{KITexampleblock}
 \begin{itemize}
-\item Walk:$p = \alpha \times \frac{s(randomV)}{s(greedyV)+s(randomV)}$
+\item Walk: $p = \alpha \times \frac{s(randomV)}{s(greedyV)+s(randomV)}$
 \item Average: $t = \alpha \times \frac{numF}{numV}$
 \item Random-Flip: $t =\alpha \times r$  with $r \in [0, numF]$.
 \item $\alpha = \tau \times (c_b)^{-q(A)}$
@@ -343,258 +343,260 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \frametitle{Evaluation}
 \framesubtitle{pickVar}
 \begin{itemize}
-\item {The 68 graphs used in our experiments are from the DIMACS benchmark collection.}
-\item {The single-threaded experiments were run on computers that had four AMD(R) Opteron(R) processors 6168 (1.9 Ghz with 12 cores) and 256GB RAM. The computers ran the 64-bit version of Ubuntu 12.04.}
-\item{ The multi-threaded experiments were run on fat nodes InstitutsClusterII. IC2 is a distributed memory parallel computer with 480 16-way so-called thin compute nodes and 5 32-way so-called fat compute nodes. The thin nodes are equipped with 16 cores, 64 GB main memory, whereas the fat nodes are equipped with 32 cores, 512 GB main memory.}
-	\end{itemize}
+\item probSAT: 
+\begin{itemize}
+\item implemented by the authors of the original paper
+\item non-incremental approach to the 3SAT problems and incremental method for 5SAT and 7SAT
+\end{itemize}
+\item yalSAT:
+\begin{itemize}
+\item  the third version of yalSAT submitted to the 2017 SAT competition
+\item  uses a variant of \emph{probSAT} randomly in the restart of a searchround
+\end{itemize}
+\end{itemize}
+    \begin{tabular}{|l|l|l|l|l|p{2.5cm}|}
+\hline 
+    k &\emph{probSAT}&\emph{yalSAT}&\emph{Walk}&\emph{Average}&\emph{Random-Flip} \\ \hline      
+    3 &9221.9&17062.35&7430.12&\textbf{6161.11} &7308.01\\ 
+    &55&41&57&\textbf{61}&58\\ \hline
+    5& 7143.9&5676.63&3330.61&\textbf{2939.74}&4003.06\\ 
+    &82&85&\textbf{89}&\textbf{89}&88\\ \hline
+    7& 6238.51&10063.4&5409.67&\textbf{3829.95}&4903.61\\
+    &60&54&61&\textbf{65}&60\\ \hline
+\end{tabular}
 \end{frame}
 
 \begin{frame}
 \frametitle{Evaluation}
-\begin{itemize}
-\item {An advantage plot shows the advantage of an algorithms to another algorithm. The y-axis gives the ordered percentage differences.}
-	\end{itemize}
-	\begin{figure}
-\includegraphics[scale=0.4]{Experiments/E1/imp/impro.pdf}
-\end{figure}
+\framesubtitle{pickVar}
+  \includegraphics[scale = 0.9]{DATA/K3/e4.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{Evaluation}
+\framesubtitle{pickVar}
+    \includegraphics[scale = 0.9]{DATA/K5/e4.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{Evaluation}
+\framesubtitle{pickVar}
+  \includegraphics[scale = 0.9]{DATA/K7/e4.pdf}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Our improvements}
-	\heading{Basic scheme}
-    \begin{itemize}
-    \item Step 1: Initialize Coloring (How to initialize coloring?)
-    \item Step 2: Solve k-VCP (How to improve Tabucol?)
-    \item Step 3: Reduce a color (How to reconstruct coloring?)
-    \end{itemize}
-\end{frame}
-\begin{frame}
-	\frametitle{Solving VCP by Tabucol}
-    \framesubtitle{Step 1:How to initialize coloring?}
-    	\begin{KITexampleblock}{     Our Node-index initialization vs Random initialization }
-\begin{itemize}
-\item
-\textbf{Node-index initialization} is to use c: $v_i \rightarrow i$ as the initial solution. 
-\item
-\textbf{Random initialization} is to build a coloring randomly.
-\end{itemize} 
-\begin{figure}
-\includegraphics[scale=0.4]{Experiments/E1/imp/impro.pdf}
-\end{figure}
-\end{KITexampleblock}
-\end{frame}
-\begin{frame}
-	\frametitle{Solving VCP by Tabucol}
-    \framesubtitle{Step 2: How to improve Tabucol?}
-    \begin{KITexampleblock}{ Our column-traverse vs row-traverse of solution matrix}
-    \begin{itemize}
-\item
-To find next move, the maximum element in the solution matrix must be found. 
-\item If more than one candidate exists, the first found one is chosen as the next step.
-\item This matrix can be traversed row by row or column by column.  
-    \end{itemize} 
- \begin{figure}
-\includegraphics[scale=0.4]{Experiments/E3/imp/impro.pdf}
-\end{figure}   
-\end{KITexampleblock}
-\end{frame}
-\begin{frame}
-	\frametitle{Solving VCP by Tabucol}
-    \framesubtitle{Step 2: How to improve Tabucol?}
-    \begin{KITexampleblock}{ Statistic matrix}
-    \begin{itemize}
-\item The Tabucol algorithm uses a tabu list to avoid short-term cycling.
-\item To recognize long-term cycling, a \emph{statistic matrix S} is added. 
-\item The $S_{ij}$ represents how many times a one-step move $[i,j]$ was chosen as the next step. 
-\item The candidate with the smallest statistic value will be chosen in the next step.  
-    \end{itemize} 
- \begin{figure}
-\includegraphics[scale=0.4]{Experiments/E4/imp/impro.pdf}
-\end{figure}   
-\end{KITexampleblock}
-\end{frame}
-\begin{frame}
-	\frametitle{Solving VCP by Tabucol}
-    \framesubtitle{Step 3: How to reconstruct new coloring?}
-\begin{KITexampleblock}{An observation}
-It seems that the solution loses its potential in the process of reducing colors iteratively. So it should be helpful to use a new and perhaps more potential coloring.
-\end{KITexampleblock}
- \begin{KITexampleblock}{Replace by a randomly generated solution}
-We replace the current illegal solution  occasionally by a new randomly generated coloring of the same size.
- \begin{figure}
-\includegraphics[scale=0.4]{Experiments/E2/imp/impro.pdf}
-\end{figure}   
-\end{KITexampleblock}
+\frametitle{Evaluation}
+\framesubtitle{swpSolver}
+  \includegraphics[scale = 0.9]{DATA/UNIF/e5.pdf}
 \end{frame}
 \begin{frame}
   \frametitle{Outline}
 
-\heading{The vertex coloring problem}
+\heading{Propositional Satisfiability Problem (\emph{\textbf{SAT}})}
   \begin{itemize}
-  \item k-VCP
-  \item VCP
+  \item Notations
+  \item Local search in SAT problem
   \end{itemize}
-\heading{{The Tabucol algorithm}}
-\heading{Solving VCP by Tabucol}
+\heading{Solving SAT by \emph{swpSolver}}
   \begin{itemize}
   \item Basic scheme
   \item Our improvements
   \end{itemize}
-\heading{\color<beamer:1>{red}{Our Parallel GCP-solver}}
+\heading{\color<beamer:1>{red}{Our Parallel SAT-solver}}
   \begin{itemize}
-  \item Parameter combinations
-  \item Our approaches
+  \item The pure portfolio approach
+  \item Failures
+  \item Initialization with a guide of formula partitioning
   \end{itemize}
-        \heading{Conclusion}
+\heading{Conclusion}
+  
 \end{frame}
 \begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{Parameter combinations}
-    \begin{itemize}
-    \item Most graphs get better results with the our suggestions. 
-\item Some graphs get better results with the original GCP-solver.
-    \item The agents run with different combinations of the suggestions ($L$, $\alpha$, the search directions and whether a statistic matrix is introduced).
-    \end{itemize}
-\end{frame}
-\begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{Parameter combinations}
-    \small
-      \begin{tabular}{| l | l l l l l l |p{2cm}|}
-   \hline
-Index&L& $\alpha$ &Initialization&Replace&Traverse& Statistic\\ \hline
-1&9 &0.38 &Node-Index&true&Column&true\\
-2&1 &0.77&Node-Index&true&Column&true\\
-3&11 &0.90&Node-Index&true&Column&true \\
-4&17 &0.59&Random&true&Column&true \\
-5&18 &0.42&Node-Index&false&Column&false\\\hline
-6&4 &0.92&Node-Index&true&Column&true \\
-7&16 &0.76&Node-Index&false&Row&false\\
-8&17 &0.47&Node-Index&false&Column&false\\
-9&2 &0.60&Node-Index&true&Column&false\\
-10&2 &0.54&Node-Index&false&Column&true\\\hline
-11&5 &0.46&Random&true&Column&true\\
-12&11 &0.63&Random&true &Column&true\\
-13&7 &0.83&Node-Index&true&Column&true\\
-14&8 &0.98&Node-Index&false &Row&true\\
-15&18 &0.58&Node-Index&true&Column&false \\
-16&13 &0.90&Node-Index&false&Column&true \\\hline
-    \end{tabular}
-\end{frame}
-\begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{Parameter combinations}
-    \small
-      \begin{tabular}{| l | l l l l l l |p{2cm}|}
-   \hline
-Index&L& $\alpha$ &Initialization&Replace&Traverse& Statistic\\ \hline
-
-17&20 &0.56&Node-Index&true &Column&false\\
-18&10&0.95&Node-Index&true &Column&true\\
-19&15 &0.55&Node-Index&true&Row&true\\
-20&17 &0.39&Node-Index&true&Column&true \\\hline
-21&18 &0.52&Node-Index&false&Column&true\\
-22&11 &0.32&Node-Index&true&Column&true \\
-23&15 &0.62&Node-Index&false&Column&true \\
-24&6 &0.94&Random&true&Column&true\\
-25&9 &0.94&Node-Index&false&Column &false\\\hline
-26&12 &0.96&Node-Index&true&Column&true\\
-27&16 &0.58&Node-Index&false&Column&true\\
-28&9 &0.45&Node-Index&false&Column&true\\
-29&19 &0.95&Node-Index&true&Column&true \\
-30&18 &0.31&Node-Index&true&Column &false\\\hline
-31&6 &0.50&Node-Index&false&Column&false\\
-32&15 &0.93&Node-Index&false&Column &false\\\hline
-    \end{tabular}
-\end{frame}
-\begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{1st Approach: The pure portfolio approach}
-    \begin{itemize}
-\item The agents run the GCP solver with different parameter combinations. 
-\item After collecting the solutions found by each agent, the search takes the coloring of the minimum size as the result.
-    \end{itemize}
-\end{frame}
-\begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{2nd Approach: Forced color reducing}
+	\frametitle{The pure portfolio approach}
 \begin{itemize}
-\item This approach is based on the pure portfolio approach.
-\item The agents share the minimum size.
-\item One agent has already found a $k$-coloring and broadcasts it.
-\item With this notification, all agents search for a legal $k-1$ coloring.
+\item random generator affects the performance. 
+\item the agents run the \emph{swpSAT} with different random generation policies. 
 \end{itemize}
-\begin{figure}
-\includegraphics[scale=0.6]{Experiments/E6/imp/impro.pdf}
-\end{figure}
-\end{frame}
+\begin{table}[h!]
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{1cm}|}
+\hline 
+$rand()$&$minstd\_rand$&$mt19937$\\ \hline
+$mt19937\_64$&$ranlux24\_base$&$ranlux48\_base$\\ \hline
+$ranlux24$&$ranlux48$&$knuth\_b$\\ \hline
+$default\_random\_engine$&$minstd\_rand0$&-\\ \hline
+\end{tabular}
+\end{center}
+\end{table} 
 
-\begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{3rd Approach: Tabu sharing}
-    \begin{itemize}
-\item A tabu list records the search path to avoid short-term cycling.
-\item The agents share the ``traps'' of local search loops. 
-    \end{itemize}
- \includegraphics[scale=0.6]{Experiments/E7/imp/impro.pdf}
-\end{frame}
+   \begin{table}[H]
+   \label{tab:UNIF}
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|l|p{3cm}|}
+\hline 
 
+    k &\emph{swpSAT}&\emph{pure portfolio}&Speedup&Efficiency\\ \hline      
+    3 &12971.3&7426.9 & 1.75& 0.16 \\ 
+    &59&69&&\\ \hline
+    5&8339.98&5185.75&1.61&0.14\\ 
+    &89&94&&\\ \hline
+    7&13406.26&2853.81&4.70&0.43\\
+    &66&83&&\\ \hline
+	
+\end{tabular}
+\end{center}
+\end{table}
+\end{frame}
 \begin{frame}
-	\frametitle{Our Parallel GCP-solver}
-    \framesubtitle{4th Approach: Statistic sharing}
+  \frametitle{Evaluation}
+	\framesubtitle{ benchmark \emph{COMBINE}}
+	\begin{itemize}
+	\item formula partitioning by a relatively balanced partitioning with small intersection
+	\item combine two \emph{UNIF} benchmark instances
+	\item build the intersection based on a randomly chosen satisfying assignment
 \begin{itemize}
-\item To recognize long-term cycling, a \emph{statistic matrix S} is added. 
-\item The $S_{ij}$ represents how many times a one-step move $[v_i,j]$ was chosen as the next step. 
+\item \emph{BIG}: \emph{COMBINE} problems with big intersection ($\frac{numCI}{numC} > 1\%$)
+\item \emph{SMALL}: \emph{COMBINE} problems with big intersection ($\frac{numCI}{numC} < 1\%$)
+\end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Failures}
+    \framesubtitle{2nd Approach: Solver with formula partitioning}
+\begin{itemize}
+\item parallelize flippings in both partitioning sets
+\item Two slave thread  deals with partitioning sets in parallel.
+\item The master thread handles with conflicts in the intersection.
+\item can only solve trivial small problems
+\item the order of solving the clauses in search
+\item Repeated flippings make the search stuck in one cycling.
+\end{itemize}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.18]{1/a2.png}
+  \end{center}
+  \label{a2}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Failures}
+    \framesubtitle{3nd Approach: Solver with combination of sub-assignments}
+\begin{itemize}
+\item the slave threads take intersection into consideration.
+\item The master thread deals with these differences in sub-assignments 
+\begin{itemize}
+\item \emph{randomCombine}: assigns the variable randomly
+\item \emph{partitionCombine}: assigns the variable to the value suggested by its charging thread
+\end{itemize}
+\item \emph{randomCombine} can not bring a better performance compared with our \emph{swpSAT} solver
+\item \emph{partitionCombine} suffers from repeated flips and may not terminate. 
+\end{itemize}
+\begin{figure}[H]
+\begin{center}
+  \includegraphics[scale = 0.15]{1/a3.png}
+  \end{center}
+  \label{a2}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Our Parallel GCP-solver}
+    \framesubtitle{4th Approach: Initialization with formula partitioning (\emph{FineInit})}
+\begin{itemize}
+\item The formula partitioning information is only used to get an initial solution. 
+\item The statistic information shared among the agents encourages the further search to flip non-critical variables in clauses.
 \item The candidate with the smallest statistic value will be chosen in the next step.  
 \item The agents use one common statistic matrix.\\
-  \includegraphics[scale = 0.6]{Experiments/E8/imp/impro.pdf}
 \end{itemize}
 \end{frame}
 \begin{frame}
-  \frametitle{Outline}
-
-\heading{The vertex coloring problem}
-  \begin{itemize}
-  \item k-VCP
-  \item VCP
-  \end{itemize}
-  
-\heading{The Tabucol algorithm}
-\heading{Solving VCP by Tabucol}
-  \begin{itemize}
-  \item Basic scheme
-  \item Our improvements
-  \end{itemize}
-\heading{Our Parallel GCP-solver}
-  \begin{itemize}
-  \item Parameter combinations
-  \item Our approaches
-  \end{itemize}
-\heading{ \color<beamer:1>{red}Conclusion} 
+  \frametitle{Evaluation}
+	\framesubtitle{ benchmark \emph{COMBINE}-\emph{BIG}}
+  \includegraphics[scale = 0.8]{DATA/BIG/a4.pdf}
 \end{frame}
 \begin{frame}
-	\frametitle{Conclusion}
+  \frametitle{Evaluation}
+	\framesubtitle{ benchmark \emph{COMBINE}-\emph{SMALL}}
+    \includegraphics[scale = 0.8]{DATA/SMALL/a4.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{Our parallel solver}
+\begin{itemize}
+\item uses \emph{FineInit} as initialization
+\item tries different search paths with  pure portfolio approach 
+\end{itemize}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula $F$, number of Processors $n_p$ }
+  $A \leftarrow initAssign(F)$\;
+ \ForEach{$(Processor_t$ for $t \in \{1, .., n_p\})$}{
+    $A_t \leftarrow A$\;
+     $i\leftarrow t\%2$\;
+	swpSAT($P_i$)\;
+	swpSAT($P_{1-i}$) \;
+ \While {$(!sat$  $ \land$ !Timeout$)$}{
+     $A_t \leftarrow A$\;
+ 	 swpSAT($F$)\;
+ 	 $sat\leftarrow true$\;
+ }
+ }
+\end{algorithm}  
+\end{frame}
+\begin{frame}
+  \frametitle{Evaluation}
+	\framesubtitle{ benchmark UNIF}
+	\begin{itemize}
+	\item separate the vertices according their indices in two partition sets.
+	\item All vertices $v_i$ with $i <\frac{numV}{2}$  belong to $P_0$.
+	\item The rest vertices belong to $P_1$.
+	\end{itemize}
+\begin{table}[H]
+%begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l||l|l|l||l|l|l|p{1cm}|}
+\hline 
+   k &\emph{swp-4}&S& E&\emph{swp-11}&S&E\\ \hline      
+    3 &3350.36&1.49&0.37&2376.26&2.10&0.19 \\
+     &21&&&24&& \\ \hline
+    5&2535.86&1.23&0.31&1115.99&2.79&0.25\\ 
+    &30&&&33&&\\ \hline
+    7&3874.51	&1.28&0.32&1076.26&4.62&0.42\\ 
+    &22&&&27&&\\ \hline
+    \end{tabular}
+\end{center}
+\end{table}
+\end{frame}
+\begin{frame}
+\frametitle{3SAT}
+  \includegraphics[scale = 0.9]{Parallel/K3/e2.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{5SAT}
+    \includegraphics[scale = 0.9]{Parallel/K5/e2.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{7SAT}
+  \includegraphics[scale = 0.9]{Parallel/K7/e2.pdf}
+\end{frame}
+\begin{frame}
+\frametitle{Conclusion}
 \heading{Our improvement:}
 \begin{itemize}
-\item An algorithm solves the VCP with parallel Tabucol searches.
-\item The statistic matrix recognizes long-term cycling and brings improvement to our algorithm.
-\item Certain information exchange (minimum size, statistic matrix) can improve the performance of the parallel search. 
-\end{itemize}
-
-\heading{Comparison of our GCP-solver with DSATUR, PASS, TRICK:} 
-\begin{itemize}
-\item  50 of 68 (73\%) benchmark graphs get best results with our solver.
-\item  20 of 68 (29\%) benchmark graphs get unique best results with our solver.
+\item a stochastic local search algorithm \emph{swpSAT} with the incorporation of \emph{walkSAT} and \emph{probSAT}
+\item different local variants, which gets better performance than the \emph{probSAT} algorithm. 
+\item parallel \emph{swpSAT} solver with formula partitioning
+\item the formula partitioning information can guide the local search
 \end{itemize}
 \heading{Further work}
 \begin{itemize}
 \item Using different  search strategies
 \item Using different cooperation strategies
-\item Using different algorithms in agents
+\item Using different random generation in local search
 \end{itemize}
 \end{frame}
 \begin{frame}
-
  \begin{figure}
 \includegraphics[scale=0.2]{1/thank-you-for-your-attention-any-questions-78.png}
 \end{figure}   

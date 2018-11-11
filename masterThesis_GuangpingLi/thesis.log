@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  11 NOV 2018 09:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.15)  11 NOV 2018 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1733,114 +1733,109 @@ Underfull \hbox (badness 10000) in paragraph at lines 373--377
  []
 
 [4]
-<images/1/hypergraph.png, id=307, 1283.79625pt x 354.32375pt>
-File: images/1/hypergraph.png Graphic file (type png)
-<use images/1/hypergraph.png>
-Package pdftex.def Info: images/1/hypergraph.png  used on input line 405.
-(pdftex.def)             Requested size: 513.5094pt x 141.72697pt.
+<images/1/hypergraph1.png, id=307, 953.5625pt x 354.32375pt>
+File: images/1/hypergraph1.png Graphic file (type png)
+<use images/1/hypergraph1.png>
+Package pdftex.def Info: images/1/hypergraph1.png  used on input line 404.
+(pdftex.def)             Requested size: 381.41824pt x 141.72697pt.
 
-Overfull \hbox (29.81253pt too wide) in paragraph at lines 405--406
- [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 395--409
+Underfull \hbox (badness 10000) in paragraph at lines 395--407
 
  []
 
 [5
 
- <./images/1/hypergraph.png>]pdfTeX warning (ext4): destination with the same i
-dentifier (name{table.1}) has been already used, duplicate ignored
+ <./images/1/hypergraph1.png>]pdfTeX warning (ext4): destination with the same 
+identifier (name{table.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.421 \begin{table}[h!]
+l.419 \begin{table}[h!]
                        
-Underfull \hbox (badness 10000) in paragraph at lines 414--435
+Underfull \hbox (badness 10000) in paragraph at lines 412--433
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 441--457
+Underfull \hbox (badness 10000) in paragraph at lines 439--455
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 458--459
+Underfull \hbox (badness 10000) in paragraph at lines 456--457
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--463
+Underfull \hbox (badness 10000) in paragraph at lines 458--461
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 460--463
+Underfull \hbox (badness 10000) in paragraph at lines 458--461
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 464--466
+Underfull \hbox (badness 10000) in paragraph at lines 462--464
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 464--466
+Underfull \hbox (badness 10000) in paragraph at lines 462--464
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--486
+Underfull \hbox (badness 10000) in paragraph at lines 465--484
 
  []
 
 [7
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 487--511
+Underfull \hbox (badness 10000) in paragraph at lines 485--509
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 487--511
+Underfull \hbox (badness 10000) in paragraph at lines 485--509
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 487--511
+Underfull \hbox (badness 10000) in paragraph at lines 485--509
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 513--536
+Underfull \hbox (badness 10000) in paragraph at lines 511--534
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 513--536
+Underfull \hbox (badness 10000) in paragraph at lines 511--534
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--588
+Underfull \hbox (badness 10000) in paragraph at lines 553--586
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--588
+Underfull \hbox (badness 10000) in paragraph at lines 553--586
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 555--588
+Underfull \hbox (badness 10000) in paragraph at lines 553--586
 
  []
 
 [9
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 595--614
+Underfull \hbox (badness 10000) in paragraph at lines 593--612
 
  []
 
@@ -1848,13 +1843,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 595--614
 Underfull \vbox (badness 2134) has occurred while \output is active []
 
  [10]
-<images/1/a2.png, id=397, 998.73125pt x 528.97626pt>
+<images/1/a2.png, id=399, 998.73125pt x 528.97626pt>
 File: images/1/a2.png Graphic file (type png)
 <use images/1/a2.png>
-Package pdftex.def Info: images/1/a2.png  used on input line 622.
+Package pdftex.def Info: images/1/a2.png  used on input line 620.
 (pdftex.def)             Requested size: 499.3644pt x 264.48747pt.
 
-Overfull \hbox (15.66753pt too wide) in paragraph at lines 622--623
+Overfull \hbox (15.66753pt too wide) in paragraph at lines 620--621
  [] 
  []
 
@@ -1862,68 +1857,63 @@ Overfull \hbox (15.66753pt too wide) in paragraph at lines 622--623
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [11]
-<images/1/a3.png, id=412, 1560.83125pt x 552.0625pt>
+<images/1/a3.png, id=414, 1560.83125pt x 552.0625pt>
 File: images/1/a3.png Graphic file (type png)
 <use images/1/a3.png>
-Package pdftex.def Info: images/1/a3.png  used on input line 632.
+Package pdftex.def Info: images/1/a3.png  used on input line 630.
 (pdftex.def)             Requested size: 468.25299pt x 165.62003pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12 <./images/1/a2.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 636--642
+Underfull \hbox (badness 10000) in paragraph at lines 634--640
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 636--642
+Underfull \hbox (badness 10000) in paragraph at lines 634--640
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 636--642
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 645--646
+Underfull \hbox (badness 10000) in paragraph at lines 634--640
 
  []
 
 [13 <./images/1/a3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 652--656
+Underfull \hbox (badness 10000) in paragraph at lines 651--655
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--656
+Underfull \hbox (badness 10000) in paragraph at lines 651--655
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--656
+Underfull \hbox (badness 10000) in paragraph at lines 651--655
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 652--656
+Underfull \hbox (badness 10000) in paragraph at lines 651--655
 
  []
 
 [14
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 673--684
+Underfull \hbox (badness 10000) in paragraph at lines 672--683
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--684
+Underfull \hbox (badness 10000) in paragraph at lines 672--683
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 673--684
+Underfull \hbox (badness 10000) in paragraph at lines 672--683
 
  []
 
@@ -1935,22 +1925,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 673--684
 Underfull \vbox (badness 3568) has occurred while \output is active []
 
  [17]
-Underfull \hbox (badness 10000) in paragraph at lines 844--864
+Underfull \hbox (badness 10000) in paragraph at lines 843--863
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 844--864
+Underfull \hbox (badness 10000) in paragraph at lines 843--863
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 844--864
+Underfull \hbox (badness 10000) in paragraph at lines 843--863
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 844--864
+Underfull \hbox (badness 10000) in paragraph at lines 843--863
 
  []
 
@@ -1961,22 +1951,22 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.865 \begin{figure}[H]
+l.864 \begin{figure}[H]
                        
-<images/DATA/K3/e1.pdf, id=464, 361.35pt x 216.81pt>
+<images/DATA/K3/e1.pdf, id=468, 361.35pt x 216.81pt>
 File: images/DATA/K3/e1.pdf Graphic file (type pdf)
 <use images/DATA/K3/e1.pdf>
-Package pdftex.def Info: images/DATA/K3/e1.pdf  used on input line 867.
+Package pdftex.def Info: images/DATA/K3/e1.pdf  used on input line 866.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K5/e1.pdf, id=465, 361.35pt x 216.81pt>
+<images/DATA/K5/e1.pdf, id=469, 361.35pt x 216.81pt>
 File: images/DATA/K5/e1.pdf Graphic file (type pdf)
 <use images/DATA/K5/e1.pdf>
-Package pdftex.def Info: images/DATA/K5/e1.pdf  used on input line 868.
+Package pdftex.def Info: images/DATA/K5/e1.pdf  used on input line 867.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K7/e1.pdf, id=466, 361.35pt x 216.81pt>
+<images/DATA/K7/e1.pdf, id=470, 361.35pt x 216.81pt>
 File: images/DATA/K7/e1.pdf Graphic file (type pdf)
 <use images/DATA/K7/e1.pdf>
-Package pdftex.def Info: images/DATA/K7/e1.pdf  used on input line 869.
+Package pdftex.def Info: images/DATA/K7/e1.pdf  used on input line 868.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1994,24 +1984,24 @@ e pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/DATA/K7/e1.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 876--877
+Underfull \hbox (badness 10000) in paragraph at lines 875--876
 
  []
 
-<images/DATA/K3/e2.pdf, id=498, 361.35pt x 216.81pt>
+<images/DATA/K3/e2.pdf, id=502, 361.35pt x 216.81pt>
 File: images/DATA/K3/e2.pdf Graphic file (type pdf)
 <use images/DATA/K3/e2.pdf>
-Package pdftex.def Info: images/DATA/K3/e2.pdf  used on input line 910.
+Package pdftex.def Info: images/DATA/K3/e2.pdf  used on input line 909.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K5/e2.pdf, id=499, 361.35pt x 216.81pt>
+<images/DATA/K5/e2.pdf, id=503, 361.35pt x 216.81pt>
 File: images/DATA/K5/e2.pdf Graphic file (type pdf)
 <use images/DATA/K5/e2.pdf>
-Package pdftex.def Info: images/DATA/K5/e2.pdf  used on input line 911.
+Package pdftex.def Info: images/DATA/K5/e2.pdf  used on input line 910.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K7/e2.pdf, id=500, 361.35pt x 216.81pt>
+<images/DATA/K7/e2.pdf, id=504, 361.35pt x 216.81pt>
 File: images/DATA/K7/e2.pdf Graphic file (type pdf)
 <use images/DATA/K7/e2.pdf>
-Package pdftex.def Info: images/DATA/K7/e2.pdf  used on input line 912.
+Package pdftex.def Info: images/DATA/K7/e2.pdf  used on input line 911.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2031,56 +2021,56 @@ e pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/DATA/K7/e2.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 922--942
+Underfull \hbox (badness 10000) in paragraph at lines 921--941
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 922--942
+Underfull \hbox (badness 10000) in paragraph at lines 921--941
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 922--942
+Underfull \hbox (badness 10000) in paragraph at lines 921--941
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 922--942
+Underfull \hbox (badness 10000) in paragraph at lines 921--941
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 943--946
+Underfull \hbox (badness 10000) in paragraph at lines 942--945
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 943--946
+Underfull \hbox (badness 10000) in paragraph at lines 942--945
 
  []
 
 [23
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 948--962
+Underfull \hbox (badness 10000) in paragraph at lines 947--961
 
  []
 
-<images/DATA/K3/e3w.pdf, id=541, 361.35pt x 216.81pt>
+<images/DATA/K3/e3w.pdf, id=545, 361.35pt x 216.81pt>
 File: images/DATA/K3/e3w.pdf Graphic file (type pdf)
 <use images/DATA/K3/e3w.pdf>
-Package pdftex.def Info: images/DATA/K3/e3w.pdf  used on input line 965.
+Package pdftex.def Info: images/DATA/K3/e3w.pdf  used on input line 964.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K5/e3w.pdf, id=542, 361.35pt x 216.81pt>
+<images/DATA/K5/e3w.pdf, id=546, 361.35pt x 216.81pt>
 File: images/DATA/K5/e3w.pdf Graphic file (type pdf)
 <use images/DATA/K5/e3w.pdf>
-Package pdftex.def Info: images/DATA/K5/e3w.pdf  used on input line 966.
+Package pdftex.def Info: images/DATA/K5/e3w.pdf  used on input line 965.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K7/e3w.pdf, id=543, 361.35pt x 216.81pt>
+<images/DATA/K7/e3w.pdf, id=547, 361.35pt x 216.81pt>
 File: images/DATA/K7/e3w.pdf Graphic file (type pdf)
 <use images/DATA/K7/e3w.pdf>
-Package pdftex.def Info: images/DATA/K7/e3w.pdf  used on input line 967.
+Package pdftex.def Info: images/DATA/K7/e3w.pdf  used on input line 966.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
 [24
 
@@ -2096,22 +2086,22 @@ le pdfs with page group included in a single page
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.975  \begin{table}[H]
+l.974  \begin{table}[H]
                        
-<images/DATA/K3/e3a.pdf, id=573, 361.35pt x 216.81pt>
+<images/DATA/K3/e3a.pdf, id=577, 361.35pt x 216.81pt>
 File: images/DATA/K3/e3a.pdf Graphic file (type pdf)
 <use images/DATA/K3/e3a.pdf>
-Package pdftex.def Info: images/DATA/K3/e3a.pdf  used on input line 990.
+Package pdftex.def Info: images/DATA/K3/e3a.pdf  used on input line 989.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K5/e3a.pdf, id=574, 361.35pt x 216.81pt>
+<images/DATA/K5/e3a.pdf, id=578, 361.35pt x 216.81pt>
 File: images/DATA/K5/e3a.pdf Graphic file (type pdf)
 <use images/DATA/K5/e3a.pdf>
-Package pdftex.def Info: images/DATA/K5/e3a.pdf  used on input line 991.
+Package pdftex.def Info: images/DATA/K5/e3a.pdf  used on input line 990.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K7/e3a.pdf, id=575, 361.35pt x 216.81pt>
+<images/DATA/K7/e3a.pdf, id=579, 361.35pt x 216.81pt>
 File: images/DATA/K7/e3a.pdf Graphic file (type pdf)
 <use images/DATA/K7/e3a.pdf>
-Package pdftex.def Info: images/DATA/K7/e3a.pdf  used on input line 992.
+Package pdftex.def Info: images/DATA/K7/e3a.pdf  used on input line 991.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
  [25
 
@@ -2127,22 +2117,22 @@ le pdfs with page group included in a single page
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.999   \begin{table}[H]
+l.998   \begin{table}[H]
                         
-<images/DATA/K3/e3r.pdf, id=603, 361.35pt x 216.81pt>
+<images/DATA/K3/e3r.pdf, id=607, 361.35pt x 216.81pt>
 File: images/DATA/K3/e3r.pdf Graphic file (type pdf)
 <use images/DATA/K3/e3r.pdf>
-Package pdftex.def Info: images/DATA/K3/e3r.pdf  used on input line 1014.
+Package pdftex.def Info: images/DATA/K3/e3r.pdf  used on input line 1013.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K5/e3r.pdf, id=604, 361.35pt x 216.81pt>
+<images/DATA/K5/e3r.pdf, id=608, 361.35pt x 216.81pt>
 File: images/DATA/K5/e3r.pdf Graphic file (type pdf)
 <use images/DATA/K5/e3r.pdf>
-Package pdftex.def Info: images/DATA/K5/e3r.pdf  used on input line 1015.
+Package pdftex.def Info: images/DATA/K5/e3r.pdf  used on input line 1014.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
-<images/DATA/K7/e3r.pdf, id=605, 361.35pt x 216.81pt>
+<images/DATA/K7/e3r.pdf, id=609, 361.35pt x 216.81pt>
 File: images/DATA/K7/e3r.pdf Graphic file (type pdf)
 <use images/DATA/K7/e3r.pdf>
-Package pdftex.def Info: images/DATA/K7/e3r.pdf  used on input line 1016.
+Package pdftex.def Info: images/DATA/K7/e3r.pdf  used on input line 1015.
 (pdftex.def)             Requested size: 289.0804pt x 173.44823pt.
  [26
 
@@ -2158,30 +2148,30 @@ le pdfs with page group included in a single page
 has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1028    \begin{table}[H]
+l.1027    \begin{table}[H]
                           
-<images/DATA/UNIF/e5.pdf, id=635, 361.35pt x 216.81pt>
+<images/DATA/UNIF/e5.pdf, id=639, 361.35pt x 216.81pt>
 File: images/DATA/UNIF/e5.pdf Graphic file (type pdf)
 <use images/DATA/UNIF/e5.pdf>
-Package pdftex.def Info: images/DATA/UNIF/e5.pdf  used on input line 1067.
+Package pdftex.def Info: images/DATA/UNIF/e5.pdf  used on input line 1065.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [27
 
  <./images/DATA/UNIF/e5.pdf>]
-<images/DATA/K3/e4.pdf, id=652, 361.35pt x 216.81pt>
+<images/DATA/K3/e4.pdf, id=656, 361.35pt x 216.81pt>
 File: images/DATA/K3/e4.pdf Graphic file (type pdf)
 <use images/DATA/K3/e4.pdf>
-Package pdftex.def Info: images/DATA/K3/e4.pdf  used on input line 1076.
+Package pdftex.def Info: images/DATA/K3/e4.pdf  used on input line 1074.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K5/e4.pdf, id=653, 361.35pt x 216.81pt>
+<images/DATA/K5/e4.pdf, id=657, 361.35pt x 216.81pt>
 File: images/DATA/K5/e4.pdf Graphic file (type pdf)
 <use images/DATA/K5/e4.pdf>
-Package pdftex.def Info: images/DATA/K5/e4.pdf  used on input line 1077.
+Package pdftex.def Info: images/DATA/K5/e4.pdf  used on input line 1075.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/K7/e4.pdf, id=654, 361.35pt x 216.81pt>
+<images/DATA/K7/e4.pdf, id=658, 361.35pt x 216.81pt>
 File: images/DATA/K7/e4.pdf Graphic file (type pdf)
 <use images/DATA/K7/e4.pdf>
-Package pdftex.def Info: images/DATA/K7/e4.pdf  used on input line 1078.
+Package pdftex.def Info: images/DATA/K7/e4.pdf  used on input line 1076.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
  [28
 
@@ -2195,24 +2185,24 @@ e pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/DATA/K7/e4.pdf): PDF inclusion: multipl
 e pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1092--1107
+Underfull \hbox (badness 10000) in paragraph at lines 1090--1105
 
  []
 
-<images/Parallel/K3/e1.pdf, id=682, 361.35pt x 216.81pt>
+<images/Parallel/K3/e1.pdf, id=686, 361.35pt x 216.81pt>
 File: images/Parallel/K3/e1.pdf Graphic file (type pdf)
 <use images/Parallel/K3/e1.pdf>
-Package pdftex.def Info: images/Parallel/K3/e1.pdf  used on input line 1132.
+Package pdftex.def Info: images/Parallel/K3/e1.pdf  used on input line 1130.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/Parallel/K5/e1.pdf, id=683, 361.35pt x 216.81pt>
+<images/Parallel/K5/e1.pdf, id=687, 361.35pt x 216.81pt>
 File: images/Parallel/K5/e1.pdf Graphic file (type pdf)
 <use images/Parallel/K5/e1.pdf>
-Package pdftex.def Info: images/Parallel/K5/e1.pdf  used on input line 1133.
+Package pdftex.def Info: images/Parallel/K5/e1.pdf  used on input line 1131.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/Parallel/K7/e1.pdf, id=684, 361.35pt x 216.81pt>
+<images/Parallel/K7/e1.pdf, id=688, 361.35pt x 216.81pt>
 File: images/Parallel/K7/e1.pdf Graphic file (type pdf)
 <use images/Parallel/K7/e1.pdf>
-Package pdftex.def Info: images/Parallel/K7/e1.pdf  used on input line 1134.
+Package pdftex.def Info: images/Parallel/K7/e1.pdf  used on input line 1132.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2229,24 +2219,24 @@ tiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/Parallel/K7/e1.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1142--1168
+Underfull \hbox (badness 10000) in paragraph at lines 1140--1166
 
  []
 
-<images/DATA/BIG/a4.pdf, id=720, 361.35pt x 216.81pt>
+<images/DATA/BIG/a4.pdf, id=724, 361.35pt x 216.81pt>
 File: images/DATA/BIG/a4.pdf Graphic file (type pdf)
 <use images/DATA/BIG/a4.pdf>
-Package pdftex.def Info: images/DATA/BIG/a4.pdf  used on input line 1195.
+Package pdftex.def Info: images/DATA/BIG/a4.pdf  used on input line 1193.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/SMALL/a4.pdf, id=721, 361.35pt x 216.81pt>
+<images/DATA/SMALL/a4.pdf, id=725, 361.35pt x 216.81pt>
 File: images/DATA/SMALL/a4.pdf Graphic file (type pdf)
 <use images/DATA/SMALL/a4.pdf>
-Package pdftex.def Info: images/DATA/SMALL/a4.pdf  used on input line 1196.
+Package pdftex.def Info: images/DATA/SMALL/a4.pdf  used on input line 1194.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/DATA/COMBINE/a4.pdf, id=722, 361.35pt x 216.81pt>
+<images/DATA/COMBINE/a4.pdf, id=726, 361.35pt x 216.81pt>
 File: images/DATA/COMBINE/a4.pdf Graphic file (type pdf)
 <use images/DATA/COMBINE/a4.pdf>
-Package pdftex.def Info: images/DATA/COMBINE/a4.pdf  used on input line 1197.
+Package pdftex.def Info: images/DATA/COMBINE/a4.pdf  used on input line 1195.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2266,29 +2256,29 @@ iple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/DATA/COMBINE/a4.pdf): PDF inclusion: mu
 ltiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1205--1233
+Underfull \hbox (badness 10000) in paragraph at lines 1203--1231
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1235--1254
+Underfull \hbox (badness 10000) in paragraph at lines 1233--1252
 
  []
 
-<images/Parallel/K3/e2.pdf, id=768, 361.35pt x 216.81pt>
+<images/Parallel/K3/e2.pdf, id=772, 361.35pt x 216.81pt>
 File: images/Parallel/K3/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K3/e2.pdf>
-Package pdftex.def Info: images/Parallel/K3/e2.pdf  used on input line 1258.
+Package pdftex.def Info: images/Parallel/K3/e2.pdf  used on input line 1256.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/Parallel/K5/e2.pdf, id=769, 361.35pt x 216.81pt>
+<images/Parallel/K5/e2.pdf, id=773, 361.35pt x 216.81pt>
 File: images/Parallel/K5/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K5/e2.pdf>
-Package pdftex.def Info: images/Parallel/K5/e2.pdf  used on input line 1259.
+Package pdftex.def Info: images/Parallel/K5/e2.pdf  used on input line 1257.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
-<images/Parallel/K7/e2.pdf, id=770, 361.35pt x 216.81pt>
+<images/Parallel/K7/e2.pdf, id=774, 361.35pt x 216.81pt>
 File: images/Parallel/K7/e2.pdf Graphic file (type pdf)
 <use images/Parallel/K7/e2.pdf>
-Package pdftex.def Info: images/Parallel/K7/e2.pdf  used on input line 1260.
+Package pdftex.def Info: images/Parallel/K7/e2.pdf  used on input line 1258.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -2308,27 +2298,27 @@ tiple pdfs with page group included in a single page
 pdfTeX warning: pdflatex (file ./images/Parallel/K7/e2.pdf): PDF inclusion: mul
 tiple pdfs with page group included in a single page
 >]
-Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1269--1276
+Underfull \hbox (badness 10000) in paragraph at lines 1267--1274
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1281--1283
+Underfull \hbox (badness 10000) in paragraph at lines 1279--1281
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1284--1286
+Underfull \hbox (badness 10000) in paragraph at lines 1282--1284
 
  []
 
@@ -2341,11 +2331,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 1284--1286
 ) [36
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1293.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1293.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1291.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1291.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1293.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1293.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1291.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1291.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 4D84AB5D46F02033DC498D56C60B613A;7804.
@@ -2355,11 +2345,11 @@ Package rerunfilecheck Info: File `thesis.brf' has not changed.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1293.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1291.
  ) 
 Here is how much of TeX's memory you used:
  27547 strings out of 492982
- 481366 string characters out of 6134895
+ 481371 string characters out of 6134895
  635840 words of memory out of 5000000
  30354 multiletter control sequences out of 15000+600000
  96235 words of font info for 79 fonts, out of 8000000 for 9000
@@ -2381,10 +2371,10 @@ xmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
 ts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf/fonts/t
 ype1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on thesis.pdf (44 pages, 809610 bytes).
+Output written on thesis.pdf (44 pages, 813042 bytes).
 PDF statistics:
- 977 PDF objects out of 1000 (max. 8388607)
- 813 compressed objects within 9 object streams
+ 981 PDF objects out of 1000 (max. 8388607)
+ 816 compressed objects within 9 object streams
  228 named destinations out of 1000 (max. 500000)
  461 words of extra memory for PDF output out of 10000 (max. 10000000)
 

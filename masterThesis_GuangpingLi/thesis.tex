@@ -401,9 +401,7 @@ Here is an example:\\
 $F =\underbrace{(v_1 \lor v_2 \lor \bar{v_3})}_\text{$C_1$} \land \underbrace{(v_1 \lor v_3\lor \bar{v_4})}_\text{$C_2$}\land \underbrace{(v_5 \lor v_6\lor \bar{v_8})}_\text{$C_3$}\land \underbrace{(v_6 \lor v_7\lor \bar{v_8})}_\text{$C_4$}\land \underbrace{(v_3\lor \bar{v_6})}_\text{$C_5$}\land \underbrace{(v_4 \lor v_5)}_\text{$C_6$}$\\
 $G(F)$:
 \begin{figure}[H]
-\begin{center}
-  \includegraphics[scale = 0.4]{1/hypergraph.png}
-  \end{center}
+  \hspace{10cm}\includegraphics[scale = 0.4]{1/hypergraph1.png}
   \caption{In a hypergraph, a hyperedge is a set of vertices. In this example, the vertices  $v_3$  and $v_4$ are in both hyperedge $\{v_1, v_3, v_4\}$ and $\{v_1, v_2, v_3\}$, so they are connected twice. In our hypergraph representation, a hyperedge contains the vertices of the corresponding clauses. In another variant, each literal refers to one vertex and a hyperedge contains all the literals of the corresponding clause.}
   \label{hypergraph representation}
   \end{figure}
@@ -592,7 +590,7 @@ According to the comparison of performances of different variants,  we konfigure
 \label{sec:parallel}
 \label{sec:Our parallel Algorithm}
 \subsection{1st Approach: The pure portfolio approach}
-Section \ref{sec:local} introduces our local solver \emph{swpSAT}. In experiments, which pseudo-random generator in use to make random values affects the performance. In the pure portfolio version of our algorithm, the agents run the \emph{swpSAT} with different random generation policies. After a satisfying assignment is found by an agent, the search will stop. This approach improved the performance compared to our sequential local search (see Experiment 5 in~\ref{sec:Experiment 5}). .\\ 
+Section \ref{sec:local} introduces our local solver \emph{swpSAT}. In experiments, which pseudo-random generator in use to make random values affects the performance. In the pure portfolio version of our algorithm, the agents run the \emph{swpSAT} with different random generation policies. After a satisfying assignment is found by an agent, the search will stop. This approach improved the performance compared to our sequential local search (see Experiment 5 in~\ref{sec:Experiment 5}).\\ 
 \\
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -616,7 +614,7 @@ This pure portfolio approach can try different search pathes in parallel. But th
 In the following part, we will introduce some partitioning-based techniques. With a good formula partitioning, the search can assign independent jobs to threads. 
 \subsection{2nd Approach: Solver with formula partitioning}
 \label{sec:2nd}
-With the information of the formula partitioning, the first idea to speed up the search is to parallelize flippings in both partitioning sets. It is possible because the clauses in different partitions do not share variables. The schema of this approach is as follows: The slave thread $t_0$ execute the \emph{swpSAT} with clauses in $H_0$. The slave thread $t_1$ deals with $H_1$ in parallel with $t_0$. Then the assignments of the corresponding partitioning sets are written in the shared memory. Then the master thread uses the assignment in shared memory as the initial assignment and make flips in the intersection $I$.  Handling with conflicts in the intersection will lead to some flips in both partitioning set. As a result, it may introduce conflicts in $H_0$ and $H_1$. Then the both processes will start again to handle conflicts in partitioning sets individually. This process will repeat itself until no conflicts exists.
+With the information of the formula partitioning, the first idea to speed up the search is to parallelize flippings in both partitioning sets. It is possible because the clauses in different partitions do not share variables. The schema of this approach is as follows: The slave thread $t_0$ execute the \emph{swpSAT} with clauses in $H_0$. The slave thread $t_1$ deals with $H_1$ in parallel with $t_0$. Then the assignments of the corresponding partitioning sets are written in the shared memory. Then the master thread uses the assignment in shared memory as the initial assignment and makes flips in the intersection $I$.  Handling with conflicts in the intersection will lead to some flips in both partitioning set. As a result, it may introduce conflicts in $H_0$ and $H_1$. Then the both processes will start again to handle conflicts in partitioning sets individually. This process will repeat itself until no conflicts exists.
 \begin{figure}[H]
 \begin{center}
   \includegraphics[scale = 0.5]{1/a2.png}
@@ -643,6 +641,7 @@ If one variable is assigned with different values in different sub-solutions, th
 \subsection{4th Approach: Initialization with a guide of formula partitioning}
 \label{sec:4th}
 After the analysis of the failures in the two approaches above, we came up with this approach, in which the formula partitioning information is only used to get an initial solution, and the further search in the whole problem is the same as our pure portfolio approach. A local search from this initial solution with only a few conflicts in the intersections can reduce the search space and prevent long-term cycling in the search. The statistic information shared among the agents encourages the further search to flip non-critical variables in clauses. \\
+In experiments (see details in \ref{sec:Experiment 6} amd \ref{sec:Experiment 7}), this approach shows a good performance.
 
 \clearpage
 \section{Evaluation} 
@@ -1039,7 +1038,6 @@ We count in the search the total number of flips for a problem set. There are no
     &82&85&\textbf{89}&\textbf{89}&88\\ \hline
     7& 6238.51&10063.4&5409.67&\textbf{3829.95}&4903.61\\
     &60&54&61&\textbf{65}&60\\ \hline
-	
 \end{tabular}
 \end{center}
 \caption{Comparison in UNIF}
@@ -1173,7 +1171,7 @@ The pseudocode of the approach is shown below:\\
 \begin{center}
     \begin{tabular}{|l|l|l|l|l|p{1cm}|}
 \hline 
-    problems &\emph{swpSAT}&FineInit&Speedup&Efficiency\\ \hline
+    problems &\emph{swpSAT}&\emph{FineInit}&Speedup&Efficiency\\ \hline
     $3-3$(big)&1861.73 &501.78&3.71&1.86\\ \hline
     $3-3$(small)&7955.19& 1734.79& 4.59&2.30\\ \hline
     $3-5$&-&-&-&-\\ \hline
@@ -1185,7 +1183,7 @@ The pseudocode of the approach is shown below:\\
     COMBINE&18373.86&4001.71&4.59& 2.30\\ \hline
 \end{tabular}
 \end{center}
-\caption{We compare our local swpSolver and our 4th approach of the parallel solver, which is referred as FineInit in this table. This approach gets a super-linear speedup thanks to the  guide of formula partition information. }
+\caption{We compare our local swpSolver and our 4th approach of the parallel solver, which is referred as \emph{FineInit} in this table. This approach gets a super-linear speedup thanks to the  guide of formula partition information. }
 %\end{minipage}
 \end{table} 
 
@@ -1196,7 +1194,7 @@ The pseudocode of the approach is shown below:\\
     \includegraphics[scale = 1]{DATA/SMALL/a4.pdf}
     \includegraphics[scale = 1]{DATA/COMBINE/a4.pdf}
   \end{center}
-  \caption{The green curve represents the half of execution times with swpSolver. With a comparison of the swpSAT-half curve and the FineInit curve, the efficiency of our \emph{FineInit} solver with two threads are shown in figures. Our FineInit solver get a super-linear efficiency for problems with relative big intersections.}
+  \caption{The green curve represents the half of execution times with swpSolver. With a comparison of the swpSAT-half curve and the FineInit curve, the efficiency of our \emph{FineInit} solver with two threads are shown in figures. Our \emph{FineInit} solver get a super-linear efficiency for problems even with relative big intersections.}
   \label{Experiment 6 COMBINE}
   \end{figure} 
 \clearpage

@@ -1,2 +1,2 @@
-filename="e1.pdf" title="K3" ./cactus.sh swp-1 pure-portfolio|gnuplot
-filename="e2.pdf" title="K3" ./cactus.sh swp swp-4 swp-11|gnuplot
+filename="e1.pdf" title="3SAT" ./cactus.sh swp-1 pure-portfolio|gnuplot
+filename="e2.pdf" title="3SAT" ./cactus.sh swp swp-4 swp-11|gnuplot
