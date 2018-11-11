@@ -331,11 +331,11 @@ The heuristic used for \emph{pickVar}  is based on scores of the variables in th
  \Input{A CNF Formula F}
  \Parameter{$Timeout$}
  \Output{a satisfying assignment $A$}
-  $A \leftarrow$ random generated assignment  $A$;\;
+  $A \leftarrow$ random generated assignment  $A$\;
  \While {$( \exists$ unsatisfied clause $ \land$ Timeout does not occur$)$}{
-  $c \leftarrow$ random selected  unsatisfied clause ;\;
+  $c \leftarrow$ random selected  unsatisfied clause\;
   $x \leftarrow pickVar(A,c)$\;
-  $A \leftarrow flip(A,x)$;\;
+  $A \leftarrow flip(A,x)$\;
  }
  \caption{Focused Local Search}
 \end{algorithm}  
@@ -363,9 +363,9 @@ The focused random local search strategy \emph{walkSAT} to solve SAT problem, wh
  \Parameter{probability $p$}
  \Output{a variable $x$ in $c$ to be flipped}
 \For{$v$ in $c$}{
-  Evaluate $v$ with function $\Gamma(A,v)$;\;
+  Evaluate $v$ with function $\Gamma(A,v)$\;
  }
-  with probability $p$: $x \leftarrow$   $v$ with maximum $\Gamma(A,v)$; \;
+  with probability $p$: $x \leftarrow$   $v$ with maximum $\Gamma(A,v)$ \;
   with probability $1-p$:  $x \leftarrow$  randomly selected $v$ in $c$. 
  \caption{PvariantickVar in walkSAT}
 \end{algorithm}  
@@ -387,9 +387,9 @@ The pseudocode of \emph{probSAT} is shown below:\\
  \Input{current assignment $A$, unsatisfied clause $c$}
  \Output{a variable $x$ in $c$ to be flipped}
 \For{$v$ in $c$}{
-  Evaluate $v$ with function $\Gamma(A,v)$;\;
+  Evaluate $v$ with function $\Gamma(A,v)$\;
  }
-  $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$; 
+  $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$ 
  \caption{PickVar in \emph{probSAT}}
 \end{algorithm} 
 \emph{\textbf{Formula partitioning}}\\
@@ -474,14 +474,14 @@ The selection procedure in \emph{probSAT} is a random heuristic. Judging from th
  \Input{current assignment $A$, unsatisfied clause $c$}
  \Parameter{probability $p$}
  \Output{a variable $x$ in $c$ to be flipped}
- \emph{greedyVs} $\leftarrow$ $\emptyset$;\;
+ \emph{greedyVs} $\leftarrow$ $\emptyset$\;
 \For{all $v$ in $c$}{
    \If{$($break(A,v)= 0 $)$}{
 	\emph{greedyVs} = \emph{greedyVs} +  $\{v\}$    
    }
  }
-  with probability $p$: $x \leftarrow$ randomly selected variable $v \in$ \emph{greedyVs};  \;
-  with probability ($1-p$):   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  
+  with probability $p$: $x \leftarrow$ randomly selected variable $v \in$ \emph{greedyVs} \;
+  with probability ($1-p$):   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$
 \caption{Our pickVar}
 \end{algorithm}  
 We analyze the following variants for  \emph{pickVar} experimentally (see experiment in~\ref{sec:Experiment 2}).\\
@@ -497,16 +497,16 @@ Instead of using a constant probability $p$ to choose between a greedy literal w
  \Input{current assignment $A$, unsatisfied clause $c$}
  \Parameter{probability $p$}
  \Output{a variable $x$ in $c$ for flipping}
- greedyVs $\leftarrow$ $\emptyset$;\;
+ greedyVs $\leftarrow$ $\emptyset$\;
 \For{all $v$ in $c$}{
    \If{$($break(A,v)= 0$)$}{
 	greedyVs = greedVs +  $\{v\}$    
    }
  }
-  $greedyV \leftarrow$   randomly selected variable $v \in$ greedyVs  ; \;
-  $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$;  \;
-  with probability $p = \alpha \times \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV;\;
-    with probability $1-p$: $x\leftarrow$ greedyV;\;
+  $greedyV \leftarrow$   randomly selected variable $v \in$ greedyVs \;
+  $randomV \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$\;
+  with probability $p = \alpha \times \frac{s(greedyV)}{s(greedyV)+s(randomV)}$: $x\leftarrow$ randomV\;
+    with probability $1-p$: $x\leftarrow$ greedyV\;
 \caption{Walk}
 \end{algorithm} 
 \clearpage
@@ -520,7 +520,7 @@ Instead of using a constant probability $p$ to choose between a greedy literal w
  \Input{current assignment $A$, unsatisfied clause $c$}
  \Parameter{probability $p$}
  \Output{a variable $x$ in $c$ for flipping}
-  \emph{greedyVs} $\leftarrow$ $\emptyset$;\;
+  \emph{greedyVs} $\leftarrow$ $\emptyset$\;
 \For{all $v$ in $c$}{
    \If{$($break(A,v)= 0 $\land$ $Permit(v))$}{
 	 \emph{greedyVs} =  \emph{greedyVs} + $\{v\}$   
@@ -664,7 +664,7 @@ p cnf 3 2\\
 
 \subsection{Benchmarks}
 \label{benchmark}
-The benchmark instances used in our experiments are the 180 uniform instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017 \cite{balyo2017proceedings}. In a \emph{UNIF} problem file, all the clause have the same length.\\
+The benchmark instances used in our experiments are the 180 instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017 \cite{balyo2017proceedings}. In a \emph{UNIF} problem file, all the clause have the same length.\\
 To generate an instance with $n$ variables and $m$ clauses, the uniform generation will work in the following way: to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals. If the generated clause contains multiple copies of the same variables, it will be abandoned. The process generates clauses until $m$ permitted clauses are gathered.\\
 A \emph{UNIF} file name contains some basic information of the problem. The suffix $k$  denotes the length of clauses. The $r$ indicates the clause-to-variable ratio. The $c$ and $v$ are the number of clauses and variables respectively, while $s$ is the seed used in the generation process.
 Without flitering, at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.

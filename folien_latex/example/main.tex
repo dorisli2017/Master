@@ -3,7 +3,8 @@
 % -----------------------------------------------------------------------------
 
 \graphicspath{{images/}}
-
+\usepackage{graphics}
+\usepackage{multimedia}
 % -----------------------------------------------------------------------------
 
 \usetheme{KIT}
@@ -16,6 +17,7 @@
 {\end{KITcolblock}}
 
 \usepackage[ngerman,english]{babel}
+\usepackage{animate}
 \usepackage[utf8]{inputenc}
 \usepackage[TS1,T1]{fontenc}
 \usepackage{array}
@@ -55,15 +57,14 @@
 \begin{frame}
   \frametitle{Outline}
 
-\heading{ \color<beamer:2>{red}{propositional satisfiability problem (\emph{\textbf{SAT}})}}
+\heading{ \color<beamer:2>{red}{Propositional Satisfiability Problem (\emph{\textbf{SAT}})}}
   \begin{itemize}
   \item Notations
-  \item Local Search in SAT Problem
+  \item Local search in SAT problem
   \end{itemize}
 \heading{Solving SAT by swpSolver}
   \begin{itemize}
   \item Basic scheme
-  \item Data structure
   \item Our improvements
   \end{itemize}
 \heading{Our Parallel SAT-solver}
@@ -79,191 +80,268 @@
 
 % blocks
 \begin{frame}
-	\frametitle{The vertex coloring problem}
+	\frametitle{Propositional Satisfiability Problem}
 
-	\begin{KITalertblock}{vertex coloring}
+	\begin{KITalertblock}{Notations}
 	\begin{itemize}
-	\item  The goal is to color the vertices of an undirected graph such that no two adjacent vertices share the same color. 
+	\item propositional variable: variable with two possible logical values  \textit{true} or  \textit{false}
+	\item literal: an atomic formula either be a positive literal $v$ or a negative literal $\bar{v}$.\\
+	\item clause: disjunction of literals.
+	\item CNF-formula: conjunction of clauses.
+	\item assignment: $V\rightarrow \{true {, }\; false\}$ 
+	\item SAT problem: to determine whether a given formula is satisfiable or not.  \\
 	\end{itemize}
-	\includegraphics[scale=0.2]{1/nodeColoring1}
 	\end{KITalertblock}
-
 \end{frame}
 \begin{frame}
-	\frametitle{The vertex coloring problem}
-
-	\begin{KITinfoblock}{k-vertex coloring problem}
-	\begin{itemize}
-		\item A $k$-vertex coloring of a graph is a function $c$: $V\rightarrow \{1...k\}$. 
-	\end{itemize}
-	\begin{figure}
-	\includegraphics[scale=0.2]{1/nodeColoring2}
-	\caption{a legal 4-coloring}
-	\end{figure}	
-	\end{KITinfoblock}
+	\frametitle{Here is an example of SAT problem:}
+\begin{center}
+\begin{table}[H]
+\begin{tabular}{l}
+$F = (v_1 \lor \bar{v_3}) \land (v_2 \lor v_1 \lor \bar{v_1})$\\	
+$Vars(F) = \{v_1, v_2, v_3\}$\\
+$numV(F) = |Vars(F)| = 3$\\
+$Lits(F) = \{v_1, \bar{v_1}, v_2, v_3, \bar{v_3}\}$\\
+$Cls(F) = \{C_1, C_2\}$\\
+$numC(F) = |Cls| = 2$\\ 
+$C_1 = \{v_1, \bar{v_3}\}$\\
+$C_2 = \{v_2, v_3, \bar{v_1}\}$\\
+\\
+$A(v_1)$ = $true$, $A(v_2)$ = $false$, $A(v_3)$ = $true$, \\
+$A$  is an assignment satisfying $F$.\\
+\\
+$\hat{A}(v_1)$ = $true$, $\hat{A}(v_2)$ = $false$, $\hat{A}(v_3)$ = $false$, \\
+$\hat{A}$  is an assignment with conflict in $C_2$.\\
+\end{tabular}
+\end{table}
+\end{center}
 \end{frame}
 \begin{frame}
-	\frametitle{The vertex coloring problem}
-	
-	\begin{KITexampleblock}{Vertex coloring problem}
-	\begin{itemize}
-		\item The \emph{\textbf{VCP}} is to determine the smallest $k$, such that the graph can be colored using $k$ colors without conflicts. 
-		\item This lower bound $k$ is called the \emph{\textbf{chromatic number}} of G, denoted by $\chi(G)$.
-	\end{itemize}
-	\end{KITexampleblock}
-\end{frame}
-\begin{frame}
-  \frametitle{Outline}
-
-\heading{The vertex coloring problem}
-  \begin{itemize}
-  \item k-VCP
-  \item VCP
-  \end{itemize}
-  
-\heading{\color<beamer:1>{red}{The Tabucol algorithm}}
-\heading{Solving VCP by Tabucol}
-  \begin{itemize}
-  \item Basic scheme
-  \item Data structure
-  \item Our improvements
-  \end{itemize}
-\heading{Our Parallel GCP-solver}
-  \begin{itemize}
-  \item Parameter combinations
-  \item Our approaches
-  \end{itemize}
-\heading{Conclusion}
-\end{frame}
-
-
-% blocks continued
-\begin{frame}
-	\frametitle{The Tabucol algorithm}
-	\framesubtitle{solving k-VCP}
+	\frametitle{ Local search in SAT problem}
+		\begin{KITexampleblock}{Local Search}
 	  \begin{itemize}
-  \item Introduced in 1987 by Hertz and de Werra 
-  \item The local search will start from an initial $k$-coloring $c$.
-  \item Changing the color of one vertex to color, is called \emph{\textbf{one-step move}}.
-  \item the best move with most reduction of conflicts will be reached.
-  \item To avoid short-term cycling, recently performed moves are marked as forbidden moves for a given duration.
-  \end{itemize}
-\end{frame}
-	
-\begin{frame}
-	\frametitle{The Tabucol algorithm}	
-The pseudo code of \emph{\textbf{Tabucol}}:
-
+	\item an instance $I$ of a hard combinational Problem $P$
+	\item a set of solutions $S(I)$
+	\item an object function (score or cost) $\Gamma$ 
+	\item to find the solution with minimum cost by applying local changes.
+\end{itemize}
+	\end{KITexampleblock}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
 \SetKwInOut{Output}{output}
 \SetKwInOut{Parameter}{parameter}
- \Input{A Graph $G=\{V,E\}$, an integer $k>0$}
- \Parameter{$L$, $\alpha$, $Timeout$}
- \Output{Coloring $c$}
- Build a random $k$-coloring $c'$:\\
- $c$ = $c'$;\\
- $i = 0$;\\
- \While {$(f(c)\neq 0$ $ \land$ Timeout does not occur$)$}{
-  Evaluate all permitted one-step-moves of $c$ with function $\Gamma$;\\
-  Choose the move [v,i] with maximum $\Gamma(c, v,i)$; \\
-  Mark the corresponding one-step move [v,i] as a forbidden move with duration $L+\alpha \times f(c)$;\\
-  Change $c(v) = i$; \
+ \Input{A CNF Formula F}
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $A \leftarrow$ random generated assignment  $A$\\
+ \While {$( \exists$ unsatisfied clause $ \land$ Timeout does not occur$)$}{
+  $c \leftarrow$ random selected  unsatisfied clause \\
+  $x \leftarrow pickVar(A,c)$\\
+  $A \leftarrow flip(A,x)$\\
  }
- \caption{Algorithm Tabucol}
-\end{algorithm}
-
+ \caption{Focused Local Search}
+\end{algorithm} 
+\end{frame}
+\begin{frame}
+	\frametitle{ Local search in SAT problem}
+		\begin{KITexampleblock}{Stochastic Local Search (SLS)}
+\begin{itemize}
+\item use the probability distribution of the scores of candidate solutions 
+\item the more advantageous a move is, the higher is the probability of choosing that move
+\end{itemize}
+\end{KITexampleblock}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Output{a variable $x$ in $c$ to be flipped}
+\For{$v$ in $c$}{
+  Evaluate $v$ with function $\Gamma(A,v)$\;
+ }
+  $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $p(v) =\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$ 
+ \caption{PickVar in \emph{probSAT}}
+ \end{algorithm} 
+\end{frame}
+\begin{frame}
+	\frametitle{ Local search in SAT problem}
+		\begin{KITexampleblock}{Random walk in local search}
+		\begin{itemize}
+         \item originally introduced in 1994
+         \item By introducing ``uphill noises'', the walkSAT combines greedy local search and random walk.
+\end{itemize}
+\end{KITexampleblock}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ to be flipped}
+\For{$v$ in $c$}{
+  Evaluate $v$ with function $\Gamma(A,v)$\;
+ }
+  with probability $p$: $x \leftarrow$   $v$ with maximum $\Gamma(A,v)$ \;
+  with probability $1-p$:  $x \leftarrow$  randomly selected $v$ in $c$. 
+ \caption{PickVar in walkSAT}
+\end{algorithm}  
 \end{frame}
 \begin{frame}
   \frametitle{Outline}
-
-\heading{The vertex coloring problem}
+\heading{Propositional Satisfiability Problem (\emph{\textbf{SAT}})}
   \begin{itemize}
-  \item k-VCP
-  \item VCP
+  \item Notations
+  \item Local search in SAT problem
   \end{itemize}
-  
-\heading{{The Tabucol algorithm}}
-\heading{\color<beamer:1>{red}{Solving VCP by Tabucol}}
+\heading{\color<beamer:1>{red}{Solving SAT by swpSolver}}
   \begin{itemize}
   \item Basic scheme
-  \item Data structure
   \item Our improvements
   \end{itemize}
-\heading{Our Parallel VCP-solver}
+\heading{Our Parallel SAT-solver}
   \begin{itemize}
-  \item Parameter combinations
-  \item Our approaches
+  \item The pure portfolio approach
+  \item Two failures
+  \item Initialization with a guide of formula partitioning
   \end{itemize}
 \heading{Conclusion}
 \end{frame}
-
-
-% drawing area
+% blocks continued
 \begin{frame}
-	\frametitle{Solving VCP by Tabucol}
+	\frametitle{Solving SAT by swpSolver}
 	\framesubtitle{Basic scheme}
-	  \begin{columns}[T]
-    \begin{column}{.4\textwidth}
-     \begin{block}{}
-    \begin{itemize}
-    \item Step 1: Initialize Coloring
-    \item Step 2: Solve k-VCP
-    \item Step 3: Reduce a color
-    \end{itemize}
-    \end{block}
-    \end{column}
-    \begin{column}{.6\textwidth}
-    \begin{block}{}
-% Your image included here
-    \includegraphics[scale=0.35]{1/gcpSolver.pdf}
-    \end{block}
-    \end{column}
-  \end{columns}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{A CNF Formula F}
+ \Parameter{$Timeout$}
+ \Output{a satisfying assignment $A$}
+  $A \leftarrow initAssign(F)$ \;
+ \While {$( \exists$ unsatisfied clause $ \land$ Timeout does not occur$)$}{
+  $c \leftarrow pickCla(A)$ \;
+  $x \leftarrow pickVar(A,c)$\;
+  $A \leftarrow flip(A,x)$\;
+ }
+ \caption{Our Local Search}
+\end{algorithm}
+\end{frame}
+\begin{frame}
+\frametitle{Evaluation}
+\begin{itemize}
+\item 180  benchmark instances used in our experiments are the 180 instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017.
+\item all the clause have the same length in a \emph{UNIF} problem file
+\item to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals
+\item at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable
+\item each experiment is repeated three times
+\item PAR-2 runtime for a whole $k$SAT set
+\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{initAssign(F)}	
+	\begin{itemize}
+\item \emph{RandomInit}: buid a complete assignment randomly
+\item \emph{BiasInit}: assign \emph{true} to a variable if the number of occurrences of its positive literal is larger than that of its negative literal.  
+\item \emph{Bias-RandomInit}: assign \emph{true} to variable $v_i$ with probability $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$.
+\end{itemize} 
+\end{frame}
+\begin{frame}
+	\frametitle{initAssign(F)}	
+\begin{table}[H]
+\label{tab:com}
+%\begin{minipage}{\textwidth}                                                                                         
+\begin{center}
+    \begin{tabular}{|l|l|l|l|p{1cm}|}
+\hline 
+    k &\emph{RandomInit}&\emph{BiasInit}&\emph{Bias-RandomInit} \\ \hline
+	3&9221.9 &9157.76 &\textbf{9078.27} \\ 
+	&\textbf{55} &54 & \textbf{55} \\ \hline
+	5&7143.9&\textbf{4351.09}&4582.54\\ 
+	&82 &\textbf{87} &\textbf{87}\\ \hline
+	7&6238.51&\textbf{5421.9}& 6310.7\\
+	&60 & 60 & 60 \\ \hline
+	
+\end{tabular}
+\end{center}
+%\end{minipage}
+\end{table}
+\begin{itemize}
+\item 3SAT: RandomInit
+\item 5SAT and 7SAT: BiasInit
+\end{itemize} 
 \end{frame}
 
 \begin{frame}
-	\frametitle{Data structure}
-	\begin{KITalertblock}{ Tabu Map and Tabu Queue }
-	\begin{itemize}
-
-	\item To avoid using the forbidden candidates, a hash map should provide whether a candidate is a tabu or not.
-	\item  A one-step move [v, i] is represented by an ordered pair $(v, i) $.\\
-\item to update the forbidden moves stored in the \emph{Tabu Map}.
-\item The size of the \emph{Tabu Queue} is $L+ f(n)\times \alpha$.
-\item When the color of a vertex $v$ is changed, $(v,c(v))$ is recorded in the  \emph{Tabu Map} and also enqueued in the \emph{Tabu Queue}.
-\item When the \emph{Tabu Queue} is full, extra forbidden moves  will be popped and will be deleted in the \emph{Tabu Map}.\\
-	\end{itemize}
-	\end{KITalertblock}
+\frametitle{pickVar(A,c)}
+\begin{itemize}
+\item combine the random walk and stochastic selection
+\item pick greedy flips with zero breakcounts with a certain probability $p$.
+\item using the \emph{probSAT} with probability ($1-p$) 
+\end{itemize}
+\begin{algorithm}[H]
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwInOut{Parameter}{parameter}
+ \Input{current assignment $A$, unsatisfied clause $c$}
+ \Parameter{probability $p$}
+ \Output{a variable $x$ in $c$ to be flipped}
+ \emph{greedyVs} $\leftarrow$ $\emptyset$\;
+\For{all $v$ in $c$}{
+   \If{$($break(A,v)= 0 $)$}{
+	\emph{greedyVs} = \emph{greedyVs} +  $\{v\}$    
+   }
+ }
+  with probability $p$: $x \leftarrow$ randomly selected variable $v \in$ \emph{greedyVs} \;
+  with probability ($1-p$):   $x \leftarrow$ randomly selected  variable $v$ in $c$ with probability $\frac{\Gamma(A,v)}{\sum_{u \in c}\Gamma(A,u)}$
+\caption{Our pickVar}
+\end{algorithm}  
 \end{frame}
 
 \begin{frame}
-	\frametitle{Data structure}
-	\begin{KITalertblock}{ Solution matrix}
-	\begin{itemize}
-\item To reuse the calculated results, a matrix $M$ is used to record the information about the neighborhood.  \item The matrix $M$  evaluates the candidate moves of the current $k$-coloring $c$.
-\item If $c(v_j) = i$, $M_{ij}$ is the number of conflicting edges incident to $v_j$ in the current solution.
-\item $\frac{\sum_{j=1}^n M_{c(v_j)j}}{2}$ is the conflict number of solution $c$;
-\item If $c(v_j)\neq i$, $M_{ij}$ is the number of conflicts involving $v_j$ in a neighbor coloring $c'$ of $c$ with\\
-$c'(v_j) = i$.\\
- $c'(v_q) = c(v_q), q \neq i,q \in \{1..n\}.$ \\
-	\end{itemize}
-	\end{KITalertblock}
+\frametitle{Variant 1: Walk}
+\begin{itemize}
+\item a statistic list $S$ to record how many times each variable is chosen for flipping.
+\item The candidate with the small statistic value will be chosen.
+\item $p = \alpha \times \frac{s(randomV)}{s(greedyV)+s(randomV)}$
+\item Getting the random literals using stochastic process consumes the most runtime.
+\end{itemize}
 \end{frame}
 \begin{frame}
-	\frametitle{Data structure}
-	\begin{KITalertblock}{ Solution matrix}
-	\begin{itemize}
-\item $\Gamma(j,i)=M_{c(v_{j})j}-M_{ij}$ evaluates the improvement of the move $[j, i]$ in constant time.
-\item This matrix is filled at the beginning based on the initial solution and constantly changed. 
-\item If the chosen one-step move is $[i, j]$, which means changing the color of $v_i$ from current color $c(v_i)$ to $j$, some entities in matrix $M$ must be updated. 
-
-	\end{itemize}
-	\end{KITalertblock}
+\frametitle{Variant 2: GreedyBreak}
+\begin{itemize}
+\item  \emph{permitted greedy literal}: literal with zero breakcount and its statistic value is under a certain threshold $t$
+\item choose a permitted greedy literal randomly for flipping. 
+\item if no permitted greefy literal exists, we pick a literal using \emph{probSAT} heuristic.
+\item 1.approach \emph{Average}: $t = \alpha \times \frac{numF}{numV}$
+\item 2.approach \emph{Random-Flip}: $t =\alpha \times r$  with $r \in [0, numF]$.
+\end{itemize}
+\end{frame}
+\begin{frame}
+\frametitle{PickVar(A,c) with simulated annealing}
+\begin{KITexampleblock}{Simulated Annealing}
+\begin{itemize}
+\item proposed by Kirkpatrick, Gelatt, and Vecchi.
+\item guide local search with a controlling parameter \emph{\textbf{temperature}}. 
+\item The temperature varies according to the score of the current situation. 
+\item Higher temperature allows uphill moves with higher probability. 
+\end{itemize}
+\end{KITexampleblock}
+\begin{itemize}
+\item Walk:$p = \alpha \times \frac{s(randomV)}{s(greedyV)+s(randomV)}$
+\item Average: $t = \alpha \times \frac{numF}{numV}$
+\item Random-Flip: $t =\alpha \times r$  with $r \in [0, numF]$.
+\item $\alpha = \tau \times (c_b)^{-q(A)}$
+\item two variants of  $q(A)$:
+\begin{itemize}
+\item $q_{global}(A) =unsatN(A)$
+\item $q_{local}(A) =|\{ v| v \in  c \land break(v) = 0\}|$
+\end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame}
 \frametitle{Evaluation}
+\framesubtitle{pickVar}
 \begin{itemize}
 \item {The 68 graphs used in our experiments are from the DIMACS benchmark collection.}
 \item {The single-threaded experiments were run on computers that had four AMD(R) Opteron(R) processors 6168 (1.9 Ghz with 12 cores) and 256GB RAM. The computers ran the 64-bit version of Ubuntu 12.04.}
@@ -360,7 +438,6 @@ We replace the current illegal solution  occasionally by a new randomly generate
 \heading{Solving VCP by Tabucol}
   \begin{itemize}
   \item Basic scheme
-  \item Data structure
   \item Our improvements
   \end{itemize}
 \heading{\color<beamer:1>{red}{Our Parallel GCP-solver}}
@@ -486,7 +563,6 @@ Index&L& $\alpha$ &Initialization&Replace&Traverse& Statistic\\ \hline
 \heading{Solving VCP by Tabucol}
   \begin{itemize}
   \item Basic scheme
-  \item Data structure
   \item Our improvements
   \end{itemize}
 \heading{Our Parallel GCP-solver}
