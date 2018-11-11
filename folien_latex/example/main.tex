@@ -229,18 +229,18 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{frame}
 \frametitle{Evaluation}
 \begin{itemize}
-\item 180  benchmark instances used in our experiments are the 180 instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017.
-\item all the clause have the same length $k$ in a \emph{UNIF} problem file
+\item 180 instances (\emph{UNIF}) in random benchmark categories in SAT competition 2017
+\item All the clause have the same length $k$ in a \emph{UNIF} problem file.
 \item to construct one clause, $k$ literals are randomly chosen from the $2n$ possible literals
-\item at least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable
-\item each experiment is repeated three times
+\item At least $60$ ( $33\%$ ) problems form our $180$ benchmark collections are unsatisfiable.
+\item Each experiment is repeated three times.
 \item PAR-2 runtime for a whole $k$SAT set
 \end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{initAssign(F)}	
 	\begin{itemize}
-\item \emph{RandomInit}: buid a complete assignment randomly
+\item \emph{RandomInit}: build a complete assignment randomly
 \item \emph{BiasInit}: assign \emph{true} to a variable if the number of occurrences of its positive literal is larger than that of its negative literal.  
 \item \emph{Bias-RandomInit}: assign \emph{true} to variable $v_i$ with probability $\frac{posOccurences[i]}{posOccurences[i]+negOccurences[i]}$.
 \end{itemize} 
@@ -276,7 +276,7 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{itemize}
 \item combine the random walk and stochastic selection
 \item pick greedy flips with zero breakcounts with a certain probability $p$.
-\item using the \emph{SLS} with probability ($1-p$) 
+\item use the \emph{SLS} with probability ($1-p$) 
 \end{itemize}
 \begin{algorithm}[H]
 \SetKwInOut{Input}{input}
@@ -311,9 +311,9 @@ $\hat{A}$  is an assignment with conflict in $C_2$.\\
 \begin{itemize}
 \item  \emph{permitted greedy literal}: literal with zero breakcount and its statistic value is under a certain threshold $t$
 \item choose a permitted greedy literal randomly for flipping. 
-\item if no permitted greefy literal exists, we pick a literal using \emph{SLS} heuristic.
-\item 1.approach \emph{Average}: $t = \alpha \times \frac{numF}{numV}$
-\item 2.approach \emph{Random-Flip}: $t =\alpha \times r$  with $r \in [0, numF]$.
+\item if no permitted greedy literal exists, we pick a literal using \emph{SLS} heuristic.
+\item 1st approach \emph{Average}: $t = \alpha \times \frac{numF}{numV}$
+\item 2nd approach \emph{Random-Flip}: $t =\alpha \times r$  with $r \in [0, numF]$.
 \end{itemize}
 \end{frame}
 \begin{frame}
@@ -462,17 +462,9 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \begin{frame}
 	\frametitle{Failures}
     \framesubtitle{2nd Approach: Solver with formula partitioning}
-\begin{itemize}
-\item parallelize flippings in both partitioning sets
-\item Two slave thread  deals with partitioning sets in parallel.
-\item The master thread handles with conflicts in the intersection.
-\item can only solve trivial small problems
-\item the order of solving the clauses in search
-\item Repeated flippings make the search stuck in one cycling.
-\end{itemize}
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 0.18]{1/a2.png}
+  \includegraphics[scale = 0.6]{ipe/aproach2.pdf}
   \end{center}
   \label{a2}
   \end{figure}
@@ -481,19 +473,9 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \begin{frame}
 	\frametitle{Failures}
     \framesubtitle{3nd Approach: Solver with combination of sub-assignments}
-\begin{itemize}
-\item the slave threads take intersection into consideration.
-\item The master thread deals with these differences in sub-assignments 
-\begin{itemize}
-\item \emph{randomCombine}: assigns the variable randomly
-\item \emph{partitionCombine}: assigns the variable to the value suggested by its charging thread
-\end{itemize}
-\item \emph{randomCombine} can not bring a better performance compared with our \emph{swpSAT} solver
-\item \emph{partitionCombine} suffers from repeated flips and may not terminate. 
-\end{itemize}
 \begin{figure}[H]
 \begin{center}
-  \includegraphics[scale = 0.15]{1/a3.png}
+  \includegraphics[scale = 0.61]{ipe/aproach3.pdf}
   \end{center}
   \label{a2}
   \end{figure}
@@ -512,12 +494,12 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \begin{frame}
   \frametitle{Evaluation}
 	\framesubtitle{ benchmark \emph{COMBINE}-\emph{BIG}}
-  \includegraphics[scale = 0.8]{DATA/BIG/a4.pdf}
+  \includegraphics[scale = 0.9]{DATA/BIG/a4.pdf}
 \end{frame}
 \begin{frame}
   \frametitle{Evaluation}
 	\framesubtitle{ benchmark \emph{COMBINE}-\emph{SMALL}}
-    \includegraphics[scale = 0.8]{DATA/SMALL/a4.pdf}
+    \includegraphics[scale = 0.9]{DATA/SMALL/a4.pdf}
 \end{frame}
 \begin{frame}
 \frametitle{Our parallel solver}
@@ -548,7 +530,7 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
   \frametitle{Evaluation}
 	\framesubtitle{ benchmark UNIF}
 	\begin{itemize}
-	\item separate the vertices according their indices in two partition sets.
+	\item separate the vertices according their indices in two partition sets
 	\item All vertices $v_i$ with $i <\frac{numV}{2}$  belong to $P_0$.
 	\item The rest vertices belong to $P_1$.
 	\end{itemize}
@@ -585,15 +567,15 @@ $default\_random\_engine$&$minstd\_rand0$&-\\ \hline
 \heading{Our improvement:}
 \begin{itemize}
 \item a stochastic local search algorithm \emph{swpSAT} with the incorporation of \emph{walkSAT} and \emph{probSAT}
-\item different local variants, which gets better performance than the \emph{probSAT} algorithm. 
+\item different local variants, which get better performance than the \emph{probSAT} algorithm
 \item parallel \emph{swpSAT} solver with formula partitioning
 \item the formula partitioning information can guide the local search
 \end{itemize}
 \heading{Further work}
 \begin{itemize}
-\item Using different  search strategies
-\item Using different cooperation strategies
-\item Using different random generation in local search
+\item use different search strategies
+\item use different cooperation strategies
+\item use different random generation in local search
 \end{itemize}
 \end{frame}
 \begin{frame}
